@@ -72,6 +72,25 @@
             padding: 24px;
             cursor: pointer;
             position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-header:hover {
+            background-color: #0052a3;
+        }
+        
+        .theme-header::after {
+            content: '▼';
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        
+        .theme-header.collapsed::after {
+            transform: translateY(-50%) rotate(-90deg);
         }
         
         .theme-header h2 {
@@ -86,6 +105,23 @@
         
         .theme-content {
             padding: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .theme-content.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .lebensbezug {
@@ -223,6 +259,31 @@
             details.classList.toggle('show');
             button.classList.toggle('active');
         }
+        
+        function toggleTheme(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+            
+            // Toggle current theme
+            if (isOpen) {
+                content.classList.remove('show');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.add('show');
+                header.classList.remove('collapsed');
+            }
+        }
+        
+        // Initialize: Add click handlers and collapse all themes
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.theme-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleTheme(this);
+                });
+                header.classList.add('collapsed');
+            });
+        });
     </script>
 </head>
 <body>
@@ -297,7 +358,11 @@
                         </div>
                         
                         <div id="t1l1-schluessel" class="kompetenz-details">
-                            <p style="color: #666; font-style: italic;">Keine spezifischen Schlüsselkompetenzen für diesen Lerninhalt definiert.</p>
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -343,9 +408,9 @@
                         
                         <div id="t1l2-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.2</span> Ich kann mir Ziele setzen, überprüfen und anpassen.</li>
-                                <li><span class="kompetenz-nummer">3.2.8</span> Ich plane meine Lebensphasen vorausschauend und realistisch.</li>
-                                <li><span class="kompetenz-nummer">3.2.10</span> Ich bin anpassungsfähig und kann mit Veränderung umgehen.</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
                             </ul>
                         </div>
                     </div>
@@ -396,7 +461,11 @@
                         </div>
                         
                         <div id="t1l2-1-schluessel" class="kompetenz-details">
-                            <p style="color: #666; font-style: italic;">Keine spezifischen Schlüsselkompetenzen für diesen Lerninhalt definiert.</p>
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -446,9 +515,9 @@
                         
                         <div id="t1l2-2-schluessel" class="kompetenz-details">
                             <ul>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
                                 <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
                                 <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
-                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung</li>
                             </ul>
                         </div>
                     </div>
@@ -511,6 +580,7 @@
                             <ul>
                                 <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
                                 <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
                             </ul>
                         </div>
                     </div>
@@ -560,9 +630,9 @@
                         <div id="t2l2-schluessel" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
                                 <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
                                 <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln</li>
-                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung</li>
                             </ul>
                         </div>
                     </div>
@@ -615,6 +685,7 @@
                         <div id="t2l2-1-schluessel" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln</li>
                                 <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
                             </ul>
                         </div>
@@ -664,7 +735,7 @@
                         
                         <div id="t2l2-2-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
                                 <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln</li>
                                 <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
                             </ul>
@@ -697,6 +768,9 @@
                             <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't3l1-digital')">
                                 Digitale Kompetenzen
                             </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't3l1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
                         </div>
                         
                         <div id="t3l1-gesellschaft" class="kompetenz-details">
@@ -721,6 +795,14 @@
                                 <li>Nutzung digitaler Präsentationformen</li>
                                 <li>Digitale Inhalte in verschiedenen Formaten erstellen und bearbeiten</li>
                                 <li>KI-Funktionen für die Überarbeitungen von medialen Inhalten nutzen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t3l1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
                             </ul>
                         </div>
                     </div>
@@ -775,7 +857,7 @@
                                 <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
                                 <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
                                 <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
-                                <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um nachhaltig zu handeln</li>
+                                <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln</li>
                             </ul>
                         </div>
                     </div>
@@ -829,10 +911,10 @@
                         
                         <div id="t3l2-1-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen und kritisch reflektieren</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
                                 <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
-                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
-                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
                             </ul>
                         </div>
                     </div>
@@ -880,7 +962,9 @@
                         <div id="t3l2-2-schluessel" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
-                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
                             </ul>
                         </div>
                     </div>
@@ -941,7 +1025,11 @@
                         </div>
                         
                         <div id="t4l1-schluessel" class="kompetenz-details">
-                            <p style="color: #666; font-style: italic;">Keine spezifischen Schlüsselkompetenzen für diesen Lerninhalt definiert.</p>
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -987,10 +1075,10 @@
                         
                         <div id="t4l2-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen</li>
-                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
-                                <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um nachhaltig zu handeln</li>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
                                 <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
                             </ul>
                         </div>
                     </div>
@@ -1042,7 +1130,11 @@
                         </div>
                         
                         <div id="t4l2-1-schluessel" class="kompetenz-details">
-                            <p style="color: #666; font-style: italic;">Keine spezifischen Schlüsselkompetenzen für diesen Lerninhalt definiert.</p>
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -1095,7 +1187,7 @@
                         <div id="t4l2-2-schluessel" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
-                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
                                 <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
                                 <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
                             </ul>

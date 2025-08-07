@@ -1,15 +1,308 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>2-jährige Grundbildung EBA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-jährige Grundbildung EBA - Schullehrplan ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .info-box h2 {
+            color: #003d7a;
+            font-size: 1.3em;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .info-box li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .info-box li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        .info-box .highlight {
+            background-color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0066cc;
+            transition: width 0.3s ease;
+        }
+        
+        .card:hover::before {
+            width: 8px;
+        }
+        
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 20px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 12px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .card .meta {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-box {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>2-jährige Grundbildung EBA</h1>
-  <ul>
-  <li><a href="1-lehrjahr.html">1. Lehrjahr</a></li>
-  <li><a href="2-lehrjahr.html">2. Lehrjahr</a></li>
-  <li><a href="zirkularitaet.html">Zirkularität</a></li>
-  </ul>
-  <a href="../index.html">Zurück zur Übersicht</a>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Schullehrplan ABU</a> / 2-jährige Grundbildung EBA
+            </nav>
+            <h1>2-jährige Grundbildung EBA</h1>
+            <p class="subtitle">Eidgenössisches Berufsattest</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="info-box">
+            <h2>📋 Vorgaben gemäss Rahmenlehrplan ABU 2025</h2>
+            <ul>
+                <li>Pro Thema werden mindestens <span class="highlight">2 Schlüsselkompetenzen</span> bewusst gefördert</li>
+                <li>Lerninhalte aus mindestens <span class="highlight">2 Aspekten</span> des Lernbereichs Gesellschaft</li>
+                <li>Berücksichtigung von mindestens <span class="highlight">1 Sprachmodus</span> pro Thema</li>
+                <li>Schwerpunkt auf <span class="highlight">Rezeption</span> (mündlich und schriftlich) sowie <span class="highlight">Produktion und Interaktion</span> (mündlich)</li>
+                <li>Bis zum Abschluss: Aufbau aller <span class="highlight">12 Schlüsselkompetenzen</span> und Kompetenzen aus allen <span class="highlight">8 gesellschaftlichen Aspekten</span></li>
+                <li>Berücksichtigung von <span class="highlight">Konventionen und Sprachbewusstheit</span> in allen Sprachmodi</li>
+            </ul>
+        </div>
+        
+        <div class="theme-overview">
+            <h2 style="margin-bottom: 20px; font-size: 1.4em; color: #003d7a;">📚 Themenübersicht</h2>
+            <table style="width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.08); margin-bottom: 40px;">
+                <thead>
+                    <tr style="background-color: #e8f4fd;">
+                        <th style="padding: 16px; text-align: left; color: #003d7a; font-weight: 600; width: 80px;">Jahr</th>
+                        <th style="padding: 16px; text-align: left; color: #003d7a; font-weight: 600;">Thema</th>
+                        <th style="padding: 16px; text-align: center; color: #003d7a; font-weight: 600; width: 100px;">Lektionen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="5" style="padding: 16px; font-weight: 600; color: #0066cc; background-color: #f0f8ff; vertical-align: middle; text-align: center; font-size: 1.2em;">1</td>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 1: Ins Berufsleben einsteigen</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 2: Bewusst konsumieren und handeln</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 3: Risiko und Sicherheit</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 4: Medien und digitale Welt</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 2px solid #ddd; font-style: italic; color: #666;">Weitere Lektionen (nicht thematisch definiert)</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 2px solid #ddd;">32</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="5" style="padding: 16px; font-weight: 600; color: #4d94ff; background-color: #e6f3ff; vertical-align: middle; text-align: center; font-size: 1.2em;">2</td>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 5: Meinung bilden, akzeptieren und mitgestalten</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 6: Verträge verstehen – fair handeln</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 7: Kunst und Kultur</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; border-bottom: 1px solid #eee;">Thema 8: Arbeit und Steuerpflicht</td>
+                        <td style="padding: 16px; text-align: center; border-bottom: 1px solid #eee;">22</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; font-style: italic; color: #666;">Weitere Lektionen (nicht thematisch definiert)</td>
+                        <td style="padding: 16px; text-align: center;">32</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="background-color: #f5f5f5;">
+                        <td colspan="2" style="padding: 16px; font-weight: 600; text-align: right;">Total Lektionen pro Jahr:</td>
+                        <td style="padding: 16px; text-align: center; font-weight: 600;">120</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+        <div class="card-grid">
+            <a href="1-lehrjahr.html" class="card">
+                <div class="card-icon">1</div>
+                <h3>1. Lehrjahr</h3>
+                <p>Grundlagen der Allgemeinbildung, Einführung in die Arbeits- und Berufswelt, Aufbau der sprachlichen und gesellschaftlichen Basiskompetenzen</p>
+                <div class="meta">
+                    120 Lektionen Allgemeinbildung
+                </div>
+            </a>
+            
+            <a href="2-lehrjahr.html" class="card">
+                <div class="card-icon">2</div>
+                <h3>2. Lehrjahr</h3>
+                <p>Vertiefung und Anwendung der Kompetenzen, Vorbereitung auf das Qualifikationsverfahren, Schlussarbeit und Schlussprüfung</p>
+                <div class="meta">
+                    120 Lektionen Allgemeinbildung
+                </div>
+            </a>
+        </div>
+        
+        <div style="text-align: center; padding: 40px 0;">
+            <a href="../index.html" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
+                ← Zurück zur Übersicht
+            </a>
+        </div>
+    </main>
 </body>
 </html>

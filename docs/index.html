@@ -1,16 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Schullehrplan Übersicht</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schullehrplan ABU - Allgemeinbildender Unterricht</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0066cc;
+            transition: width 0.3s ease;
+        }
+        
+        .card:hover::before {
+            width: 8px;
+        }
+        
+        .card.external {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+        }
+        
+        .card.external::before {
+            background-color: #6c757d;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .card.external .card-icon {
+            background-color: #6c757d;
+        }
+        
+        .card h2 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .card.external h2 {
+            color: #495057;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+        
+        .section-divider {
+            height: 40px;
+        }
+        
+        .external-link-indicator {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Kanton Zürich Farben */
+        .zh-blue { color: #0066cc; }
+        .zh-darkblue { color: #003d7a; }
+        .zh-lightblue { color: #4d94ff; }
+        
+        /* Icons als CSS */
+        .icon-book::before { content: "📚"; }
+        .icon-law::before { content: "⚖️"; }
+        .icon-cert::before { content: "🎓"; }
+        .icon-2y::before { content: "2️⃣"; }
+        .icon-3y::before { content: "3️⃣"; }
+        .icon-4y::before { content: "4️⃣"; }
+    </style>
 </head>
 <body>
-  <h1>Schullehrplan – Übersicht</h1>
-  <ul>
-    <li><a href="qualifikationsverfahren/index.html">Qualifikationsverfahren</a></li>
-    <li><a href="grundbildung-eba/index.html">2-jährige Grundbildung EBA</a></li>
-    <li><a href="grundbildung-efz3/index.html">3-jährige Grundbildung EFZ</a></li>
-    <li><a href="grundbildung-efz4/index.html">4-jährige Grundbildung EFZ</a></li>
-  </ul>
+    <header>
+        <div class="container">
+            <h1>Schullehrplan ABU</h1>
+            <p class="subtitle">
+                Digitaler Schullehrplan für den allgemeinbildenden Unterricht an Berufsfachschulen 
+                des Kantons Zürich, basierend auf dem Rahmenlehrplan ABU 2025
+            </p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Externe Links zu Rechtsgrundlagen -->
+        <div class="card-grid">
+            <a href="https://www.fedlex.admin.ch/eli/fga/2025/1234/de" class="card external" target="_blank">
+                <div class="card-icon icon-book"></div>
+                <h2>Rahmenlehrplan ABU 2025<span class="external-link-indicator">↗</span></h2>
+                <p>Rahmenlehrplan für die Allgemeinbildung in der beruflichen Grundbildung vom 9. April 2025</p>
+            </a>
+            
+            <a href="https://www.fedlex.admin.ch/eli/cc/2025/123/de" class="card external" target="_blank">
+                <div class="card-icon icon-law"></div>
+                <h2>VMAB-Verordnung<span class="external-link-indicator">↗</span></h2>
+                <p>Verordnung über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung</p>
+            </a>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <!-- Interne Navigation -->
+        <div class="card-grid">
+            <a href="qualifikationsverfahren/index.html" class="card">
+                <div class="card-icon icon-cert"></div>
+                <h2>Qualifikationsverfahren</h2>
+                <p>Informationen zu Semesterzeugnisnoten, Schlussarbeit und Schlussprüfung im Qualifikationsbereich Allgemeinbildung</p>
+            </a>
+            
+            <a href="grundbildung-eba/index.html" class="card">
+                <div class="card-icon icon-2y"></div>
+                <h2>2-jährige Grundbildung EBA</h2>
+                <p>Schullehrplan für die zweijährige berufliche Grundbildung mit eidgenössischem Berufsattest</p>
+            </a>
+            
+            <a href="grundbildung-efz3/index.html" class="card">
+                <div class="card-icon icon-3y"></div>
+                <h2>3-jährige Grundbildung EFZ</h2>
+                <p>Schullehrplan für die dreijährige berufliche Grundbildung mit eidgenössischem Fähigkeitszeugnis</p>
+            </a>
+            
+            <a href="grundbildung-efz4/index.html" class="card">
+                <div class="card-icon icon-4y"></div>
+                <h2>4-jährige Grundbildung EFZ</h2>
+                <p>Schullehrplan für die vierjährige berufliche Grundbildung mit eidgenössischem Fähigkeitszeugnis</p>
+            </a>
+        </div>
+    </main>
 </body>
 </html>
 

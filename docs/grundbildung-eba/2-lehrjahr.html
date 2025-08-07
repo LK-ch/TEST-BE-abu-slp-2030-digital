@@ -72,6 +72,25 @@
             padding: 24px;
             cursor: pointer;
             position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-header:hover {
+            background-color: #0052a3;
+        }
+        
+        .theme-header::after {
+            content: '▼';
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        
+        .theme-header.collapsed::after {
+            transform: translateY(-50%) rotate(-90deg);
         }
         
         .theme-header h2 {
@@ -86,6 +105,23 @@
         
         .theme-content {
             padding: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .theme-content.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .lebensbezug {
@@ -223,6 +259,31 @@
             details.classList.toggle('show');
             button.classList.toggle('active');
         }
+        
+        function toggleTheme(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+            
+            // Toggle current theme
+            if (isOpen) {
+                content.classList.remove('show');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.add('show');
+                header.classList.remove('collapsed');
+            }
+        }
+        
+        // Initialize: Add click handlers and collapse all themes
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.theme-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleTheme(this);
+                });
+                header.classList.add('collapsed');
+            });
+        });
     </script>
 </head>
 <body>

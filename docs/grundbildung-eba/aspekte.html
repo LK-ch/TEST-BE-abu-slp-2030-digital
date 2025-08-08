@@ -199,7 +199,7 @@
         .competence-item.aspekt-identitaet { border-left-color: var(--zh-pink); }
         .competence-item.aspekt-kultur { border-left-color: var(--zh-orange); }
         .competence-item.aspekt-oekologie { border-left-color: var(--zh-green); }
-        .competence-item.aspekt-politik { border-left-color: var(--zh-blue); }
+        .competence-item.aspekt-politik { border-left-color: var(--zh-blue); background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); color: white; }
         .competence-item.aspekt-recht { border-left-color: var(--zh-red); }
         .competence-item.aspekt-technologie { border-left-color: var(--zh-cyan); }
         .competence-item.aspekt-wirtschaft { border-left-color: var(--zh-yellow); }
@@ -268,8 +268,8 @@
         .theme-matrix .lerninhalt-cell {
             font-size: 0.75rem;
             color: var(--zh-text);
-            opacity: 0.8;
-            width: 15%;
+            opacity: 0.9;
+            width: 25%;
         }
 
         .theme-matrix .competences-cell {
@@ -501,19 +501,19 @@
                     <div class="competence-title">5.2.4 Ökologie</div>
                     <div class="competence-count">3 Verwendungen</div>
                 </div>
-                <div class="competence-item aspekt-politik" onclick="filterByAspekt('aspekt-politik', '5.2.5', 'Politik')">
+                <div class="competence-item aspekt-politik" onclick="filterByAspect('aspekt-politik', '5.2.5', 'Politik')">
                     <div class="competence-title">5.2.5 Politik</div>
                     <div class="competence-count">6 Verwendungen</div>
                 </div>
-                <div class="competence-item aspekt-recht" onclick="filterByAspekt('aspekt-recht', '5.2.6', 'Recht')">
+                <div class="competence-item aspekt-recht" onclick="filterByAspect('aspekt-recht', '5.2.6', 'Recht')">
                     <div class="competence-title">5.2.6 Recht</div>
                     <div class="competence-count">8 Verwendungen</div>
                 </div>
-                <div class="competence-item aspekt-technologie" onclick="filterByAspekt('aspekt-technologie', '5.2.7', 'Technologie')">
+                <div class="competence-item aspekt-technologie" onclick="filterByAspect('aspekt-technologie', '5.2.7', 'Technologie')">
                     <div class="competence-title">5.2.7 Technologie</div>
                     <div class="competence-count">9 Verwendungen</div>
                 </div>
-                <div class="competence-item aspekt-wirtschaft" onclick="filterByAspekt('aspekt-wirtschaft', '5.2.8', 'Wirtschaft')">
+                <div class="competence-item aspekt-wirtschaft" onclick="filterByAspect('aspekt-wirtschaft', '5.2.8', 'Wirtschaft')">
                     <div class="competence-title">5.2.8 Wirtschaft</div>
                     <div class="competence-count">13 Verwendungen</div>
                 </div>
@@ -564,9 +564,9 @@
                     <tr>
                         <th>Thema</th>
                         <th>Lebensbezug</th>
-                        <th>Lerninhalt</th>
+                        <th>Lerninhalt (Kompetenz)</th>
                         <th>Gesellschaftsaspekte</th>
-                        <th>Entwicklung</th>
+                        <th>Zirkuläre Entwicklung</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -574,7 +574,7 @@
                     <tr>
                         <td rowspan="4" class="theme-cell"><strong>1. Ins Berufsleben einsteigen</strong></td>
                         <td rowspan="2" class="lebensbezug-cell">1.1 Orientierung in Arbeits-/Ausbildungswelt</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
+                        <td class="lerninhalt-cell">Ich orientiere mich in der Arbeits- und Ausbildungswelt anhand von vielfältigen Informationen und hole Unterstützung</td>
                         <td class="competences-cell">
                             <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
                             <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.4')">5.2.6.4</span>
@@ -583,7 +583,7 @@
                         <td class="development-cell">Rechtliche Grundlagen & Identitätsfindung</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
+                        <td class="lerninhalt-cell">Ich kenne Lernstrategien, achte auf mich und arbeite ressourcenschonend</td>
                         <td class="competences-cell">
                             <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
                         </td>
@@ -591,7 +591,7 @@
                     </tr>
                     <tr>
                         <td rowspan="2" class="lebensbezug-cell">1.2 Konstruktive Kommunikation</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
+                        <td class="lerninhalt-cell">Ich kann mich in Schule und Betrieb verständlich, situationsgerecht und respektvoll ausdrücken</td>
                         <td class="competences-cell">
                             <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
                             <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
@@ -599,7 +599,7 @@
                         <td class="development-cell">Ethische Kommunikation</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
+                        <td class="lerninhalt-cell">Ich kann Konflikte im Berufs- oder Schulalltag erkennen und adäquat darauf reagieren</td>
                         <td class="competences-cell">
                             <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
                             <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.2')">5.2.2.2</span>
@@ -895,6 +895,7 @@
                         <td class="competences-cell">
                             <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.4')">5.2.6.4</span>
                             <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
+                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.2')">5.2.1.2</span>
                         </td>
                         <td class="development-cell">Formulare & Behörden</td>
                     </tr>
@@ -936,7 +937,8 @@
                         text: 'Die Lernenden lassen sich durch Herausforderungen im persönlichen, gesellschaftlichen und beruflichen Umfeld, in denen die Integrität und Würde von Menschen und die Erhaltung der natürlichen Umwelt gefährdet sind, zu eigenem Entscheiden und Handeln herausfordern. Sie übernehmen Verantwortung für sich selbst, für ihre Mitmenschen und einen nachhaltigen Umgang mit natürlichen Ressourcen und Energie.',
                         used: [
                             '6.1 Rechtliche Fragen im Alltag - Lerninhalt 2',
-                            '6.2 Fair handeln - Lerninhalt 1'
+                            '6.2 Fair handeln - Lerninhalt 1',
+                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 2'
                         ]
                     },
                     {

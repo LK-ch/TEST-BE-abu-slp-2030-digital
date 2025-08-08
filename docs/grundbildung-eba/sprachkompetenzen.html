@@ -1,12 +1,920 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Sprachkompetenzen – Zirkularität EBA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprachmodi - Zirkulärer Aufbau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-accent: #FF6B6B;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-orange: #FF9500;
+            --zh-purple: #9B59B6;
+            --zh-pink: #FF69B4;
+            --zh-teal: #20B2AA;
+            --zh-red: #DC143C;
+            --zh-yellow: #FFD700;
+            --zh-cyan: #00CED1;
+            --zh-lime: #32CD32;
+            --zh-indigo: #4B0082;
+            --zh-coral: #FF7F50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-blue) 0%, var(--zh-dark-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--zh-gray);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .back-btn:hover {
+            background: var(--zh-light-blue);
+            transform: translateX(-5px);
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        /* EBA Link Button */
+        .eba-link {
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .eba-link:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Theme Matrix */
+        .matrix-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        .theme-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        .theme-matrix th, .theme-matrix td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid var(--zh-gray);
+            vertical-align: top;
+        }
+
+        .theme-matrix th {
+            background: var(--zh-blue);
+            color: white;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .theme-matrix tr:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .theme-matrix .theme-cell {
+            font-weight: bold;
+            background: var(--zh-gray);
+        }
+
+        .theme-matrix .lebensbezug-cell {
+            font-style: italic;
+            color: var(--zh-text);
+            font-size: 0.85rem;
+        }
+
+        /* Sprachmodi Tags */
+        .sprachmodi-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            margin: 0.2rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sprachmodi-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sprachmodi-tag.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out;
+        }
+
+        /* Color coding for Sprachmodi */
+        .modus-rezeption-muendlich { background: var(--zh-blue); }
+        .modus-rezeption-audiovisuell { background: var(--zh-cyan); }
+        .modus-rezeption-schriftlich { background: var(--zh-teal); }
+        .modus-produktion-muendlich { background: var(--zh-orange); }
+        .modus-produktion-schriftlich { background: var(--zh-coral); }
+        .modus-produktion-multimedial { background: var(--zh-red); }
+        .modus-interaktion-muendlich { background: var(--zh-purple); }
+        .modus-interaktion-schriftlich { background: var(--zh-pink); }
+        .modus-interaktion-digital { background: var(--zh-green); }
+
+        /* Legend */
+        .legend {
+            background: var(--zh-gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .legend h3 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        /* Filter Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .modus-used {
+            background: var(--zh-light-blue);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--zh-blue);
+        }
+
+        .usage-info {
+            font-size: 0.9em;
+            color: var(--zh-blue);
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .theme-matrix {
+                font-size: 0.8rem;
+            }
+            
+            .sprachmodi-tag {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .theme-matrix th, .theme-matrix td {
+                padding: 0.5rem;
+            }
+
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Sprachkompetenzen – Zirkularität EBA</h1>
-  <p>Hier stehen die Sprachkompetenzen zur Zirkularität.</p>
-  <a href="zirkularitaet.html">Zurück zur Zirkularität</a>
-  <a href="index.html">Zurück zu EBA</a>
+    <!-- Header -->
+    <header class="header">
+        <h1>Sprachmodi</h1>
+        <p>Zirkulärer Aufbau der Kommunikationskompetenzen über alle Themen</p>
+    </header>
+
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <a href="index.html">Übersicht</a>
+        <span>›</span>
+        <span>Sprachmodi</span>
+        <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            ← Zurück zur Übersicht
+        </a>
+
+        <h2>Sprachmodi im zirkulären Aufbau</h2>
+        <p>Die neun Sprachmodi werden spiralförmig über alle Themen und individuellen Lebensbezüge entwickelt. <strong>Klicken Sie auf einen Sprachmodus</strong>, um zu sehen, wo er wiederkehrt und welche konkreten Anwendungen dahinter stehen.</p>
+
+        <div class="legend">
+            <h3>Legende Sprachmodi</h3>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-blue);"></div>
+                    <span>4.2.1.1 Rezeption mündlich</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-cyan);"></div>
+                    <span>4.2.1.2 Rezeption audiovisuell</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-teal);"></div>
+                    <span>4.2.1.3 Rezeption schriftlich & bildlich</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-orange);"></div>
+                    <span>4.2.2.1 Produktion mündlich</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-coral);"></div>
+                    <span>4.2.2.2 Produktion schriftlich & bildlich</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-red);"></div>
+                    <span>4.2.2.3 Produktion multimedial</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-purple);"></div>
+                    <span>4.2.3.1 Interaktion & Kollaboration mündlich</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-pink);"></div>
+                    <span>4.2.3.2 Interaktion & Kollaboration schriftlich</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: var(--zh-green);"></div>
+                    <span>4.2.3.3 Interaktion & Kollaboration digital</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="matrix-container">
+            <table class="theme-matrix">
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Sprachmodi</th>
+                        <th>Zirkuläre Entwicklung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Thema 1 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>1. Ins Berufsleben einsteigen</strong></td>
+                        <td class="lebensbezug-cell">1.1 Orientierung in Arbeits-/Ausbildungswelt</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                        </td>
+                        <td>Rechtliche Texte verstehen & schriftlich dokumentieren</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">1.2 Konstruktive Kommunikation</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-muendlich" onclick="filterByModus('modus-rezeption-muendlich', '4.2.1.1')">4.2.1.1</span>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Aktives Zuhören & konstruktive Gesprächsführung</td>
+                    </tr>
+                    
+                    <!-- Thema 2 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>2. Bewusst konsumieren und handeln</strong></td>
+                        <td class="lebensbezug-cell">2.1 Verantwortungsvoller Umgang mit Geld</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-muendlich" onclick="filterByModus('modus-rezeption-muendlich', '4.2.1.1')">4.2.1.1</span>
+                            <span class="sprachmodi-tag modus-rezeption-audiovisuell" onclick="filterByModus('modus-rezeption-audiovisuell', '4.2.1.2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                        </td>
+                        <td>Budgetplanung & Finanzinformationen verstehen</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">2.2 Nachhaltiger Konsum</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-audiovisuell" onclick="filterByModus('modus-rezeption-audiovisuell', '4.2.1.2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-multimedial" onclick="filterByModus('modus-produktion-multimedial', '4.2.2.3')">4.2.2.3</span>
+                        </td>
+                        <td>Nachhaltigkeitsinformationen analysieren & präsentieren</td>
+                    </tr>
+
+                    <!-- Thema 3 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>3. Risiko und Sicherheit</strong></td>
+                        <td class="lebensbezug-cell">3.1 Absicherung gegen Risiken</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-schriftlich" onclick="filterByModus('modus-interaktion-schriftlich', '4.2.3.2')">4.2.3.2</span>
+                        </td>
+                        <td>Versicherungsunterlagen & Korrespondenz</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">3.2 Gesellschaftliche Normen & Gesundheit</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-audiovisuell" onclick="filterByModus('modus-rezeption-audiovisuell', '4.2.1.2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Gesundheitskommunikation & Aufklärungs gespräche</td>
+                    </tr>
+
+                    <!-- Thema 4 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>4. Medien und digitale Welt</strong></td>
+                        <td class="lebensbezug-cell">4.1 Digitale Werkzeuge & KI-Nutzung</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-produktion-muendlich" onclick="filterByModus('modus-produktion-muendlich', '4.2.2.1')">4.2.2.1</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-produktion-multimedial" onclick="filterByModus('modus-produktion-multimedial', '4.2.2.3')">4.2.2.3</span>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Digitale Präsentationen & KI-Interaktion</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">4.2 Kritischer Medienumgang</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Digitale Reflexion & kritische Medienanalyse</td>
+                    </tr>
+
+                    <!-- Thema 5 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>5. Meinung bilden, akzeptieren und mitgestalten</strong></td>
+                        <td class="lebensbezug-cell">5.1 Respektvolle Meinungsäußerung</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-produktion-muendlich" onclick="filterByModus('modus-produktion-muendlich', '4.2.2.1')">4.2.2.1</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                        </td>
+                        <td>Argumentative Meinungsäußerung & Diskussionskultur</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">5.2 Politische Rechte & Partizipation</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                        </td>
+                        <td>Politische Texte verstehen & partizipative Kommunikation</td>
+                    </tr>
+
+                    <!-- Thema 6 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>6. Verträge verstehen – fair handeln</strong></td>
+                        <td class="lebensbezug-cell">6.1 Rechtliche Fragen im Alltag</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-rezeption-audiovisuell" onclick="filterByModus('modus-rezeption-audiovisuell', '4.2.1.2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                            <span class="sprachmodi-tag modus-interaktion-schriftlich" onclick="filterByModus('modus-interaktion-schriftlich', '4.2.3.2')">4.2.3.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Rechtsdokumente verstehen & Beratungsgespräche führen</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">6.2 Fair handeln in schwierigen Situationen</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-audiovisuell" onclick="filterByModus('modus-rezeption-audiovisuell', '4.2.1.2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                            <span class="sprachmodi-tag modus-interaktion-schriftlich" onclick="filterByModus('modus-interaktion-schriftlich', '4.2.3.2')">4.2.3.2</span>
+                        </td>
+                        <td>Ethische Diskussionsführung & Konfliktlösung</td>
+                    </tr>
+
+                    <!-- Thema 7 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>7. Kunst und Kultur</strong></td>
+                        <td class="lebensbezug-cell">7.1 Kulturelle Ausdrucksformen</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-audiovisuell" onclick="filterByModus('modus-rezeption-audiovisuell', '4.2.1.2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag modus-produktion-multimedial" onclick="filterByModus('modus-produktion-multimedial', '4.2.2.3')">4.2.2.3</span>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Kulturelle Medienanalyse & kreative Produktion</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">7.2 Kultur & Machtverhältnisse</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                        </td>
+                        <td>Kulturkritische Diskussion & Analyse</td>
+                    </tr>
+
+                    <!-- Thema 8 -->
+                    <tr>
+                        <td rowspan="2" class="theme-cell"><strong>8. Arbeit und Steuerpflicht</strong></td>
+                        <td class="lebensbezug-cell">8.1 Berufliche Laufbahnplanung</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-produktion-multimedial" onclick="filterByModus('modus-produktion-multimedial', '4.2.2.3')">4.2.2.3</span>
+                            <span class="sprachmodi-tag modus-interaktion-muendlich" onclick="filterByModus('modus-interaktion-muendlich', '4.2.3.1')">4.2.3.1</span>
+                            <span class="sprachmodi-tag modus-interaktion-digital" onclick="filterByModus('modus-interaktion-digital', '4.2.3.3')">4.2.3.3</span>
+                        </td>
+                        <td>Bewerbungsunterlagen & Vorstellungsgespräche</td>
+                    </tr>
+                    <tr>
+                        <td class="lebensbezug-cell">8.2 Bürgerpflichten & Steuern</td>
+                        <td>
+                            <span class="sprachmodi-tag modus-rezeption-schriftlich" onclick="filterByModus('modus-rezeption-schriftlich', '4.2.1.3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag modus-produktion-schriftlich" onclick="filterByModus('modus-produktion-schriftlich', '4.2.2.2')">4.2.2.2</span>
+                            <span class="sprachmodi-tag modus-interaktion-schriftlich" onclick="filterByModus('modus-interaktion-schriftlich', '4.2.3.2')">4.2.3.2</span>
+                        </td>
+                        <td>Steuerformulare & behördliche Kommunikation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Sprachmodus gefiltert</h2>
+            <div id="modalDescription"></div>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sprachmodi-Definitionen mit konkreten Anwendungsbeispielen
+        const sprachmodi = {
+            '4.2.1.1': {
+                title: 'Rezeption mündlich',
+                description: 'Hörmaterialien aus verschiedenen Medien verstehen',
+                applications: [
+                    'Informalen und formalen Gesprächen aus verschiedenen Kontexten folgen',
+                    'Audiodateien zur Kommunikation und Konfliktstrategien verstehen',
+                    'Hörmaterialien zu Finanzthemen und Budgetplanung analysieren'
+                ],
+                used: [
+                    '1.2 Konstruktive Kommunikation',
+                    '2.1 Verantwortungsvoller Umgang mit Geld'
+                ]
+            },
+            '4.2.1.2': {
+                title: 'Rezeption audiovisuell',
+                description: 'Audiovisuelle Materialien verstehen',
+                applications: [
+                    'Erklärvideos zu Vertragsbestandteilen analysieren',
+                    'Nachhaltigkeits-Dokumentationen verstehen',
+                    'Gesundheitsaufklärungsvideos interpretieren',
+                    'Kulturelle Medieninhalte kritisch betrachten'
+                ],
+                used: [
+                    '2.1 Verantwortungsvoller Umgang mit Geld',
+                    '2.2 Nachhaltiger Konsum',
+                    '3.2 Gesellschaftliche Normen & Gesundheit',
+                    '6.1 Rechtliche Fragen im Alltag',
+                    '6.2 Fair handeln in schwierigen Situationen',
+                    '7.1 Kulturelle Ausdrucksformen'
+                ]
+            },
+            '4.2.1.3': {
+                title: 'Rezeption schriftlich und bildlich',
+                description: 'Analoge und digitale lineare und nicht-lineare Texte verstehen',
+                applications: [
+                    'Vertragsdokumente und AGB verstehen',
+                    'Infografiken zu Nachhaltigkeit interpretieren',
+                    'Versicherungsunterlagen analysieren',
+                    'Politische Texte und Abstimmungsunterlagen verstehen',
+                    'Steuerformulare und behördliche Dokumente lesen'
+                ],
+                used: [
+                    '1.1 Orientierung in Arbeits-/Ausbildungswelt',
+                    '1.2 Konstruktive Kommunikation',
+                    '2.1 Verantwortungsvoller Umgang mit Geld',
+                    '2.2 Nachhaltiger Konsum',
+                    '3.1 Absicherung gegen Risiken',
+                    '5.2 Politische Rechte & Partizipation',
+                    '6.1 Rechtliche Fragen im Alltag',
+                    '6.2 Fair handeln in schwierigen Situationen',
+                    '8.2 Bürgerpflichten & Steuern'
+                ]
+            },
+            '4.2.2.1': {
+                title: 'Produktion mündlich',
+                description: 'Fakten- und meinungsorientiert kommunizieren',
+                applications: [
+                    'Argumente strukturieren und Redemittel nutzen',
+                    'Anwendungsbereiche in Gesprächen bestimmen',
+                    'Respektvolle Meinungsäußerung und Feedback geben',
+                    'An Diskussionen und Debatten teilnehmen'
+                ],
+                used: [
+                    '4.1 Digitale Werkzeuge & KI-Nutzung',
+                    '5.1 Respektvolle Meinungsäußerung'
+                ]
+            },
+            '4.2.2.2': {
+                title: 'Produktion schriftlich und bildlich',
+                description: 'Fakten- und meinungsorientiert schriftlich kommunizieren',
+                applications: [
+                    'Budget erstellen und Konsumentscheidungen dokumentieren',
+                    'Rechtsdokumente verfassen und E-Mails an Vertragspartner',
+                    'Strukturierte Dokumentation und Reflexion',
+                    'Bewerbungsunterlagen erstellen',
+                    'Steuerformulare ausfüllen'
+                ],
+                used: [
+                    '1.1 Orientierung in Arbeits-/Ausbildungswelt',
+                    '1.2 Konstruktive Kommunikation',
+                    '2.1 Verantwortungsvoller Umgang mit Geld',
+                    '3.1 Absicherung gegen Risiken',
+                    '4.1 Digitale Werkzeuge & KI-Nutzung',
+                    '5.1 Respektvolle Meinungsäußerung',
+                    '5.2 Politische Rechte & Partizipation',
+                    '6.1 Rechtliche Fragen im Alltag',
+                    '6.2 Fair handeln in schwierigen Situationen',
+                    '7.2 Kultur & Machtverhältnisse',
+                    '8.1 Berufliche Laufbahnplanung',
+                    '8.2 Bürgerpflichten & Steuern'
+                ]
+            },
+            '4.2.2.3': {
+                title: 'Produktion multimedial',
+                description: 'Fakten- oder meinungsorientierte Multimedia-Präsentationen erstellen',
+                applications: [
+                    'Nachhaltigkeits-Präsentationen mit verschiedenen Medien',
+                    'Digitale Tools-Präsentationen erstellen',
+                    'Kulturelle Multimedia-Produktionen',
+                    'Bewerbungspräsentationen für die Laufbahnplanung'
+                ],
+                used: [
+                    '2.2 Nachhaltiger Konsum',
+                    '4.1 Digitale Werkzeuge & KI-Nutzung',
+                    '7.1 Kulturelle Ausdrucksformen',
+                    '8.1 Berufliche Laufbahnplanung'
+                ]
+            },
+            '4.2.3.1': {
+                title: 'Interaktion und Kollaboration mündlich',
+                description: 'An formalen und informalen Gesprächen aktiv teilnehmen',
+                applications: [
+                    'Aktiv zuhören und angemessen reagieren',
+                    'Budgetgespräche und Finanzberatung',
+                    'Gesundheitsgespräche und Aufklärung',
+                    'Beratungsgespräche zu rechtlichen Fragen',
+                    'Vorstellungsgespräche führen',
+                    'Moralische Diskussionen moderieren'
+                ],
+                used: [
+                    '1.2 Konstruktive Kommunikation',
+                    '2.1 Verantwortungsvoller Umgang mit Geld',
+                    '3.2 Gesellschaftliche Normen & Gesundheit',
+                    '5.1 Respektvolle Meinungsäußerung',
+                    '5.2 Politische Rechte & Partizipation',
+                    '6.1 Rechtliche Fragen im Alltag',
+                    '6.2 Fair handeln in schwierigen Situationen',
+                    '7.2 Kultur & Machtverhältnisse',
+                    '8.1 Berufliche Laufbahnplanung'
+                ]
+            },
+            '4.2.3.2': {
+                title: 'Interaktion und Kollaboration schriftlich',
+                description: 'Formal und informal korrespondieren und Texte kooperativ erarbeiten',
+                applications: [
+                    'Korrespondenz mit Versicherungen',
+                    'Schriftliche Anfragen an Beratungsstellen',
+                    'Behördliche Korrespondenz',
+                    'Kooperative Textarbeit in Gruppen'
+                ],
+                used: [
+                    '3.1 Absicherung gegen Risiken',
+                    '6.1 Rechtliche Fragen im Alltag',
+                    '6.2 Fair handeln in schwierigen Situationen',
+                    '8.2 Bürgerpflichten & Steuern'
+                ]
+            },
+            '4.2.3.3': {
+                title: 'Interaktion und Kollaboration digital',
+                description: 'An digitalen Austauschen teilnehmen und mit KI-Tools interagieren',
+                applications: [
+                    'KI-Tools zur Simulation von Gesprächsverläufen nutzen',
+                    'Digitale Lernjournale führen und reflektieren',
+                    'Prompts formulieren und KI-Output reflektieren',
+                    'Online-Formularkorrespondenz',
+                    'Digitale Supportformulare und Chat',
+                    'Kulturelle digitale Kollaboration'
+                ],
+                used: [
+                    '1.2 Konstruktive Kommunikation',
+                    '3.2 Gesellschaftliche Normen & Gesundheit',
+                    '4.1 Digitale Werkzeuge & KI-Nutzung',
+                    '4.2 Kritischer Medienumgang',
+                    '6.1 Rechtliche Fragen im Alltag',
+                    '7.1 Kulturelle Ausdrucksformen',
+                    '8.1 Berufliche Laufbahnplanung'
+                ]
+            }
+        };
+
+        // Mapping für Lebensbezug zu Thema
+        const lebensbezugToTheme = {
+            '1.1': 'Thema 1: Ins Berufsleben einsteigen', 
+            '1.2': 'Thema 1: Ins Berufsleben einsteigen',
+            '2.1': 'Thema 2: Bewusst konsumieren und handeln', 
+            '2.2': 'Thema 2: Bewusst konsumieren und handeln',
+            '3.1': 'Thema 3: Risiko und Sicherheit', 
+            '3.2': 'Thema 3: Risiko und Sicherheit',
+            '4.1': 'Thema 4: Medien und digitale Welt', 
+            '4.2': 'Thema 4: Medien und digitale Welt',
+            '5.1': 'Thema 5: Meinung bilden, akzeptieren und mitgestalten', 
+            '5.2': 'Thema 5: Meinung bilden, akzeptieren und mitgestalten',
+            '6.1': 'Thema 6: Verträge verstehen – fair handeln', 
+            '6.2': 'Thema 6: Verträge verstehen – fair handeln',
+            '7.1': 'Thema 7: Kunst und Kultur', 
+            '7.2': 'Thema 7: Kunst und Kultur',
+            '8.1': 'Thema 8: Arbeit und Steuerpflicht', 
+            '8.2': 'Thema 8: Arbeit und Steuerpflicht'
+        };
+
+        // Filter functionality
+        function filterByModus(modusClass, modusNumber) {
+            const modal = document.getElementById('filterModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Clear previous states
+            document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            
+            // Highlight matching tags
+            const matchingTags = document.querySelectorAll(`.${modusClass}`);
+            
+            // Count total occurrences
+            const totalOccurrences = matchingTags.length;
+            
+            matchingTags.forEach(tag => {
+                tag.classList.add('active');
+            });
+
+            // Set modal content
+            const modus = sprachmodi[modusNumber];
+            modalTitle.textContent = `${modusNumber}: ${modus.title} (${totalOccurrences} Vorkommen)`;
+            
+            modalDescription.innerHTML = `
+                <p><strong>Sprachmodus:</strong> ${modusNumber} ${modus.title}</p>
+                <p><strong>Definition:</strong> ${modus.description}</p>
+            `;
+
+            // Generate applications content
+            const applicationsContent = `
+                <div class="modus-used">
+                    <strong>Konkrete Anwendungen:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        ${modus.applications.map(app => `<li>${app}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            // Generate usage content with themes
+            const usageWithThemes = modus.used.map(usage => {
+                const numberMatch = usage.match(/^(\d+\.\d+)/);
+                if (numberMatch) {
+                    const number = numberMatch[1];
+                    const theme = lebensbezugToTheme[number];
+                    return `${usage} (${theme})`;
+                }
+                return usage;
+            });
+            
+            const usageContent = `
+                <div class="modus-used">
+                    <strong>Verwendet in ${modus.used.length} Lebensbezügen:</strong>
+                    <div class="usage-info" style="margin-top: 0.5rem;">
+                        ${usageWithThemes.join(' • ')}
+                    </div>
+                </div>
+            `;
+            
+            modalContent.innerHTML = applicationsContent + usageContent;
+            
+            modal.style.display = 'block';
+            
+            // Auto-close after 15 seconds
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
+                    tag.classList.remove('active');
+                });
+            }, 15000);
+        }
+
+        // Modal close functionality
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('filterModal').style.display = 'none';
+            document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('filterModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
+                    tag.classList.remove('active');
+                });
+            }
+        }
+
+        // Add pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.2); box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

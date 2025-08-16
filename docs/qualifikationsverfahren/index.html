@@ -1,11 +1,378 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Qualifikationsverfahren</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualifikationsverfahren - Schullehrplan ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .info-box h2 {
+            color: #003d7a;
+            font-size: 1.3em;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .info-box li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .info-box li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        .info-box .highlight {
+            background-color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .qv-overview {
+            margin-bottom: 40px;
+        }
+        
+        .qv-overview h2 {
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            color: #003d7a;
+        }
+        
+        .qv-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .qv-table th {
+            background-color: #e8f4fd;
+            padding: 12px;
+            text-align: left;
+            color: #003d7a;
+            font-weight: 600;
+        }
+        
+        .qv-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .qv-table .component-cell {
+            font-weight: 600;
+            color: #0066cc;
+        }
+        
+        .qv-table .weight-cell {
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0066cc;
+            transition: width 0.3s ease;
+        }
+        
+        .card:hover::before {
+            width: 8px;
+        }
+        
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 20px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .card.erfahrung .card-icon {
+            background-color: #4d94ff;
+        }
+        
+        .card.schlussarbeit .card-icon {
+            background-color: #0066cc;
+        }
+        
+        .card.pruefung .card-icon {
+            background-color: #003d7a;
+        }
+        
+        .card.hinweise .card-icon {
+            background-color: #6699cc;
+        }
+        
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 12px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .card .meta {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .back-link {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .back-link a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-box {
+                padding: 20px;
+            }
+            
+            .qv-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Qualifikationsverfahren</h1>
-  <p>Hier steht alles rund um das Qualifikationsverfahren...</p>
-  <a href="../index.html">Zurück zur Übersicht</a>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Schullehrplan ABU</a> / Qualifikationsverfahren
+            </nav>
+            <h1>Qualifikationsverfahren</h1>
+            <p class="subtitle">Allgemeinbildender Unterricht (ABU)</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="info-box">
+            <h2>📋 Übersicht Qualifikationsverfahren</h2>
+            <ul>
+                <li><strong>3- und 4-jährige EFZ-Ausbildungen:</strong> Das QV setzt sich aus <span class="highlight">3 Benotungen</span> zusammen: Erfahrungsnoten, Schlussarbeit und Schlussprüfung</li>
+                <li><strong>2-jährige EBA-Ausbildungen:</strong> Die Abschlussnote besteht aus <span class="highlight">Erfahrungsnoten</span> aus vier Semestern (ohne Schlussarbeit und Schlussprüfung)</li>
+                <li><strong>Wiederholung bei EBA:</strong> Bei Wiederholung des QV ist eine <span class="highlight">Schlussarbeit</span> zu erstellen</li>
+                <li><strong>BM-Übertritt:</strong> Bei Wechsel während des vorletzten Semesters entfällt die Erfahrungsnote; die QV-Note setzt sich aus <span class="highlight">Schlussarbeit und Schlussprüfung</span> zusammen</li>
+                <li><strong>Kompetenzorientierung:</strong> Alle Prüfungsformen orientieren sich an <span class="highlight">praxisrelevanten, lebensweltlichen Problemstellungen</span></li>
+            </ul>
+        </div>
+        
+        <div class="qv-overview">
+            <h2>📊 Gewichtung der QV-Bestandteile</h2>
+            <table class="qv-table">
+                <thead>
+                    <tr>
+                        <th>Bildungsgang</th>
+                        <th>Erfahrungsnoten</th>
+                        <th>Schlussarbeit</th>
+                        <th>Schlussprüfung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="component-cell">3-jähriges EFZ</td>
+                        <td class="weight-cell">⅓</td>
+                        <td class="weight-cell">⅓</td>
+                        <td class="weight-cell">⅓</td>
+                    </tr>
+                    <tr>
+                        <td class="component-cell">4-jähriges EFZ</td>
+                        <td class="weight-cell">⅓</td>
+                        <td class="weight-cell">⅓</td>
+                        <td class="weight-cell">⅓</td>
+                    </tr>
+                    <tr>
+                        <td class="component-cell">2-jähriges EBA</td>
+                        <td class="weight-cell">100%</td>
+                        <td class="weight-cell">—</td>
+                        <td class="weight-cell">—</td>
+                    </tr>
+                    <tr>
+                        <td class="component-cell">BM-Wechsler (vorletztes Sem.)</td>
+                        <td class="weight-cell">—</td>
+                        <td class="weight-cell">50%</td>
+                        <td class="weight-cell">50%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card-grid">
+            <a href="erfa.html" class="card erfahrung">
+                <div class="card-icon">📚</div>
+                <h3>Erfahrungsnoten</h3>
+                <p>Pro Semester werden Zeugnisnoten für Sprache und Kommunikation sowie Gesellschaft generiert. Die Erfahrungsnote ergibt sich aus dem Mittel aller Semesterzeugnisnoten und bildet die kontinuierliche Lernleistung ab.</p>
+                <div class="meta">
+                    Mind. 3 Einzelnoten pro Semester
+                </div>
+            </a>
+            
+            <a href="schlussarbeit.html" class="card schlussarbeit">
+                <div class="card-icon">✍️</div>
+                <h3>Schlussarbeit</h3>
+                <p>Eigenständige Bearbeitung eines selbstgewählten Themas mit gesellschaftlichem Bezug. Die Arbeit umfasst Konzept, Produkt und Präsentation mit vertiefendem Gespräch und fördert methodische, soziale und fachliche Kompetenzen.</p>
+                <div class="meta">
+                    Prozess ⅓ • Produkt ⅓ • Präsentation ⅓
+                </div>
+            </a>
+            
+            <a href="schlusspruefung.html" class="card pruefung">
+                <div class="card-icon">📝</div>
+                <h3>Schlussprüfung</h3>
+                <p>Zentral erstellte, schriftliche Prüfung über 150 Minuten. Sie überprüft die Fähigkeit, komplexe gesellschaftliche und berufliche Herausforderungen zu analysieren und zu beurteilen. Mindestens ein Teil im Open-Book-Format.</p>
+                <div class="meta">
+                    3-jährig & 4-jährig unterschiedlich
+                </div>
+            </a>
+            
+            <a href="hinweise.html" class="card hinweise">
+                <div class="card-icon">ℹ️</div>
+                <h3>Allgemeine Hinweise</h3>
+                <p>Wichtige Informationen zu digitalen Hilfsmitteln, Nachteilsausgleich, Wiederholungen, Plagiatsprüfung und rechtlichen Grundlagen. Umfasst auch Regelungen zum Einsatz von KI-Tools und deren Deklaration.</p>
+                <div class="meta">
+                    Rechtliche Grundlagen & Regelungen
+                </div>
+            </a>
+        </div>
+        
+        <div class="back-link">
+            <a href="../index.html">← Zurück zur Übersicht</a>
+        </div>
+    </main>
 </body>
 </html>

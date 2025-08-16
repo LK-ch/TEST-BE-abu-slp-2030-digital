@@ -1,11 +1,652 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>EFZ 3-jährig – 3. Lehrjahr</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Lehrjahr EFZ - Schullehrplan ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .warning-box h2 {
+            color: #856404;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .warning-box p {
+            color: #856404;
+            margin: 0;
+        }
+        
+        .theme-section {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .theme-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 24px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-header:hover {
+            background-color: #0052a3;
+        }
+        
+        .theme-header::after {
+            content: '▼';
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        
+        .theme-header.collapsed::after {
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .theme-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        
+        .theme-header .lektionen {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .theme-content {
+            padding: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .theme-content.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .lebensbezug {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #4d94ff;
+        }
+        
+        .lebensbezug h3 {
+            color: #003d7a;
+            font-size: 1.1em;
+            margin-bottom: 16px;
+        }
+        
+        .lerninhalt {
+            margin-bottom: 20px;
+            padding: 16px;
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .lerninhalt h4 {
+            color: #333;
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+        
+        .kompetenz-container {
+            margin-top: 12px;
+        }
+        
+        .kompetenz-button {
+            background-color: #e8f4fd;
+            border: 1px solid #cce0f4;
+            color: #0066cc;
+            padding: 8px 16px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .kompetenz-button:hover {
+            background-color: #cce0f4;
+            transform: translateY(-1px);
+        }
+        
+        .kompetenz-button.active {
+            background-color: #0066cc;
+            color: white;
+        }
+        
+        .kompetenz-details {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background-color: #f0f8ff;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .kompetenz-details.show {
+            display: block;
+        }
+        
+        .kompetenz-details ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .kompetenz-details li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .kompetenz-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+        }
+        
+        .kompetenz-nummer {
+            font-weight: 600;
+            color: #003d7a;
+        }
+        
+        /* Farbcodierung für verschiedene Kompetenzbereiche */
+        .gesellschaft { background-color: #e8f4fd; border-color: #b3d9ff; color: #0056b3; }
+        .sprache { background-color: #f0e8fd; border-color: #d4b3ff; color: #5a00b3; }
+        .digital { background-color: #e8fdf0; border-color: #b3ffd4; color: #00b356; }
+        .schluessel { background-color: #fde8e8; border-color: #ffb3b3; color: #b30000; }
+        
+        .leitidee {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .leitidee h3 {
+            color: #003d7a;
+            margin-bottom: 10px;
+        }
+        
+        .leitidee p {
+            margin-bottom: 10px;
+        }
+        
+        .hinweis {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .va-section {
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .va-section h2 {
+            color: #003d7a;
+            font-size: 1.4em;
+            margin-bottom: 16px;
+        }
+        
+        .va-section p {
+            margin-bottom: 12px;
+        }
+        
+        .va-section ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .va-section li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .va-section li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .theme-header {
+                padding: 16px;
+            }
+            
+            .theme-content {
+                padding: 16px;
+            }
+            
+            .kompetenz-button {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+            
+            .lebensbezug h3 span {
+                display: block;
+                float: none !important;
+                margin-top: 8px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <script>
+        function toggleKompetenz(button, detailsId) {
+            const details = document.getElementById(detailsId);
+            const allButtons = button.parentElement.querySelectorAll('.kompetenz-button');
+            const allDetails = button.parentElement.parentElement.querySelectorAll('.kompetenz-details');
+            
+            // Alle anderen schließen
+            allDetails.forEach(d => {
+                if (d.id !== detailsId) d.classList.remove('show');
+            });
+            allButtons.forEach(b => {
+                if (b !== button) b.classList.remove('active');
+            });
+            
+            // Aktuellen toggle
+            details.classList.toggle('show');
+            button.classList.toggle('active');
+        }
+        
+        function toggleTheme(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+            
+            // Toggle current theme
+            if (isOpen) {
+                content.classList.remove('show');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.add('show');
+                header.classList.remove('collapsed');
+            }
+        }
+        
+        // Initialize: Add click handlers and collapse all themes
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.theme-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleTheme(this);
+                });
+                header.classList.add('collapsed');
+            });
+        });
+    </script>
 </head>
 <body>
-  <h1>EFZ 3-jährig – 3. Lehrjahr</h1>
-  <p>Hier steht alles zum 3. Lehrjahr.</p>
-  <a href="index.html">Zurück zu EFZ 3-jährig</a>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Schullehrplan ABU</a> / 
+                <a href="index.html">3-jährige Grundbildung EFZ</a> / 
+                3. Lehrjahr
+            </nav>
+            <h1>3. Lehrjahr EFZ</h1>
+            <p class="subtitle">Themen und Kompetenzen der Allgemeinbildung</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="warning-box">
+            <h2>⚠️ Hinweis zur Konsultation</h2>
+            <p><strong>Die Kompetenzen und Umsetzungsvorschläge für die Themen des 3. Lehrjahres befinden sich in Ausarbeitung und liegen für die Konsultation nicht vor.</strong></p>
+            <p>Die nachfolgenden Inhalte zeigen die geplante Struktur und Leitideen der Themen 7-8 sowie Informationen zur Vertiefungsarbeit.</p>
+        </div>
+        
+        <!-- Thema 7: Arbeiten in der Zukunft -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 7: Arbeiten in der Zukunft</h2>
+                <p class="lektionen">ca. 28 Lektionen</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee</h3>
+                    <p><strong>Die Arbeitswelt verändert sich.</strong> Ich setze mich damit auseinander, wie ich meine berufliche Zukunft gestalten kann – mit rechtlichem Wissen, digitalen Kompetenzen und einem klaren Blick auf meine Ziele.</p>
+                    <p>Ich befasse mich damit, wie neue Technologien (Robotik, KI) die Berufswelt verändern (Interaktion schriftlich). Ich reflektiere meine Stärken, entdecke Weiterbildungen und gestalte meine Laufbahn (multimedial). Fragen der Work-Life-Balance spielen dabei eine wichtige Rolle. Ich lerne die Grundlagen zu Arbeitsverträgen, Kündigungen, finanzieller Vorsorge und Sozialversicherungen (Rezeption schriftlich).</p>
+                </div>
+                
+                <div class="hinweis">
+                    <strong>Hinweis:</strong> Die detaillierten Kompetenzen und Umsetzungsvorschläge für dieses Thema befinden sich in Ausarbeitung.
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>1. Individueller Lebensbezug: Ich kenne die Chancen und Herausforderungen der Digitalisierung in meiner Berufsbranche.</h3>
+                    
+                    <div class="kompetenz-container">
+                        <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l1-schluessel')">
+                            Schlüsselkompetenzen
+                        </button>
+                        <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l1-sprache')">
+                            Sprachmodi
+                        </button>
+                        <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l1-gesellschaft')">
+                            Handlungsfelder
+                        </button>
+                    </div>
+                    
+                    <div id="t7l1-schluessel" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
+                            <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                            <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="t7l1-sprache" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Analoge und digitale lineare/nicht-lineare Texte verstehen</li>
+                            <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial: Eine Multimedia-Präsentation erstellen</li>
+                            <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Formal und informal korrespondieren</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="t7l1-gesellschaft" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">5.2.7.1 Technologische und digitale Transformation:</span> Die Lernenden analysieren den Einfluss aktueller Technologien</li>
+                            <li><span class="kompetenz-nummer">5.2.7.2 Technologische und digitale Transformation:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien zweckmässig</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>2. Individueller Lebensbezug: Ich plane meine berufliche Zukunft und achte auf meine Lebensqualität.</h3>
+                    
+                    <div class="kompetenz-container">
+                        <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l2-schluessel')">
+                            Schlüsselkompetenzen
+                        </button>
+                        <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l2-sprache')">
+                            Sprachmodi
+                        </button>
+                        <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l2-gesellschaft')">
+                            Handlungsfelder
+                        </button>
+                    </div>
+                    
+                    <div id="t7l2-schluessel" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
+                            <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="t7l2-sprache" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial: Laufbahngestaltung multimedial darstellen</li>
+                            <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Reflexion der Stärken</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="t7l2-gesellschaft" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> Die Lernenden erkunden und entwickeln ihre Persönlichkeit</li>
+                            <li><span class="kompetenz-nummer">5.2.2.2 Identität und Sozialisation:</span> Sie achten auf ihre psychische und physische Gesundheit</li>
+                            <li><span class="kompetenz-nummer">5.2.2.3 Identität und Sozialisation:</span> Die Lernenden erkunden identitätsstiftende Räume und treffen persönliche Entscheidungen</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>3. Individueller Lebensbezug: Ich kenne meine Rechte und Pflichten im Arbeitsleben.</h3>
+                    
+                    <div class="kompetenz-container">
+                        <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l3-schluessel')">
+                            Schlüsselkompetenzen
+                        </button>
+                        <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l3-sprache')">
+                            Sprachmodi
+                        </button>
+                        <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l3-gesellschaft')">
+                            Handlungsfelder
+                        </button>
+                    </div>
+                    
+                    <div id="t7l3-schluessel" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                            <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="t7l3-sprache" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Arbeitsverträge, Kündigungen verstehen</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="t7l3-gesellschaft" class="kompetenz-details">
+                        <ul>
+                            <li><span class="kompetenz-nummer">5.2.6.1 Recht:</span> Die Lernenden verstehen die Funktionsweise juristischer Instrumente</li>
+                            <li><span class="kompetenz-nummer">5.2.6.2 Recht:</span> Die Lernenden verstehen gesellschaftsrelevante juristische Regeln</li>
+                            <li><span class="kompetenz-nummer">5.2.6.3 Recht:</span> Die Lernenden identifizieren und interpretieren juristische Informationen</li>
+                            <li><span class="kompetenz-nummer">5.2.6.4 Recht:</span> In juristisch bedeutsamen Herausforderungen unterscheiden die Lernenden zwischen den Interessen der beteiligten Parteien</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thema 8: Schlussarbeit -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 8: Schlussarbeit</h2>
+                <p class="lektionen">ca. 28 Lektionen</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee</h3>
+                    <p><strong>Die Schlussarbeit bildet den Abschluss meiner allgemeinbildenden Ausbildung.</strong> Sie ermöglicht mir, ein selbstgewähltes Thema vertieft zu bearbeiten und dabei die erworbenen Kompetenzen aus allen drei Lehrjahren anzuwenden.</p>
+                    <p>In der Schlussarbeit verbinde ich gesellschaftliche Aspekte mit persönlichen Erfahrungen und zeige, dass ich komplexe Themen selbstständig bearbeiten kann. Ich nutze verschiedene Informationsquellen, entwickle eigene Standpunkte und präsentiere meine Erkenntnisse strukturiert und überzeugend.</p>
+                </div>
+                
+                <div class="hinweis">
+                    <strong>Hinweis:</strong> Die detaillierten Vorgaben zur Schlussarbeit werden gemäss kantonalen Richtlinien umgesetzt.
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>Anforderungen an die Schlussarbeit</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Die Schlussarbeit umfasst folgende Elemente:</h4>
+                        <ul style="list-style: none; margin-left: 0;">
+                            <li style="padding: 8px 0; padding-left: 24px; position: relative;">
+                                <span style="position: absolute; left: 0; color: #0066cc;">▸</span>
+                                <strong>Themenwahl:</strong> Selbstständige Wahl eines relevanten Themas mit gesellschaftlichem Bezug
+                            </li>
+                            <li style="padding: 8px 0; padding-left: 24px; position: relative;">
+                                <span style="position: absolute; left: 0; color: #0066cc;">▸</span>
+                                <strong>Recherche:</strong> Nutzung verschiedener Quellen und kritische Bewertung von Informationen
+                            </li>
+                            <li style="padding: 8px 0; padding-left: 24px; position: relative;">
+                                <span style="position: absolute; left: 0; color: #0066cc;">▸</span>
+                                <strong>Dokumentation:</strong> Schriftliche Arbeit mit klarer Struktur und korrektem Quellennachweis
+                            </li>
+                            <li style="padding: 8px 0; padding-left: 24px; position: relative;">
+                                <span style="position: absolute; left: 0; color: #0066cc;">▸</span>
+                                <strong>Präsentation:</strong> Mündliche Präsentation der Ergebnisse
+                            </li>
+                            <li style="padding: 8px 0; padding-left: 24px; position: relative;">
+                                <span style="position: absolute; left: 0; color: #0066cc;">▸</span>
+                                <strong>Reflexion:</strong> Kritische Auseinandersetzung mit dem eigenen Lernprozess
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="kompetenz-container">
+                        <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't8-kompetenzen')">
+                            Integrierte Kompetenzen aus allen Lehrjahren
+                        </button>
+                    </div>
+                    
+                    <div id="t8-kompetenzen" class="kompetenz-details">
+                        <p><strong>In der Schlussarbeit werden Kompetenzen aus allen drei Lehrjahren integriert:</strong></p>
+                        <ul>
+                            <li><strong>Schlüsselkompetenzen:</strong> Alle 12 Schlüsselkompetenzen können je nach Thema zur Anwendung kommen</li>
+                            <li><strong>Sprachmodi:</strong> Rezeption, Produktion und Interaktion in verschiedenen Formaten</li>
+                            <li><strong>Gesellschaftliche Aspekte:</strong> Mindestens 2 Aspekte aus den 8 Handlungsfeldern</li>
+                            <li><strong>Digitale Kompetenzen:</strong> Recherche, Dokumentation und Präsentation mit digitalen Tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vertiefungsarbeit (VA) -->
+        <div class="va-section">
+            <h2>📚 Vertiefungsarbeit (VA)</h2>
+            <p class="lektionen" style="color: #666; font-size: 0.9em;">24 Lektionen</p>
+            
+            <p><strong>Die Vertiefungsarbeit ist ein zentraler Bestandteil des 3. Lehrjahres.</strong> Sie ermöglicht eine individuelle und vertiefte Auseinandersetzung mit einem selbstgewählten Thema und bereitet auf lebenslanges Lernen vor.</p>
+            
+            <h3 style="color: #003d7a; margin-top: 20px; margin-bottom: 12px;">Zielsetzungen der Vertiefungsarbeit:</h3>
+            <ul>
+                <li><strong>Selbstständigkeit:</strong> Eigenverantwortliche Planung und Durchführung eines Projekts</li>
+                <li><strong>Vertiefung:</strong> Intensive Auseinandersetzung mit einem spezifischen Themenbereich</li>
+                <li><strong>Methodenkompetenz:</strong> Anwendung verschiedener Arbeitsmethoden und Recherche-techniken</li>
+                <li><strong>Reflexion:</strong> Kritische Betrachtung des eigenen Arbeitsprozesses und der Ergebnisse</li>
+                <li><strong>Präsentation:</strong> Professionelle Darstellung der Arbeitsergebnisse</li>
+            </ul>
+            
+            <h3 style="color: #003d7a; margin-top: 20px; margin-bottom: 12px;">Mögliche Formate:</h3>
+            <ul>
+                <li>Schriftliche Arbeit mit Recherche und Analyse</li>
+                <li>Praktisches Projekt mit Dokumentation</li>
+                <li>Kreative Arbeit mit Reflexionsbericht</li>
+                <li>Multimediale Präsentation mit Begleitdokumentation</li>
+            </ul>
+            
+            <div class="hinweis" style="margin-top: 20px;">
+                <strong>Hinweis:</strong> Die konkreten Anforderungen und Bewertungskriterien für die Vertiefungsarbeit werden gemäss den kantonalen Vorgaben festgelegt.
+            </div>
+        </div>
+        
+        <!-- Weitere Lektionen -->
+        <div class="va-section" style="background-color: #f8f9fa;">
+            <h2>➕ Weitere Lektionen</h2>
+            <p class="lektionen" style="color: #666; font-size: 0.9em;">40 Lektionen</p>
+            
+            <p>Die weiteren Lektionen im 3. Lehrjahr dienen der:</p>
+            <ul>
+                <li><strong>Prüfungsvorbereitung:</strong> Gezielte Vorbereitung auf das Qualifikationsverfahren</li>
+                <li><strong>Repetition:</strong> Wiederholung und Vertiefung zentraler Themen aus allen Lehrjahren</li>
+                <li><strong>Aktualitätsbezug:</strong> Behandlung aktueller gesellschaftlicher Themen und Ereignisse</li>
+                <li><strong>Individuelle Förderung:</strong> Unterstützung bei spezifischen Lernbedürfnissen</li>
+                <li><strong>Überfachliche Kompetenzen:</strong> Stärkung der Selbst-, Sozial- und Methodenkompetenzen</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; padding: 40px 0;">
+            <a href="index.html" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
+                ← Zurück zur Übersicht EFZ
+            </a>
+        </div>
+    </main>
 </body>
 </html>

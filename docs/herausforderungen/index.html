@@ -1,15 +1,277 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Herausforderungen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herausforderungen - Authentische Aufgaben im ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .intro-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .intro-section h2 {
+            color: #0066cc;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .intro-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .intro-section ul {
+            margin-left: 30px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .intro-section li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .highlight {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0066cc;
+            transition: width 0.3s ease;
+        }
+        
+        .card:hover::before {
+            width: 8px;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .card h3 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+        
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Icons */
+        .icon-info::before { content: "ℹ️"; }
+        .icon-eba::before { content: "2️⃣"; }
+        .icon-efz::before { content: "3️⃣"; }
+    </style>
 </head>
 <body>
-  <h1>Herausforderungen</h1>
-  <ul>
-  <li><a href="info.html">Info</a></li>
-  <li><a href="beispieleefz.html">Beispiele EBA</a></li>
-  <li><a href="beispieleefz">Beispiele EFZ</a></li>
-  </ul>
-  <a href="../index.html">Zurück zur Übersicht</a>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">ABU Schullehrplan</a> / Herausforderungen
+        </nav>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>Herausforderungen</h1>
+            <p class="subtitle">
+                Authentische Aufgaben und greifbare Produkte für kompetenzorientiertes Lernen im ABU
+            </p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="intro-section">
+            <h2>Was sind Herausforderungen im ABU?</h2>
+            
+            <p>
+                Herausforderungen – im Rahmenlehrplan als <strong>authentische Aufgaben</strong> bezeichnet – sind 
+                realitätsnahe, greifbare Produkte, die Lernende über ein ganzes Thema hinweg erarbeiten. Sie stellen 
+                ein zentrales Element der kompetenzorientierten Didaktik dar und ermöglichen es, erworbene Kompetenzen 
+                in konkreten, lebensnahen Situationen anzuwenden und nachzuweisen.
+            </p>
+            
+            <div class="highlight">
+                <strong>Kernmerkmale von Herausforderungen:</strong>
+                <ul>
+                    <li>Sie sind <strong>repräsentativ</strong> für alltägliche Situationen, die den Lernenden in der Gegenwart oder Zukunft begegnen können</li>
+                    <li>Sie führen zu einem <strong>greifbaren Produkt</strong> (Kompetenznachweis)</li>
+                    <li>Sie fördern <strong>kompetentes und authentisches Handeln</strong> in realistischen Situationen</li>
+                    <li>Sie integrieren Kompetenzen aus allen drei Bereichen: Schlüsselkompetenzen, Sprache und Kommunikation, Gesellschaft</li>
+                </ul>
+            </div>
+            
+            <p>
+                <strong>Beispiele für Herausforderungen/Produkte:</strong>
+            </p>
+            <ul>
+                <li><strong>Podcasts</strong> zu relevanten Lebensthemen</li>
+                <li><strong>Videoblogs</strong> mit Tipps und Erfahrungsberichten</li>
+                <li><strong>Portfolios</strong> zur Dokumentation von Lernprozessen</li>
+                <li><strong>Ratgeber</strong> für junge Menschen</li>
+                <li><strong>Themendossiers</strong> zu aktuellen Fragestellungen</li>
+                <li><strong>Tutorials</strong> zur Weitergabe von Wissen</li>
+                <li><strong>Cases</strong> (problemhaltige Situationen mit Lösungsansätzen)</li>
+            </ul>
+            
+            <p>
+                Die Herausforderungen werden von den SLP-Autorinnen und -Autoren als Vorschläge entwickelt und können 
+                von den Lehrpersonen an die spezifischen Bedürfnisse ihrer Lernenden und die aktuelle Situation angepasst 
+                werden. Wichtig ist, dass die zu fördernden Kompetenzen und die Bewertungskriterien erhalten bleiben.
+            </p>
+        </section>
+        
+        <div class="card-grid">
+            <a href="info.html" class="card">
+                <div class="card-icon icon-info"></div>
+                <h3>Informationen & Konzept</h3>
+                <p>
+                    Detaillierte Erläuterungen zum didaktischen Konzept der Herausforderungen, 
+                    ihrer Rolle im kompetenzorientierten Unterricht und Hinweise zur Bewertung
+                </p>
+            </a>
+            
+            <a href="beispieleeba.html" class="card">
+                <div class="card-icon icon-eba"></div>
+                <h3>Beispiele für 2-jährige Grundbildung EBA</h3>
+                <p>
+                    Konkrete Herausforderungen aus ausgewählten Themen der 2-jährigen Grundbildung 
+                    mit Lebenskontexten und Kompetenznachweisen
+                </p>
+            </a>
+            
+            <a href="beispieleefz.html" class="card">
+                <div class="card-icon icon-efz"></div>
+                <h3>Beispiele für 3-jährige Grundbildung EFZ</h3>
+                <p>
+                    Konkrete Herausforderungen aus ausgewählten Themen der 3-jährigen Grundbildung 
+                    mit erweiterten Anforderungen und komplexeren Produkten
+                </p>
+            </a>
+        </div>
+    </main>
 </body>
 </html>

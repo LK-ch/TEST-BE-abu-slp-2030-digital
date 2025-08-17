@@ -1,11 +1,389 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Info Herausforderungen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information & Konzept - Herausforderungen im ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .content-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #0066cc;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #e6f2ff;
+            padding-bottom: 10px;
+        }
+        
+        .content-section h3 {
+            color: #003d7a;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .content-section ul {
+            margin-left: 30px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            margin: 25px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        
+        .example-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #dee2e6;
+        }
+        
+        .example-box h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .criteria-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .criteria-card h4 {
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        .nav-button {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: #003d7a;
+        }
+        
+        strong {
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Info Herausforderungen</h1>
-  <p>Info Herausforderungen.</p>
-  <a href="index.html">Zurück Herausforderungen</a>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">ABU Schullehrplan</a> / 
+            <a href="index.html">Herausforderungen</a> / 
+            Information & Konzept
+        </nav>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>Information & Konzept</h1>
+            <p class="subtitle">
+                Das didaktische Konzept der Herausforderungen (authentischen Aufgaben) im ABU
+            </p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="content-section">
+            <h2>Didaktisches Konzept</h2>
+            
+            <p>
+                Herausforderungen stellen ein <strong>Schlüsselelement</strong> der kompetenzorientierten Didaktik im ABU dar. 
+                Sie verkörpern das Prinzip des <strong>Constructive Alignment</strong>, bei dem Lernziele, Lehr- und Lernaktivitäten 
+                sowie die Bewertung aufeinander abgestimmt sind.
+            </p>
+            
+            <h3>Methodische Vorteile</h3>
+            <p>
+                Die Skizzierung von Herausforderungen zu einem frühen Zeitpunkt in der Themenplanung (Phase 3) bietet 
+                entscheidende Vorteile:
+            </p>
+            <ul>
+                <li>Sie ermöglicht die <strong>Organisation des Themas von seinem Ausgangspunkt</strong> aus</li>
+                <li>Das angestrebte kompetente Verhalten wird von Anfang an klar definiert</li>
+                <li>Die Komplexität von Lebenssituationen wird angemessen berücksichtigt</li>
+                <li>Der Kompetenzerwerb erfolgt in <strong>realitätsnahen und komplexen Lebenskontexten</strong></li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h4>Zentrale Funktion</h4>
+                <p>
+                    Die Herausforderungen haben die Funktion, die aus dem Rahmenlehrplan ausgewählten Kompetenzen 
+                    zum Thema zu entwickeln, indem sie in ein <strong>zusammenhängendes Ganzes</strong> integriert werden, 
+                    das mit konkreten Lebenssituationen kongruent ist – und nicht eine Abfolge von kleinen, 
+                    unzusammenhängenden Ereignissen bleiben.
+                </p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Gestaltungsprinzipien</h2>
+            
+            <h3>1. Authentizität und Realitätsnähe</h3>
+            <p>
+                Die Aufgaben sind <strong>repräsentativ für alltägliche Situationen</strong>, die den Lernenden in der 
+                Gegenwart oder in der Zukunft begegnen können. Trotz des schulischen Kontexts wird eine möglichst 
+                hohe Realitätsnähe angestrebt, die sich an subjektiv bedeutsamen Situationen (Lebenskontexten) orientiert.
+            </p>
+            
+            <h3>2. Rollenzuschreibung</h3>
+            <p>
+                Die <strong>Rollenzuschreibung</strong>, die die Lernenden übernehmen sollen, ist entscheidend. Sie ermöglicht 
+                "kompetentes und authentisches Handeln in einer realistischen Situation". Beispiele:
+            </p>
+            <ul>
+                <li>Autorin/Autor eines Podcasts oder Videoblogs</li>
+                <li>Beraterin/Berater für junge Menschen</li>
+                <li>Expertin/Experte für ein spezifisches Thema</li>
+                <li>Vermittlerin/Vermittler von Erfahrungswissen</li>
+            </ul>
+            
+            <h3>3. Multimodalität</h3>
+            <p>
+                Der Schullehrplan schlägt in der Regel <strong>zwei anregende (multimodale) Beispiele</strong> zur Auswahl vor, 
+                von denen jedes operationalisiert ist und entsprechende Bewertungskriterien enthält. Dies ermöglicht:
+            </p>
+            <ul>
+                <li>Berücksichtigung unterschiedlicher Lernpräferenzen</li>
+                <li>Flexibilität in der Umsetzung</li>
+                <li>Anpassung an verfügbare Ressourcen und Medien</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>Bewertungskriterien</h2>
+            
+            <p>
+                Die Bewertungskriterien geben Aufschluss darüber, wie der Lernprozess kompetenzorientiert begleitet 
+                und wie die entwickelten Kompetenzen bewertet werden können. Sie sind nach Lernbereichen strukturiert:
+            </p>
+            
+            <div class="criteria-grid">
+                <div class="criteria-card">
+                    <h4>Sprache und Kommunikation (SuK)</h4>
+                    <ul>
+                        <li>Adressatengerechte Gestaltung</li>
+                        <li>Nachvollziehbare Strukturierung</li>
+                        <li>Verständliche Präsentation</li>
+                        <li>Präzise Formulierungen</li>
+                        <li>Angemessenes Sprachregister</li>
+                    </ul>
+                </div>
+                
+                <div class="criteria-card">
+                    <h4>Gesellschaft</h4>
+                    <ul>
+                        <li>Hoher Nützlichkeitsgrad</li>
+                        <li>Informativer Gehalt</li>
+                        <li>Sachliche Korrektheit</li>
+                        <li>Relevanz für Zielgruppe</li>
+                        <li>Kritische Reflexion</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>Wichtiger Hinweis</h4>
+                <p>
+                    Ein Produkt/Kompetenznachweis kann durch die Lehrperson <strong>verändert</strong> werden, um seine 
+                    Intention und Relevanz aufrechtzuerhalten. Was erhalten bleiben muss, sind die durch das Thema 
+                    zu fördernden Kompetenzen und die grundlegenden Bewertungskriterien, auch wenn diese an die 
+                    spezifische Aufgabe angepasst werden.
+                </p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Beispiele für Produkte</h2>
+            
+            <div class="example-box">
+                <h4>📻 Podcast</h4>
+                <p>
+                    Audio-Aufnahmen zu relevanten Lebensthemen mit Tipps, Erfahrungsberichten und Ratschlägen. 
+                    Fördert mündliche Kommunikation, Strukturierung und Zielgruppenorientierung.
+                </p>
+            </div>
+            
+            <div class="example-box">
+                <h4>🎥 Videoblog</h4>
+                <p>
+                    Multimediale Präsentation von Inhalten mit visuellen und auditiven Elementen. 
+                    Ermöglicht kreative Gestaltung und fördert digitale Kompetenzen.
+                </p>
+            </div>
+            
+            <div class="example-box">
+                <h4>📚 Ratgeber</h4>
+                <p>
+                    Schriftliche Anleitungen und Empfehlungen für spezifische Zielgruppen. 
+                    Trainiert strukturiertes Schreiben und adressatengerechte Kommunikation.
+                </p>
+            </div>
+            
+            <div class="example-box">
+                <h4>📁 Portfolio</h4>
+                <p>
+                    Sammlung und Reflexion von Arbeitsergebnissen über einen längeren Zeitraum. 
+                    Dokumentiert Lernprozesse und fördert Selbstreflexion.
+                </p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Integration in den Unterricht</h2>
+            
+            <p>
+                Die Herausforderungen sind nicht als isolierte Endprodukte zu verstehen, sondern als 
+                <strong>integraler Bestandteil des gesamten Lernprozesses</strong>:
+            </p>
+            
+            <h3>Prozessbegleitung</h3>
+            <ul>
+                <li>Kontinuierliche Arbeit über das gesamte Thema hinweg</li>
+                <li>Zwischenschritte und Meilensteine definieren</li>
+                <li>Formative Bewertung während des Prozesses</li>
+                <li>Peer-Feedback und Selbstreflexion einbauen</li>
+            </ul>
+            
+            <h3>Kompetenzintegration</h3>
+            <p>
+                Die Herausforderungen integrieren Kompetenzen aus allen drei Lernbereichen:
+            </p>
+            <ul>
+                <li><strong>Schlüsselkompetenzen:</strong> Vernetztes Denken, Planung, Selbstständigkeit</li>
+                <li><strong>Sprache und Kommunikation:</strong> Adressatengerechte Gestaltung, Medienproduktion</li>
+                <li><strong>Gesellschaft:</strong> Sachliche Korrektheit, kritische Reflexion</li>
+            </ul>
+        </section>
+        
+        <div class="navigation">
+            <a href="index.html" class="nav-button">← Zurück zur Übersicht</a>
+            <a href="beispieleeba.html" class="nav-button">Beispiele EBA →</a>
+        </div>
+    </main>
 </body>
 </html>

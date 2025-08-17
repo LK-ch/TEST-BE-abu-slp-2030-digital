@@ -1,11 +1,564 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Beispiele EBA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beispiele EBA - Herausforderungen im ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .theme-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .theme-header {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .theme-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .theme-header .leitidee {
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .lebensbezug-box {
+            background-color: #e6f2ff;
+            padding: 25px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            margin: 25px 0;
+        }
+        
+        .lebensbezug-box h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .lebensbezug-box .description {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        /* Accordion Styles */
+        .accordion {
+            margin-top: 20px;
+        }
+        
+        .accordion-item {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .accordion-header:hover {
+            background-color: #e9ecef;
+        }
+        
+        .accordion-header h4 {
+            color: #0066cc;
+            font-size: 1.2em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .accordion-header h4::before {
+            content: "";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .accordion-item.herausforderung .accordion-header h4::before {
+            content: "🎯";
+        }
+        
+        .accordion-item.produkt .accordion-header h4::before {
+            content: "📝";
+        }
+        
+        .accordion-item.sprachmodi .accordion-header h4::before {
+            content: "💬";
+        }
+        
+        .accordion-item.bewertung .accordion-header h4::before {
+            content: "✓";
+        }
+        
+        .accordion-arrow {
+            transition: transform 0.3s;
+            font-size: 1.2em;
+            color: #0066cc;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .accordion-content-inner {
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .accordion-item.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .challenge-text {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-style: italic;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .product-description {
+            color: #333;
+            line-height: 1.7;
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .sprachmodi-list {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .sprachmodi-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .scaffold-note {
+            background-color: #f0f7ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-left: 30px;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #0066cc;
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .criteria-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid #0066cc;
+        }
+        
+        .criteria-box h6 {
+            color: #003d7a;
+            margin-bottom: 10px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+        
+        .criteria-box ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .criteria-box li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        .nav-button {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: #003d7a;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .theme-section {
+                padding: 25px;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Beispiele EBA</h1>
-  <p>Beispiele EBA</p>
-  <a href="index.html">Zurück Herausforderungen</a>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">ABU Schullehrplan</a> / 
+            <a href="index.html">Herausforderungen</a> / 
+            Beispiele für 2-jährige Grundbildung EBA
+        </nav>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>Beispiele für 2-jährige Grundbildung EBA</h1>
+            <p class="subtitle">
+                Konkrete Herausforderungen aus ausgewählten Themen mit praxisnahen Produkten
+            </p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Thema 1: Ins Berufsleben einsteigen -->
+        <section class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 1: Ins Berufsleben einsteigen</h2>
+                <p class="leitidee">
+                    Ich finde meinen Platz in der Berufswelt. Der Beginn meiner beruflichen Grundbildung bedeutet 
+                    mehr als der Start einer Ausbildung – er ist der Übergang in eine neue Lebensphase.
+                </p>
+            </div>
+            
+            <div class="lebensbezug-box">
+                <h3>Individueller Lebensbezug</h3>
+                <p class="description">
+                    <strong>Zurechtfinden im Berufsleben und in der Berufsschule</strong>
+                </p>
+                <p>
+                    Ich finde mich im Betrieb und in der Berufsfachschule zurecht, kenne Lernstrategien, 
+                    achte auf mich und arbeite ressourcenschonend.
+                </p>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Immer wieder erhalte ich offizielle Schreiben: ein ÜK-Aufgebot, eine Kursanmeldung oder die 
+                                Hausordnung meines Betriebs. Ich kann offizielle Schreiben selbstständig und adressatengerecht 
+                                lesen, zentrale Informationen herausfiltern (Was ist relevant? Was muss ich tun? Bis wann?), 
+                                Unklarheiten erkennen und gezielte Rückfragen formulieren (Wen kann ich fragen? Wie frage ich 
+                                höflich und klar?) sowie die erhaltenen Informationen korrekt im Alltag anwenden (Wie verhalte 
+                                ich mich regelkonform und fristgerecht?). So übernehme ich Verantwortung für mein Handeln im 
+                                schulischen, betrieblichen und administrativen Umfeld.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich formuliere eine Rückfrage in einer passenden Nachrichtenform zu Unklarheiten gegenüber 
+                                Dokumenten, Informationen, Aufgabenstellungen, Arbeitsaufträgen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>4.2.1.1 Rezeption mündlich:</strong> Hörmaterialien aus verschiedenen Medien verstehen
+                                </li>
+                                <li>
+                                    <strong>4.2.1.3 Rezeption schriftlich und bildlich:</strong> Formelle Dokumente lesen und verstehen
+                                </li>
+                                <li>
+                                    <strong>4.2.2.2 Produktion schriftlich und bildlich:</strong> Rückfrage formulieren
+                                </li>
+                                <li>
+                                    <strong>4.2.3.3 Interaktion und Kollaboration digital:</strong> KI-Tools zur Textüberarbeitung 
+                                    oder Anfrageformulierung nutzen
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Respektvolle und korrekte Kommunikation per E-Mail (KI-Korrektur)</li>
+                                        <li>Interview-Fragetechnik</li>
+                                        <li>Plakatgestaltung mit digitalen Tools</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Rechte und Pflichten auf meine Situation passend angewandt</li>
+                                        <li>Hinweis auf Quellen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Thema 2: Bewusst konsumieren und handeln -->
+        <section class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 2: Bewusst konsumieren und handeln</h2>
+                <p class="leitidee">
+                    Ich verstehe, wie mein Konsumverhalten mit meiner finanziellen Situation, ökologischen 
+                    Aspekten und politischen Entscheidungen zusammenhängt.
+                </p>
+            </div>
+            
+            <div class="lebensbezug-box">
+                <h3>Individueller Lebensbezug</h3>
+                <p class="description">
+                    <strong>Verantwortungsbewusster Umgang mit Geld</strong>
+                </p>
+                <p>
+                    Ich gehe verantwortungsbewusst mit meinem Geld um.
+                </p>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Mit meinem eigenen Lohn beginnt ein neues Stück Selbstständigkeit. Ich kann selbst entscheiden, 
+                                wofür ich mein Geld ausgebe – aber ich trage auch die Verantwortung dafür, wie weit es reicht. 
+                                Plötzlich geht es nicht nur um Wünsche, sondern um Miete, Krankenkasse, Rechnungen und Sparziele.
+                                <br><br>
+                                Die Versuchung ist gross, das Geld einfach auszugeben. Aber ich weiss: Wer seine Ausgaben nicht 
+                                im Griff hat, landet schnell in der Schuldenfalle. Und genau das will ich vermeiden.
+                                <br><br>
+                                Ich will herausfinden, wie ich meinen Lohn sinnvoll plane, wie ich zwischen notwendigen und 
+                                weniger dringlichen Ausgaben unterscheide – und wie ich finanziell auf eigenen Beinen stehen kann.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich reflektiere in einem Dokumentationsformat meine Ausgaben und meine Kaufwünsche und 
+                                beachte dabei den Schutz sensibler Daten.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>4.2.1.2 Rezeption audiovisuell:</strong> Zwei Werbeclips analysieren und Wirkungen 
+                                    (Bild, Musik, Sprache) beschreiben
+                                    <div class="scaffold-note">→ Mindmap-Vorlage zu Konsumverhalten</div>
+                                </li>
+                                <li>
+                                    <strong>4.2.3.1 Interaktion und Kollaboration mündlich:</strong> Austausch und Diskussion 
+                                    über Lohn und Budget, Meinungsaustausch über Hauptaussagen Film
+                                    <div class="scaffold-note">→ Gesprächsraster für Diskussion im Tandem</div>
+                                </li>
+                                <li>
+                                    <strong>4.2.2.2 Produktion schriftlich und bildlich:</strong> Budget erstellen/Diagramme analysieren
+                                    <div class="scaffold-note">→ Textbausteine für Tagebucheintrag</div>
+                                    <div class="scaffold-note">→ Budget-Tabelle mit vorgegebenen Spalten</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Einfache, sachliche und verständliche Ausdrucksweise</li>
+                                        <li>Hauptaussagen erkennen</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Kritische Auseinandersetzung mit eigenem Budget</li>
+                                        <li>Erste Reflexion über Kaufverhalten</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="navigation">
+            <a href="info.html" class="nav-button">← Information & Konzept</a>
+            <a href="beispieleefz.html" class="nav-button">Beispiele EFZ →</a>
+        </div>
+    </main>
+    
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            
+            // Einfach nur das aktuelle Item umschalten (toggle)
+            // ohne andere Items zu beeinflussen
+            item.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

@@ -1,11 +1,1086 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Beispiele EFZ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beispiele EFZ - Herausforderungen im ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .theme-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .theme-header {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .theme-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .theme-header .leitidee {
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .lebensbezug-box {
+            background-color: #e6f2ff;
+            padding: 25px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            margin: 25px 0;
+        }
+        
+        .lebensbezug-box h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .lebensbezug-box .description {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .lebensbezug-list {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .lebensbezug-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,102,204,0.2);
+        }
+        
+        .lebensbezug-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Accordion Styles */
+        .accordion {
+            margin-top: 20px;
+        }
+        
+        .accordion-item {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .accordion-header:hover {
+            background-color: #e9ecef;
+        }
+        
+        .accordion-header h4 {
+            color: #0066cc;
+            font-size: 1.2em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .accordion-header h4::before {
+            content: "";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .accordion-item.herausforderung .accordion-header h4::before {
+            content: "🎯";
+        }
+        
+        .accordion-item.produkt .accordion-header h4::before {
+            content: "📝";
+        }
+        
+        .accordion-item.sprachmodi .accordion-header h4::before {
+            content: "💬";
+        }
+        
+        .accordion-item.bewertung .accordion-header h4::before {
+            content: "✓";
+        }
+        
+        .accordion-arrow {
+            transition: transform 0.3s;
+            font-size: 1.2em;
+            color: #0066cc;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .accordion-content-inner {
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .accordion-item.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .challenge-text {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-style: italic;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .product-description {
+            color: #333;
+            line-height: 1.7;
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .sprachmodi-list {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .sprachmodi-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .scaffold-note {
+            background-color: #f0f7ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-left: 30px;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #0066cc;
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .criteria-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid #0066cc;
+        }
+        
+        .criteria-box h6 {
+            color: #003d7a;
+            margin-bottom: 10px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+        
+        .criteria-box ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .criteria-box li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        .nav-button {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: #003d7a;
+        }
+        
+        .example-badge {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+        
+        .example-badge.erweitert {
+            background-color: #ffc107;
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .theme-section {
+                padding: 25px;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Beispiele EFZ</h1>
-  <p>Beispiele EFZ</p>
-  <a href="index.html">Zurück Herausforderungen</a>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">ABU Schullehrplan</a> / 
+            <a href="index.html">Herausforderungen</a> / 
+            Beispiele für 3-jährige Grundbildung EFZ
+        </nav>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>Beispiele für 3-jährige Grundbildung EFZ</h1>
+            <p class="subtitle">
+                Konkrete Herausforderungen aus den ersten drei Themen mit praxisnahen Produkten und erweiterten Kompetenzen
+            </p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Thema 1: Ins Berufsleben einsteigen -->
+        <section class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 1: Ins Berufsleben einsteigen (21 Lektionen)</h2>
+                <p class="leitidee">
+                    Der Beginn meiner beruflichen Grundbildung bedeutet einen tiefgreifenden Wandel. 
+                    Ich übernehme eine neue Rolle im Berufsbildungssystem als verantwortungsvolle, 
+                    lernende Fachkraft im Betrieb, in der Schule und in den überbetrieblichen Kursen (ÜK).
+                </p>
+            </div>
+            
+            <div class="lebensbezug-box">
+                <h3>Individuelle Lebensbezüge</h3>
+                <ul class="lebensbezug-list">
+                    <li><strong>1.</strong> Ich finde mich im Berufsbildungssystem zurecht.</li>
+                    <li><strong>2.</strong> Ich kommuniziere auf konstruktive Art und Weise.</li>
+                    <li><strong>3.</strong> Ich lerne effektiv und setze meine Ressourcen effizient ein.</li>
+                </ul>
+            </div>
+            
+            <!-- Beispiel 1 -->
+            <h3 style="margin-top: 30px; color: #003d7a;">Umsetzungsvariante - Beispiel 1</h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Ich habe eine Frage zu meinen Rechten und Pflichten, die aus dem Lehrvertrag entstehen. 
+                                Die Frage hat für mich eine hohe Wichtigkeit, ist mir aber irgendwie unangenehm. 
+                                Deshalb bin ich mir nicht sicher, wie ich sie der verantwortlichen Person z.B. beim 
+                                Berufsbildungsamt stellen soll.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich verfasse eine klare, adressatengerechte E-Mail an die verantwortliche Person mit 
+                                einer konkreten Rückfrage zu meinen Rechten und Pflichten, die aus dem Lehrvertrag 
+                                entstanden sind (z.B. Betrieb, Schule, Anlaufstellen).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption schriftlich und bildlich:</strong> Informationen recherchieren und auf meine Situation übertragen
+                                    <div class="scaffold-note">→ Lesestrategien, Lesestruktur, Markierhilfe</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion und Kollaboration mündlich:</strong> Rücksprache im Plenum
+                                    <div class="scaffold-note">→ Gesprächsbausteine, Argumentstruktur, Feedbackhilfe, Prompt-Hilfe</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion und Kollaboration schriftlich:</strong> Formulierung und Gestaltung der E-Mail
+                                    <div class="scaffold-note">→ Schreibbausteine, E-Mail- und Chat-Konventionen, E-Mail-Vorlage</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Adressatengerechte Kommunikation</li>
+                                        <li>Strukturierte Darstellung (Anrede, Anliegen, Gruss)</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Rechte und Pflichten auf meine Situation passend angewandt</li>
+                                        <li>Hinweis auf passende Quellen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beispiel 2 (Erweitertes Niveau) -->
+            <h3 style="margin-top: 30px; color: #003d7a;">
+                Umsetzungsvariante - Beispiel 2
+                <span class="example-badge erweitert">Erweitertes Niveau</span>
+            </h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Ich möchte mich gezielter auf Prüfungen vorbereiten und dabei meine eigenen Lernunterlagen 
+                                sinnvoll nutzen. Ich finde es hilfreich, wenn mir jemand Fragen stellt. Deshalb möchte ich 
+                                einen KI-Bot so trainieren, dass er mich auf Basis meiner Unterlagen abfragt und mir dabei 
+                                hilft, Wissenslücken zu erkennen und zu schliessen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich erstelle eine strukturierte Eingabe (Prompt oder Upload-Set), mit der ich eine KI 
+                                (z. B. ChatGPT oder ein anderes Tool) so füttere, damit sie mir passende Prüfungsfragen 
+                                stellt, meine Antworten kommentiert und mir Feedback gibt. Der Bot basiert auf meinen 
+                                eigenen Arbeitsunterlagen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption schriftlich und bildlich:</strong> Eigene Arbeitsunterlagen strukturieren und analysieren
+                                    <div class="scaffold-note">→ Lesestrategien, Prompt-Hilfe</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion und Kollaboration digital:</strong> Erstellen eines Prompts, Dialog mit dem KI-Bot (Fragen, Antworten, Feedback)
+                                    <div class="scaffold-note">→ KI-Assistenz mit Rollen, Fragetypen</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Klare Struktur und Sprache im Prompt</li>
+                                        <li>Zielgerichtete Fragen und Antworten im KI-Dialog</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Übersichtliche Struktur der Arbeitsunterlagen</li>
+                                        <li>Verwendung der Fragetypen</li>
+                                        <li>Selbstständige Lernprozessgestaltung (z. B. Adaption der Prompts und Anpassung der Strategie)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Thema 2: Meinungen bilden und mitgestalten -->
+        <section class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 2: Meinungen bilden und mitgestalten (27 Lektionen)</h2>
+                <p class="leitidee">
+                    In einer Welt, in der täglich unzählige Informationen und Meinungen auf mich einwirken, 
+                    wird es für mich immer wichtiger, mir eine eigene, fundierte Haltung zu erarbeiten. 
+                    Zu diesem Zweck lerne ich, meine Meinung bewusst zu bilden, sie respektvoll zu vertreten 
+                    und mich aktiv in gesellschaftliche Prozesse einzubringen.
+                </p>
+            </div>
+            
+            <div class="lebensbezug-box">
+                <h3>Individuelle Lebensbezüge</h3>
+                <ul class="lebensbezug-list">
+                    <li><strong>1.</strong> Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert und merke, dass ich oft nicht weiss, was stimmt und was nicht, geschweige denn, warum mir gerade diese Inhalte angezeigt werden.</li>
+                    <li><strong>2.</strong> Ich erlebe Diskussionen über Ungleichbehandlung, Ausgrenzung oder Respekt und stelle dabei fest, dass Menschen sehr unterschiedlich denken und reagieren.</li>
+                    <li><strong>3.</strong> Wir jungen Menschen wollen mitreden und mitgestalten, werden aber nicht immer ernst genommen, obwohl viele Themen uns direkt betreffen.</li>
+                </ul>
+            </div>
+            
+            <!-- Beispiel 1 -->
+            <h3 style="margin-top: 30px; color: #003d7a;">Umsetzungsvariante - Beispiel 1</h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Ich sehe in meinem Feed ein Video mit einer krassen Behauptung. Ich bin mir nicht sicher, 
+                                ob der Inhalt der Wahrheit entspricht und hinterfrage die Glaubwürdigkeit des Inhalts und 
+                                der Quelle.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich fasse meine Einschätzung in einem mündlichen Beitrag zusammen: 
+                                Konkrete Anzeichen für oder gegen die Glaubwürdigkeit, Überprüfung mithilfe 
+                                anderer medialer Quellen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption audiovisuell:</strong> Anschauen eines digitalen Beitrags (z. B. TikTok, Podcast, Interview)
+                                    <div class="scaffold-note">→ Hörstrukturhilfe, Untertitelfunktion, Sequenzplan/Transkribierungstool (KI)</div>
+                                </li>
+                                <li>
+                                    <strong>Produktion mündlich:</strong> Klassengespräch oder kurzer Redebeitrag
+                                    <div class="scaffold-note">→ Satzanfänge, Stichwortkarten, Argumentstruktur</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Klare und verständliche Ausdrucksweise in Standardsprache</li>
+                                        <li>Verwendung einfacher Fachbegriffe (z. B. Quelle, Meinung, Fakt)</li>
+                                        <li>Strukturierte Darstellung eigener Einschätzung</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Beurteilung digitaler Inhalte</li>
+                                        <li>Quellenangabe und Reflexion über Informationsquellen</li>
+                                        <li>Identifizierung von Elementen der Desinformation und Meinungsmanipulation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beispiel 2 (Erweitertes Niveau) -->
+            <h3 style="margin-top: 30px; color: #003d7a;">
+                Umsetzungsvariante - Beispiel 2
+                <span class="example-badge erweitert">Erweitertes Niveau</span>
+            </h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Nach einem Fussballspiel lese ich in den sozialen Medien rassistische Kommentare gegen 
+                                einzelne Spieler. Ich frage mich, wie sich das mit den Menschenrechten verträgt und 
+                                wie man öffentlich Stellung beziehen kann, ohne zu beleidigen oder zu spalten.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich gestalte ein Produkt (z. B. Erklärvideo, Statement-Clip, kommentierte Mini-Dokumentation, 
+                                Plakat), in dem ich den menschenrechtlichen Hintergrund erkläre, eigene Gedanken formuliere 
+                                und andere Jugendliche dazu anrege, sich ebenfalls mit Respekt zu positionieren.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption mündlich:</strong> Interviews oder O-Töne zu ähnlichen Fällen anhören und zentrale Aussagen erkennen
+                                    <div class="scaffold-note">→ Hörstrukturhilfen, Satzanfänge, Wortspeicher</div>
+                                </li>
+                                <li>
+                                    <strong>Produktion multimedial:</strong> Gestaltung eines Videobeitrags mit Kommentar, Bild, Ton
+                                    <div class="scaffold-note">→ Storyboard, Redestruktur, KI-Podcast Generator</div>
+                                </li>
+                                <li>
+                                    <strong>Produktion schriftlich und bildlich:</strong> Gestaltung eines Plakats
+                                    <div class="scaffold-note">→ Prompt-Hilfe zum inhaltlichen Aufbau und zu einem KI-Bildgenerator für Plakat</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Sachliche und respektvolle Ausdrucksweise in Standardsprache</li>
+                                        <li>Sprachlich (Grammatik, Normen) korrekt</li>
+                                        <li>Adressatengerechter Aufbau und Botschaft</li>
+                                        <li>Kreative Verbindung von Information und Meinung</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Erkennen und Erklären menschenrechtlicher Prinzipien</li>
+                                        <li>Reflexion von Diskriminierung als gesellschaftliches Problem</li>
+                                        <li>Konstruktiver Beitrag zur Debattenkultur</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Thema 3: Bewusst konsumieren und handeln -->
+        <section class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 3: Bewusst konsumieren und handeln (33 Lektionen)</h2>
+                <p class="leitidee">
+                    Meine Konsumentscheidungen -- sei es beim Einkaufen, Essen oder Reisen -- beeinflussen 
+                    andere Personen, Unternehmen und auch die Umwelt. Beim Thema „Bewusst konsumieren und handeln" 
+                    gehe ich verantwortungsvoll mit meinem Lohn um. Ich reflektiere mein eigenes Konsumverhalten, 
+                    erkenne wirtschaftliche Zusammenhänge, lerne meine Rechte als Konsument/in kennen und setze 
+                    mich mit den ökologischen Auswirkungen meiner alltäglichen Entscheidungen auseinander.
+                </p>
+            </div>
+            
+            <div class="lebensbezug-box">
+                <h3>Individuelle Lebensbezüge</h3>
+                <ul class="lebensbezug-list">
+                    <li><strong>1.</strong> Ich treffe überlegte Kaufentscheidungen, die zu mir und meiner Lebenssituation passen.</li>
+                    <li><strong>2.</strong> Ich achte auf einen nachhaltigen Konsum.</li>
+                    <li><strong>3.</strong> Ich informiere mich über meine Rechte und Pflichten beim Einkaufen und fordere diese ein.</li>
+                </ul>
+            </div>
+            
+            <!-- Beispiel 1 -->
+            <h3 style="margin-top: 30px; color: #003d7a;">Umsetzungsvariante - Beispiel 1</h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Mit meinem ersten Lohn habe ich auch meine erste Lohnabrechnung erhalten. 
+                                Darauf sind verschiedene Abkürzungen aufgeführt. Ich verstehe jedoch nicht, 
+                                was ein bestimmter Abzug bedeutet und warum mir Geld von meinem Lohn abgezogen wird. 
+                                Ich möchte lernen, wie ich eine schriftliche Rückfrage an die entsprechende 
+                                betriebliche Anlaufstelle formuliere.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich verfasse eine E-Mail an die zuständige betriebliche Anlaufstelle und stelle darin 
+                                eine konkrete, adressatengerecht formulierte Rückfrage zu einem Abzug auf meiner 
+                                Lohnabrechnung.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption schriftlich und bildlich:</strong> Lohnabrechnung lesen und verstehen (Lohnabzug identifizieren)
+                                    <div class="scaffold-note">→ Lesestruktur, Lesestrategien, Markierhilfe, Wortliste mit typischen Lohnabrechnungsbegriffen</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion und Kollaboration mündlich:</strong> Austausch im Team zur Formulierung der Anfrage
+                                    <div class="scaffold-note">→ Gesprächsbausteine, Prompt-Hilfe, Argumentstruktur, Feedbackhilfe, Formulierungshilfen für höfliche Kritik</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion und Kollaboration schriftlich:</strong> Schreiben der E-Mail an die entsprechende betriebliche Anlaufstelle
+                                    <div class="scaffold-note">→ E-Mailvorlage, E-Mail- und Chat-Konventionen, Prompt-Hilfe, Textbausteine</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Respektvolle Kommunikation</li>
+                                        <li>Strukturierte Darstellung (Anrede, Anliegen, Gruss)</li>
+                                        <li>Verwendung einfacher Fachbegriffe</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Anspruch auf fraglichen Lohnbestandteil klären</li>
+                                        <li>Verwendung der Fachbegriffe</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beispiel 2 (Erweitertes Niveau) -->
+            <h3 style="margin-top: 30px; color: #003d7a;">
+                Umsetzungsvariante - Beispiel 2
+                <span class="example-badge erweitert">Erweitertes Niveau</span>
+            </h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Ich wünsche mir ein neues Smartphone, kann es mir im Moment aber nicht leisten. 
+                                Deshalb möchte ich wissen, ob mein Lehrlingslohn dafür ausreicht und wie ich es 
+                                mir leisten kann, ohne mich zu verschulden oder andere wichtige Ausgaben zu gefährden.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich erstelle ein realistisches Monatsbudget mit Sparplan für mein neues Smartphone. 
+                                Dazu vergleiche ich verschiedene Finanzierungsmöglichkeiten und deren Verschuldungsrisiko. 
+                                Anschliessend führe ich ein Interview mit einer KI-Assistenz über die verschiedenen 
+                                Finanzierungsmöglichkeiten und deren Verschuldungsrisiko. Schliesslich entscheide ich 
+                                mich für eine Finanzierungsart, begründe meine Entscheidung und reflektiere den Einfluss 
+                                auf mein Budget.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption schriftlich und bildlich:</strong> Informationen zu Lohn, Fixkosten, Spartipps und Konsumentscheidungen recherchieren
+                                    <div class="scaffold-note">→ Lesestruktur, Lesestrategien, Markierhilfe</div>
+                                </li>
+                                <li>
+                                    <strong>Produktion mündlich (erweiterter Sprachmodus):</strong> Präsentieren des Vergleichs
+                                    <div class="scaffold-note">→ Satzanfänge, Stichwortkarten, Argumentstruktur, Übungshilfe mit KI-Voice</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion und Kollaboration digital:</strong> Rolle der KI-Assistenz definieren, Dialog mit KI führen
+                                    <div class="scaffold-note">→ Online Meeting-Konventionen (Netiquette), KI-Tools für Ideenfindung</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Verständliche Darstellung des Sparziels und der Budgetplanung</li>
+                                        <li>Gesprächsführung mit Rückfragen (KI-Prompts)</li>
+                                        <li>(erweiterter Sprachmodus) Strukturierte und adressatengerechte Präsentation meines Vergleichs der Planung und KI-Feedback</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Qualität der finanziellen Planung</li>
+                                        <li>Vergleich verschiedener Finanzierungsmöglichkeiten und des Verschuldungsrisikos</li>
+                                        <li>(erweiterte Kompetenz) Präsentation der reflektierten Haltung zu Schulden</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beispiel 3 (Integrierte Herausforderung) -->
+            <h3 style="margin-top: 30px; color: #003d7a;">
+                Umsetzungsvariante - Beispiel 3
+                <span class="example-badge erweitert">Integrierte Herausforderung</span>
+            </h3>
+            <div class="accordion">
+                <div class="accordion-item herausforderung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Herausforderung (mit Option Partnerarbeit)</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="challenge-text">
+                                Ich will mir ein neues Produkt (z. B. Smartphone, Kopfhörer, E-Bike, Markenjacke) anschaffen, 
+                                bin mir aber unsicher, ob ich es wirklich brauche. Auch ist mir nicht klar, wie ökologisch 
+                                oder sozialverträglich es produziert wurde und ob ich es mir leisten kann.
+                                <br><br>
+                                👥 Ich kann diese Analyse auch mit einer Partnerperson erarbeiten: Wir tauschen uns über 
+                                unsere Perspektiven aus, vergleichen unsere Kriterien und erarbeiten gemeinsam ein 
+                                Entscheidungstool. Dabei nutzen wir digitale Tools zur Zusammenarbeit.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item produkt">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Produkt</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="product-description">
+                                Ich entwickle eine multimediale Konsumentscheidungshilfe, in der ich (allein oder im Zweierteam) 
+                                ein konkretes Produkt analysiere:
+                                <ul style="margin-top: 10px;">
+                                    <li>Bedürfnisanalyse (Was will ich? Was brauche ich?)</li>
+                                    <li>Einfluss von Werbung (Wie beeinflussen mich Medien, Trends, Influencer und Influencerinnen)</li>
+                                    <li>Nachhaltigkeitsanalyse (ökologisch, sozial, ökonomisch)</li>
+                                    <li>Finanzierungs- und Sparmöglichkeiten</li>
+                                    <li>Reflexion und begründete Entscheidung</li>
+                                </ul>
+                                Die Präsentation erfolgt z. B. als interaktive Online-Grafik, Plakat, besprochene Canva- oder 
+                                PPT-Präsentation oder Video, begleitet von einem kurzen Bericht oder Kommentar.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item sprachmodi">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Sprachmodi und Scaffolds</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul class="sprachmodi-list">
+                                <li>
+                                    <strong>Rezeption schriftlich und bildlich:</strong> Konsumportale, Werbeanzeigen, Budgetvorlagen, Nachhaltigkeitsberichte
+                                    <div class="scaffold-note">→ Lesestrategien, Markierhilfe, Vergleichsraster, Lesestruktur, Recherchestrategien, Wirkungsschema, Quellenkritik (inkl. KI-Prüfkatalog), Abbildungskodierung, Schrifterkennungstool</div>
+                                </li>
+                                <li>
+                                    <strong>Rezeption audiovisuell:</strong> Influencer-Clip oder Werbespot analysieren
+                                    <div class="scaffold-note">→ Sequenzplan/Transkribierungstool (KI), Videostills (Standbilder), KI-Analysetools, Untertitelfunktion, KI-Übersetzungstool</div>
+                                </li>
+                                <li>
+                                    <strong>Produktion schriftlich/multimedial:</strong> Entscheidungsanalyse mit Text, Grafik oder Video
+                                    <div class="scaffold-note">→ Storyboard, Redestruktur, Schneidprogramme, KI-Videogenerator, KI-Podcast-Generator</div>
+                                </li>
+                                <li>
+                                    <strong>Interaktion/Kollaboration digital (optional):</strong> Zusammenarbeit im Online-Dokument (z. B. Canva, Padlet), Austausch im Chat oder KI-Dialog
+                                    <div class="scaffold-note">→ Onlinemeeting-Konventionen (Netiquette, KI-Tools für Ideenfindung (Übung für die Schlussarbeit)</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bewertung">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Bewertungspositionen</h4>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="criteria-grid">
+                                <div class="criteria-box">
+                                    <h6>Sprache & Kommunikation</h6>
+                                    <ul>
+                                        <li>Strukturierte Analyse</li>
+                                        <li>Argumentation mit Fachbegriffen</li>
+                                        <li>Bei Partnerarbeit: reflektierte Auseinandersetzung mit zwei Perspektiven</li>
+                                    </ul>
+                                </div>
+                                <div class="criteria-box">
+                                    <h6>Gesellschaft</h6>
+                                    <ul>
+                                        <li>Reflexion von Bedürfnis, Werbung, Nachhaltigkeit, Finanzierung</li>
+                                        <li>Multiperspektivische Bewertung bei Partnerarbeit</li>
+                                        <li>Beurteilung des Umgangs mit Konsumwünschen und Wertkonflikten</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="navigation">
+            <a href="beispieleeba.html" class="nav-button">← Beispiele EBA</a>
+            <a href="info.html" class="nav-button">Information & Konzept →</a>
+        </div>
+    </main>
+    
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            
+            // Einfach nur das aktuelle Item umschalten (toggle)
+            // ohne andere Items zu beeinflussen
+            item.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

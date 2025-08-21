@@ -1,11 +1,380 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>EFZ 4-jährig – 2. Lehrjahr</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. Lehrjahr 4-jährige Grundbildung EFZ - Schullehrplan ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .warning-icon {
+            font-size: 2em;
+            color: #ff9800;
+        }
+        
+        .warning-text {
+            flex: 1;
+        }
+        
+        .warning-text h2 {
+            color: #ff6b00;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        
+        .warning-text p {
+            color: #856404;
+            margin: 0;
+        }
+        
+        .theme-section {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .theme-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 24px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-header:hover {
+            background-color: #0052a3;
+        }
+        
+        .theme-header::after {
+            content: '▼';
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        
+        .theme-header.collapsed::after {
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .theme-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        
+        .theme-header .lektionen {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .theme-content {
+            padding: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .theme-content.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .leitidee {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .leitidee h3 {
+            color: #003d7a;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .leitidee p {
+            margin-bottom: 10px;
+        }
+        
+        .leitidee p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .coming-soon {
+            background-color: #f8f9fa;
+            padding: 40px;
+            text-align: center;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        
+        .coming-soon-icon {
+            font-size: 3em;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .coming-soon h4 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .coming-soon p {
+            color: #999;
+            font-size: 0.95em;
+        }
+        
+        .asterisk {
+            color: #ff6b00;
+            font-weight: normal;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .theme-header {
+                padding: 16px;
+            }
+            
+            .theme-content {
+                padding: 16px;
+            }
+            
+            .warning-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    <script>
+        function toggleTheme(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+            
+            // Toggle current theme
+            if (isOpen) {
+                content.classList.remove('show');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.add('show');
+                header.classList.remove('collapsed');
+            }
+        }
+        
+        // Initialize: Add click handlers and collapse all themes
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.theme-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleTheme(this);
+                });
+                header.classList.add('collapsed');
+            });
+        });
+    </script>
 </head>
 <body>
-  <h1>EFZ 4-jährig – 2. Lehrjahr</h1>
-  <p>Inhalt für das 2. Lehrjahr der 4-jährigen Grundbildung EFZ.</p>
-  <a href="index.html">Zurück zu EFZ 4-jährig</a>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Schullehrplan ABU</a> / 
+                <a href="index-4j.html">4-jährige Grundbildung EFZ</a> / 
+                2. Lehrjahr
+            </nav>
+            <h1>2. Lehrjahr EFZ - 4-jährige Grundbildung</h1>
+            <p class="subtitle">Themen und Kompetenzen der Allgemeinbildung</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Warnung -->
+        <div class="warning-box">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-text">
+                <h2>Dokument in Bearbeitung</h2>
+                <p>Die detaillierten Kompetenzen und Umsetzungsvorschläge für die Themen dieses Lehrjahres befinden sich noch in Ausarbeitung. 
+                   Die nachfolgenden Informationen zeigen nur die Themen und deren Leitideen.</p>
+            </div>
+        </div>
+        
+        <!-- Thema 3: Bewusst konsumieren und handeln -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 3: Bewusst konsumieren und handeln</h2>
+                <p class="lektionen">33 Lektionen</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee - Kurze Beschreibung</h3>
+                    <p><strong>Meine Konsumentscheidungen – sei es beim Einkaufen, Essen oder Reisen – beeinflussen andere Personen, Unternehmen und auch die Umwelt.</strong> 
+                    Beim Thema «Bewusst konsumieren und handeln» gehe ich verantwortungsvoll mit meinem Lohn um. Ich reflektiere mein eigenes Konsumverhalten, 
+                    erkenne wirtschaftliche Zusammenhänge, lerne meine Rechte als Konsument/in kennen und setze mich mit den ökologischen Auswirkungen meiner 
+                    alltäglichen Entscheidungen auseinander.</p>
+                </div>
+                
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <p>Ich gehe verantwortungsbewusst mit meinem Einkommen um und finde heraus, welche finanziellen Spielräume und Verpflichtungen damit verbunden sind. 
+                    Dazu erstelle ich mithilfe digitaler Tools ein eigenes Budget und tausche mich über meine Bedürfnisse und Möglichkeiten mit anderen aus 
+                    <em>(🧩 Produktion multimedial, Interaktion und Kollaboration digital)</em>.</p>
+                    
+                    <p>Ich setze mich mit grundlegenden wirtschaftlichen Mechanismen auseinander: Was beeinflusst meine Konsumbedürfnisse? Wie entstehen Preise? 
+                    Welche Rolle spiele ich als Konsument/in in der Wirtschaft? Und welche Auswirkungen hat mein Konsumverhalten im globalen Zusammenhang? 
+                    Dabei analysiere ich audiovisuelle Beiträge wie Werbeclips, Erklärvideos oder Dokumentationen, um ökonomische Zusammenhänge zu erkennen 
+                    und kritisch zu reflektieren <em>(🧩 Rezeption audiovisuell)</em>.</p>
+                    
+                    <p>Ich reflektiere die sozialen und ökologischen Folgen meines Konsums. Ich vergleiche konventionelle und nachhaltige Konsumformen, 
+                    befasse mich mit Labels, Produktionsbedingungen und Umweltauswirkungen und formuliere meine Erkenntnisse in Texten und multimedial 
+                    gestalteten Beiträgen wie Infografiken, Plakaten oder Video-Storys <em>(🧩 Produktion multimedial)</em>.</p>
+                    
+                    <p>Zudem lerne ich, welche Rechte und Pflichten sich aus Kaufverträgen ergeben, sei es im Laden, online oder bei digitalen Vertragsabschlüssen. 
+                    Dadurch kann ich Rückgaberecht, Garantie, Reklamation oder Schutz vor Betrug in meinem Alltag anwenden. In digitalen Austauschformaten 
+                    entwickle ich gemeinsam mit anderen Strategien für den Konsumalltag, beispielsweise im Forum, im Chat oder im E-Mail-Austausch 
+                    <em>(🧩 Interaktion und Kollaboration digital)</em>.</p>
+                    
+                    <p>So stärke ich meine Fähigkeit, wirtschaftlich informiert, rechtlich orientiert und ökologisch bewusst zu handeln – 
+                    als verantwortungsvolle Konsumentin bzw. verantwortungsvoller Konsument.</p>
+                    
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> 
+                    Aspekt Ethik wird integriert.</p>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">📝</div>
+                    <h4>Detaillierte Ausarbeitung in Bearbeitung</h4>
+                    <p>Die individuellen Lebensbezüge, Lerninhalte und Kompetenzen werden zurzeit erarbeitet und stehen demnächst zur Verfügung.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thema 4: Verantwortung für mich und andere übernehmen -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 4: Verantwortung für mich und andere übernehmen</h2>
+                <p class="lektionen">Lektionen werden noch definiert</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee - Kurze Beschreibung</h3>
+                    <p><strong>Verantwortung zu übernehmen, bedeutet für mich, mich selbst, andere Menschen und das gemeinsame Zusammenleben ernst zu nehmen.</strong> 
+                    Im Rahmen des Themas «Verantwortung für mich und andere übernehmen» setze ich mich mit meiner Rolle in der Gesellschaft auseinander, 
+                    entwickle ein Bewusstsein für Mitverantwortung und reflektiere, was Fairness, Respekt und Solidarität bedeuten.</p>
+                </div>
+                
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <p>Ich setze mich mit Fragen meiner persönlichen Identität und sozialen Rollen auseinander, beispielsweise damit, was mein Leben, 
+                    meine Beziehungen und meine Werte prägt. Dabei lese ich unterschiedliche Texte, Berichte oder Erfahrungsberichte zu Lebensrealitäten, 
+                    gesellschaftlichen Normen und persönlichen Entwicklungen <em>(🧩 Rezeption schriftlich)</em>.</p>
+                    
+                    <p>Ich beleuchte die Vielfalt gesellschaftlicher Lebensformen: sexuelle Orientierung, kulturelle Hintergründe oder unterschiedliche 
+                    soziale Realitäten. In Gesprächen mit anderen tausche ich mich über Erfahrungen, Haltungen und mögliche Vorurteile aus – 
+                    und lerne, diese einzuordnen und zu hinterfragen <em>(🧩 Interaktion mündlich)</em>.</p>
+                    
+                    <p>Ein weiterer Schwerpunkt liegt auf gesellschaftlicher Teilhabe und Chancengerechtigkeit. Ich schreibe eigene Texte, in denen ich 
+                    gesellschaftliche Themen reflektiere, persönliche Bezüge herstelle und Möglichkeiten zu respektvollem Handeln beschreibe – 
+                    etwa in Form von Briefen, Statements oder Kommentaren <em>(🧩 Produktion schriftlich)</em>.</p>
+                    
+                    <p>Zudem befasse ich mich mit Fragen der körperlichen und seelischen Gesundheit, reflektiere den Umgang mit Belastungen, Grenzen 
+                    und Verantwortung. So entwickle ich ein stärkeres Bewusstsein für mich selbst, für andere und dafür, was es heisst, 
+                    in einer komplexen, vielfältigen Gesellschaft verantwortungsvoll zu handeln.</p>
+                    
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> 
+                    Aspekt Recht wird integriert.</p>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">📝</div>
+                    <h4>Detaillierte Ausarbeitung in Bearbeitung</h4>
+                    <p>Die individuellen Lebensbezüge, Lerninhalte und Kompetenzen werden zurzeit erarbeitet und stehen demnächst zur Verfügung.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; padding: 40px 0;">
+            <a href="index-4j.html" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
+                ← Zurück zur Übersicht 4-jährige Grundbildung EFZ
+            </a>
+        </div>
+    </main>
 </body>
 </html>

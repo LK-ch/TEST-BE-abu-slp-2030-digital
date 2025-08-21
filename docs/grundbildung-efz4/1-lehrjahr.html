@@ -1,11 +1,1515 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>EFZ 4-jährig – 1. Lehrjahr</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. Lehrjahr 4-jährige Grundbildung EFZ - Schullehrplan ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .theme-section {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .theme-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 24px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-header:hover {
+            background-color: #0052a3;
+        }
+        
+        .theme-header::after {
+            content: '▼';
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        
+        .theme-header.collapsed::after {
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .theme-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        
+        .theme-header .lektionen {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .theme-content {
+            padding: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .theme-content.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .lebensbezug {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #4d94ff;
+        }
+        
+        .lebensbezug h3 {
+            color: #003d7a;
+            font-size: 1.1em;
+            margin-bottom: 16px;
+        }
+        
+        .lerninhalt {
+            margin-bottom: 20px;
+            padding: 16px;
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .lerninhalt h4 {
+            color: #333;
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+        
+        .kompetenz-container {
+            margin-top: 12px;
+        }
+        
+        .kompetenz-button {
+            background-color: #e8f4fd;
+            border: 1px solid #cce0f4;
+            color: #0066cc;
+            padding: 8px 16px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .kompetenz-button:hover {
+            background-color: #cce0f4;
+            transform: translateY(-1px);
+        }
+        
+        .kompetenz-button.active {
+            background-color: #0066cc;
+            color: white;
+        }
+        
+        .kompetenz-details {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background-color: #f0f8ff;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .kompetenz-details.show {
+            display: block;
+        }
+        
+        .kompetenz-details ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .kompetenz-details li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .kompetenz-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+        }
+        
+        .kompetenz-nummer {
+            font-weight: 600;
+            color: #003d7a;
+        }
+        
+        /* Farbcodierung für verschiedene Kompetenzbereiche */
+        .gesellschaft { background-color: #e8f4fd; border-color: #b3d9ff; color: #0056b3; }
+        .sprache { background-color: #f0e8fd; border-color: #d4b3ff; color: #5a00b3; }
+        .digital { background-color: #e8fdf0; border-color: #b3ffd4; color: #00b356; }
+        .schluessel { background-color: #fde8e8; border-color: #ffb3b3; color: #b30000; }
+        
+        .leitidee {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .leitidee h3 {
+            color: #003d7a;
+            margin-bottom: 10px;
+        }
+        
+        .leitidee p {
+            margin-bottom: 10px;
+        }
+        
+        .asterisk {
+            color: #ff6b00;
+            font-weight: normal;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .theme-header {
+                padding: 16px;
+            }
+            
+            .theme-content {
+                padding: 16px;
+            }
+            
+            .kompetenz-button {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+    <script>
+        function toggleKompetenz(button, detailsId) {
+            const details = document.getElementById(detailsId);
+            const allButtons = button.parentElement.querySelectorAll('.kompetenz-button');
+            const allDetails = button.parentElement.parentElement.querySelectorAll('.kompetenz-details');
+            
+            // Alle anderen schließen
+            allDetails.forEach(d => {
+                if (d.id !== detailsId) d.classList.remove('show');
+            });
+            allButtons.forEach(b => {
+                if (b !== button) b.classList.remove('active');
+            });
+            
+            // Aktuellen toggle
+            details.classList.toggle('show');
+            button.classList.toggle('active');
+        }
+        
+        function toggleTheme(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+            
+            // Toggle current theme
+            if (isOpen) {
+                content.classList.remove('show');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.add('show');
+                header.classList.remove('collapsed');
+            }
+        }
+        
+        // Initialize: Add click handlers and collapse all themes
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.theme-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleTheme(this);
+                });
+                header.classList.add('collapsed');
+            });
+        });
+    </script>
 </head>
 <body>
-  <h1>EFZ 4-jährig – 1. Lehrjahr</h1>
-  <p>Inhalt für das 1. Lehrjahr der 4-jährigen Grundbildung EFZ.</p>
-  <a href="index.html">Zurück zu EFZ 4-jährig</a>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Schullehrplan ABU</a> / 
+                <a href="index-4j.html">4-jährige Grundbildung EFZ</a> / 
+                1. Lehrjahr
+            </nav>
+            <h1>1. Lehrjahr EFZ - 4-jährige Grundbildung</h1>
+            <p class="subtitle">Themen und Kompetenzen der Allgemeinbildung</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Thema 1: Ins Berufsleben einsteigen -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 1: Ins Berufsleben einsteigen</h2>
+                <p class="lektionen">36 Lektionen</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee</h3>
+                    <p><strong>Der Beginn meiner beruflichen Grundbildung bedeutet einen tiefgreifenden Wandel.</strong> Ich übernehme eine neue Rolle im Berufsbildungssystem als verantwortungsvolle, lernende Fachkraft im Betrieb, in der Schule und in den überbetrieblichen Kursen (ÜK). In meiner Ausbildungszeit entwickle ich Orientierung und Sicherheit und finde meinen Platz in der Berufs- und Lebenswelt.</p>
+                </div>
+
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <p>Ich setze mich mit den Inhalten meines Lehrvertrags auseinander und erkenne meine Rechte und Pflichten 
+                        im Berufsalltag. Dazu lese und verarbeite ich unterschiedliche Quellen, z. B. Verträge oder betriebliche 
+                        Regelwerke, und nutze Informationen gezielt für meine Situation 
+                        <em>(🧩 Rezeption schriftlich und bildlich)</em>.
+                    </p>
+                    <p>Ausserdem mache ich erste Erfahrungen damit, wie in meiner neuen Rolle kommuniziert wird, wie Zusammenarbeit 
+                        im Team gelingt und wie Konflikte fair gelöst werden. Dabei tausche ich mich mit anderen Lernenden und 
+                        Mitarbeitenden über Erlebnisse und Herausforderungen aus und bringe meine Sichtweise ein 
+                        <em>(🧩 Interaktion und Kollaboration mündlich und schriftlich)</em>.
+                    </p>
+                    <p>Ich erweitere meine Lern- und Arbeitstechniken und gehe bei meinem Einstieg in die Arbeitswelt bewusst mit 
+                        meinen Ressourcen um, indem ich meine eigene Arbeit gezielt organisiere 
+                        <em>(🧩 Interaktion und Kollaboration digital)</em>.
+                    </p>
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> Ich gehe mit meinem Geld verantwortungsbewusst um und lerne, meine Ausgaben zu planen und zu kontrollieren. So gestalte ich meinen Alltag im neuen Lebensabschnitt eigenständig und nachhaltig.</p>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>1. Individueller Lebensbezug: Ich finde mich im Berufsbildungssystem zurecht. (9 Lektionen)</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann Informationen zu meiner Ausbildung (z. B. Lehrvertrag, Rechte, Pflichten, neue Rollen) aus analogen und digitalen Quellen entnehmen, gezielt nutzen und auf meine Situation anwenden.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.6.1 Recht:</span> Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft (Funktion und Wirkung des Lehrvertrags).</li>
+                                <li><span class="kompetenz-nummer">5.2.2.3 Identität & Sozialisation:</span> In ihrer eigenen Existenz sowie in den sozialen und beruflichen Kontexten erkunden die Lernenden identitätsstiftende Räume und treffen dort persönliche Entscheidungen (Rollenverständnis).</li>
+                                <li><span class="asterisk">*</span> <span class="kompetenz-nummer">5.2.8.1 Wirtschaft:</span> Die Lernenden treffen als Konsumentinnen und Konsumenten mit ihren knappen Ressourcen eine Wahl.</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Analoge und digitale lineare/nicht-lineare Texte verstehen (z. B. Lehrvertrag, Bildungsportale)</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: An formalen und informalen Gesprächen aktiv teilnehmen (z. B. Gespräch mit Berufsbildner/in)</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Texte kooperativ erarbeiten</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Recherche auf berufsbildung.ch</li>
+                                <li>Online-Recherche</li>
+                                <li>Strukturierte digitale Anfrage</li>
+                                <li>Bewerten der Quellen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann mich in meinem neuen Alltag verständlich, situationsgerecht und respektvoll ausdrücken.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.2.3 Identität & Sozialisation:</span> Rollenverständnis, Umgangsformen</li>
+                                <li><span class="kompetenz-nummer">5.2.1.1 Ethik:</span> Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven (Respekt, Würde)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: An formalen und informalen Gesprächen aktiv teilnehmen (z. B. Rückmeldungsgespräche)</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Formal und informal korrespondieren (z. B. E-Mails)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung digitaler Kanäle für adressaten- und kontextgerechte Kommunikation (E-Mail, Lernplattform, KI-Assistenz)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 3: Ich kann die ausbildungsrelevanten IT-Infrastrukturen und digitalen Werkzeuge einrichten und sicher nutzen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l3-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l3-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l3-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l3-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l3-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.7.2 Technologie:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst (digitale Infrastruktur)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Analoge und digitale lineare/nicht-lineare Texte verstehen (z. B. Anleitungen)</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Formal und informal korrespondieren (z. B. Rückfragen bei technischen Problemen)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Einrichtung und Anwendung von ICT-Tools</li>
+                                <li>Nutzung digitaler Anleitungen und Supportangebote</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>2. Individueller Lebensbezug: Ich kommuniziere auf konstruktive Art und Weise. (6 Lektionen)</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann in (Standort-) Gesprächen im Berufs- oder Schulalltag aktiv zuhören, Argumente erkennen und meine Sichtweise einbringen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l2-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l2-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l2-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l2-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l2-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Rollenklarheit, Selbstreflexion</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Wertorientierung, Fairness</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Texte zu Konfliktstrategien</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Aktiv zuhören</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Reflektieren</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Online-Recherche zu Konfliktstrategien</li>
+                                <li>Reflexion über eigenes Verhalten in digitalen Kontexten</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann in Konfliktgesprächen meine Rolle aktiv wahrnehmen und Gespräche zielgerichtet führen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l2-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l2-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l2-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l2-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l2-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.1.3 Ethik:</span> Die Lernenden beteiligen sich aktiv an der Aushandlung von moralischen Entscheiden (Verantwortung, gegenseitiger Respekt)</li>
+                                <li><span class="kompetenz-nummer">5.2.2.4 Identität & Sozialisation:</span> Die Lernenden anerkennen andere kulturelle Realitäten (Vielfalt anerkennen)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Gespräch strukturieren</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: E-Mails/Chats zur Konfliktklärung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung von Mail, Chat, Foren zur Klärung von Konflikten</li>
+                                <li>Dialog mit KI führen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 3: Ich kann digitale Kommunikationsformen sachlich und adressatengerecht einsetzen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l2-3-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l2-3-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l2-3-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l2-3-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l2-3-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.7.2 Technologie:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst (Kommunikationsethik)</li>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Kommunikationsregeln</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-3-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Sachliche E-Mail-Kommunikation</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-3-digital" class="kompetenz-details">
+                            <ul>
+                                <li>KI-gestützte Simulationen</li>
+                                <li>Reflexionsplattformen</li>
+                                <li>Digitale Feedbackformate</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l2-3-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>3. Individueller Lebensbezug: Ich lerne effektiv und setze meine Ressourcen effizient ein. (6 Lektionen)</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann persönliche, zeitliche und digitale Ressourcen einschätzen, zielgerichtet einsetzen und in Lernprozessen sinnvoll kombinieren.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l3-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l3-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l3-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l3-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l3-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Selbststeuerung, Selbstbild</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Verantwortung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Lernstrategien lesen</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Tandemgespräch</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich: Wochenplan erstellen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Online-Recherche</li>
+                                <li>Markieren und Notieren in digitalen Tools</li>
+                                <li>Strukturierte Ablage</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann meine Lern- und Arbeitszeit strukturiert planen, geeignete Methoden anwenden und meine Planung bei Bedarf anpassen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l3-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l3-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l3-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l3-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l3-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Lernverantwortung</li>
+                                <li><span class="kompetenz-nummer">5.2.7 Technologie:</span> Digitale Lernorganisation</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Nutzungshinweise für Tools</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Austausch</li>
+                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital: Digitale Dokumentation</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung von digitalen Planungsinstrumenten (z. B. Kalender)</li>
+                                <li>Digitale Koordination im Team</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l3-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug" style="background-color: #fff8e1; border-left-color: #ffa000;">
+                    <h3><span class="asterisk">*</span> 4. Individueller Lebensbezug: Ich gehe mit meinem Geld verantwortungsbewusst um. (15 Lektionen) <em style="color: #ff6b00;">[Zusätzlich in 4-jähriger Grundbildung]</em></h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann mein Budget mithilfe der Lohnabrechnung realistisch planen, mich darüber austauschen, Rückmeldung geben, Probleme wahrnehmen und mein Budget anpassen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l4-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l4-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l4-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l4-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l4-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.8 Wirtschaft:</span> Lohnabrechnung, Nettolohn, Bruttolohn, Lohnabzüge, Budget, Ausgaben, Konsumverhalten</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l4-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Lohnabrechnung interpretieren</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Budgetplanung diskutieren</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l4-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Recherche auf Webseiten (z.B. budgetberatung.ch)</li>
+                                <li>Nutzung von Budget-Tools</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l4-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann Finanzierungsformen (z. B. Abo mit Ratenzahlung, Leasing, Kredit) unterscheiden, deren Konsequenzen abschätzen und eine für mich passende Option begründet auswählen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't1l4-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't1l4-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't1l4-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't1l4-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t1l4-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.8 Wirtschaft:</span> Konsum inkl. Finanzierungsarten und Verschuldung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l4-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Texte auf Beratungswebseiten vergleichen</li>
+                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital: Dialog mit KI</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l4-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Dialog mit KI</li>
+                                <li>Recherche und Vergleich</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t1l4-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thema 2: Meinungen bilden und mitgestalten -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 2: Meinungen bilden und mitgestalten</h2>
+                <p class="lektionen">48 Lektionen</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee</h3>
+                    <p><strong>In einer Welt, in der täglich unzählige Informationen und Meinungen auf mich einwirken, wird es für mich immer wichtiger, mir eine eigene, fundierte Haltung zu erarbeiten.</strong> Zu diesem Zweck lerne ich, meine Meinung bewusst zu bilden, sie respektvoll zu vertreten und mich aktiv in gesellschaftliche Prozesse einzubringen.</p>
+                </div>
+
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <p>Ich lerne, digitale Informationen kritisch zu prüfen. Ich erkenne den Einfluss von Algorithmen, Filterblasen und Desinformationen auf meine Meinungsbildung. 
+                        Ich bin sensibilisiert für den Unterschied zwischen Fake News und verlässlichen Quellen. Ich entwickle Strategien, um mich sicher und selbstbestimmt in 
+                        digitalen Räumen zu bewegen. Dazu höre ich politische Debatten, Interviews und Social-Media-Beiträge, analysiere die Absichten hinter Aussagen und vergleiche Positionen 
+                        <em>(🧩 Rezeption mündlich)</em>.
+                    </p>
+                    <p>Auf dieser Basis setze ich mich mit ethischen Fragen zum Umgang mit Hassrede, Meinungsfreiheit und Verantwortung im Netz auseinander. 
+                        Ich reflektiere Menschenrechte und Grundwerte und überlege, wie sie auf aktuelle Themen angewandt werden können. Dabei bringe ich unterschiedliche Sichtweisen 
+                        in Diskussionen ein und lerne, meine Meinung begründet und respektvoll zu vertreten 
+                        <em>(🧩 Produktion mündlich)</em>.
+                    </p>
+                    <p>Ich kenne meine politischen Rechte und weiss, wie ich mich an politischen Prozessen beteiligen kann – von der Klassenvertretung bis zur nationalen Abstimmung. 
+                        Ich entwickle eigene Standpunkte, bereite sie sprachlich sorgfältig auf und präsentiere sie adressatengerecht, beispielsweise in einem Debattenbeitrag 
+                        <em>(🧩 Produktion schriftlich)</em> oder als Videostatement für Social Media. So erlebe ich, dass meine Stimme zählt und dass ich durch aktives Mitgestalten 
+                        Veränderungen anstossen kann.
+                    </p>
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> Auch in der Kunst geht es oft um Standpunkte, Meinungen und Haltungen. Indem ich mich mit Kunst auseinandersetze, versuche ich herauszufinden, was Menschen bewegt. Dabei entwickle ich meine eigene Haltung und lerne, sie verständlich auszudrücken.</p>
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> Ich setze mich mit ökologischen Herausforderungen auseinander und untersuche, welche Rolle Medien, Werbung und politische Interessen bei der Meinungsbildung zu Umweltthemen spielen. Ich vergleiche unterschiedliche Sichtweisen auf ökologische Fragen und entwickle eine fundierte eigene Haltung.</p>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>1. Individueller Lebensbezug: Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert und merke, dass ich oft nicht weiss, was stimmt und was nicht. (6 Lektionen)</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann mündliche Beiträge zu aktuellen politischen Themen verstehen, ihre Absicht erfassen, reflektieren und grundlegende Merkmale von Manipulation und Desinformation erkennen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.7 Technologie:</span> Digitale Öffentlichkeit, algorithmische Steuerung, Filterblasen, Fake News</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Wahrheit, Verantwortung in der Informationsverbreitung</li>
+                                <li><span class="kompetenz-nummer">5.2.5 Politik:</span> Aktualitätsbezug</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich: Hörmaterialien aus verschiedenen Medien verstehen</li>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell: Audiovisuelle Materialien verstehen (Debatten, Interviews analysieren)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Kritische Bewertung medialer Inhalte</li>
+                                <li>Unterscheidung von faktenbasierter Information und Meinung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann eigene Standpunkte zur Meinungsbildung entwickeln und diese in Gesprächen oder Diskussionen nachvollziehbar und respektvoll vertreten.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Persönliche Werthaltungen, Umgang mit abweichenden Meinungen</li>
+                                <li><span class="kompetenz-nummer">5.2.5 Politik:</span> Meinungsfreiheit, Beteiligung an gesellschaftlichen Debatten</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.2.1</span> Produktion mündlich: Faktenorientiert und meinungsorientiert kommunizieren (begründete Beiträge)</li>
+                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial: Eine fakten- oder meinungsorientierte Multimedia-Präsentation erstellen (Erklär-Clip, Story-Format)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung digitaler Präsentationsformen zur Argumentation</li>
+                                <li>Bewusster Umgang mit digitalen Kommunikationsräumen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>2. Individueller Lebensbezug: Ich erlebe Diskussionen über Ungleichbehandlung, Ausgrenzung oder Respekt und stelle dabei fest, dass Menschen sehr unterschiedlich denken und reagieren. (9 Lektionen)</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann Beiträge aus Gesprächen, Medien oder sozialen Netzwerken zum Thema Ausgrenzung oder Hassrede gezielt analysieren, zentrale Aussagen erkennen und unterschiedliche Haltungen nachvollziehen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l2-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l2-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l2-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l2-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l2-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Menschenwürde, Gleichheit, Gerechtigkeit</li>
+                                <li><span class="kompetenz-nummer">5.2.5 Politik:</span> Universelle Rechte, Verfassung, Rechtsstaatlichkeit, Menschenrechte</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich: Analyse mündlicher Beiträge</li>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Textanalyse</li>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell: Medieninhalte</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Recherche und kritische Prüfung von Informationen zu Menschenrechtsthemen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann mich mit der Bedeutung von Meinungsfreiheit und Verantwortung in Diskussionen auseinandersetzen, eigene Standpunkte entwickeln und diese sprachlich klar und nachvollziehbar ausdrücken.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l2-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l2-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l2-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l2-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l2-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Rechte vs. Pflichten, Aushandlung von Normen Verantwortung, Solidarität</li>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Zugehörigkeit, Diskriminierung, Toleranz</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich: Umsetzung von Inhalten zu Menschenrechten</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Debattenformate</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Gestaltung eigener digitaler Beiträge</li>
+                                <li>Reflexion der Wirkung bei öffentlicher Positionierung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>3. Individueller Lebensbezug: Wir jungen Menschen wollen mitreden und mitgestalten, werden aber nicht immer ernst genommen, obwohl viele Themen uns direkt betreffen. (12 Lektionen)</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann politische Systeme und Entscheidungsprozesse in der Schweiz erklären und die Bedeutung demokratischer Rechte und Pflichten nachvollziehen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l3-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l3-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l3-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l3-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l3-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.5 Politik:</span> Staatsaufbau, direkte Demokratie, Rechte von Jugendlichen</li>
+                                <li><span class="kompetenz-nummer">5.2.6 Recht:</span> Personenrecht, politische Grundrechte, Mitwirkung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l3-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich: Erschliessung politischer Informationen</li>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Informationen aus Flyern, Wahlplakaten</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l3-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Informationsrecherche zu Beteiligungsmöglichkeiten</li>
+                                <li>Orientierung in politischen Informationsangeboten</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l3-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann meine Meinung zu politischen und gesellschaftlichen Fragen begründet darlegen und Möglichkeiten der Mitwirkung aufzeigen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l3-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l3-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l3-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l3-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l3-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.5 Politik:</span> Partizipation, Meinungsäusserung, Interessenvertretung/politische Parteien</li>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Zugehörigkeit, Engagement</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l3-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Klassendebatte</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich: Stellungnahme</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l3-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung von Tools zur Meinungsbildung und Beteiligung (z. B. digitale Petitionen)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l3-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug" style="background-color: #fff8e1; border-left-color: #ffa000;">
+                    <h3><span class="asterisk">*</span> 4. Individueller Lebensbezug: Ich entdecke, wie in verschiedenen Kunstformen Meinungen und Haltungen sichtbar werden. (9 Lektionen) <em style="color: #ff6b00;">[Zusätzlich in 4-jähriger Grundbildung]</em></h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann Meinungen und Haltungen in künstlerischen Ausdrucksformen wie Songtexten, Bildern oder Theaterszenen erkennen, beschreiben und deren Wirkung auf das Publikum einschätzen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l4-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l4-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l4-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l4-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l4-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.3 Kultur:</span> Künstlerische Ausdrucksformen und Deutung</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Haltungen und Werte in der Kunst</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Text, Bild, Plakat</li>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell: Musikvideo, Theaterszene</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Recherche in digitalen Sammlungen (z. B. Online-Ausstellungen)</li>
+                                <li>Nutzung von Annotationstools zur Bild-/Textanalyse</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> Herausfordernde Situationen bewältigen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann eine eigene Haltung zu einem gesellschaftlichen Thema entwickeln und sie in einem kreativen Text oder künstlerischen Beitrag verständlich zum Ausdruck bringen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l4-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l4-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l4-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l4-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l4-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Eigene Haltung ausdrücken</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Verantwortung und Wertevermittlung durch Kunst</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich: Poetry-Text, Kurzrede</li>
+                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial: Video, Audiostatement</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung von Schreib- und Gestaltungssoftware</li>
+                                <li>KI-gestützte Textentwürfe zur Reflexion und Überarbeitung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> Herausfordernde Situationen bewältigen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 3: Ich kann mit anderen über die Botschaften von Kunstwerken diskutieren, verschiedene Perspektiven respektvoll austauschen und Gemeinsamkeiten oder Unterschiede reflektieren.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l4-3-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l4-3-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l4-3-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l4-3-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l4-3-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.3 Kultur:</span> Kunst als Diskussionsanlass</li>
+                                <li><span class="kompetenz-nummer">5.2.2 Identität & Sozialisation:</span> Perspektivwechsel</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Meinungsvielfalt, Respekt</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-3-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Diskussion, Gruppenarbeit</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion schriftlich: Chat, Blogbeitrag</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-3-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Einsatz von digitalen Diskussionsplattformen</li>
+                                <li>Reflexionsjournal mit KI-Unterstützung</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l4-3-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug" style="background-color: #fff8e1; border-left-color: #ffa000;">
+                    <h3><span class="asterisk">*</span> 5. Individueller Lebensbezug: Ich bilde mir zu Umweltthemen eine fundierte Meinung, reflektiere unterschiedliche Perspektiven und beteilige mich aktiv an Diskussionen und Entscheidungen. (12 Lektionen) <em style="color: #ff6b00;">[Zusätzlich in 4-jähriger Grundbildung]</em></h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann zentrale Aussagen zu Umweltthemen (z. B. Klimawandel, Abfall, Energieverbrauch) aus analogen und digitalen Medien entnehmen und einordnen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l5-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l5-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l5-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l5-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l5-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.4 Ökologie:</span> Umwelt, Ressourcen, Nachhaltigkeit</li>
+                                <li><span class="kompetenz-nummer">5.2.7 Technologie:</span> Digitale Informationskanäle</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Flyer, Webseiten, Artikel</li>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell: Videos, Erklärfilme</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Kritische Recherche im Netz</li>
+                                <li>Quellenanalyse, Faktenchecks mit KI</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> Herausfordernde Situationen bewältigen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann in Diskussionen über ökologische Themen meine eigene Position sachlich und begründet vertreten, auf andere Perspektiven eingehen und respektvoll argumentieren.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l5-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l5-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l5-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l5-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l5-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.4 Ökologie:</span> Wertkonflikte, Konsumverhalten</li>
+                                <li><span class="kompetenz-nummer">5.2.1 Ethik:</span> Verantwortung, Gerechtigkeit</li>
+                                <li><span class="kompetenz-nummer">5.2.5 Politik:</span> Klimaschutz als gesellschaftliches Thema</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: Gruppengespräch, Debatte</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: Kommentar, Beitrag</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung eines Diskussionstools (z. B. digitales Forum, Abstimmungstool)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> Herausfordernde Situationen bewältigen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 3: Ich kann meine Meinung zu einer ökologischen Frage einfach und verständlich ausdrücken und in einem digitalen Format darstellen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l5-3-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l5-3-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l5-3-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l5-3-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l5-3-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.4 Ökologie:</span> Klimawandel, Ressourcen, Umweltverhalten im Alltag</li>
+                                <li><span class="kompetenz-nummer">5.2.7 Technologie:</span> Medienwirkung, Social Media</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-3-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial: Video, Podcast</li>
+                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital: Onlineumfrage, Chat</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-3-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Gestaltung mit Video-/Audiotools</li>
+                                <li>Einsatz von Storyboard-Software</li>
+                                <li>KI-unterstütztes Redigieren</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l5-3-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> Herausfordernde Situationen bewältigen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; padding: 40px 0;">
+            <a href="index-4j.html" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
+                ← Zurück zur Übersicht 4-jährige Grundbildung EFZ
+            </a>
+        </div>
+    </main>
 </body>
 </html>

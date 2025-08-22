@@ -162,6 +162,101 @@
             transform: translateY(-2px);
         }
 
+        /* Concept Section */
+        .concept-section {
+            background: linear-gradient(135deg, var(--zh-light-blue) 0%, rgba(255,255,255,0.9) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-section h2 {
+            color: var(--zh-dark-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--zh-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .concept-section h3 {
+            color: var(--zh-blue);
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .framework-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .framework-card h4 {
+            color: var(--zh-dark-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .framework-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--zh-blue);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .framework-card p {
+            color: var(--zh-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .framework-card ul {
+            margin-top: 0.8rem;
+            padding-left: 1.5rem;
+        }
+
+        .framework-card li {
+            color: var(--zh-text);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .integration-note {
+            background: rgba(15, 5, 160, 0.05);
+            border-left: 4px solid var(--zh-blue);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .integration-note strong {
+            color: var(--zh-dark-blue);
+        }
+
         /* Theme Matrix */
         .matrix-container {
             overflow-x: auto;
@@ -351,6 +446,14 @@
             .legend-grid {
                 grid-template-columns: 1fr;
             }
+
+            .framework-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .concept-section {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -358,7 +461,7 @@
     <!-- Header -->
     <header class="header">
         <h1>Digitale Kompetenzen</h1>
-        <p>Zirkulärer Aufbau mit KI-Integration über alle Themen</p>
+        <p>Zirkulärer Aufbau über alle Themen</p>
     </header>
 
     <!-- Navigation Breadcrumb -->
@@ -374,6 +477,70 @@
         <a href="zirkularitaet.html" class="back-btn">
             ← Zurück zur Übersicht
         </a>
+
+        <!-- Concept Section -->
+        <section class="concept-section">
+            <h2>Konzept des digitalen Kompetenzrasters</h2>
+            
+            <p>Dieses innovative Kompetenzraster kombiniert das <strong>OECD AILit-Framework</strong> sinnvoll mit <strong>DigComp 2.2</strong> und dem <strong>UNESCO AI-Kompetenzrahmen</strong>. Diese Integration ermöglicht eine ganzheitliche Einbettung von KI-Kompetenzen in bestehende digitale Bildungsstrukturen und schafft einen zukunftsfähigen Rahmen für die Erwachsenenbildung.</p>
+
+            <h3>Die drei Säulen des kombinierten Frameworks</h3>
+            
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <h4><span class="framework-icon">1</span> DigComp 2.2</h4>
+                    <p>Definiert fünf zentrale digitale Kompetenzbereiche mit über 250 praxisnahen Beispielen:</p>
+                    <ul>
+                        <li>Informations- und Datenkompetenz</li>
+                        <li>Kommunikation & Kollaboration</li>
+                        <li>Digitale Inhaltserstellung</li>
+                        <li>Sicherheit</li>
+                        <li>Problemlösung</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card">
+                    <h4><span class="framework-icon">2</span> UNESCO AI-Kompetenzrahmen</h4>
+                    <p>Umfasst vier Schlüsselbereiche mit Progressionsstufen:</p>
+                    <ul>
+                        <li>Human-Centred Mindset</li>
+                        <li>Ethics of AI</li>
+                        <li>AI Foundations & Applications</li>
+                        <li>AI System Design</li>
+                        <li>Stufen: Understand → Apply → Create</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card">
+                    <h4><span class="framework-icon">3</span> AILit-Framework (OECD)</h4>
+                    <p>Liefert konkrete KI-Domänen mit technischem Wissen und ethischen Haltungen:</p>
+                    <ul>
+                        <li><strong>Engaging:</strong> KI erkennen und bewerten</li>
+                        <li><strong>Creating:</strong> Mit KI kreativ arbeiten</li>
+                        <li><strong>Managing:</strong> KI verantwortungsvoll einsetzen</li>
+                        <li><strong>Designing:</strong> KI-Systeme gestalten</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Vorteile der Integration</h3>
+            
+            <div class="integration-note">
+                <p><strong>Strukturelle Klarheit:</strong> Die DigComp-Bereiche bilden eine etablierte Struktur, die für Lehrpläne und Kompetenzraster klar verständlich ist.</p>
+            </div>
+
+            <div class="integration-note">
+                <p><strong>KI-Erweiterung:</strong> Die KI-Ergänzungen aus dem AILit-Framework sind direkt in die bestehenden digitalen Kompetenzbereiche integriert – so wird sichtbar, welche digitalen Kompetenzen durch KI-Konzepte erweitert werden.</p>
+            </div>
+
+            <div class="integration-note">
+                <p><strong>Ethische Dimension:</strong> Der UNESCO-Aspekt mit seinem menschenzentrierten Ansatz und der Fokus auf KI-Ethik bildet eine Querschnittskompetenz, die in allen Bereichen relevant ist.</p>
+            </div>
+
+            <div class="integration-note">
+                <p><strong>Spiralförmige Entwicklung:</strong> Die Kompetenzen werden nicht isoliert, sondern zirkulär über alle Themen und individuellen Lebensbezüge entwickelt – ein Kompetenzbereich kehrt in verschiedenen Kontexten wieder und vertieft sich dabei kontinuierlich.</p>
+            </div>
+        </section>
 
         <h2>Digitale Kompetenzen im zirkulären Aufbau</h2>
         <p>Die sechs digitalen Kompetenzbereiche mit KI-Integration werden spiralförmig über alle Themen und individuellen Lebensbezüge entwickelt. <strong>Klicken Sie auf eine Kompetenz</strong>, um zu sehen, wo sie wiederkehrt und welche konkreten Anwendungen dahinter stehen.</p>

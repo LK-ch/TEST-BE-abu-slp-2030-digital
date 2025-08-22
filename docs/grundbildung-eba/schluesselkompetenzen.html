@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schlüsselkompetenzen - Zirkulärer Aufbau</title>
+    <title>Zirkularität der Schlüsselkompetenzen EBA</title>
     <style>
         * {
             margin: 0;
@@ -30,9 +30,6 @@
             --zh-lime: #32CD32;
             --zh-indigo: #4B0082;
             --zh-coral: #FF7F50;
-            --zh-mint: #98FB98;
-            --zh-lavender: #E6E6FA;
-            --zh-salmon: #FA8072;
         }
 
         body {
@@ -84,31 +81,6 @@
             z-index: 1;
         }
 
-        /* Navigation */
-        .nav-breadcrumb {
-            background-color: var(--zh-gray);
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .nav-breadcrumb a {
-            color: var(--zh-blue);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .nav-breadcrumb span {
-            color: var(--zh-text);
-            opacity: 0.6;
-        }
-
         /* Container */
         .container {
             max-width: 1400px;
@@ -116,220 +88,286 @@
             padding: 2rem;
         }
 
-        /* Back Button */
-        .back-btn {
-            background: var(--zh-gray);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--zh-text);
+        /* Kompetenzen Übersicht */
+        .kompetenzen-overview {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
-
-        .back-btn:hover {
-            background: var(--zh-light-blue);
-            transform: translateX(-5px);
-            text-decoration: none;
-            color: var(--zh-text);
-        }
-
-        /* EBA Link Button */
-        .eba-link {
-            background: var(--zh-light-blue);
+        
+        .kompetenzen-overview h2 {
             color: var(--zh-dark-blue);
-            border: 2px solid var(--zh-blue);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .kompetenzen-list {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .kompetenz-item {
+            padding: 8px 12px;
+            border-left: 4px solid;
+            background: var(--zh-gray);
+            border-radius: 4px;
+        }
+        
+        /* Farben für Schlüsselkompetenzen */
+        .sk-1 { border-color: var(--zh-red); }
+        .sk-2 { border-color: var(--zh-orange); }
+        .sk-3 { border-color: var(--zh-yellow); }
+        .sk-4 { border-color: var(--zh-green); }
+        .sk-5 { border-color: var(--zh-cyan); }
+        .sk-6 { border-color: var(--zh-blue); }
+        .sk-7 { border-color: var(--zh-purple); }
+        .sk-8 { border-color: var(--zh-pink); }
+        .sk-9 { border-color: var(--zh-teal); }
+        .sk-10 { border-color: var(--zh-indigo); }
+        .sk-11 { border-color: var(--zh-coral); }
+        .sk-12 { border-color: var(--zh-lime); }
+        
+        /* Kacheln */
+        .kacheln-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .kachel {
+            padding: 15px;
+            border-radius: 10px;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-left: 1rem;
-            text-decoration: none;
             transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .eba-link:hover {
-            background: var(--zh-blue);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Theme Matrix */
-        .matrix-container {
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-
-        .theme-matrix {
-            width: 100%;
-            border-collapse: collapse;
+            text-align: center;
             background: white;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kachel.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .kachel-1 { background: linear-gradient(135deg, rgba(220,20,60,0.1), rgba(220,20,60,0.05)); border-color: var(--zh-red); }
+        .kachel-2 { background: linear-gradient(135deg, rgba(255,149,0,0.1), rgba(255,149,0,0.05)); border-color: var(--zh-orange); }
+        .kachel-3 { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border-color: var(--zh-yellow); }
+        .kachel-4 { background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,200,150,0.05)); border-color: var(--zh-green); }
+        .kachel-5 { background: linear-gradient(135deg, rgba(0,206,209,0.1), rgba(0,206,209,0.05)); border-color: var(--zh-cyan); }
+        .kachel-6 { background: linear-gradient(135deg, rgba(15,5,160,0.1), rgba(15,5,160,0.05)); border-color: var(--zh-blue); }
+        .kachel-7 { background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.05)); border-color: var(--zh-purple); }
+        .kachel-8 { background: linear-gradient(135deg, rgba(255,105,180,0.1), rgba(255,105,180,0.05)); border-color: var(--zh-pink); }
+        .kachel-9 { background: linear-gradient(135deg, rgba(32,178,170,0.1), rgba(32,178,170,0.05)); border-color: var(--zh-teal); }
+        .kachel-10 { background: linear-gradient(135deg, rgba(75,0,130,0.1), rgba(75,0,130,0.05)); border-color: var(--zh-indigo); }
+        .kachel-11 { background: linear-gradient(135deg, rgba(255,127,80,0.1), rgba(255,127,80,0.05)); border-color: var(--zh-coral); }
+        .kachel-12 { background: linear-gradient(135deg, rgba(50,205,50,0.1), rgba(50,205,50,0.05)); border-color: var(--zh-lime); }
+        
+        .kachel-nummer {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .kachel-text {
+            font-size: 12px;
+            margin-bottom: 8px;
+            min-height: 40px;
+        }
+        
+        .kachel-count {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        /* Tabelle */
+        .table-container {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-            overflow: hidden;
-            font-size: 0.9rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
         }
-
-        .theme-matrix th, .theme-matrix td {
-            padding: 0.8rem;
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
             text-align: left;
-            border: 1px solid var(--zh-gray);
-            vertical-align: top;
+            border-bottom: 1px solid #e0e0e0;
         }
-
-        .theme-matrix th {
-            background: var(--zh-blue);
+        
+        th {
+            background-color: var(--zh-blue);
             color: white;
             font-weight: 500;
             position: sticky;
             top: 0;
-            z-index: 10;
         }
-
-        .theme-matrix tr:hover {
-            background: var(--zh-light-blue);
+        
+        tr:hover {
+            background-color: var(--zh-light-blue);
         }
-
-        .theme-matrix .theme-cell {
-            font-weight: bold;
-            background: var(--zh-gray);
-        }
-
-        .theme-matrix .lebensbezug-cell {
-            font-style: italic;
-            color: var(--zh-text);
-            font-size: 0.85rem;
-        }
-
-        /* Schlüsselkompetenzen Tags */
-        .key-competence-tag {
+        
+        .sk-button {
             display: inline-block;
-            padding: 0.3rem 0.8rem;
-            margin: 0.2rem;
+            padding: 4px 8px;
+            margin: 2px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 12px;
             font-weight: 500;
             color: white;
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sk-button.hidden {
+            display: none;
         }
 
-        .key-competence-tag:hover {
+        .sk-button:hover {
             transform: scale(1.05);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
-
-        .key-competence-tag.active {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            animation: pulse 2s ease-in-out;
-        }
-
-        /* Color coding for Schlüsselkompetenzen */
-        .competence-3-2-1 { background: var(--zh-red); }
-        .competence-3-2-2 { background: var(--zh-orange); }
-        .competence-3-2-3 { background: var(--zh-yellow); color: var(--zh-text); }
-        .competence-3-2-4 { background: var(--zh-green); }
-        .competence-3-2-5 { background: var(--zh-cyan); }
-        .competence-3-2-6 { background: var(--zh-blue); }
-        .competence-3-2-7 { background: var(--zh-purple); }
-        .competence-3-2-8 { background: var(--zh-pink); }
-        .competence-3-2-9 { background: var(--zh-teal); }
-        .competence-3-2-10 { background: var(--zh-indigo); }
-        .competence-3-2-11 { background: var(--zh-coral); }
-        .competence-3-2-12 { background: var(--zh-salmon); }
-
-        /* Legend */
-        .legend {
-            background: var(--zh-gray);
+        
+        .btn-1 { background-color: var(--zh-red); }
+        .btn-2 { background-color: var(--zh-orange); }
+        .btn-3 { background-color: var(--zh-yellow); color: var(--zh-text); }
+        .btn-4 { background-color: var(--zh-green); }
+        .btn-5 { background-color: var(--zh-cyan); }
+        .btn-6 { background-color: var(--zh-blue); }
+        .btn-7 { background-color: var(--zh-purple); }
+        .btn-8 { background-color: var(--zh-pink); }
+        .btn-9 { background-color: var(--zh-teal); }
+        .btn-10 { background-color: var(--zh-indigo); }
+        .btn-11 { background-color: var(--zh-coral); }
+        .btn-12 { background-color: var(--zh-lime); color: var(--zh-text); }
+        
+        /* Qualitative Einschätzung */
+        .qualitative-section {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .legend h3 {
+        .qualitative-section h2 {
             color: var(--zh-dark-blue);
             margin-bottom: 1rem;
         }
 
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1rem;
+        .qualitative-section h3 {
+            color: var(--zh-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .legend-item {
+        .qualitative-section p {
+            margin-bottom: 1rem;
+        }
+
+        .qualitative-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .reset-button {
+            padding: 10px 20px;
+            background-color: var(--zh-gray);
+            color: var(--zh-text);
+            border: 2px solid var(--zh-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-button:hover {
+            background-color: var(--zh-light-blue);
+            transform: translateY(-2px);
+        }
+
+        .erfuellung-gut {
+            color: var(--zh-green);
+            font-weight: 600;
+        }
+
+        .erfuellung-genuegend {
+            color: var(--zh-orange);
+            font-weight: 600;
+        }
+
+        .erfuellung-knapp {
+            color: var(--zh-red);
+            font-weight: 600;
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--zh-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        /* Filter Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: none;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--zh-gray);
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .close:hover {
-            color: black;
-        }
-
-        .competence-used {
+        .accordion-header:hover {
             background: var(--zh-light-blue);
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 8px;
-            border-left: 4px solid var(--zh-blue);
         }
 
-        .usage-info {
-            font-size: 0.9em;
-            color: var(--zh-blue);
-            font-weight: bold;
-            margin-top: 0.5rem;
+        .accordion-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 20px;
         }
 
         /* Responsive */
@@ -338,25 +376,12 @@
                 font-size: 1.8rem;
             }
             
-            .theme-matrix {
-                font-size: 0.8rem;
-            }
-            
-            .key-competence-tag {
-                font-size: 0.7rem;
-                padding: 0.2rem 0.6rem;
-            }
-
             .container {
                 padding: 1rem;
             }
 
-            .theme-matrix th, .theme-matrix td {
-                padding: 0.5rem;
-            }
-
-            .legend-grid {
-                grid-template-columns: 1fr;
+            .kacheln-container {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -364,519 +389,473 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <h1>Schlüsselkompetenzen</h1>
-        <p>Zirkulärer Aufbau der 12 Kompetenzen für lebenslanges Lernen</p>
+        <h1>Zirkularität der Schlüsselkompetenzen</h1>
+        <p>Spiralförmiger Aufbau der Kompetenzen für lebenslanges Lernen</p>
     </header>
-
-    <!-- Navigation Breadcrumb -->
-    <nav class="nav-breadcrumb">
-        <a href="zirkularitaet.html">Übersicht</a>
-        <span>›</span>
-        <span>Schlüsselkompetenzen</span>
-        <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
-    </nav>
 
     <!-- Main Container -->
     <div class="container">
-        <a href="zirkularitaet.html" class="back-btn">
-            ← Zurück zur Übersicht
-        </a>
-
-        <h2>Schlüsselkompetenzen im zirkulären Aufbau</h2>
-        <p>Die 12 Schlüsselkompetenzen für lebenslanges Lernen werden spiralförmig über alle Themen und individuellen Lebensbezüge entwickelt. <strong>Klicken Sie auf eine Schlüsselkompetenz</strong>, um zu sehen, wo sie wiederkehrt und wie sie progressiv aufgebaut wird.</p>
-
-        <div class="legend">
-            <h3>Legende Schlüsselkompetenzen für lebenslanges Lernen</h3>
-            <div class="legend-grid">
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-red);"></div>
-                    <span>3.2.1 Zwischen relevanten und irrelevanten Quellen unterscheiden</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-orange);"></div>
-                    <span>3.2.2 Sich selbst Ziele setzen, überprüfen und adaptiv verhalten</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-yellow);"></div>
-                    <span>3.2.3 Antizipative, unternehmerische und innovative Problemlösung</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-green);"></div>
-                    <span>3.2.4 In unterschiedlichen Teams zielgerichtet arbeiten</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-cyan);"></div>
-                    <span>3.2.5 Werthaltungen erkennen, reflektieren und weiterentwickeln</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-blue);"></div>
-                    <span>3.2.6 Eigene Standpunkte begründen und andere überzeugen</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-purple);"></div>
-                    <span>3.2.7 Unterschiedliche Standpunkte nachvollziehen</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-pink);"></div>
-                    <span>3.2.8 Lebensphasen planen und mit Unwägbarkeiten umgehen</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-teal);"></div>
-                    <span>3.2.9 Vernetzt und systemisch denken für Nachhaltigkeit</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-indigo);"></div>
-                    <span>3.2.10 Sich in veränderndem Umfeld zurechtfinden</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-coral);"></div>
-                    <span>3.2.11 Mit Mehrdeutigkeiten umgehen</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-salmon);"></div>
-                    <span>3.2.12 An gesellschaftlichen Prozessen partizipieren</span>
-                </div>
+        <!-- Übersicht der Schlüsselkompetenzen -->
+        <div class="kompetenzen-overview">
+            <h2>Schlüsselkompetenzen für lebenslanges Lernen</h2>
+            <div class="kompetenzen-list">
+                <div class="kompetenz-item sk-1"><strong>3.2.1:</strong> Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
+                <div class="kompetenz-item sk-2"><strong>3.2.2:</strong> Ziele setzen, prüfen, adaptiv handeln</div>
+                <div class="kompetenz-item sk-3"><strong>3.2.3:</strong> Antizipativ, unternehmerisch, innovativ Probleme lösen</div>
+                <div class="kompetenz-item sk-4"><strong>3.2.4:</strong> In unterschiedlichen Teams effizient arbeiten</div>
+                <div class="kompetenz-item sk-5"><strong>3.2.5:</strong> Werthaltungen reflektieren und weiterentwickeln</div>
+                <div class="kompetenz-item sk-6"><strong>3.2.6:</strong> Standpunkte begründen und überzeugen</div>
+                <div class="kompetenz-item sk-7"><strong>3.2.7:</strong> Perspektiven wechseln und gegenseitiges Verständnis fördern</div>
+                <div class="kompetenz-item sk-8"><strong>3.2.8:</strong> Lebensphasen planen, mit Unwägbarkeiten umgehen</div>
+                <div class="kompetenz-item sk-9"><strong>3.2.9:</strong> Vernetzt/systemisch denken, nachhaltig handeln</div>
+                <div class="kompetenz-item sk-10"><strong>3.2.10:</strong> Sich an Wandel anpassen</div>
+                <div class="kompetenz-item sk-11"><strong>3.2.11:</strong> Mit Mehrdeutigkeiten umgehen</div>
+                <div class="kompetenz-item sk-12"><strong>3.2.12:</strong> Gesellschaftlich partizipieren, Handlungsspielräume nutzen</div>
             </div>
         </div>
-
-        <div class="matrix-container">
-            <table class="theme-matrix">
+        
+        <!-- Interaktive Kacheln -->
+        <button class="reset-button" onclick="resetFilter()">Alle anzeigen</button>
+        <div class="kacheln-container">
+            <div class="kachel kachel-1" onclick="filterKompetenz('1')">
+                <div class="kachel-nummer">3.2.1</div>
+                <div class="kachel-text">Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
+                <div class="kachel-count">Vorkommnisse: 9</div>
+            </div>
+            <div class="kachel kachel-2" onclick="filterKompetenz('2')">
+                <div class="kachel-nummer">3.2.2</div>
+                <div class="kachel-text">Ziele setzen, prüfen, adaptiv handeln</div>
+                <div class="kachel-count">Vorkommnisse: 7</div>
+            </div>
+            <div class="kachel kachel-3" onclick="filterKompetenz('3')">
+                <div class="kachel-nummer">3.2.3</div>
+                <div class="kachel-text">Antizipativ, unternehmerisch, innovativ Probleme lösen</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-4" onclick="filterKompetenz('4')">
+                <div class="kachel-nummer">3.2.4</div>
+                <div class="kachel-text">In unterschiedlichen Teams effizient arbeiten</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-5" onclick="filterKompetenz('5')">
+                <div class="kachel-nummer">3.2.5</div>
+                <div class="kachel-text">Werthaltungen reflektieren und weiterentwickeln</div>
+                <div class="kachel-count">Vorkommnisse: 8</div>
+            </div>
+            <div class="kachel kachel-6" onclick="filterKompetenz('6')">
+                <div class="kachel-nummer">3.2.6</div>
+                <div class="kachel-text">Standpunkte begründen und überzeugen</div>
+                <div class="kachel-count">Vorkommnisse: 10</div>
+            </div>
+            <div class="kachel kachel-7" onclick="filterKompetenz('7')">
+                <div class="kachel-nummer">3.2.7</div>
+                <div class="kachel-text">Perspektiven wechseln und gegenseitiges Verständnis fördern</div>
+                <div class="kachel-count">Vorkommnisse: 7</div>
+            </div>
+            <div class="kachel kachel-8" onclick="filterKompetenz('8')">
+                <div class="kachel-nummer">3.2.8</div>
+                <div class="kachel-text">Lebensphasen planen, mit Unwägbarkeiten umgehen</div>
+                <div class="kachel-count">Vorkommnisse: 4</div>
+            </div>
+            <div class="kachel kachel-9" onclick="filterKompetenz('9')">
+                <div class="kachel-nummer">3.2.9</div>
+                <div class="kachel-text">Vernetzt/systemisch denken, nachhaltig handeln</div>
+                <div class="kachel-count">Vorkommnisse: 6</div>
+            </div>
+            <div class="kachel kachel-10" onclick="filterKompetenz('10')">
+                <div class="kachel-nummer">3.2.10</div>
+                <div class="kachel-text">Sich an Wandel anpassen</div>
+                <div class="kachel-count">Vorkommnisse: 8</div>
+            </div>
+            <div class="kachel kachel-11" onclick="filterKompetenz('11')">
+                <div class="kachel-nummer">3.2.11</div>
+                <div class="kachel-text">Mit Mehrdeutigkeiten umgehen</div>
+                <div class="kachel-count">Vorkommnisse: 8</div>
+            </div>
+            <div class="kachel kachel-12" onclick="filterKompetenz('12')">
+                <div class="kachel-nummer">3.2.12</div>
+                <div class="kachel-text">Gesellschaftlich partizipieren, Handlungsspielräume nutzen</div>
+                <div class="kachel-count">Vorkommnisse: 8</div>
+            </div>
+        </div>
+        
+        <!-- Tabelle mit allen Themen -->
+        <div class="table-container">
+            <h2>Übersicht der Themen und Schlüsselkompetenzen</h2>
+            <table>
                 <thead>
                     <tr>
                         <th>Thema</th>
                         <th>Individueller Lebensbezug</th>
+                        <th>Lerninhalt</th>
                         <th>Schlüsselkompetenzen</th>
-                        <th>Zirkuläre Entwicklung</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Thema 1 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>1. Ins Berufsleben einsteigen</strong></td>
-                        <td class="lebensbezug-cell">1.1 Orientierung in Arbeits-/Ausbildungswelt</td>
+                        <td rowspan="2"><strong>Thema 1:</strong> Ins Berufsleben einsteigen</td>
+                        <td>1: Ich finde mich im Betrieb und in der Berufsfachschule zurecht, kenne Lernstrategien, achte auf mich und arbeite ressourcenschonend.</td>
+                        <td>1.2: Ich kenne Lernstrategien, achte auf mich und arbeite ressourcenschonend.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-2" onclick="filterByCompetence('competence-3-2-2', '3.2.2')">3.2.2</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
                         </td>
-                        <td>Grundlegende Zielplanung & Standpunktvertretung</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">1.2 Konstruktive Kommunikation</td>
+                        <td>2: Ich kommuniziere auf konstruktive Art und Weise.</td>
+                        <td>2.2: Ich kann Konflikte im Berufs- oder Schulalltag erkennen und adäquat darauf reagieren.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
-                            <span class="key-competence-tag competence-3-2-7" onclick="filterByCompetence('competence-3-2-7', '3.2.7')">3.2.7</span>
-                            <span class="key-competence-tag competence-3-2-3" onclick="filterByCompetence('competence-3-2-3', '3.2.3')">3.2.3</span>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
                         </td>
-                        <td>Kommunikative Kompetenzen & innovative Problemlösung</td>
                     </tr>
                     
                     <!-- Thema 2 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>2. Bewusst konsumieren und handeln</strong></td>
-                        <td class="lebensbezug-cell">2.1 Verantwortungsvoller Umgang mit Geld</td>
+                        <td rowspan="4"><strong>Thema 2:</strong> Bewusst konsumieren und handeln</td>
+                        <td rowspan="2">1: Ich gehe verantwortungsbewusst mit meinem Geld um.</td>
+                        <td>1.1: Ich kann ein Budget erstellen, Konsumentscheidungen reflektieren und Risiken für Schulden identifizieren.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-2" onclick="filterByCompetence('competence-3-2-2', '3.2.2')">3.2.2</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
                         </td>
-                        <td>Finanzplanung & Begründung von Konsumentscheidungen</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">2.2 Nachhaltiger Konsum</td>
+                        <td>1.2: Ich kann Strategien für einen nachhaltigen Konsum umsetzen.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-1" onclick="filterByCompetence('competence-3-2-1', '3.2.1')">3.2.1</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
-                            <span class="key-competence-tag competence-3-2-9" onclick="filterByCompetence('competence-3-2-9', '3.2.9')">3.2.9</span>
-                            <span class="key-competence-tag competence-3-2-3" onclick="filterByCompetence('competence-3-2-3', '3.2.3')">3.2.3</span>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
                         </td>
-                        <td>Nachhaltiges Denken & Quellenunterscheidung</td>
                     </tr>
-
+                    <tr>
+                        <td rowspan="2">2: Ich konsumiere bewusst und verstehe die wirtschaftlichen Zusammenhänge meines Handelns.</td>
+                        <td>2.1: Ich kann die Grundlagen für die Produktion/Dienstleistung in meinem Betrieb, die Werbung und die Kunden beschreiben.</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2.2: Ich kann Phänomene des Massenkonsums beschreiben und deren Einfluss auf die Wirtschaft erklären.</td>
+                        <td>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
+                        </td>
+                    </tr>
+                    
                     <!-- Thema 3 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>3. Risiko und Sicherheit</strong></td>
-                        <td class="lebensbezug-cell">3.1 Absicherung gegen Risiken</td>
+                        <td rowspan="3"><strong>Thema 3:</strong> Risiko und Sicherheit</td>
+                        <td>1: Ich kann einschätzen, welchen Risiken ich im Alltag ausgesetzt bin, und erklären, wie ich mich dagegen absichern kann.</td>
+                        <td>1.2: Ich kann beschreiben, wie ich gegen Risiken abgesichert bin oder mich absichern kann.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-1" onclick="filterByCompetence('competence-3-2-1', '3.2.1')">3.2.1</span>
-                            <span class="key-competence-tag competence-3-2-2" onclick="filterByCompetence('competence-3-2-2', '3.2.2')">3.2.2</span>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
                         </td>
-                        <td>Risikobewertung & strategische Planung</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">3.2 Gesellschaftliche Normen & Gesundheit</td>
+                        <td rowspan="2">2: Ich kann reflektieren, wie gesellschaftliche Normen mein Wohlbefinden prägen, und wie ich gesund leben kann.</td>
+                        <td>2.1: Ich kann gesellschaftliche Erwartungen und Normen zu Körper, Geschlecht und Identität erkennen und reflektieren.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
-                            <span class="key-competence-tag competence-3-2-7" onclick="filterByCompetence('competence-3-2-7', '3.2.7')">3.2.7</span>
-                            <span class="key-competence-tag competence-3-2-12" onclick="filterByCompetence('competence-3-2-12', '3.2.12')">3.2.12</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
                         </td>
-                        <td>Wertereflexion & gesellschaftliche Partizipation</td>
                     </tr>
-
+                    <tr>
+                        <td>2.2: Ich kann Möglichkeiten für einen gesundheitsfördernden Lebensstil protokollieren/recherchieren/erfassen und reflektieren.</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                        </td>
+                    </tr>
+                    
                     <!-- Thema 4 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>4. Medien und digitale Welt</strong></td>
-                        <td class="lebensbezug-cell">4.1 Digitale Werkzeuge & KI-Nutzung</td>
+                        <td rowspan="2"><strong>Thema 4:</strong> Medien und digitale Welt</td>
+                        <td>1: Ich nutze KI und digitale Werkzeuge gezielt, reflektiert und eigenständig.</td>
+                        <td>1.2: Ich kann die Funktionsweisen von KI beschreiben und ein eigenes Produkt mit KI überarbeiten.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-3" onclick="filterByCompetence('competence-3-2-3', '3.2.3')">3.2.3</span>
-                            <span class="key-competence-tag competence-3-2-10" onclick="filterByCompetence('competence-3-2-10', '3.2.10')">3.2.10</span>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
                         </td>
-                        <td>Innovation & Anpassung an technischen Wandel</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">4.2 Kritischer Medienumgang</td>
+                        <td>2: Ich recherchiere gezielt, beurteile Quellen kritisch und kommuniziere respektvoll und selbstbestimmt im digitalen Raum.</td>
+                        <td>-</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-3" onclick="filterByCompetence('competence-3-2-3', '3.2.3')">3.2.3</span>
-                            <span class="key-competence-tag competence-3-2-10" onclick="filterByCompetence('competence-3-2-10', '3.2.10')">3.2.10</span>
-                            <span class="key-competence-tag competence-3-2-9" onclick="filterByCompetence('competence-3-2-9', '3.2.9')">3.2.9</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
                         </td>
-                        <td>Kritisches Denken & mediale Meinungsbildung</td>
                     </tr>
-
+                    
                     <!-- Thema 5 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>5. Meinung bilden, akzeptieren und mitgestalten</strong></td>
-                        <td class="lebensbezug-cell">5.1 Respektvolle Meinungsäußerung</td>
+                        <td rowspan="6"><strong>Thema 5:</strong> Meinung bilden, akzeptieren und mitgestalten</td>
+                        <td rowspan="3">1: Ich bilde mir eine Meinung, vertrete sie – und rege andere zum Nachdenken an.</td>
+                        <td>1.1: Ich kann Beiträge aus Informationsquellen verstehen, politische Absichten erfassen und Manipulation erkennen.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
-                            <span class="key-competence-tag competence-3-2-7" onclick="filterByCompetence('competence-3-2-7', '3.2.7')">3.2.7</span>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
                         </td>
-                        <td>Meinungsbildung & respektvoller Diskurs</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">5.2 Politische Rechte & Partizipation</td>
+                        <td>1.2: Ich kann eigene Standpunkte entwickeln und in Diskussionen respektvoll vertreten.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
-                            <span class="key-competence-tag competence-3-2-7" onclick="filterByCompetence('competence-3-2-7', '3.2.7')">3.2.7</span>
-                            <span class="key-competence-tag competence-3-2-12" onclick="filterByCompetence('competence-3-2-12', '3.2.12')">3.2.12</span>
-                            <span class="key-competence-tag competence-3-2-9" onclick="filterByCompetence('competence-3-2-9', '3.2.9')">3.2.9</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
                         </td>
-                        <td>Demokratische Partizipation & systemisches Denken</td>
                     </tr>
-
+                    <tr>
+                        <td>1.3: Ich kann ein mediengestütztes Produkt gestalten, das Kriterien für kritischen Umgang mit digitalen Informationen vermittelt.</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">2: Ich kenne meine politischen Rechte und weiss, wie ich mich an politischen Prozessen beteiligen kann.</td>
+                        <td>2.1: Ich kann politische Systeme und Entscheidungsprozesse in der Schweiz erklären.</td>
+                        <td>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2.2: Ich kann meine Meinung zu politischen und gesellschaftlichen Fragen begründet darlegen.</td>
+                        <td>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2.3: Ich kann einen Beitrag gestalten, der politische Mitgestaltungsmöglichkeiten für Jugendliche sichtbar macht.</td>
+                        <td>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                        </td>
+                    </tr>
+                    
                     <!-- Thema 6 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>6. Verträge verstehen – fair handeln</strong></td>
-                        <td class="lebensbezug-cell">6.1 Rechtliche Fragen im Alltag</td>
+                        <td rowspan="2"><strong>Thema 6:</strong> Verträge verstehen – fair handeln</td>
+                        <td>1: Ich erkenne, wann rechtliche Fragen im Alltag auftreten können – und weiss, wie ich meine Rechte kläre und Unterstützung finde.</td>
+                        <td>1.2: Ich erkenne, wann eine rechtliche Abklärung notwendig ist und wo ich Unterstützung finde.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-1" onclick="filterByCompetence('competence-3-2-1', '3.2.1')">3.2.1</span>
-                            <span class="key-competence-tag competence-3-2-11" onclick="filterByCompetence('competence-3-2-11', '3.2.11')">3.2.11</span>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
                         </td>
-                        <td>Rechtliche Quellenanalyse & Umgang mit Komplexität</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">6.2 Fair handeln in schwierigen Situationen</td>
+                        <td>2: Ich lerne, wie ich in schwierigen Situationen fair handeln kann.</td>
+                        <td>-</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-2" onclick="filterByCompetence('competence-3-2-2', '3.2.2')">3.2.2</span>
-                            <span class="key-competence-tag competence-3-2-4" onclick="filterByCompetence('competence-3-2-4', '3.2.4')">3.2.4</span>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-9" onclick="filterByCompetence('competence-3-2-9', '3.2.9')">3.2.9</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
                         </td>
-                        <td>Ethische Entscheidungsfindung & Teamarbeit</td>
                     </tr>
-
+                    
                     <!-- Thema 7 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>7. Kunst und Kultur</strong></td>
-                        <td class="lebensbezug-cell">7.1 Kulturelle Ausdrucksformen</td>
+                        <td rowspan="4"><strong>Thema 7:</strong> Kunst und Kultur</td>
+                        <td rowspan="2">1: Ich erlebe, wie Kultur Zugehörigkeit schafft – und warum Ausdrucksfreiheit wichtig ist.</td>
+                        <td>1.1: Ich kann kulturelle Ausdrucksformen beschreiben, ihre Bedeutung erklären und die Wichtigkeit der Ausdrucksfreiheit erkennen.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-3" onclick="filterByCompetence('competence-3-2-3', '3.2.3')">3.2.3</span>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-7" onclick="filterByCompetence('competence-3-2-7', '3.2.7')">3.2.7</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
                         </td>
-                        <td>Kreative Ausdrucksformen & Perspektivenwechsel</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">7.2 Kultur & Machtverhältnisse</td>
+                        <td>1.2: Ich kann kulturelle Phänomene reflektieren und begründen, wie sie Zugehörigkeit und Machtverhältnisse beeinflussen.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-7" onclick="filterByCompetence('competence-3-2-7', '3.2.7')">3.2.7</span>
-                            <span class="key-competence-tag competence-3-2-12" onclick="filterByCompetence('competence-3-2-12', '3.2.12')">3.2.12</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
                         </td>
-                        <td>Kulturkritik & gesellschaftliche Machtverhältnisse</td>
                     </tr>
-
+                    <tr>
+                        <td rowspan="2">2: Ich finde kreative Wege, gesellschaftliche oder ökologische Themen gestalterisch auszudrücken.</td>
+                        <td>2.1: Ich kann kreative Ausdrucksformen nutzen, um auf Entwicklungen zu reagieren und Denkanstösse zu geben.</td>
+                        <td>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2.2: Ich lerne, mit anderen respektvoll über Kunst zu sprechen und verschiedene Sichtweisen zu diskutieren.</td>
+                        <td>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                        </td>
+                    </tr>
+                    
                     <!-- Thema 8 -->
                     <tr>
-                        <td rowspan="2" class="theme-cell"><strong>8. Arbeit und Steuerpflicht</strong></td>
-                        <td class="lebensbezug-cell">8.1 Berufliche Laufbahnplanung</td>
+                        <td rowspan="4"><strong>Thema 8:</strong> Arbeit und Steuerpflicht</td>
+                        <td rowspan="2">1: Ich finde heraus, was mir wichtig ist, wohin ich beruflich will.</td>
+                        <td>1.1: Ich setze mich mit meinen Fähigkeiten, Interessen, Werten und Zielen auseinander.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-2" onclick="filterByCompetence('competence-3-2-2', '3.2.2')">3.2.2</span>
-                            <span class="key-competence-tag competence-3-2-4" onclick="filterByCompetence('competence-3-2-4', '3.2.4')">3.2.4</span>
-                            <span class="key-competence-tag competence-3-2-5" onclick="filterByCompetence('competence-3-2-5', '3.2.5')">3.2.5</span>
-                            <span class="key-competence-tag competence-3-2-6" onclick="filterByCompetence('competence-3-2-6', '3.2.6')">3.2.6</span>
-                            <span class="key-competence-tag competence-3-2-8" onclick="filterByCompetence('competence-3-2-8', '3.2.8')">3.2.8</span>
-                            <span class="key-competence-tag competence-3-2-10" onclick="filterByCompetence('competence-3-2-10', '3.2.10')">3.2.10</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
                         </td>
-                        <td>Umfassende Laufbahnplanung & Zukunftsgestaltung</td>
                     </tr>
                     <tr>
-                        <td class="lebensbezug-cell">8.2 Bürgerpflichten & Steuern</td>
+                        <td>1.2: Ich plane meine berufliche Laufbahn bewusst und bewerbe mich gezielt für eine neue Stelle.</td>
                         <td>
-                            <span class="key-competence-tag competence-3-2-1" onclick="filterByCompetence('competence-3-2-1', '3.2.1')">3.2.1</span>
-                            <span class="key-competence-tag competence-3-2-2" onclick="filterByCompetence('competence-3-2-2', '3.2.2')">3.2.2</span>
-                            <span class="key-competence-tag competence-3-2-11" onclick="filterByCompetence('competence-3-2-11', '3.2.11')">3.2.11</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
                         </td>
-                        <td>Komplexe Bürgerpflichten & administrative Kompetenz</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">2: Ich kann meine Pflichten gegenüber Staat und Gesellschaft benennen.</td>
+                        <td>2.1: Ich erstelle eine Übersicht über meine Aufgaben gegenüber dem Staat/der Gesellschaft.</td>
+                        <td>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2.2: Ich stelle Unterlagen für den Austausch mit Behörden oder anderen Akteuren zusammen.</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <!-- Filter Modal -->
-    <div id="filterModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Schlüsselkompetenz gefiltert</h2>
-            <div id="modalDescription"></div>
-            <div id="modalContent"></div>
+            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Fundamentale Kernkompetenzen</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei den Kompetenzen "Standpunkte begründen und überzeugen" (3.2.6), "Werthaltungen reflektieren" (3.2.5), "Sich an Wandel anpassen" (3.2.10), "Mit Mehrdeutigkeiten umgehen" (3.2.11) und "Gesellschaftlich partizipieren" (3.2.12) sehr gut erfüllt.</p>
+                        <p><strong>Erklärung:</strong> Diese Kompetenzen bilden das Rückgrat des Lehrplans. Ihre extrem häufige Wiederholung über so unterschiedliche Themen wie Berufseinstieg, Politik, Medien und Kultur hinweg stellt sicher, dass die Lernenden diese Fähigkeiten in verschiedensten Kontexten anwenden und vertiefen müssen. Der Lehrplan legt hier einen klaren und konsequent umgesetzten Schwerpunkt auf die Entwicklung einer reflektierten, kommunikationsstarken und anpassungsfähigen Persönlichkeit, die aktiv am gesellschaftlichen Leben teilnimmt.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Wichtige Querschnittskompetenzen</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei den Kompetenzen "Quellen unterscheiden" (3.2.1), "Ziele setzen" (3.2.2), "Perspektiven wechseln" (3.2.7) sowie "Vernetzt/systemisch denken" (3.2.9) als genügend zu bewerten.</p>
+                        <p><strong>Erklärung:</strong> Diese Fähigkeiten werden regelmässig in mehreren, aber nicht allen Themenbereichen aufgegriffen. Sie fungieren als wichtige Werkzeuge für das Bearbeiten spezifischer Aufgaben (z.B. Recherche, Planung, soziale Interaktion). Die Wiederholung ist ausreichend, um eine solide Grundlage zu schaffen. Allerdings besteht das Risiko, dass die Anwendung dieser Kompetenzen stark an die explizit genannten Themen (z.B. Quellenkritik primär bei Medien und Politik) gebunden bleibt. Eine noch breitere Verankerung, beispielsweise des vernetzten Denkens auch im Bereich der persönlichen Lebensplanung, könnte die Transferleistung weiter stärken.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Spezifische Anwendungskompetenzen</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei den Kompetenzen "Innovativ Probleme lösen" (3.2.3), "In Teams arbeiten" (3.2.4) und "Lebensphasen planen" (3.2.8) nur knapp erfüllt.</p>
+                        <p><strong>Erklärung:</strong> Diese Kompetenzen werden nur in wenigen, sehr spezifischen Kontexten explizit gefördert. Die Lebensphasenplanung (3.2.8) ist logischerweise auf den Anfang (Thema 1) und das Ende (Thema 8) der Ausbildung konzentriert. Innovationsfähigkeit (3.2.3) und Teamarbeit (3.2.4) sind zwar zentral für die moderne Arbeitswelt, werden im Lehrplan aber nur punktuell verlangt. Die geringe Wiederholungsrate birgt die Gefahr, dass diese Fähigkeiten als isolierte "Methoden" für bestimmte Aufgaben wahrgenommen werden und der Transfer in neue, unvorhergesehene Situationen des Berufs- und Privatlebens nicht ausreichend geübt wird. Hier besteht das grösste Potenzial für eine stärkere zirkuläre Integration.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Schlüsselkompetenzen-Definitionen mit konkreten Anwendungsbeispielen
-        const schluesselkompetenzen = {
-            '3.2.1': {
-                title: 'Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden',
-                description: 'Mit der Vielfalt der Quellen und Medieninhalte, inklusive KI, kritisch umgehen können, Informationen filtern, auswählen, bewerten und organisieren.',
-                used: [
-                    '2.2 Nachhaltiger Konsum',
-                    '3.1 Absicherung gegen Risiken',
-                    '6.1 Rechtliche Fragen im Alltag',
-                    '8.2 Bürgerpflichten & Steuern'
-                ]
-            },
-            '3.2.2': {
-                title: 'Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten',
-                description: 'Effektiv und effizient lernen, priorisieren, sich Lernziele setzen, Fortschritte bewerten und Lernstrategien anpassen.',
-                used: [
-                    '1.1 Orientierung in Arbeits-/Ausbildungswelt',
-                    '2.1 Verantwortungsvoller Umgang mit Geld',
-                    '3.1 Absicherung gegen Risiken',
-                    '6.2 Fair handeln in schwierigen Situationen',
-                    '8.1 Berufliche Laufbahnplanung',
-                    '8.2 Bürgerpflichten & Steuern'
-                ]
-            },
-            '3.2.3': {
-                title: 'Antizipative, unternehmerische und innovative Wege der Problemlösung',
-                description: 'Komplexe Herausforderungen lösen, über ein breites Spektrum an Ressourcen zur Ideenfindung verfügen, konzeptionell, flexibel, antizipativ und kreativ denken und handeln.',
-                used: [
-                    '1.2 Konstruktive Kommunikation',
-                    '2.2 Nachhaltiger Konsum',
-                    '4.1 Digitale Werkzeuge & KI-Nutzung',
-                    '4.2 Kritischer Medienumgang',
-                    '7.1 Kulturelle Ausdrucksformen'
-                ]
-            },
-            '3.2.4': {
-                title: 'In unterschiedlichen Teams zielgerichtet und effizient arbeiten',
-                description: 'In verschiedenen Teams und Rollen effizient und respektvoll arbeiten, Kooperation, Kommunikation und Koordination entwickeln, gemeinsam Verantwortung übernehmen.',
-                used: [
-                    '6.2 Fair handeln in schwierigen Situationen',
-                    '8.1 Berufliche Laufbahnplanung'
-                ]
-            },
-            '3.2.5': {
-                title: 'Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln',
-                description: 'Persönliche Entwicklungsschritte hin zu einem selbstbestimmten Leben machen, persönliche Werte und Überzeugungen hinterfragen, Perspektiven erweitern.',
-                used: [
-                    '3.2 Gesellschaftliche Normen & Gesundheit',
-                    '5.1 Respektvolle Meinungsäußerung',
-                    '5.2 Politische Rechte & Partizipation',
-                    '6.2 Fair handeln in schwierigen Situationen',
-                    '7.1 Kulturelle Ausdrucksformen',
-                    '7.2 Kultur & Machtverhältnisse',
-                    '8.1 Berufliche Laufbahnplanung'
-                ]
-            },
-            '3.2.6': {
-                title: 'Ihre eigenen Standpunkte begründen und andere davon überzeugen',
-                description: 'Andere von eigenen Ideen und Standpunkten überzeugen, eigene Gedanken effektiv artikulieren und vertreten, Argumente klar und überzeugend präsentieren.',
-                used: [
-                    '1.1 Orientierung in Arbeits-/Ausbildungswelt',
-                    '1.2 Konstruktive Kommunikation',
-                    '2.1 Verantwortungsvoller Umgang mit Geld',
-                    '2.2 Nachhaltiger Konsum',
-                    '3.2 Gesellschaftliche Normen & Gesundheit',
-                    '4.2 Kritischer Medienumgang',
-                    '5.1 Respektvolle Meinungsäußerung',
-                    '5.2 Politische Rechte & Partizipation',
-                    '8.1 Berufliche Laufbahnplanung'
-                ]
-            },
-            '3.2.7': {
-                title: 'Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern',
-                description: 'Eine inklusive und respektvolle Umgebung schaffen, Konsensfindung ermöglichen, Perspektive wechseln können, Empathie entwickeln und Toleranz zeigen.',
-                used: [
-                    '1.2 Konstruktive Kommunikation',
-                    '3.2 Gesellschaftliche Normen & Gesundheit',
-                    '5.1 Respektvolle Meinungsäußerung',
-                    '5.2 Politische Rechte & Partizipation',
-                    '7.1 Kulturelle Ausdrucksformen',
-                    '7.2 Kultur & Machtverhältnisse'
-                ]
-            },
-            '3.2.8': {
-                title: 'Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen',
-                description: 'Mittel- und langfristige Lebensphasen planen und gestalten, persönliche, soziale und materielle Ressourcen aufbauen und gezielt einsetzen.',
-                used: [
-                    '8.1 Berufliche Laufbahnplanung'
-                ]
-            },
-            '3.2.9': {
-                title: 'Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln',
-                description: 'Komplexe lokale und globale Zusammenhänge verstehen, Handlungsmöglichkeiten für nachhaltige Entwicklung ableiten, multidisziplinär denken.',
-                used: [
-                    '2.2 Nachhaltiger Konsum',
-                    '4.2 Kritischer Medienumgang',
-                    '5.2 Politische Rechte & Partizipation',
-                    '6.2 Fair handeln in schwierigen Situationen'
-                ]
-            },
-            '3.2.10': {
-                title: 'Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen',
-                description: 'In sich schnell wandelnden Lebenskontexten bestehen, mit Veränderungen konstruktiv umgehen, flexibel und nachhaltig verhalten, Anpassungsfähigkeit stärken.',
-                used: [
-                    '4.1 Digitale Werkzeuge & KI-Nutzung',
-                    '4.2 Kritischer Medienumgang',
-                    '8.1 Berufliche Laufbahnplanung'
-                ]
-            },
-            '3.2.11': {
-                title: 'Mit Mehrdeutigkeiten umgehen',
-                description: 'Mit Verunsicherung und Ungewissheit umgehen, komplexe Situationen analysieren, verschiedene Perspektiven berücksichtigen, Widersprüchlichkeiten aushalten.',
-                used: [
-                    '6.1 Rechtliche Fragen im Alltag',
-                    '8.2 Bürgerpflichten & Steuern'
-                ]
-            },
-            '3.2.12': {
-                title: 'An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen',
-                description: 'In interkulturellen Umgebungen gesellschaftliche Entwicklungen aktiv mitgestalten, politische Prozesse und Machtverhältnisse erkennen, Handlungsspielräume ausloten.',
-                used: [
-                    '3.2 Gesellschaftliche Normen & Gesundheit',
-                    '5.2 Politische Rechte & Partizipation',
-                    '7.2 Kultur & Machtverhältnisse'
-                ]
+        let activeFilter = null;
+        
+        function filterKompetenz(kompetenzNr) {
+            // Alle Kacheln zurücksetzen
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            
+            if (activeFilter === kompetenzNr) {
+                // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
+                resetFilter();
+                return;
             }
-        };
-
-        // Mapping für Lebensbezug zu Thema
-        const lebensbezugToTheme = {
-            '1.1': 'Thema 1: Ins Berufsleben einsteigen', 
-            '1.2': 'Thema 1: Ins Berufsleben einsteigen',
-            '2.1': 'Thema 2: Bewusst konsumieren und handeln', 
-            '2.2': 'Thema 2: Bewusst konsumieren und handeln',
-            '3.1': 'Thema 3: Risiko und Sicherheit', 
-            '3.2': 'Thema 3: Risiko und Sicherheit',
-            '4.1': 'Thema 4: Medien und digitale Welt', 
-            '4.2': 'Thema 4: Medien und digitale Welt',
-            '5.1': 'Thema 5: Meinung bilden, akzeptieren und mitgestalten', 
-            '5.2': 'Thema 5: Meinung bilden, akzeptieren und mitgestalten',
-            '6.1': 'Thema 6: Verträge verstehen – fair handeln', 
-            '6.2': 'Thema 6: Verträge verstehen – fair handeln',
-            '7.1': 'Thema 7: Kunst und Kultur', 
-            '7.2': 'Thema 7: Kunst und Kultur',
-            '8.1': 'Thema 8: Arbeit und Steuerpflicht', 
-            '8.2': 'Thema 8: Arbeit und Steuerpflicht'
-        };
-
-        // Filter functionality
-        function filterByCompetence(competenceClass, competenceNumber) {
-            const modal = document.getElementById('filterModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const modalContent = document.getElementById('modalContent');
             
-            // Clear previous states
-            document.querySelectorAll('.key-competence-tag').forEach(tag => {
-                tag.classList.remove('active');
+            // Neue Kachel aktivieren
+            document.querySelector(`.kachel-${kompetenzNr}`).classList.add('active');
+            activeFilter = kompetenzNr;
+            
+            // Alle Buttons verstecken
+            document.querySelectorAll('.sk-button').forEach(btn => {
+                btn.classList.add('hidden');
             });
             
-            // Highlight matching tags
-            const matchingTags = document.querySelectorAll(`.${competenceClass}`);
-            
-            // Count total occurrences
-            const totalOccurrences = matchingTags.length;
-            
-            matchingTags.forEach(tag => {
-                tag.classList.add('active');
+            // Nur die entsprechenden Buttons anzeigen
+            document.querySelectorAll(`.sk-button[data-sk="${kompetenzNr}"]`).forEach(btn => {
+                btn.classList.remove('hidden');
             });
+        }
+        
+        function resetFilter() {
+            activeFilter = null;
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            document.querySelectorAll('.sk-button').forEach(btn => {
+                btn.classList.remove('hidden');
+            });
+        }
 
-            // Set modal content
-            const kompetenz = schluesselkompetenzen[competenceNumber];
-            modalTitle.textContent = `${competenceNumber}: ${kompetenz.title} (${totalOccurrences} Vorkommen)`;
+        // Accordion Funktion
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
             
-            modalDescription.innerHTML = `
-                <p><strong>Schlüsselkompetenz:</strong> ${competenceNumber}</p>
-                <p><strong>Definition:</strong> ${kompetenz.description}</p>
-            `;
-
-            // Generate usage content with themes
-            const usageWithThemes = kompetenz.used.map(usage => {
-                const numberMatch = usage.match(/^(\d+\.\d+)/);
-                if (numberMatch) {
-                    const number = numberMatch[1];
-                    const theme = lebensbezugToTheme[number];
-                    return `${usage} (${theme})`;
+            // Schließe alle anderen Accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
                 }
-                return usage;
+            });
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
             });
             
-            const usageContent = `
-                <div class="competence-used">
-                    <strong>Spiralförmige Entwicklung in ${kompetenz.used.length} Lebensbezügen:</strong>
-                    <div class="usage-info" style="margin-top: 0.5rem; line-height: 1.4;">
-                        ${usageWithThemes.join(' • ')}
-                    </div>
-                </div>
-            `;
-            
-            modalContent.innerHTML = usageContent;
-            
-            modal.style.display = 'block';
-            
-            // Auto-close after 15 seconds
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.querySelectorAll('.key-competence-tag').forEach(tag => {
-                    tag.classList.remove('active');
-                });
-            }, 15000);
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
         }
-
-        // Modal close functionality
-        document.querySelector('.close').onclick = function() {
-            document.getElementById('filterModal').style.display = 'none';
-            document.querySelectorAll('.key-competence-tag').forEach(tag => {
-                tag.classList.remove('active');
-            });
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('filterModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                document.querySelectorAll('.key-competence-tag').forEach(tag => {
-                    tag.classList.remove('active');
-                });
-            }
-        }
-
-        // Add pulse animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.2); box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

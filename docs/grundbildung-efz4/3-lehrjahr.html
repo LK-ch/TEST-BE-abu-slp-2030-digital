@@ -1,11 +1,383 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>EFZ 4-jährig – 3. Lehrjahr</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Lehrjahr 4-jährige Grundbildung EFZ - Schullehrplan ABU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            color: #0066cc;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .warning-icon {
+            font-size: 2em;
+            color: #ff9800;
+        }
+        
+        .warning-text {
+            flex: 1;
+        }
+        
+        .warning-text h2 {
+            color: #ff6b00;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        
+        .warning-text p {
+            color: #856404;
+            margin: 0;
+        }
+        
+        .theme-section {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .theme-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 24px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-header:hover {
+            background-color: #0052a3;
+        }
+        
+        .theme-header::after {
+            content: '▼';
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        
+        .theme-header.collapsed::after {
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .theme-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        
+        .theme-header .lektionen {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .theme-content {
+            padding: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .theme-content.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .leitidee {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .leitidee h3 {
+            color: #003d7a;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .leitidee p {
+            margin-bottom: 10px;
+        }
+        
+        .leitidee p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .coming-soon {
+            background-color: #f8f9fa;
+            padding: 40px;
+            text-align: center;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        
+        .coming-soon-icon {
+            font-size: 3em;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .coming-soon h4 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .coming-soon p {
+            color: #999;
+            font-size: 0.95em;
+        }
+        
+        .asterisk {
+            color: #ff6b00;
+            font-weight: normal;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .theme-header {
+                padding: 16px;
+            }
+            
+            .theme-content {
+                padding: 16px;
+            }
+            
+            .warning-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    <script>
+        function toggleTheme(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('show');
+            
+            // Toggle current theme
+            if (isOpen) {
+                content.classList.remove('show');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.add('show');
+                header.classList.remove('collapsed');
+            }
+        }
+        
+        // Initialize: Add click handlers and collapse all themes
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.theme-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleTheme(this);
+                });
+                header.classList.add('collapsed');
+            });
+        });
+    </script>
 </head>
 <body>
-  <h1>EFZ 4-jährig – 3. Lehrjahr</h1>
-  <p>Inhalt für das 3. Lehrjahr der 4-jährigen Grundbildung EFZ.</p>
-  <a href="index.html">Zurück zu EFZ 4-jährig</a>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Schullehrplan ABU</a> / 
+                <a href="index-4j.html">4-jährige Grundbildung EFZ</a> / 
+                3. Lehrjahr
+            </nav>
+            <h1>3. Lehrjahr EFZ - 4-jährige Grundbildung</h1>
+            <p class="subtitle">Themen und Kompetenzen der Allgemeinbildung</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Warnung -->
+        <div class="warning-box">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-text">
+                <h2>Dokument in Bearbeitung</h2>
+                <p>Die detaillierten Kompetenzen und Umsetzungsvorschläge für die Themen dieses Lehrjahres befinden sich noch in Ausarbeitung. 
+                   Die nachfolgenden Informationen zeigen nur die Themen und deren Leitideen.</p>
+            </div>
+        </div>
+        
+        <!-- Thema 5: Sich im Staat orientieren und finanzielle Selbständigkeit entwickeln -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 5: Sich im Staat orientieren und finanzielle Selbständigkeit entwickeln</h2>
+                <p class="lektionen">Lektionen werden noch definiert</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee - Kurze Beschreibung</h3>
+                    <p><strong>Als volljährige Person übernehme ich neue Rechte und Pflichten im Staat.</strong> 
+                    Beim Thema «Sich im Staat orientieren und finanzielle Selbständigkeit entwickeln» verstehe ich, wie unser politisches System funktioniert, 
+                    kann meine Interessen vertreten und entwickle meine finanzielle Selbständigkeit durch das Verständnis von Steuern, Sozialversicherungen 
+                    und wirtschaftlichen Zusammenhängen.</p>
+                </div>
+                
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <p>Ich setze mich mit dem politischen System der Schweiz auseinander und verstehe die Grundlagen der direkten Demokratie, 
+                    des Föderalismus und der Gewaltenteilung. Dabei analysiere ich politische Texte, Abstimmungsunterlagen und Medienberichte, 
+                    um mir eine fundierte Meinung zu bilden <em>(🧩 Rezeption schriftlich und bildlich)</em>.</p>
+                    
+                    <p>Ich lerne das Steuersystem kennen und verstehe, wie direkte und indirekte Steuern funktionieren, was Progression bedeutet 
+                    und wie der Staatshaushalt aufgebaut ist. Mit digitalen Tools fülle ich meine erste Steuererklärung aus und plane meine 
+                    finanzielle Zukunft <em>(🧩 Produktion digital, Interaktion mit E-Government)</em>.</p>
+                    
+                    <p>Das Sozialversicherungssystem mit dem 3-Säulen-Prinzip wird für mich verständlich. Ich weiss, welche Leistungen mir 
+                    zustehen und wie ich für meine Zukunft vorsorgen kann. In Diskussionen mit anderen tausche ich mich über politische 
+                    Themen und gesellschaftliche Verantwortung aus <em>(🧩 Interaktion mündlich)</em>.</p>
+                    
+                    <p>Ich reflektiere die Rolle des Staates beim Umweltschutz und verstehe, wie politische Entscheidungen ökologische 
+                    Auswirkungen haben. Dabei entwickle ich Vorschläge für nachhaltiges Handeln auf individueller und gesellschaftlicher 
+                    Ebene <em>(🧩 Produktion schriftlich)</em>.</p>
+                    
+                    <p>So werde ich zu einer mündigen Bürgerin bzw. einem mündigen Bürger, der seine Rechte kennt, Pflichten wahrnimmt 
+                    und aktiv an der Gestaltung unserer Gesellschaft teilnimmt.</p>
+                    
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> 
+                    Der Aspekt Recht wird vertieft behandelt, insbesondere Verfassungsrecht, Grundrechte und Verwaltungsrecht im Alltag.</p>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">📝</div>
+                    <h4>Detaillierte Ausarbeitung in Bearbeitung</h4>
+                    <p>Die individuellen Lebensbezüge, Lerninhalte und Kompetenzen werden zurzeit erarbeitet und stehen demnächst zur Verfügung.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thema 6: Von Zuhause ausziehen -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 6: Von Zuhause ausziehen</h2>
+                <p class="lektionen">Lektionen werden noch definiert</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee">
+                    <h3>Leitidee - Kurze Beschreibung</h3>
+                    <p><strong>Der Auszug von zuhause ist ein wichtiger Schritt in die Selbständigkeit.</strong> 
+                    Beim Thema «Von Zuhause ausziehen» lerne ich, was es bedeutet, eine eigene Wohnung zu suchen, einen Mietvertrag 
+                    abzuschliessen und meinen Haushalt selbständig zu führen. Dabei setze ich mich mit rechtlichen, finanziellen 
+                    und ökologischen Aspekten des Wohnens auseinander.</p>
+                </div>
+                
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <p>Ich lerne den Wohnungsmarkt kennen und verstehe, wie ich eine passende Wohnung finde. Dabei erstelle ich ein 
+                    vollständiges Bewerbungsdossier mit Lebenslauf, Motivationsschreiben und allen nötigen Unterlagen. Mit digitalen 
+                    Plattformen recherchiere ich Wohnungsangebote und kommuniziere professionell mit Vermietern 
+                    <em>(🧩 Produktion schriftlich und digital)</em>.</p>
+                    
+                    <p>Das Mietrecht wird für mich greifbar: Ich verstehe Mietverträge, kenne meine Rechte und Pflichten als Mieter/in 
+                    und weiss, wie ich bei Mängeln oder Problemen vorgehe. In Rollenspielen übe ich Verhandlungen und 
+                    Konfliktgespräche <em>(🧩 Interaktion mündlich)</em>.</p>
+                    
+                    <p>Die Ablösung vom Elternhaus ist auch ein wichtiger Schritt in meiner persönlichen Entwicklung. Ich reflektiere 
+                    meine Identität, gestalte mein eigenes Zuhause und baue neue soziale Netze auf. Dabei tausche ich mich mit 
+                    Gleichaltrigen über verschiedene Wohnformen aus <em>(🧩 Interaktion und Kollaboration)</em>.</p>
+                    
+                    <p>Nachhaltiges Wohnen ist mir wichtig: Ich achte auf Energieeffizienz, organisiere Recycling und Abfallmanagement 
+                    und gestalte meinen Haushalt ökologisch. Mit multimedialen Präsentationen zeige ich Möglichkeiten für 
+                    umweltbewusstes Wohnen auf <em>(🧩 Produktion multimedial)</em>.</p>
+                    
+                    <p>So entwickle ich die Kompetenzen, um selbständig zu wohnen und meinen Alltag eigenverantwortlich zu gestalten – 
+                    rechtlich abgesichert, finanziell durchdacht und ökologisch bewusst.</p>
+                    
+                    <p><span class="asterisk">*</span> <strong>Zusätzlich in der 4-jährigen Grundbildung:</strong> 
+                    Der Aspekt Wirtschaft wird integriert mit Fokus auf Wohnbudget, Versicherungen und finanzielle Planung für den Auszug.</p>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">📝</div>
+                    <h4>Detaillierte Ausarbeitung in Bearbeitung</h4>
+                    <p>Die individuellen Lebensbezüge, Lerninhalte und Kompetenzen werden zurzeit erarbeitet und stehen demnächst zur Verfügung.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; padding: 40px 0;">
+            <a href="index.html" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
+                ← Zurück zur Übersicht 4-jährige Grundbildung EFZ
+            </a>
+        </div>
+    </main>
 </body>
 </html>

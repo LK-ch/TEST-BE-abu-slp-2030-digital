@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handlungsfelder Gesellschaft - Zirkulärer Aufbau</title>
+    <title>Handlungsfelder - Zirkulärer Aufbau</title>
     <style>
         * {
             margin: 0;
@@ -15,21 +15,19 @@
             --zh-blue: #0F05A0;
             --zh-light-blue: #E8F2FF;
             --zh-dark-blue: #000051;
-            --zh-accent: #FF6B6B;
             --zh-gray: #F5F5F5;
             --zh-text: #333333;
             --zh-white: #FFFFFF;
-            --zh-green: #00C896;
-            --zh-orange: #FF9500;
-            --zh-purple: #9B59B6;
-            --zh-pink: #FF69B4;
-            --zh-teal: #20B2AA;
-            --zh-red: #DC143C;
-            --zh-yellow: #FFD700;
-            --zh-cyan: #00CED1;
-            --zh-lime: #32CD32;
-            --zh-indigo: #4B0082;
-            --zh-coral: #FF7F50;
+            
+            /* Farben für die 8 Aspekte */
+            --aspect-ethik: #FF6B6B;
+            --aspect-identitaet: #4ECDC4;
+            --aspect-kultur: #9B59B6;
+            --aspect-oekologie: #2ECC71;
+            --aspect-politik: #3498DB;
+            --aspect-recht: #E67E22;
+            --aspect-tech: #34495E;
+            --aspect-wirtschaft: #F39C12;
         }
 
         body {
@@ -81,14 +79,13 @@
             z-index: 1;
         }
 
-        /* Navigation */
+        /* Navigation Breadcrumb */
         .nav-breadcrumb {
             background-color: var(--zh-gray);
             padding: 1rem 2rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
         .nav-breadcrumb a {
@@ -109,7 +106,7 @@
 
         /* Container */
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -133,11 +130,8 @@
         .back-btn:hover {
             background: var(--zh-light-blue);
             transform: translateX(-5px);
-            text-decoration: none;
-            color: var(--zh-text);
         }
 
-        /* EBA Link Button */
         .eba-link {
             background: var(--zh-light-blue);
             color: var(--zh-dark-blue);
@@ -160,266 +154,365 @@
             transform: translateY(-2px);
         }
 
-        /* Competence Overview Section */
-        .competence-overview {
-            background: var(--zh-gray);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .competence-overview h3 {
-            color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .competence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .competence-item {
+        /* Title Section */
+        .handlungsfelder-title {
             background: white;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 4px solid;
-        }
-
-        .competence-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .competence-item.aspekt-ethik { border-left-color: var(--zh-purple); }
-        .competence-item.aspekt-identitaet { border-left-color: var(--zh-pink); }
-        .competence-item.aspekt-kultur { border-left-color: var(--zh-orange); }
-        .competence-item.aspekt-oekologie { border-left-color: var(--zh-green); }
-        .competence-item.aspekt-politik { border-left-color: var(--zh-blue); background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); color: white; }
-        .competence-item.aspekt-recht { border-left-color: var(--zh-red); }
-        .competence-item.aspekt-technologie { border-left-color: var(--zh-cyan); }
-        .competence-item.aspekt-wirtschaft { border-left-color: var(--zh-yellow); }
-
-        .competence-title {
-            font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: var(--zh-dark-blue);
-        }
-
-        .competence-count {
-            font-size: 0.9rem;
-            color: var(--zh-text);
-            opacity: 0.7;
-        }
-
-        /* Theme Matrix */
-        .matrix-container {
-            overflow-x: auto;
-            margin: 2rem 0;
+            padding: 20px;
             border-radius: 10px;
+            margin-bottom: 20px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .theme-matrix {
+        .handlungsfelder-title h2 {
+            color: var(--zh-dark-blue);
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Aspekte Übersicht (vor den Kacheln) */
+        .aspekte-overview {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .aspekte-overview h3 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .aspekte-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .aspekt-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .aspekt-header {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .aspekt-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .aspekt-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .aspekt-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .aspekt-header.active .aspekt-icon {
+            transform: rotate(180deg);
+        }
+
+        .aspekt-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: var(--zh-gray);
+        }
+
+        .aspekt-content.active {
+            max-height: 500px;
+        }
+
+        .aspekt-body {
+            padding: 15px;
+        }
+
+        .handlungsfeld-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .handlungsfeld-nummer {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .handlungsfeld-text {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .handlungsfeld-themen {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .handlungsfeld-item.missing {
+            background: #f0f0f0;
+            color: #999;
+            opacity: 0.7;
+        }
+
+        /* Kacheln */
+        .kacheln-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .kachel {
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kachel.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Farben für Aspekt-Kacheln */
+        .kachel-ethik { 
+            background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,107,107,0.05)); 
+            border-color: var(--aspect-ethik); 
+        }
+        .kachel-identitaet { 
+            background: linear-gradient(135deg, rgba(78,205,196,0.1), rgba(78,205,196,0.05)); 
+            border-color: var(--aspect-identitaet); 
+        }
+        .kachel-kultur { 
+            background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.05)); 
+            border-color: var(--aspect-kultur); 
+        }
+        .kachel-oekologie { 
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.05)); 
+            border-color: var(--aspect-oekologie); 
+        }
+        .kachel-politik { 
+            background: linear-gradient(135deg, rgba(52,152,219,0.1), rgba(52,152,219,0.05)); 
+            border-color: var(--aspect-politik); 
+        }
+        .kachel-recht { 
+            background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(230,126,34,0.05)); 
+            border-color: var(--aspect-recht); 
+        }
+        .kachel-tech { 
+            background: linear-gradient(135deg, rgba(52,73,94,0.1), rgba(52,73,94,0.05)); 
+            border-color: var(--aspect-tech); 
+        }
+        .kachel-wirtschaft { 
+            background: linear-gradient(135deg, rgba(243,156,18,0.1), rgba(243,156,18,0.05)); 
+            border-color: var(--aspect-wirtschaft); 
+        }
+        
+        .kachel-titel {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .kachel-felder {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .feld-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+
+        .feld-nummer {
+            font-weight: 500;
+        }
+
+        .feld-count {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .feld-missing {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        /* Tabelle */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        
+        table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            font-size: 0.85rem;
         }
-
-        .theme-matrix th, .theme-matrix td {
-            padding: 0.7rem;
+        
+        th, td {
+            padding: 12px;
             text-align: left;
-            border: 1px solid var(--zh-gray);
-            vertical-align: top;
+            border-bottom: 1px solid #e0e0e0;
         }
-
-        .theme-matrix th {
-            background: var(--zh-blue);
+        
+        th {
+            background-color: var(--zh-blue);
             color: white;
             font-weight: 500;
             position: sticky;
             top: 0;
-            z-index: 10;
+        }
+        
+        tr:hover {
+            background-color: var(--zh-light-blue);
         }
 
-        .theme-matrix tr:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .theme-matrix .theme-cell {
-            font-weight: bold;
-            background: var(--zh-gray);
-            width: 15%;
-        }
-
-        .theme-matrix .lebensbezug-cell {
-            font-style: italic;
-            color: var(--zh-text);
-            font-size: 0.8rem;
-            width: 20%;
-        }
-
-        .theme-matrix .lerninhalt-cell {
-            font-size: 0.75rem;
-            color: var(--zh-text);
-            opacity: 0.9;
-            width: 25%;
-        }
-
-        .theme-matrix .competences-cell {
-            width: 35%;
-        }
-
-        .theme-matrix .development-cell {
-            width: 15%;
-        }
-
-        /* Competence Tags */
-        .competence-tag {
+        /* Aspekt Tags als Buttons */
+        .aspekt-tag {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
-            margin: 0.15rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
+            padding: 4px 10px;
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 500;
             color: white;
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .competence-tag:hover {
+        .aspekt-tag.hidden {
+            display: none;
+        }
+
+        .aspekt-tag:hover {
             transform: scale(1.05);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .competence-tag.active {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            animation: pulse 2s ease-in-out;
-        }
+        /* Farben für Aspekt-Buttons */
+        .btn-ethik { background-color: var(--aspect-ethik); }
+        .btn-identitaet { background-color: var(--aspect-identitaet); }
+        .btn-kultur { background-color: var(--aspect-kultur); }
+        .btn-oekologie { background-color: var(--aspect-oekologie); }
+        .btn-politik { background-color: var(--aspect-politik); }
+        .btn-recht { background-color: var(--aspect-recht); }
+        .btn-tech { background-color: var(--aspect-tech); }
+        .btn-wirtschaft { background-color: var(--aspect-wirtschaft); }
 
-        /* Color coding for Gesellschaft Aspekte */
-        .aspekt-ethik { background: var(--zh-purple); }
-        .aspekt-identitaet { background: var(--zh-pink); }
-        .aspekt-kultur { background: var(--zh-orange); }
-        .aspekt-oekologie { background: var(--zh-green); }
-        .aspekt-politik { background: var(--zh-blue); }
-        .aspekt-recht { background: var(--zh-red); }
-        .aspekt-technologie { background: var(--zh-cyan); }
-        .aspekt-wirtschaft { background: var(--zh-yellow); color: var(--zh-text); }
-
-        /* Legend */
-        .legend {
-            background: var(--zh-gray);
+        /* Qualitative Einschätzung */
+        .qualitative-section {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .legend h3 {
+        .qualitative-section h2 {
             color: var(--zh-dark-blue);
             margin-bottom: 1rem;
         }
 
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--zh-gray);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .legend-item {
+        .accordion-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-        }
-
-        /* Filter Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 2% auto;
-            padding: 20px;
-            border: none;
-            border-radius: 10px;
-            width: 95%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--zh-gray);
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .close:hover {
-            color: black;
-        }
-
-        .handlungsfeld-used {
+        .accordion-header:hover {
             background: var(--zh-light-blue);
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 8px;
-            border-left: 4px solid var(--zh-blue);
         }
 
-        .handlungsfeld-unused {
-            background: #f8f8f8;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 8px;
-            border-left: 4px solid #ccc;
-            color: #666;
+        .accordion-header.active {
+            background: var(--zh-light-blue);
         }
 
-        .usage-info {
-            font-size: 0.85em;
-            color: var(--zh-blue);
-            font-weight: bold;
+        .accordion-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+        }
+
+        .accordion-body ul {
+            margin-left: 1.5rem;
             margin-top: 0.5rem;
         }
 
-        .usage-locations {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.8rem;
+        .erfuellung-gut {
+            color: #2ECC71;
+            font-weight: 600;
         }
 
-        .usage-location {
-            background: white;
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--zh-light-blue);
+        .erfuellung-genuegend {
+            color: #F39C12;
+            font-weight: 600;
+        }
+
+        .erfuellung-knapp {
+            color: #E74C3C;
+            font-weight: 600;
         }
 
         /* Responsive */
@@ -428,31 +521,16 @@
                 font-size: 1.8rem;
             }
             
-            .theme-matrix {
-                font-size: 0.7rem;
-            }
-            
-            .competence-tag {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.4rem;
-            }
-
             .container {
                 padding: 1rem;
             }
 
-            .theme-matrix th, .theme-matrix td {
-                padding: 0.4rem;
+            .kacheln-container {
+                grid-template-columns: 1fr;
             }
 
-            .nav-breadcrumb {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .eba-link {
-                margin-left: 0;
+            .aspekte-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -460,15 +538,15 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <h1>Handlungsfelder Gesellschaft</h1>
-        <p>Vollständiger zirkulärer Aufbau der gesellschaftlichen Kompetenzen</p>
+        <h1>Gesellschaftliche Handlungsfelder</h1>
+        <p>Zirkulärer Aufbau der gesellschaftlichen Aspekte über alle Themen</p>
     </header>
 
     <!-- Navigation Breadcrumb -->
     <nav class="nav-breadcrumb">
-        <a href="index.html">Übersicht</a>
+        <a href="zirkularitaet.html">Übersicht</a>
         <span>›</span>
-        <span>Handlungsfelder Gesellschaft</span>
+        <span>Handlungsfelder</span>
         <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
     </nav>
 
@@ -478,916 +556,701 @@
             ← Zurück zur Übersicht
         </a>
 
-        <h2>Handlungsfelder Gesellschaft im zirkulären Aufbau</h2>
-        <p>Die acht Aspekte der Gesellschaft werden spiralförmig über alle individuellen Lebensbezüge entwickelt. <strong>Klicken Sie auf eine Kompetenz-Nummer oder auf einen Gesellschaftsaspekt</strong>, um zu sehen, wo sie wiederkehrt und welche Handlungsfelder dahinter stehen.</p>
+        <!-- Title Section -->
+        <div class="handlungsfelder-title">
+            <h2>Gesellschaftliche Handlungsfelder im zirkulären Aufbau</h2>
+        </div>
 
-        <!-- Competence Overview Section -->
-        <div class="competence-overview">
-            <h3>Gesellschaftsaspekte Übersicht (Klicken für Details)</h3>
-            <div class="competence-grid">
-                <div class="competence-item aspekt-ethik" onclick="filterByAspect('aspekt-ethik', '5.2.1', 'Ethik')">
-                    <div class="competence-title">5.2.1 Ethik</div>
-                    <div class="competence-count">12 Verwendungen</div>
+        <!-- Aspekte Übersicht mit Accordions -->
+        <div class="aspekte-overview">
+            <h3>Detailansicht der Handlungsfelder</h3>
+            <div class="aspekte-grid">
+                <!-- Ethik -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-ethik);">
+                        <span>Ethik</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.1.1</div>
+                                <div class="handlungsfeld-text">Empathisch handeln und andere Perspektiven übernehmen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1, T2, T6, T7 (5 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.1.2</div>
+                                <div class="handlungsfeld-text">Verantwortung für sich selbst, Mitmenschen und Umwelt übernehmen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T6 (1 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.1.3</div>
+                                <div class="handlungsfeld-text">Aktiv an der Aushandlung moralischer Entscheidungen beteiligen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T5, T6 (2 Mal)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-identitaet" onclick="filterByAspect('aspekt-identitaet', '5.2.2', 'Identität & Sozialisation')">
-                    <div class="competence-title">5.2.2 Identität & Sozialisation</div>
-                    <div class="competence-count">15 Verwendungen</div>
+
+                <!-- Identität und Sozialisation -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-identitaet);">
+                        <span>Identität und Sozialisation</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.1</div>
+                                <div class="handlungsfeld-text">Persönlichkeit erkunden und entwickeln</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T7, T8 (4 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.2</div>
+                                <div class="handlungsfeld-text">Auf psychische und physische Gesundheit achten</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1, T3 (4 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.3</div>
+                                <div class="handlungsfeld-text">Identitätsstiftende Räume erkunden und Rollen finden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1, T5, T6, T8 (7 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.4</div>
+                                <div class="handlungsfeld-text">Andere kulturelle Realitäten anerkennen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T7 (2 Mal)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-kultur" onclick="filterByAspect('aspekt-kultur', '5.2.3', 'Kultur')">
-                    <div class="competence-title">5.2.3 Kultur</div>
-                    <div class="competence-count">7 Verwendungen</div>
+
+                <!-- Kultur -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-kultur);">
+                        <span>Kultur</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.1</div>
+                                <div class="handlungsfeld-text">Bewusstsein für die gestaltete und ästhetische Welt entwickeln</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T5 (1 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.2</div>
+                                <div class="handlungsfeld-text">Grundlegende Themen des Lebens in der Kultur wahrnehmen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T6, T7 (3 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.3</div>
+                                <div class="handlungsfeld-text">Eigene Wahrnehmungen im Umgang mit Kunst reflektieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T7 (1 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.4</div>
+                                <div class="handlungsfeld-text">Eigene Gestaltungs- und Ausdrucksfähigkeiten erproben</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T4, T5, T7 (4 Mal)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-oekologie" onclick="filterByAspect('aspekt-oekologie', '5.2.4', 'Ökologie')">
-                    <div class="competence-title">5.2.4 Ökologie</div>
-                    <div class="competence-count">3 Verwendungen</div>
+
+                <!-- Ökologie -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-oekologie);">
+                        <span>Ökologie</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.4.1</div>
+                                <div class="handlungsfeld-text">Eigenes Verhalten unter ökologischen Gesichtspunkten analysieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2 (1 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.4.2</div>
+                                <div class="handlungsfeld-text">Lösungsansätze für nachhaltige Ressourcennutzung formulieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2, T5, T7 (3 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item missing">
+                                <div class="handlungsfeld-nummer">5.2.4.3</div>
+                                <div class="handlungsfeld-text">Nicht im Lehrplan vorhanden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: fehlt</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-politik" onclick="filterByAspect('aspekt-politik', '5.2.5', 'Politik')">
-                    <div class="competence-title">5.2.5 Politik</div>
-                    <div class="competence-count">6 Verwendungen</div>
+
+                <!-- Politik -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-politik);">
+                        <span>Politik</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.5.1</div>
+                                <div class="handlungsfeld-text">Politische Fragen analysieren und Manipulationsmöglichkeiten erkennen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T5 (3 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.5.2</div>
+                                <div class="handlungsfeld-text">Eigene politische Meinungen und Werte entwickeln</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T5, T7 (2 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.5.3</div>
+                                <div class="handlungsfeld-text">Organisation und Funktionsweise der Politik verstehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T5, T8 (2 Mal)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-recht" onclick="filterByAspect('aspekt-recht', '5.2.6', 'Recht')">
-                    <div class="competence-title">5.2.6 Recht</div>
-                    <div class="competence-count">8 Verwendungen</div>
+
+                <!-- Recht -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-recht);">
+                        <span>Recht</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.1</div>
+                                <div class="handlungsfeld-text">Funktionsweise der juristischen Institutionen verstehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T5, T8 (2 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.2</div>
+                                <div class="handlungsfeld-text">Gesellschaftsrelevante juristische Regeln verstehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T6 (2 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.3</div>
+                                <div class="handlungsfeld-text">Juristische Informationen in Konfliktsituationen interpretieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1, T3, T4, T6, T8 (6 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.4</div>
+                                <div class="handlungsfeld-text">Juristische Normen zum Schutz eigener Interessen nutzen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1, T8 (2 Mal)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-technologie" onclick="filterByAspect('aspekt-technologie', '5.2.7', 'Technologie')">
-                    <div class="competence-title">5.2.7 Technologie</div>
-                    <div class="competence-count">9 Verwendungen</div>
+
+                <!-- Technologische und digitale Transformation -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-tech);">
+                        <span>Technologische und digitale Transformation</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.7.1</div>
+                                <div class="handlungsfeld-text">Einfluss aktueller Technologien analysieren und beurteilen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2, T4, T8 (5 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.7.2</div>
+                                <div class="handlungsfeld-text">Daten, Informationen und digitale Systeme sinnvoll nutzen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2, T3, T4, T5 (9 Mal)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="competence-item aspekt-wirtschaft" onclick="filterByAspect('aspekt-wirtschaft', '5.2.8', 'Wirtschaft')">
-                    <div class="competence-title">5.2.8 Wirtschaft</div>
-                    <div class="competence-count">13 Verwendungen</div>
+
+                <!-- Wirtschaft -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-wirtschaft);">
+                        <span>Wirtschaft</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.8.1</div>
+                                <div class="handlungsfeld-text">Als Konsument:in mit knappen Ressourcen umgehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2 (2 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.8.2</div>
+                                <div class="handlungsfeld-text">Zusammenwirken wirtschaftlicher Akteure untersuchen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2, T3, T4, T6, T8 (8 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.8.3</div>
+                                <div class="handlungsfeld-text">Wirtschaftliche Entwicklungen analysieren und beurteilen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2, T3, T8 (4 Mal)</div>
+                            </div>
+                            <div class="handlungsfeld-item missing">
+                                <div class="handlungsfeld-nummer">5.2.8.4</div>
+                                <div class="handlungsfeld-text">Nicht im Lehrplan vorhanden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: fehlt</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="legend">
-            <h3>Legende Gesellschaftsaspekte</h3>
-            <div class="legend-grid">
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-purple);"></div>
-                    <span>5.2.1 Ethik</span>
+        <!-- Interaktive Kacheln -->
+        <div class="kacheln-container">
+            <div class="kachel kachel-ethik" onclick="filterAspekt('ethik')">
+                <div class="kachel-titel">Ethik</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.1.1:</span>
+                        <span class="feld-count">5 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.1.2:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.1.3:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-pink);"></div>
-                    <span>5.2.2 Identität & Sozialisation</span>
+            </div>
+
+            <div class="kachel kachel-identitaet" onclick="filterAspekt('identitaet')">
+                <div class="kachel-titel">Identität und Sozialisation</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.1:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.2:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.3:</span>
+                        <span class="feld-count">7 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.4:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-orange);"></div>
-                    <span>5.2.3 Kultur</span>
+            </div>
+
+            <div class="kachel kachel-kultur" onclick="filterAspekt('kultur')">
+                <div class="kachel-titel">Kultur</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.1:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.2:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.3:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.4:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-green);"></div>
-                    <span>5.2.4 Ökologie</span>
+            </div>
+
+            <div class="kachel kachel-oekologie" onclick="filterAspekt('oekologie')">
+                <div class="kachel-titel">Ökologie</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.4.1:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.4.2:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer feld-missing">5.2.4.3:</span>
+                        <span class="feld-count feld-missing">fehlt</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-blue);"></div>
-                    <span>5.2.5 Politik</span>
+            </div>
+
+            <div class="kachel kachel-politik" onclick="filterAspekt('politik')">
+                <div class="kachel-titel">Politik</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.5.1:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.5.2:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.5.3:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-red);"></div>
-                    <span>5.2.6 Recht</span>
+            </div>
+
+            <div class="kachel kachel-recht" onclick="filterAspekt('recht')">
+                <div class="kachel-titel">Recht</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.1:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.2:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.3:</span>
+                        <span class="feld-count">6 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.4:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-cyan);"></div>
-                    <span>5.2.7 Technologie</span>
+            </div>
+
+            <div class="kachel kachel-tech" onclick="filterAspekt('tech')">
+                <div class="kachel-titel">Technologische und digitale Transformation</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.7.1:</span>
+                        <span class="feld-count">5 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.7.2:</span>
+                        <span class="feld-count">9 Mal</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: var(--zh-yellow);"></div>
-                    <span>5.2.8 Wirtschaft</span>
+            </div>
+
+            <div class="kachel kachel-wirtschaft" onclick="filterAspekt('wirtschaft')">
+                <div class="kachel-titel">Wirtschaft</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.8.1:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.8.2:</span>
+                        <span class="feld-count">8 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.8.3:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer feld-missing">5.2.8.4:</span>
+                        <span class="feld-count feld-missing">fehlt</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="matrix-container">
-            <table class="theme-matrix">
+        <!-- Tabelle mit allen Themen -->
+        <div class="table-container">
+            <h2>Übersicht der Themen und gesellschaftlichen Aspekte</h2>
+            <table>
                 <thead>
                     <tr>
                         <th>Thema</th>
-                        <th>Lebensbezug</th>
-                        <th>Lerninhalt (Kompetenz)</th>
-                        <th>Gesellschaftsaspekte</th>
-                        <th>Zirkuläre Entwicklung</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Gesellschaftliche Aspekte</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Thema 1 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>1. Ins Berufsleben einsteigen</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">1.1 Orientierung in Arbeits-/Ausbildungswelt</td>
-                        <td class="lerninhalt-cell">Ich orientiere mich in der Arbeits- und Ausbildungswelt anhand von vielfältigen Informationen und hole Unterstützung</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.4')">5.2.6.4</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
+                        <td rowspan="2"><strong>1. Ins Berufsleben einsteigen</strong></td>
+                        <td>1.1 Orientierung in Arbeits-/Ausbildungswelt</td>
+                        <td>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
                         </td>
-                        <td class="development-cell">Rechtliche Grundlagen & Identitätsfindung</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Ich kenne Lernstrategien, achte auf mich und arbeite ressourcenschonend</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
+                        <td>1.2 Konstruktive Kommunikation</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
                         </td>
-                        <td class="development-cell">Lernstrategien & Selbstreflexion</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" class="lebensbezug-cell">1.2 Konstruktive Kommunikation</td>
-                        <td class="lerninhalt-cell">Ich kann mich in Schule und Betrieb verständlich, situationsgerecht und respektvoll ausdrücken</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
-                        </td>
-                        <td class="development-cell">Ethische Kommunikation</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Ich kann Konflikte im Berufs- oder Schulalltag erkennen und adäquat darauf reagieren</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.2')">5.2.2.2</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
-                        </td>
-                        <td class="development-cell">Konfliktlösung & Wohlbefinden</td>
                     </tr>
                     
-                    <!-- Thema 2 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>2. Bewusst konsumieren und handeln</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">2.1 Verantwortungsvoller Umgang mit Geld</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.1')">5.2.8.1</span>
+                        <td rowspan="2"><strong>2. Bewusst konsumieren und handeln</strong></td>
+                        <td>2.1 Verantwortungsvoller Umgang mit Geld</td>
+                        <td>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                            <span class="aspekt-tag btn-oekologie" data-aspekt="oekologie" onclick="filterAspekt('oekologie')">Ökologie</span>
                         </td>
-                        <td class="development-cell">Budget & digitale Tools</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-oekologie" onclick="filterByCompetence('5.2.4.1')">5.2.4.1</span>
-                            <span class="competence-tag aspekt-oekologie" onclick="filterByCompetence('5.2.4.2')">5.2.4.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.1')">5.2.8.1</span>
+                        <td>2.2 Nachhaltiger Konsum</td>
+                        <td>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
                         </td>
-                        <td class="development-cell">Nachhaltiger Konsum</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" class="lebensbezug-cell">2.2 Wirtschaftliche Zusammenhänge</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
-                        </td>
-                        <td class="development-cell">Produktionsgrundlagen verstehen</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.3')">5.2.8.3</span>
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.1')">5.2.7.1</span>
-                        </td>
-                        <td class="development-cell">Massenkonsum & Technologie</td>
                     </tr>
 
-                    <!-- Thema 3 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>3. Risiko und Sicherheit</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">3.1 Absicherung gegen Risiken</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.2')">5.2.2.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
+                        <td rowspan="2"><strong>3. Risiko und Sicherheit</strong></td>
+                        <td>3.1 Absicherung gegen Risiken</td>
+                        <td>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
                         </td>
-                        <td class="development-cell">Risikobewertung</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
+                        <td>3.2 Gesellschaftliche Normen & Gesundheit</td>
+                        <td>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
                         </td>
-                        <td class="development-cell">Versicherungen & digitale Sicherheit</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" class="lebensbezug-cell">3.2 Gesellschaftliche Normen & Gesundheit</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.2')">5.2.2.2</span>
-                            <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.2')">5.2.3.2</span>
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-                        </td>
-                        <td class="development-cell">Körper, Identität & Normen</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.2')">5.2.2.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.3')">5.2.8.3</span>
-                        </td>
-                        <td class="development-cell">Gesunde Lebensweise</td>
                     </tr>
 
-                    <!-- Thema 4 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>4. Medien und digitale Welt</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">4.1 Digitale Werkzeuge & KI</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.1')">5.2.7.1</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
+                        <td rowspan="2"><strong>4. Medien und digitale Welt</strong></td>
+                        <td>4.1 Digitale Werkzeuge & KI-Nutzung</td>
+                        <td>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                            <span class="aspekt-tag btn-kultur" data-aspekt="kultur" onclick="filterAspekt('kultur')">Kultur</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
                         </td>
-                        <td class="development-cell">Digitale Kompetenz</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.1')">5.2.7.1</span>
-                            <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.4')">5.2.3.4</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
+                        <td>4.2 Kritischer Medienumgang</td>
+                        <td>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
                         </td>
-                        <td class="development-cell">KI & Kreativität</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" class="lebensbezug-cell">4.2 Kritischer Medienumgang</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.1')">5.2.7.1</span>
-                        </td>
-                        <td class="development-cell">Quellenanalyse & Recherche</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
-                            <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.4')">5.2.3.4</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
-                        </td>
-                        <td class="development-cell">Social Media & Verantwortung</td>
                     </tr>
 
-                  <!-- Thema 5 -->
-<tr>
-    <td rowspan="6" class="theme-cell"><strong>5. Meinung bilden, akzeptieren und mitgestalten</strong></td>
-    <td rowspan="3" class="lebensbezug-cell">5.1 Meinungsbildung & Äußerung</td>
-    <td class="lerninhalt-cell">Lerninhalt 1</td>
-    <td class="competences-cell">
-        <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-        <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.1')">5.2.5.1</span>
-    </td>
-    <td class="development-cell">Manipulation erkennen</td>
-</tr>
-<tr>
-    <td class="lerninhalt-cell">Lerninhalt 2</td>
-    <td class="competences-cell">
-        <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.3')">5.2.1.3</span>
-        <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.1')">5.2.5.1</span>
-    </td>
-    <td class="development-cell">Standpunkte vertreten</td>
-</tr>
-<tr>
-    <td class="lerninhalt-cell">Lerninhalt 3</td>
-    <td class="competences-cell">
-        <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-        <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.4')">5.2.3.4</span>
-    </td>
-    <td class="development-cell">Medienprodukte gestalten</td>
-</tr>
-<tr>
-    <!-- Thema-Spalte bleibt leer, weil rowspan="6" alles abdeckt -->
-    <td rowspan="3" class="lebensbezug-cell">5.2 Politische Rechte & Partizipation</td>
-    <td class="lerninhalt-cell">Lerninhalt 1</td>
-    <td class="competences-cell">
-        <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.3')">5.2.5.3</span>
-        <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.1')">5.2.6.1</span>
-    </td>
-    <td class="development-cell">Politisches System verstehen</td>
-</tr>
-<tr>
-    <td class="lerninhalt-cell">Lerninhalt 2</td>
-    <td class="competences-cell">
-        <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
-        <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.2')">5.2.5.2</span>
-    </td>
-    <td class="development-cell">Politische Meinungsbildung</td>
-</tr>
-<tr>
-    <td class="lerninhalt-cell">Lerninhalt 3</td>
-    <td class="competences-cell">
-        <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.1')">5.2.3.1</span>
-        <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.2')">5.2.7.2</span>
-        <span class="competence-tag aspekt-oekologie" onclick="filterByCompetence('5.2.4.2')">5.2.4.2</span>
-    </td>
-    <td class="development-cell">Jugendpartizipation & Ökologie</td>
-</tr>
-
-
-                    <!-- Thema 6 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>6. Verträge verstehen – fair handeln</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">6.1 Rechtliche Fragen im Alltag</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.2')">5.2.6.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
+                        <td rowspan="2"><strong>5. Meinung bilden, akzeptieren und mitgestalten</strong></td>
+                        <td>5.1 Respektvolle Meinungsäußerung</td>
+                        <td>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-kultur" data-aspekt="kultur" onclick="filterAspekt('kultur')">Kultur</span>
                         </td>
-                        <td class="development-cell">Vertragsverständnis</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.2')">5.2.1.2</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
+                        <td>5.2 Politische Rechte & Partizipation</td>
+                        <td>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-kultur" data-aspekt="kultur" onclick="filterAspekt('kultur')">Kultur</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
+                            <span class="aspekt-tag btn-oekologie" data-aspekt="oekologie" onclick="filterAspekt('oekologie')">Ökologie</span>
                         </td>
-                        <td class="development-cell">Rechtshilfe finden</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" class="lebensbezug-cell">6.2 Fair handeln</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.2')">5.2.1.2</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.2')">5.2.6.2</span>
-                        </td>
-                        <td class="development-cell">Ethik vs. Recht unterscheiden</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.3')">5.2.1.3</span>
-                        </td>
-                        <td class="development-cell">Moralische Konflikte lösen</td>
                     </tr>
 
-                    <!-- Thema 7 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>7. Kunst und Kultur</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">7.1 Kulturelle Ausdrucksformen</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.3')">5.2.3.3</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.4')">5.2.2.4</span>
+                        <td rowspan="2"><strong>6. Verträge verstehen – fair handeln</strong></td>
+                        <td>6.1 Rechtliche Fragen im Alltag</td>
+                        <td>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
                         </td>
-                        <td class="development-cell">Kultur & Zugehörigkeit</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.1')">5.2.1.1</span>
-                            <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.2')">5.2.5.2</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.1')">5.2.2.1</span>
+                        <td>6.2 Fair handeln in schwierigen Situationen</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
                         </td>
-                        <td class="development-cell">Kultur & Machtverhältnisse</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" class="lebensbezug-cell">7.2 Kreative gesellschaftliche Beiträge</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.4')">5.2.3.4</span>
-                            <span class="competence-tag aspekt-oekologie" onclick="filterByCompetence('5.2.4.2')">5.2.4.2</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.1')">5.2.2.1</span>
-                        </td>
-                        <td class="development-cell">Kreative Ausdrucksfähigkeiten</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.2')">5.2.5.2</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.1')">5.2.2.1</span>
-                            <span class="competence-tag aspekt-kultur" onclick="filterByCompetence('5.2.3.2')">5.2.3.2</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.4')">5.2.2.4</span>
-                        </td>
-                        <td class="development-cell">Respektvoller Kunstdialog</td>
                     </tr>
 
-                    <!-- Thema 8 -->
                     <tr>
-                        <td rowspan="4" class="theme-cell"><strong>8. Arbeit und Steuerpflicht</strong></td>
-                        <td rowspan="2" class="lebensbezug-cell">8.1 Berufliche Laufbahn</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.1')">5.2.2.1</span>
-                            <span class="competence-tag aspekt-identitaet" onclick="filterByCompetence('5.2.2.3')">5.2.2.3</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.3')">5.2.8.3</span>
-                            <span class="competence-tag aspekt-technologie" onclick="filterByCompetence('5.2.7.1')">5.2.7.1</span>
+                        <td rowspan="2"><strong>7. Kunst und Kultur</strong></td>
+                        <td>7.1 Kulturelle Ausdrucksformen</td>
+                        <td>
+                            <span class="aspekt-tag btn-kultur" data-aspekt="kultur" onclick="filterAspekt('kultur')">Kultur</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
                         </td>
-                        <td class="development-cell">Berufliche Identität entwickeln</td>
                     </tr>
                     <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.3')">5.2.8.3</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.3')">5.2.6.3</span>
+                        <td>7.2 Kultur & kreative Gestaltung</td>
+                        <td>
+                            <span class="aspekt-tag btn-kultur" data-aspekt="kultur" onclick="filterAspekt('kultur')">Kultur</span>
+                            <span class="aspekt-tag btn-oekologie" data-aspekt="oekologie" onclick="filterAspekt('oekologie')">Ökologie</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
                         </td>
-                        <td class="development-cell">Bewerbung & Weiterbildung</td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="2"><strong>8. Arbeit und Steuerpflicht</strong></td>
+                        <td>8.1 Berufliche Laufbahnplanung</td>
+                        <td>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie & digitale Transformation</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td rowspan="2" class="lebensbezug-cell">8.2 Bürgerpflichten & Steuern</td>
-                        <td class="lerninhalt-cell">Lerninhalt 1</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-politik" onclick="filterByCompetence('5.2.5.3')">5.2.5.3</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.1')">5.2.6.1</span>
+                        <td>8.2 Bürgerpflichten & Steuern</td>
+                        <td>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
                         </td>
-                        <td class="development-cell">Staatspflichten verstehen</td>
-                    </tr>
-                    <tr>
-                        <td class="lerninhalt-cell">Lerninhalt 2</td>
-                        <td class="competences-cell">
-                            <span class="competence-tag aspekt-recht" onclick="filterByCompetence('5.2.6.4')">5.2.6.4</span>
-                            <span class="competence-tag aspekt-wirtschaft" onclick="filterByCompetence('5.2.8.2')">5.2.8.2</span>
-                            <span class="competence-tag aspekt-ethik" onclick="filterByCompetence('5.2.1.2')">5.2.1.2</span>
-                        </td>
-                        <td class="development-cell">Formulare & Behörden</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <!-- Filter Modal -->
-    <div id="filterModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Kompetenz gefiltert</h2>
-            <div id="modalDescription"></div>
-            <div id="modalHandlungsfeld"></div>
-            <div id="modalOccurrences"></div>
+        <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
+            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Identität, Politik, Recht und Technologie</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Besonders stark abgedeckt sind die Aspekte <strong>Identität und Sozialisation</strong> (17 Vorkommen), <strong>Politik</strong> (7 Vorkommen), <strong>Recht</strong> (12 Vorkommen) sowie <strong>Technologie und digitale Transformation</strong> (14 Vorkommen).</p>
+                        <p><strong>Erklärung:</strong> In diesen Bereichen ist die Zirkularität hoch, da die Handlungsfelder regelmässig wieder aufgenommen und aufeinander bezogen werden. Lernende begegnen den Themen mehrmals während der Ausbildung, wodurch eine schrittweise Vertiefung und ein wachsendes Verständnis gefördert wird:</p>
+                        <ul>
+                            <li>Bei <strong>Identität und Sozialisation</strong> zeigt sich eine breite Behandlung von Persönlichkeitsentwicklung, Rollenfindung und sozialem Umfeld</li>
+                            <li><strong>Politik</strong> wird in allen relevanten Handlungsfeldern eingebunden und trägt zur Orientierung im gesellschaftlichen Prozess bei</li>
+                            <li>Im Bereich <strong>Recht</strong> liegt zwar ein Schwerpunkt auf der Analyse juristischer Informationen (5.2.6.3 mit 6 Vorkommen), dennoch sind alle Felder vertreten</li>
+                            <li>Die <strong>technologische und digitale Transformation</strong> wird mehrfach wiederholt, mit klarem Fokus auf digitale Systeme und Vernetzung (5.2.7.2 mit 9 Vorkommen)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Ethik, Kultur und Wirtschaft</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Aspekte <strong>Ethik</strong> (8 Vorkommen), <strong>Kultur</strong> (9 Vorkommen) und <strong>Wirtschaft</strong> (14 Vorkommen) sind grundsätzlich vorhanden und über mehrere Themen verteilt, weisen aber eine gewisse Unausgeglichenheit auf.</p>
+                        <p><strong>Erklärung:</strong></p>
+                        <ul>
+                            <li>Bei <strong>Ethik</strong> liegt der Schwerpunkt stark auf der Empathie und Perspektivenübernahme (5.2.1.1 mit 5 Vorkommen), während die aktive Aushandlung moralischer Fragen seltener berücksichtigt wird</li>
+                            <li><strong>Kultur</strong> ist in allen Handlungsfeldern vertreten, jedoch teils ungleich gewichtet – kritische Reflexion kultureller Ausdrucksformen erscheint weniger häufig</li>
+                            <li>Im Bereich <strong>Wirtschaft</strong> ist die Zirkularität breit angelegt, allerdings fehlt das Handlungsfeld 5.2.8.4 vollständig, wodurch die Vielfalt ökonomischer Perspektiven eingeschränkt bleibt</li>
+                        </ul>
+                        <p>In allen drei Fällen zeigt sich, dass die Wiederaufnahme der Aspekte zwar gewährleistet ist, qualitativ jedoch noch stärker ausbalanciert werden könnte.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Ökologie</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Deutlich schwächer fällt die Zirkularität im Aspekt <strong>Ökologie</strong> mit nur 4 Vorkommen aus.</p>
+                        <p><strong>Erklärung:</strong> Zwar werden einzelne Handlungsfelder aufgegriffen, doch das zentrale Feld 5.2.4.3 fehlt vollständig. Dadurch bleibt die thematische Wiederaufnahme stark eingeschränkt. Auch die vorhandenen Inhalte erscheinen eher punktuell, ohne dass eine kontinuierliche Vertiefung sichtbar wird.</p>
+                        <p><strong>Problematik:</strong> Angesichts der hohen gesellschaftlichen Bedeutung von Nachhaltigkeit, Ressourcenmanagement und ökologischen Zusammenhängen ist diese geringe Zirkularität auffällig. Die Ökologie wird hauptsächlich in Thema 2 (Bewusst konsumieren) behandelt und taucht dann nur noch vereinzelt in den Themen 5 und 7 auf. Dies führt zu:</p>
+                        <ul>
+                            <li>Fehlender Kontinuität in der ökologischen Bildung</li>
+                            <li>Mangelnder Verknüpfung mit anderen gesellschaftlichen Aspekten</li>
+                            <li>Unzureichender Vorbereitung auf die ökologischen Herausforderungen der Arbeitswelt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Detaillierte Handlungsfeld-Definitionen mit vollständigen Verwendungsnachweisen
-        const handlungsfelder = {
-            '5.2.1': {
-                title: 'Ethik',
-                fields: [
-                    {
-                        id: '5.2.1.1',
-                        text: 'Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven. Sie erkennen in moralischen Verunsicherungskontexten die eigene und fremde moralische Intuition sowie die daraus folgenden Handlungsweisen und überprüfen diese aufgrund ethischer Grundsätze.',
-                        used: [
-                            '1.2 Konstruktive Kommunikation - Lerninhalt 1',
-                            '1.2 Konstruktive Kommunikation - Lerninhalt 2', 
-                            '4.2 Kritischer Medienumgang - Lerninhalt 2',
-                            '6.2 Fair handeln - Lerninhalt 2',
-                            '7.1 Kulturelle Ausdrucksformen - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.1.2',
-                        text: 'Die Lernenden lassen sich durch Herausforderungen im persönlichen, gesellschaftlichen und beruflichen Umfeld, in denen die Integrität und Würde von Menschen und die Erhaltung der natürlichen Umwelt gefährdet sind, zu eigenem Entscheiden und Handeln herausfordern. Sie übernehmen Verantwortung für sich selbst, für ihre Mitmenschen und einen nachhaltigen Umgang mit natürlichen Ressourcen und Energie.',
-                        used: [
-                            '6.1 Rechtliche Fragen im Alltag - Lerninhalt 2',
-                            '6.2 Fair handeln - Lerninhalt 1',
-                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.1.3',
-                        text: 'Die Lernenden beteiligen sich aktiv an der Aushandlung von moralischen Entscheiden. Sie vertreten ihre moralischen Überzeugungen fair und entwickeln sie in Auseinandersetzung mit anderen Überzeugungen und ethischen Prinzipien weiter.',
-                        used: [
-                            '5.1 Meinungsbildung & Äußerung - Lerninhalt 2',
-                            '6.2 Fair handeln - Lerninhalt 2'
-                        ]
-                    }
-                ]
-            },
-            '5.2.2': {
-                title: 'Identität und Sozialisation',
-                fields: [
-                    {
-                        id: '5.2.2.1',
-                        text: 'In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit. Dabei reflektieren sie mögliche Prägungen durch ihren eigenen Hintergrund.',
-                        used: [
-                            '7.1 Kulturelle Ausdrucksformen - Lerninhalt 2',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 1',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 2',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 1'
-                        ]
-                    },
-                    {
-                        id: '5.2.2.2',
-                        text: 'Sie achten auf ihre psychische und physische Gesundheit, erkennen Gewaltformen und Diskriminierung, können angemessen darauf reagieren und sich Hilfe holen. Sie beachten die legitimen Bedürfnisse anderer und respektieren diese.',
-                        used: [
-                            '1.2 Konstruktive Kommunikation - Lerninhalt 2',
-                            '3.1 Absicherung gegen Risiken - Lerninhalt 1',
-                            '3.2 Gesellschaftliche Normen & Gesundheit - Lerninhalt 1',
-                            '3.2 Gesellschaftliche Normen & Gesundheit - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.2.3',
-                        text: 'In ihrer eigenen Existenz sowie in den sozialen und beruflichen Kontexten erkunden die Lernenden identitätsstiftende Räume und treffen dort persönliche Entscheidungen. Diese tragen dazu bei, ihre Rollen in der Gesellschaft und in der Arbeitswelt zu finden und zu festigen. Auch stellen sie diese Rollen durch den Vergleich mit anderen möglichen Entscheidungen zur Diskussion.',
-                        used: [
-                            '1.1 Orientierung in Arbeits-/Ausbildungswelt - Lerninhalt 1',
-                            '1.1 Orientierung in Arbeits-/Ausbildungswelt - Lerninhalt 2',
-                            '1.2 Konstruktive Kommunikation - Lerninhalt 1',
-                            '1.2 Konstruktive Kommunikation - Lerninhalt 2',
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 2',
-                            '6.1 Rechtliche Fragen im Alltag - Lerninhalt 2',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 1'
-                        ]
-                    },
-                    {
-                        id: '5.2.2.4',
-                        text: 'Die Lernenden anerkennen andere kulturelle Realitäten in einem Umfeld, in dem jeder und jede das Recht auf Andersartigkeit und die Wahrung der Grundrechte berücksichtigen muss. Sie lassen deren Existenz gelten und bewerten sie mit Offenheit und Toleranz ihrem eigenen Lebensstil entsprechend.',
-                        used: [
-                            '7.1 Kulturelle Ausdrucksformen - Lerninhalt 1',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 2'
-                        ]
-                    }
-                ]
-            },
-            '5.2.3': {
-                title: 'Kultur',
-                fields: [
-                    {
-                        id: '5.2.3.1',
-                        text: 'Die Lernenden entwickeln ein Bewusstsein für die gestaltete und ästhetische Welt und verstehen verschiedene kulturelle Ausdrucksmittel, die durch die jeweilige Zeit geprägt sind. Sie erkennen die Ausdrucksformen der Kultur und deren Auswirkung auf ihr Lebensumfeld.',
-                        used: [
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 3'
-                        ]
-                    },
-                    {
-                        id: '5.2.3.2',
-                        text: 'Die Lernenden nehmen in der Beschäftigung mit Kultur grundlegende Themen des Lebens wahr und setzen sich mit diesen auseinander.',
-                        used: [
-                            '3.2 Gesellschaftliche Normen & Gesundheit - Lerninhalt 1',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.3.3',
-                        text: 'Die Lernenden reflektieren im Umgang mit Werken der Kunst eigene Wahrnehmungen, finden dafür Ausdrucksmöglichkeiten und erweitern im Dialog mit anderen ihre Vorstellungen von Wirklichkeit.',
-                        used: [
-                            '7.1 Kulturelle Ausdrucksformen - Lerninhalt 1'
-                        ]
-                    },
-                    {
-                        id: '5.2.3.4',
-                        text: 'Die Lernenden erproben ihre eigenen Gestaltungs- und Ausdrucksfähigkeiten und erweitern sie.',
-                        used: [
-                            '4.1 Digitale Werkzeuge & KI - Lerninhalt 2',
-                            '4.2 Kritischer Medienumgang - Lerninhalt 2',
-                            '5.1 Meinungsbildung & Äußerung - Lerninhalt 3',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 1'
-                        ]
-                    }
-                ]
-            },
-            '5.2.4': {
-                title: 'Ökologie',
-                fields: [
-                    {
-                        id: '5.2.4.1',
-                        text: 'Die Lernenden analysieren ihr eigenes Verhalten und beurteilen Eingriffe in die Natur im persönlichen, gesellschaftlichen und beruflichen Umfeld unter dem Blickwinkel ökologisch nachhaltiger Entwicklung.',
-                        used: [
-                            '2.1 Verantwortungsvoller Umgang mit Geld - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.4.2',
-                        text: 'Die Lernenden formulieren Lösungsansätze bezüglich der ökologisch nachhaltigen Nutzung von natürlichen Ressourcen und dem effizienten Einsatz von Energie im persönlichen, gesellschaftlichen und beruflichen Umfeld. Sie erkennen, dass nachhaltiges Verhalten die Umweltqualität verbessert, bzw. die zunehmende Umweltbelastung reduziert.',
-                        used: [
-                            '2.1 Verantwortungsvoller Umgang mit Geld - Lerninhalt 2',
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 3',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 1'
-                        ]
-                    }
-                ]
-            },
-            '5.2.5': {
-                title: 'Politik',
-                fields: [
-                    {
-                        id: '5.2.5.1',
-                        text: 'Die Lernenden analysieren aktuelle politische Fragen und Themen und identifizieren die Interessen und Werte der betroffenen Personen sowie die für deren Durchsetzung verwendeten Strategien. Sie analysieren dabei Chancen und Risiken der Strategien und erkennen Beeinflussung bzw. Manipulationsmöglichkeiten.',
-                        used: [
-                            '5.1 Meinungsbildung & Äußerung - Lerninhalt 1',
-                            '5.1 Meinungsbildung & Äußerung - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.5.2',
-                        text: 'Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst. Sie entwickeln ihr politisches Verhalten im Kontakt mit den Meinungen und Werten anderer. Sie sind in der Lage, diese in den politischen Kontext einzuordnen. Sie entwickeln ihre Einstellungen weiter, um sich einen eigenen ethischen Bezugsrahmen zu schaffen. Bei der Einschätzung von politischen Fragen sind die Lernenden in der Lage, eigene und fremde Interessen wahrzunehmen und auf dieser Grundlage ihre Position argumentativ zu begründen.',
-                        used: [
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 2',
-                            '7.1 Kulturelle Ausdrucksformen - Lerninhalt 2',
-                            '7.2 Kreative gesellschaftliche Beiträge - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.5.3',
-                        text: 'Die Lernenden verstehen die Organisation und die Funktionsweise der drei Ebenen der nationalen Politik (Gemeinde, Kanton und Bund) sowie die Funktion von supranationalen Organisationen in Europa und weltweit. Sie erkennen die ihnen angebotenen Möglichkeiten zur Teilnahme am politischen Leben und entwickeln Fähigkeiten, diese verantwortungsvoll zu nutzen.',
-                        used: [
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 1',
-                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 1'
-                        ]
-                    }
-                ]
-            },
-            '5.2.6': {
-                title: 'Recht',
-                fields: [
-                    {
-                        id: '5.2.6.1',
-                        text: 'Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft. Sie erkennen deren Einfluss auf die Gesellschaft.',
-                        used: [
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 1',
-                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 1'
-                        ]
-                    },
-                    {
-                        id: '5.2.6.2',
-                        text: 'Die Lernenden verstehen die gesellschaftsrelevanten juristischen Regeln. Sie identifizieren die diesen Regeln zugrunde liegenden Werthaltungen und Denkweisen und beurteilen deren Bedeutung für die Gesellschaft, in der sie leben, auch unter historischer Perspektive.',
-                        used: [
-                            '6.1 Rechtliche Fragen im Alltag - Lerninhalt 1',
-                            '6.2 Fair handeln - Lerninhalt 1'
-                        ]
-                    },
-                    {
-                        id: '5.2.6.3',
-                        text: 'Die Lernenden identifizieren, rekonstruieren und interpretieren wichtige juristischen Informationen in Konfliktsituationen. Sie entwickeln ihre Argumentation, um die Herausforderung zu beurteilen und entscheiden, ob es notwendig ist, eine Spezialistin oder einen Spezialisten beizuziehen.',
-                        used: [
-                            '1.1 Orientierung in Arbeits-/Ausbildungswelt - Lerninhalt 1',
-                            '3.1 Absicherung gegen Risiken - Lerninhalt 2',
-                            '4.1 Digitale Werkzeuge & KI - Lerninhalt 2',
-                            '4.2 Kritischer Medienumgang - Lerninhalt 2',
-                            '6.1 Rechtliche Fragen im Alltag - Lerninhalt 2',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.6.4',
-                        text: 'In juristisch bedeutsamen Herausforderungen unterscheiden die Lernenden zwischen den Interessen der beteiligten Parteien und arbeiten heraus, wer von der Anwendung des Rechts betroffen ist. Sie greifen auf juristische Normen zurück, um ihre Interessen zu schützen und sozial akzeptable Lösungen für die bestehenden Konflikte zu finden.',
-                        used: [
-                            '1.1 Orientierung in Arbeits-/Ausbildungswelt - Lerninhalt 1',
-                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 2'
-                        ]
-                    }
-                ]
-            },
-            '5.2.7': {
-                title: 'Technologie',
-                fields: [
-                    {
-                        id: '5.2.7.1',
-                        text: 'Die Lernenden analysieren den Einfluss von aktuellen Technologien im persönlichen, gesellschaftlichen und beruflichen Umfeld und beurteilen deren Auswirkungen auf der individuellen Ebene sowie unter dem Blickwinkel einer nachhaltigen Entwicklung. Sie erkennen sowohl die Chancen und die sinnvolle und arbeitserleichternde Nutzung als auch die damit verbundenen Risiken und Abhängigkeiten. Sie wählen situativ den zweckmässigen und verantwortungsbewussten Einsatz technischer Mittel und technologischer Produkte aus persönlicher und beruflicher Sicht und berücksichtigen dabei Schutz- und Sicherheitsaspekte.',
-                        used: [
-                            '2.2 Wirtschaftliche Zusammenhänge - Lerninhalt 2',
-                            '4.1 Digitale Werkzeuge & KI - Lerninhalt 1',
-                            '4.1 Digitale Werkzeuge & KI - Lerninhalt 2',
-                            '4.2 Kritischer Medienumgang - Lerninhalt 1',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 1'
-                        ]
-                    },
-                    {
-                        id: '5.2.7.2',
-                        text: 'Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst. Sie setzen sich mit Daten und Informationen, mit Systemen und Vernetzung, mit Informatikanwendungen und Medien sowie Informations- und Kommunikationstechnologien und deren Auswirkungen auf Individuum und Gesellschaft auseinander. Dabei analysieren die Lernenden auch Chancen und Risiken von künstlicher Intelligenz und nutzen die entsprechenden Mittel und Anwendungsmöglichkeiten sinnvoll.',
-                        used: [
-                            '2.1 Verantwortungsvoller Umgang mit Geld - Lerninhalt 1',
-                            '2.2 Wirtschaftliche Zusammenhänge - Lerninhalt 1',
-                            '3.1 Absicherung gegen Risiken - Lerninhalt 2',
-                            '3.2 Gesellschaftliche Normen & Gesundheit - Lerninhalt 1',
-                            '4.2 Kritischer Medienumgang - Lerninhalt 1',
-                            '4.2 Kritischer Medienumgang - Lerninhalt 2',
-                            '5.1 Meinungsbildung & Äußerung - Lerninhalt 1',
-                            '5.1 Meinungsbildung & Äußerung - Lerninhalt 3',
-                            '5.2 Politische Rechte & Partizipation - Lerninhalt 3'
-                        ]
-                    }
-                ]
-            },
-            '5.2.8': {
-                title: 'Wirtschaft',
-                fields: [
-                    {
-                        id: '5.2.8.1',
-                        text: 'Die Lernenden treffen als Konsumentinnen und Konsumenten mit ihren knappen Ressourcen eine Wahl, welche Bedürfnisse sie befriedigen wollen und können. Sie nutzen geeignete Instrumente, um mit den eigenen Mitteln selbstverantwortlich und ökonomisch nachhaltig umzugehen.',
-                        used: [
-                            '2.1 Verantwortungsvoller Umgang mit Geld - Lerninhalt 1',
-                            '2.1 Verantwortungsvoller Umgang mit Geld - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.8.2',
-                        text: 'Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen (Arbeitnehmende, Mieterinnen und Mieter, Steuerpflichtige u.a.) artikulieren.',
-                        used: [
-                            '2.2 Wirtschaftliche Zusammenhänge - Lerninhalt 1',
-                            '3.1 Absicherung gegen Risiken - Lerninhalt 1',
-                            '3.1 Absicherung gegen Risiken - Lerninhalt 2',
-                            '4.1 Digitale Werkzeuge & KI - Lerninhalt 1',
-                            '6.1 Rechtliche Fragen im Alltag - Lerninhalt 1',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 2',
-                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 1',
-                            '8.2 Bürgerpflichten & Steuern - Lerninhalt 2'
-                        ]
-                    },
-                    {
-                        id: '5.2.8.3',
-                        text: 'Die Lernenden analysieren die Erwartungen verschiedener Anspruchsgruppen an ein Unternehmen und die daraus entstehenden Zielkonflikte. Sie beurteilen Auswirkungen von wirtschaftlichen Entwicklungen auf die eigene Person, das eigene Unternehmen, die eigene Branche und die eigene Laufbahngestaltung.',
-                        used: [
-                            '2.2 Wirtschaftliche Zusammenhänge - Lerninhalt 2',
-                            '3.2 Gesellschaftliche Normen & Gesundheit - Lerninhalt 2',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 1',
-                            '8.1 Berufliche Laufbahn - Lerninhalt 2'
-                        ]
-                    }
-                ]
+        let activeFilter = null;
+        
+        function filterAspekt(aspektName) {
+            // Alle Kacheln zurücksetzen
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            
+            if (activeFilter === aspektName) {
+                // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
+                resetFilter();
+                return;
             }
-        };
-
-        // Mapping für Lebensbezug zu Thema
-        const lebensbezugToTheme = {
-            '1.1': 'Thema 1: Ins Berufsleben einsteigen', 
-            '1.2': 'Thema 1: Ins Berufsleben einsteigen',
-            '2.1': 'Thema 2: Bewusst konsumieren und handeln', 
-            '2.2': 'Thema 2: Bewusst konsumieren und handeln',
-            '3.1': 'Thema 3: Risiko und Sicherheit', 
-            '3.2': 'Thema 3: Risiko und Sicherheit',
-            '4.1': 'Thema 4: Medien und digitale Welt', 
-            '4.2': 'Thema 4: Medien und digitale Welt',
-            '5.1': 'Thema 5: Meinung bilden, akzeptieren und mitgestalten', 
-            '5.2': 'Thema 5: Meinung bilden, akzeptieren und mitgestalten',
-            '6.1': 'Thema 6: Verträge verstehen – fair handeln', 
-            '6.2': 'Thema 6: Verträge verstehen – fair handeln',
-            '7.1': 'Thema 7: Kunst und Kultur', 
-            '7.2': 'Thema 7: Kunst und Kultur',
-            '8.1': 'Thema 8: Arbeit und Steuerpflicht', 
-            '8.2': 'Thema 8: Arbeit und Steuerpflicht'
-        };
-
-        // Filter by specific competence
-        function filterByCompetence(competenceId) {
-            const modal = document.getElementById('filterModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const modalHandlungsfeld = document.getElementById('modalHandlungsfeld');
-            const modalOccurrences = document.getElementById('modalOccurrences');
             
-            // Clear previous states
-            document.querySelectorAll('.competence-tag').forEach(tag => {
-                tag.classList.remove('active');
+            // Neue Kachel aktivieren
+            document.querySelector(`.kachel-${aspektName}`).classList.add('active');
+            activeFilter = aspektName;
+            
+            // Alle Aspekt-Tags verstecken
+            document.querySelectorAll('.aspekt-tag').forEach(tag => {
+                tag.classList.add('hidden');
             });
             
-            // Find and highlight matching tags
-            const matchingTags = document.querySelectorAll(`[onclick*="${competenceId}"]`);
-            
-            matchingTags.forEach(tag => {
-                tag.classList.add('active');
+            // Nur die entsprechenden Tags anzeigen
+            document.querySelectorAll(`.aspekt-tag[data-aspekt="${aspektName}"]`).forEach(tag => {
+                tag.classList.remove('hidden');
             });
+        }
+        
+        function resetFilter() {
+            activeFilter = null;
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            document.querySelectorAll('.aspekt-tag').forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
 
-            // Extract base competence (e.g., "5.2.1" from "5.2.1.3")
-            const baseCompetence = competenceId.substring(0, 5);
-            const handlungsfeld = handlungsfelder[baseCompetence];
+        // Accordion Funktion für qualitative Einschätzung
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
             
-            if (handlungsfeld) {
-                const specificField = handlungsfeld.fields.find(field => field.id === competenceId);
-                
-                if (specificField) {
-                    modalTitle.textContent = `Handlungsfeld ${competenceId} (${specificField.used.length} Verwendungen)`;
-                    
-                    modalDescription.innerHTML = `
-                        <p><strong>Aspekt:</strong> ${baseCompetence} ${handlungsfeld.title}</p>
-                        <p><strong>Spezifisches Handlungsfeld:</strong> ${competenceId}</p>
-                    `;
-                    
-                    modalHandlungsfeld.innerHTML = `
-                        <div class="handlungsfeld-used">
-                            <strong>${competenceId}:</strong> ${specificField.text}
-                        </div>
-                    `;
-                    
-                    // Show usage locations with themes
-                    const usageWithThemes = specificField.used.map(usage => {
-                        const numberMatch = usage.match(/^(\d+\.\d+)/);
-                        if (numberMatch) {
-                            const number = numberMatch[1];
-                            const theme = lebensbezugToTheme[number];
-                            return `${usage} (${theme})`;
-                        }
-                        return usage;
-                    });
-                    
-                    modalOccurrences.innerHTML = `
-                        <h3>Verwendung in folgenden Lerninhalten:</h3>
-                        <div class="usage-locations">
-                            ${usageWithThemes.map(usage => `<div class="usage-location">${usage}</div>`).join('')}
-                        </div>
-                    `;
+            // Schließe alle anderen Accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
                 }
-            }
-            
-            modal.style.display = 'block';
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.querySelectorAll('.competence-tag').forEach(tag => {
-                    tag.classList.remove('active');
-                });
-            }, 25000);
-        }
-
-        // Filter by aspect (from overview section)
-        function filterByAspect(aspectClass, aspectNumber, aspectTitle) {
-            const modal = document.getElementById('filterModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const modalHandlungsfeld = document.getElementById('modalHandlungsfeld');
-            const modalOccurrences = document.getElementById('modalOccurrences');
-            
-            // Clear previous states
-            document.querySelectorAll('.competence-tag').forEach(tag => {
-                tag.classList.remove('active');
             });
-            
-            // Highlight matching tags
-            const matchingTags = document.querySelectorAll(`.${aspectClass}`);
-            const totalOccurrences = matchingTags.length;
-            
-            matchingTags.forEach(tag => {
-                tag.classList.add('active');
-            });
-
-            // Set modal content for the entire aspect
-            const handlungsfeld = handlungsfelder[aspectNumber];
-            modalTitle.textContent = `Aspekt ${aspectNumber}: ${aspectTitle} (${totalOccurrences} Vorkommen)`;
-            
-            modalDescription.innerHTML = `<p><strong>Gesellschaftsaspekt:</strong> ${aspectNumber} ${aspectTitle}</p>`;
-            
-            // Generate handlungsfeld content with usage information
-            const handlungsfeldContent = handlungsfeld.fields.map(field => {
-                const isUsed = field.used.length > 0;
-                const cssClass = isUsed ? 'handlungsfeld-used' : 'handlungsfeld-unused';
-                
-                let usageInfo = '';
-                if (isUsed) {
-                    const usageWithThemes = field.used.map(usage => {
-                        const numberMatch = usage.match(/^(\d+\.\d+)/);
-                        if (numberMatch) {
-                            const number = numberMatch[1];
-                            const theme = lebensbezugToTheme[number];
-                            return `${usage} (${theme})`;
-                        }
-                        return usage;
-                    });
-                    usageInfo = `<div class="usage-info">Verwendet in: ${usageWithThemes.join(', ')}</div>`;
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
                 }
-                
-                return `
-                    <div class="${cssClass}">
-                        <strong>${field.id}:</strong> ${field.text}
-                        ${usageInfo}
-                    </div>
-                `;
-            }).join('');
-            
-            modalHandlungsfeld.innerHTML = `
-                <h3>Handlungsfelder (farbig markiert = verwendet):</h3>
-                ${handlungsfeldContent}
-            `;
-            
-            modalOccurrences.innerHTML = '';
-            
-            modal.style.display = 'block';
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.querySelectorAll('.competence-tag').forEach(tag => {
-                    tag.classList.remove('active');
-                });
-            }, 30000);
-        }
-
-        // Modal close functionality
-        document.querySelector('.close').onclick = function() {
-            document.getElementById('filterModal').style.display = 'none';
-            document.querySelectorAll('.competence-tag').forEach(tag => {
-                tag.classList.remove('active');
             });
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
         }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('filterModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                document.querySelectorAll('.competence-tag').forEach(tag => {
-                    tag.classList.remove('active');
-                });
-            }
+        // Accordion Funktion für Aspekte-Übersicht
+        function toggleAspekt(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.aspekt-header');
+            const allContents = document.querySelectorAll('.aspekt-content');
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
         }
-
-        // Add pulse animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.15); box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

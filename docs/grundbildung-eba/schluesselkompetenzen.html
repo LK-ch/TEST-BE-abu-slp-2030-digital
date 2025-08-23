@@ -84,21 +84,20 @@
         /* Navigation Breadcrumb */
         .nav-breadcrumb {
             background-color: var(--zh-gray);
-            padding: 0.75rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 0.95rem;
+            gap: 1rem;
         }
 
         .nav-breadcrumb a {
             color: var(--zh-blue);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-breadcrumb a:hover {
-            color: var(--zh-dark-blue);
             text-decoration: underline;
         }
 
@@ -108,11 +107,25 @@
         }
 
         .eba-link {
-            margin-left: auto;
-            background-color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            border: 1px solid var(--zh-blue);
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .eba-link:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* Container */
@@ -120,24 +133,6 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: white;
-            color: var(--zh-blue);
-            text-decoration: none;
-            border: 2px solid var(--zh-blue);
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background-color: var(--zh-light-blue);
-            transform: translateX(-5px);
         }
 
         /* Kompetenzen Übersicht mit Accordion */
@@ -480,12 +475,12 @@
             }
 
             .nav-breadcrumb {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
+                padding: 1rem;
             }
 
             .eba-link {
-                padding: 0.25rem 0.5rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -499,18 +494,12 @@
 
     <!-- Navigation Breadcrumb -->
     <nav class="nav-breadcrumb">
-        <a href="zirkularitaet.html">Übersicht</a>
-        <span>›</span>
-        <span>Schlüsselkompetenzen</span>
+        <span>Übersicht</span>
         <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
     </nav>
 
     <!-- Main Container -->
     <div class="container">
-        <a href="zirkularitaet.html" class="back-btn">
-            ← Zurück zur Übersicht
-        </a>
-
         <!-- Übersicht der Schlüsselkompetenzen mit Accordion -->
         <div class="kompetenzen-overview">
             <div class="kompetenzen-accordion-header" onclick="toggleKompetenzenAccordion()">

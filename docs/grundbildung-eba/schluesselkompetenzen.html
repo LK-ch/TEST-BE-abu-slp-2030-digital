@@ -81,6 +81,40 @@
             z-index: 1;
         }
 
+        /* Navigation Breadcrumb */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: var(--zh-dark-blue);
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        .eba-link {
+            margin-left: auto;
+            background-color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            border: 1px solid var(--zh-blue);
+        }
+
         /* Container */
         .container {
             max-width: 1400px;
@@ -88,24 +122,85 @@
             padding: 2rem;
         }
 
-        /* Kompetenzen Übersicht */
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: white;
+            color: var(--zh-blue);
+            text-decoration: none;
+            border: 2px solid var(--zh-blue);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: var(--zh-light-blue);
+            transform: translateX(-5px);
+        }
+
+        /* Kompetenzen Übersicht mit Accordion */
         .kompetenzen-overview {
             background: white;
-            padding: 20px;
+            padding: 0;
             border-radius: 10px;
             margin-bottom: 30px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         
-        .kompetenzen-overview h2 {
+        .kompetenzen-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: var(--zh-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid var(--zh-light-blue);
+        }
+
+        .kompetenzen-accordion-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .kompetenzen-accordion-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .kompetenzen-accordion-header h2 {
             color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
+            margin: 0;
+        }
+
+        .kompetenzen-accordion-icon {
+            font-size: 1.5rem;
+            color: var(--zh-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .kompetenzen-accordion-header.active .kompetenzen-accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .kompetenzen-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .kompetenzen-accordion-content.active {
+            max-height: 600px;
+        }
+
+        .kompetenzen-accordion-body {
+            padding: 20px;
         }
         
         .kompetenzen-list {
             display: grid;
             gap: 10px;
-            margin-bottom: 20px;
         }
         
         .kompetenz-item {
@@ -383,34 +478,62 @@
             .kacheln-container {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .nav-breadcrumb {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .eba-link {
+                padding: 0.25rem 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <h1>Zirkularität der Schlüsselkompetenzen</h1>
+        <h1>Schlüsselkompetenzen</h1>
         <p>Spiralförmiger Aufbau der Kompetenzen für lebenslanges Lernen</p>
     </header>
 
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <a href="zirkularitaet.html">Übersicht</a>
+        <span>›</span>
+        <span>Schlüsselkompetenzen</span>
+        <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
+    </nav>
+
     <!-- Main Container -->
     <div class="container">
-        <!-- Übersicht der Schlüsselkompetenzen -->
+        <a href="zirkularitaet.html" class="back-btn">
+            ← Zurück zur Übersicht
+        </a>
+
+        <!-- Übersicht der Schlüsselkompetenzen mit Accordion -->
         <div class="kompetenzen-overview">
-            <h2>Schlüsselkompetenzen für lebenslanges Lernen</h2>
-            <div class="kompetenzen-list">
-                <div class="kompetenz-item sk-1"><strong>3.2.1:</strong> Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
-                <div class="kompetenz-item sk-2"><strong>3.2.2:</strong> Ziele setzen, prüfen, adaptiv handeln</div>
-                <div class="kompetenz-item sk-3"><strong>3.2.3:</strong> Antizipativ, unternehmerisch, innovativ Probleme lösen</div>
-                <div class="kompetenz-item sk-4"><strong>3.2.4:</strong> In unterschiedlichen Teams effizient arbeiten</div>
-                <div class="kompetenz-item sk-5"><strong>3.2.5:</strong> Werthaltungen reflektieren und weiterentwickeln</div>
-                <div class="kompetenz-item sk-6"><strong>3.2.6:</strong> Standpunkte begründen und überzeugen</div>
-                <div class="kompetenz-item sk-7"><strong>3.2.7:</strong> Perspektiven wechseln und gegenseitiges Verständnis fördern</div>
-                <div class="kompetenz-item sk-8"><strong>3.2.8:</strong> Lebensphasen planen, mit Unwägbarkeiten umgehen</div>
-                <div class="kompetenz-item sk-9"><strong>3.2.9:</strong> Vernetzt/systemisch denken, nachhaltig handeln</div>
-                <div class="kompetenz-item sk-10"><strong>3.2.10:</strong> Sich an Wandel anpassen</div>
-                <div class="kompetenz-item sk-11"><strong>3.2.11:</strong> Mit Mehrdeutigkeiten umgehen</div>
-                <div class="kompetenz-item sk-12"><strong>3.2.12:</strong> Gesellschaftlich partizipieren, Handlungsspielräume nutzen</div>
+            <div class="kompetenzen-accordion-header" onclick="toggleKompetenzenAccordion()">
+                <h2>Schlüsselkompetenzen für lebenslanges Lernen</h2>
+                <span class="kompetenzen-accordion-icon">▼</span>
+            </div>
+            <div class="kompetenzen-accordion-content active">
+                <div class="kompetenzen-accordion-body">
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item sk-1"><strong>3.2.1:</strong> Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
+                        <div class="kompetenz-item sk-2"><strong>3.2.2:</strong> Ziele setzen, prüfen, adaptiv handeln</div>
+                        <div class="kompetenz-item sk-3"><strong>3.2.3:</strong> Antizipativ, unternehmerisch, innovativ Probleme lösen</div>
+                        <div class="kompetenz-item sk-4"><strong>3.2.4:</strong> In unterschiedlichen Teams effizient arbeiten</div>
+                        <div class="kompetenz-item sk-5"><strong>3.2.5:</strong> Werthaltungen reflektieren und weiterentwickeln</div>
+                        <div class="kompetenz-item sk-6"><strong>3.2.6:</strong> Standpunkte begründen und überzeugen</div>
+                        <div class="kompetenz-item sk-7"><strong>3.2.7:</strong> Perspektiven wechseln und gegenseitiges Verständnis fördern</div>
+                        <div class="kompetenz-item sk-8"><strong>3.2.8:</strong> Lebensphasen planen, mit Unwägbarkeiten umgehen</div>
+                        <div class="kompetenz-item sk-9"><strong>3.2.9:</strong> Vernetzt/systemisch denken, nachhaltig handeln</div>
+                        <div class="kompetenz-item sk-10"><strong>3.2.10:</strong> Sich an Wandel anpassen</div>
+                        <div class="kompetenz-item sk-11"><strong>3.2.11:</strong> Mit Mehrdeutigkeiten umgehen</div>
+                        <div class="kompetenz-item sk-12"><strong>3.2.12:</strong> Gesellschaftlich partizipieren, Handlungsspielräume nutzen</div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -754,6 +877,19 @@
                 </tbody>
             </table>
         </div>
+        
+        <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
+            <h2>Quantitative Einschätzung (Anzahl Nennungen über alle Themen)</h2>
+            <ul>
+                <li><strong>10 Mal:</strong> 3.2.6 (Standpunkte begründen und überzeugen)</li>
+                <li><strong>9 Mal:</strong> 3.2.1 (Quellen unterscheiden)</li>
+                <li><strong>8 Mal:</strong> 3.2.5 (Werthaltungen reflektieren), 3.2.10 (Sich an Wandel anpassen), 3.2.11 (Mit Mehrdeutigkeiten umgehen), 3.2.12 (Gesellschaftlich partizipieren)</li>
+                <li><strong>7 Mal:</strong> 3.2.2 (Ziele setzen), 3.2.7 (Perspektiven wechseln)</li>
+                <li><strong>6 Mal:</strong> 3.2.9 (Vernetzt/systemisch denken)</li>
+                <li><strong>5 Mal:</strong> 3.2.3 (Innovativ Probleme lösen), 3.2.4 (In Teams arbeiten)</li>
+                <li><strong>4 Mal:</strong> 3.2.8 (Lebensphasen planen)</li>
+            </ul>
 
             <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
             
@@ -856,6 +992,20 @@
             header.classList.toggle('active');
             content.classList.toggle('active');
         }
+
+        // Kompetenzen Accordion Toggle
+        function toggleKompetenzenAccordion() {
+            const header = document.querySelector('.kompetenzen-accordion-header');
+            const content = document.querySelector('.kompetenzen-accordion-content');
+            
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Initialisierung: Kompetenzen-Accordion beim Start geöffnet
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.kompetenzen-accordion-header').classList.add('active');
+        });
     </script>
 </body>
 </html>

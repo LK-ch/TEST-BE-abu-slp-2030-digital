@@ -106,7 +106,7 @@
             opacity: 0.6;
         }
 
-                /* Back Button */
+        /* Back Button */
         .back-btn {
             background: var(--zh-gray);
             border: none;
@@ -158,74 +158,19 @@
             padding: 2rem;
         }
 
-        /* Kompetenzen Übersicht mit Accordion */
-        .kompetenzen-overview {
+        /* Vereinfachte Überschrift */
+        .kompetenzen-title {
             background: white;
-            padding: 0;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        .kompetenzen-accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             padding: 20px;
-            background: var(--zh-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid var(--zh-light-blue);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .kompetenzen-accordion-header:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .kompetenzen-accordion-header.active {
-            background: var(--zh-light-blue);
-        }
-
-        .kompetenzen-accordion-header h2 {
+        .kompetenzen-title h2 {
             color: var(--zh-dark-blue);
             margin: 0;
-        }
-
-        .kompetenzen-accordion-icon {
-            font-size: 1.5rem;
-            color: var(--zh-blue);
-            transition: transform 0.3s ease;
-        }
-
-        .kompetenzen-accordion-header.active .kompetenzen-accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .kompetenzen-accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .kompetenzen-accordion-content.active {
-            max-height: 700px;
-        }
-
-        .kompetenzen-accordion-body {
-            padding: 20px;
-        }
-        
-        .kompetenzen-list {
-            display: grid;
-            gap: 10px;
-        }
-        
-        .kompetenz-item {
-            padding: 8px 12px;
-            border-left: 4px solid;
-            background: var(--zh-gray);
-            border-radius: 4px;
+            text-align: center;
         }
         
         /* Farben für Schlüsselkompetenzen */
@@ -516,44 +461,21 @@
     </header>
 
     <nav class="nav-breadcrumb">
-    <a href="index.html">Übersicht</a>
-    <span>›</span>
-    <span>Schlüsselkompetenzen</span>
-    <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
-</nav>
+        <a href="index.html">Übersicht</a>
+        <span>›</span>
+        <span>Schlüsselkompetenzen</span>
+        <a href="index.html" class="eba-link">🏠 EBA-Überblick</a>
+    </nav>
     
-       <!-- Main Container -->
+    <!-- Main Container -->
     <div class="container">
         <a href="zirkularitaet.html" class="back-btn">
             ← Zurück zur Übersicht
         </a>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Übersicht der Schlüsselkompetenzen mit Accordion -->
-        <div class="kompetenzen-overview">
-            <div class="kompetenzen-accordion-header" onclick="toggleKompetenzenAccordion()">
-                <h2>Schlüsselkompetenzen für lebenslanges Lernen</h2>
-                <span class="kompetenzen-accordion-icon">▼</span>
-            </div>
-            <div class="kompetenzen-accordion-content active">
-                <div class="kompetenzen-accordion-body">
-                    <div class="kompetenzen-list">
-                        <div class="kompetenz-item sk-1"><strong>3.2.1:</strong> Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
-                        <div class="kompetenz-item sk-2"><strong>3.2.2:</strong> Ziele setzen, prüfen, adaptiv handeln</div>
-                        <div class="kompetenz-item sk-3"><strong>3.2.3:</strong> Antizipativ, unternehmerisch, innovativ Probleme lösen</div>
-                        <div class="kompetenz-item sk-4"><strong>3.2.4:</strong> In unterschiedlichen Teams effizient arbeiten</div>
-                        <div class="kompetenz-item sk-5"><strong>3.2.5:</strong> Werthaltungen reflektieren und weiterentwickeln</div>
-                        <div class="kompetenz-item sk-6"><strong>3.2.6:</strong> Standpunkte begründen und überzeugen</div>
-                        <div class="kompetenz-item sk-7"><strong>3.2.7:</strong> Perspektiven wechseln und gegenseitiges Verständnis fördern</div>
-                        <div class="kompetenz-item sk-8"><strong>3.2.8:</strong> Lebensphasen planen, mit Unwägbarkeiten umgehen</div>
-                        <div class="kompetenz-item sk-9"><strong>3.2.9:</strong> Vernetzt/systemisch denken, nachhaltig handeln</div>
-                        <div class="kompetenz-item sk-10"><strong>3.2.10:</strong> Sich an Wandel anpassen</div>
-                        <div class="kompetenz-item sk-11"><strong>3.2.11:</strong> Mit Mehrdeutigkeiten umgehen</div>
-                        <div class="kompetenz-item sk-12"><strong>3.2.12:</strong> Gesellschaftlich partizipieren, Handlungsspielräume nutzen</div>
-                    </div>
-                </div>
-            </div>
+        <!-- Vereinfachte Übersicht - nur Titel -->
+        <div class="kompetenzen-title">
+            <h2>Schlüsselkompetenzen für lebenslanges Lernen</h2>
         </div>
         
         <!-- Interaktive Kacheln -->
@@ -897,6 +819,7 @@
         </div>
         
         <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
             <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
             
             <div class="accordion-item">
@@ -998,20 +921,6 @@
             header.classList.toggle('active');
             content.classList.toggle('active');
         }
-
-        // Kompetenzen Accordion Toggle
-        function toggleKompetenzenAccordion() {
-            const header = document.querySelector('.kompetenzen-accordion-header');
-            const content = document.querySelector('.kompetenzen-accordion-content');
-            
-            header.classList.toggle('active');
-            content.classList.toggle('active');
-        }
-
-        // Initialisierung: Kompetenzen-Accordion beim Start geöffnet
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.kompetenzen-accordion-header').classList.add('active');
-        });
     </script>
 </body>
 </html>

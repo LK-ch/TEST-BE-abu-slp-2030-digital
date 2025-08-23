@@ -1,12 +1,849 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Schlüsselkompetenzen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirkularität der Schlüsselkompetenzen EFZ (3-jährige Lehre)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-accent: #FF6B6B;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-orange: #FF9500;
+            --zh-purple: #9B59B6;
+            --zh-pink: #FF69B4;
+            --zh-teal: #20B2AA;
+            --zh-red: #DC143C;
+            --zh-yellow: #FFD700;
+            --zh-cyan: #00CED1;
+            --zh-lime: #32CD32;
+            --zh-indigo: #4B0082;
+            --zh-coral: #FF7F50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-blue) 0%, var(--zh-dark-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--zh-yellow);
+            margin-top: 0.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Status Info Box */
+        .status-info {
+            background: linear-gradient(135deg, var(--zh-light-blue), white);
+            border-left: 5px solid var(--zh-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-info h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .status-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .status-info li {
+            padding: 5px 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-complete {
+            background: var(--zh-green);
+            color: white;
+        }
+
+        .badge-draft {
+            background: var(--zh-orange);
+            color: white;
+        }
+
+        /* Überschrift */
+        .kompetenzen-title {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .kompetenzen-title h2 {
+            color: var(--zh-dark-blue);
+            margin: 0;
+            text-align: center;
+        }
+        
+        /* Kacheln */
+        .kacheln-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .kachel {
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kachel.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .kachel-1 { background: linear-gradient(135deg, rgba(220,20,60,0.1), rgba(220,20,60,0.05)); border-color: var(--zh-red); }
+        .kachel-2 { background: linear-gradient(135deg, rgba(255,149,0,0.1), rgba(255,149,0,0.05)); border-color: var(--zh-orange); }
+        .kachel-3 { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border-color: var(--zh-yellow); }
+        .kachel-4 { background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,200,150,0.05)); border-color: var(--zh-green); }
+        .kachel-5 { background: linear-gradient(135deg, rgba(0,206,209,0.1), rgba(0,206,209,0.05)); border-color: var(--zh-cyan); }
+        .kachel-6 { background: linear-gradient(135deg, rgba(15,5,160,0.1), rgba(15,5,160,0.05)); border-color: var(--zh-blue); }
+        .kachel-7 { background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.05)); border-color: var(--zh-purple); }
+        .kachel-8 { background: linear-gradient(135deg, rgba(255,105,180,0.1), rgba(255,105,180,0.05)); border-color: var(--zh-pink); }
+        .kachel-9 { background: linear-gradient(135deg, rgba(32,178,170,0.1), rgba(32,178,170,0.05)); border-color: var(--zh-teal); }
+        .kachel-10 { background: linear-gradient(135deg, rgba(75,0,130,0.1), rgba(75,0,130,0.05)); border-color: var(--zh-indigo); }
+        .kachel-11 { background: linear-gradient(135deg, rgba(255,127,80,0.1), rgba(255,127,80,0.05)); border-color: var(--zh-coral); }
+        .kachel-12 { background: linear-gradient(135deg, rgba(50,205,50,0.1), rgba(50,205,50,0.05)); border-color: var(--zh-lime); }
+        
+        .kachel-nummer {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .kachel-text {
+            font-size: 12px;
+            margin-bottom: 8px;
+            min-height: 40px;
+        }
+        
+        .kachel-count {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        /* Tabelle */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            background: var(--zh-gray);
+            padding: 10px 20px;
+            margin: 20px 0 10px 0;
+            border-left: 5px solid var(--zh-blue);
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--zh-dark-blue);
+        }
+
+        .section-title.draft {
+            border-left-color: var(--zh-orange);
+            background: linear-gradient(90deg, rgba(255,149,0,0.1), transparent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: var(--zh-blue);
+            color: white;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background-color: var(--zh-light-blue);
+        }
+
+        .draft-row {
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .draft-indicator {
+            display: inline-block;
+            background: var(--zh-orange);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
+        
+        .sk-button {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sk-button.hidden {
+            display: none;
+        }
+
+        .sk-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-1 { background-color: var(--zh-red); }
+        .btn-2 { background-color: var(--zh-orange); }
+        .btn-3 { background-color: var(--zh-yellow); color: var(--zh-text); }
+        .btn-4 { background-color: var(--zh-green); }
+        .btn-5 { background-color: var(--zh-cyan); }
+        .btn-6 { background-color: var(--zh-blue); }
+        .btn-7 { background-color: var(--zh-purple); }
+        .btn-8 { background-color: var(--zh-pink); }
+        .btn-9 { background-color: var(--zh-teal); }
+        .btn-10 { background-color: var(--zh-indigo); }
+        .btn-11 { background-color: var(--zh-coral); }
+        .btn-12 { background-color: var(--zh-lime); color: var(--zh-text); }
+        
+        .reset-button {
+            padding: 10px 20px;
+            background-color: var(--zh-gray);
+            color: var(--zh-text);
+            border: 2px solid var(--zh-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-button:hover {
+            background-color: var(--zh-light-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Qualitative Einschätzung */
+        .qualitative-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .qualitative-section h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .qualitative-section h3 {
+            color: var(--zh-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .qualitative-section p {
+            margin-bottom: 1rem;
+        }
+
+        .qualitative-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .erfuellung-gut {
+            color: var(--zh-green);
+            font-weight: 600;
+        }
+
+        .erfuellung-genuegend {
+            color: var(--zh-orange);
+            font-weight: 600;
+        }
+
+        .erfuellung-knapp {
+            color: var(--zh-red);
+            font-weight: 600;
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--zh-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--zh-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+
+            .kacheln-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Schlüsselkompetenzen</h1>
-  <p>Hier stehen die Schlüsselkompetenzen für EFZ 3-jährig...</p>
-  <a href="index.html">Zurück zu Zirkularität</a>
-  <a href="zirkularitaet.html">Zurück zur Übersicht</a>
+    <!-- Header -->
+    <header class="header">
+        <h1>Schlüsselkompetenzen EFZ</h1>
+        <p>Spiralförmiger Aufbau der Kompetenzen für lebenslanges Lernen</p>
+        <p class="subtitle">3-jährige Grundbildung - Schullehrplan Allgemeinbildung 2030</p>
+    </header>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Status Info -->
+        <div class="status-info">
+            <h2>📊 Bearbeitungsstand der Themen</h2>
+            <ul>
+                <li><strong>1. Schuljahr (vollständig erarbeitet):</strong>
+                    <span class="status-badge badge-complete">Fertig</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Thema 1: Ins Berufsleben einsteigen</li>
+                        <li>• Thema 2: Meinungen bilden und mitgestalten</li>
+                        <li>• Thema 3: Bewusst konsumieren und handeln</li>
+                    </ul>
+                </li>
+                <li style="margin-top: 15px;"><strong>2. & 3. Schuljahr (in Ausarbeitung):</strong>
+                    <span class="status-badge badge-draft">Entwurf</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Thema 4: Verantwortung für mich und andere übernehmen</li>
+                        <li>• Thema 5: Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</li>
+                        <li>• Thema 6: Von zu Hause ausziehen</li>
+                        <li>• Thema 7: Arbeiten in der Zukunft</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Überschrift -->
+        <div class="kompetenzen-title">
+            <h2>Schlüsselkompetenzen für lebenslanges Lernen</h2>
+        </div>
+        
+        <!-- Interaktive Kacheln -->
+        <div class="kacheln-container">
+            <div class="kachel kachel-1" onclick="filterKompetenz('1')">
+                <div class="kachel-nummer">3.2.1</div>
+                <div class="kachel-text">Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-2" onclick="filterKompetenz('2')">
+                <div class="kachel-nummer">3.2.2</div>
+                <div class="kachel-text">Ziele setzen, prüfen, adaptiv handeln</div>
+                <div class="kachel-count">Vorkommnisse: 2</div>
+            </div>
+            <div class="kachel kachel-3" onclick="filterKompetenz('3')">
+                <div class="kachel-nummer">3.2.3</div>
+                <div class="kachel-text">Antizipativ, unternehmerisch, innovativ Probleme lösen</div>
+                <div class="kachel-count">Vorkommnisse: 4</div>
+            </div>
+            <div class="kachel kachel-4" onclick="filterKompetenz('4')">
+                <div class="kachel-nummer">3.2.4</div>
+                <div class="kachel-text">In unterschiedlichen Teams effizient arbeiten</div>
+                <div class="kachel-count">Vorkommnisse: 3</div>
+            </div>
+            <div class="kachel kachel-5" onclick="filterKompetenz('5')">
+                <div class="kachel-nummer">3.2.5</div>
+                <div class="kachel-text">Werthaltungen reflektieren und weiterentwickeln</div>
+                <div class="kachel-count">Vorkommnisse: 8</div>
+            </div>
+            <div class="kachel kachel-6" onclick="filterKompetenz('6')">
+                <div class="kachel-nummer">3.2.6</div>
+                <div class="kachel-text">Standpunkte begründen und überzeugen</div>
+                <div class="kachel-count">Vorkommnisse: 4</div>
+            </div>
+            <div class="kachel kachel-7" onclick="filterKompetenz('7')">
+                <div class="kachel-nummer">3.2.7</div>
+                <div class="kachel-text">Perspektiven wechseln und gegenseitiges Verständnis fördern</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-8" onclick="filterKompetenz('8')">
+                <div class="kachel-nummer">3.2.8</div>
+                <div class="kachel-text">Lebensphasen planen, mit Unwägbarkeiten umgehen</div>
+                <div class="kachel-count">Vorkommnisse: 3</div>
+            </div>
+            <div class="kachel kachel-9" onclick="filterKompetenz('9')">
+                <div class="kachel-nummer">3.2.9</div>
+                <div class="kachel-text">Vernetzt/systemisch denken, nachhaltig handeln</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-10" onclick="filterKompetenz('10')">
+                <div class="kachel-nummer">3.2.10</div>
+                <div class="kachel-text">Sich an Wandel anpassen</div>
+                <div class="kachel-count">Vorkommnisse: 3</div>
+            </div>
+            <div class="kachel kachel-11" onclick="filterKompetenz('11')">
+                <div class="kachel-nummer">3.2.11</div>
+                <div class="kachel-text">Mit Mehrdeutigkeiten umgehen</div>
+                <div class="kachel-count">Vorkommnisse: 2</div>
+            </div>
+            <div class="kachel kachel-12" onclick="filterKompetenz('12')">
+                <div class="kachel-nummer">3.2.12</div>
+                <div class="kachel-text">Gesellschaftlich partizipieren, Handlungsspielräume nutzen</div>
+                <div class="kachel-count">Vorkommnisse: 1</div>
+            </div>
+        </div>
+
+        <button class="reset-button" onclick="resetFilter()">Filter zurücksetzen</button>
+        
+        <!-- Tabelle mit allen Themen -->
+        <div class="table-container">
+            <h2>Übersicht der Themen und Schlüsselkompetenzen</h2>
+            
+            <div class="section-title">
+                1. Schuljahr - Vollständig erarbeitet
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Schlüsselkompetenzen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Thema 1 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 1:</strong> Ins Berufsleben einsteigen</td>
+                        <td>1: Ich finde mich im Berufsbildungssystem zurecht.</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kommuniziere auf konstruktive Art und Weise.</td>
+                        <td>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich lerne effektiv und setze meine Ressourcen effizient ein.</td>
+                        <td>
+                            <span class="sk-button btn-2" data-sk="2" onclick="filterKompetenz('2')">3.2.2</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Thema 2 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 2:</strong> Meinungen bilden und mitgestalten</td>
+                        <td>1: Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert...</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich erlebe Diskussionen über Ungleichbehandlung...</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Wir jungen Menschen wollen mitreden...</td>
+                        <td>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Thema 3 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 3:</strong> Bewusst konsumieren und handeln</td>
+                        <td>1: Ich treffe überlegte Kaufentscheidungen...</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich achte auf einen nachhaltigen Konsum.</td>
+                        <td>
+                            <span class="sk-button btn-1" data-sk="1" onclick="filterKompetenz('1')">3.2.1</span>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne meine Rechte und Pflichten beim Einkaufen...</td>
+                        <td>
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section-title draft">
+                2. & 3. Schuljahr - In Ausarbeitung
+                <span class="draft-indicator">Entwurf</span>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Schlüsselkompetenzen</th>
+                    </tr>
+                </thead>
+                <tbody class="draft-row">
+                    <!-- Thema 4 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 4:</strong> Verantwortung für mich und andere übernehmen</td>
+                        <td>1: Ich sorge für mein körperliches und psychisches Wohlbefinden.</td>
+                        <td rowspan="3">
+                            <span class="sk-button btn-5" data-sk="5" onclick="filterKompetenz('5')">3.2.5</span>
+                            <span class="sk-button btn-7" data-sk="7" onclick="filterKompetenz('7')">3.2.7</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich erkenne gesellschaftliche Vielfalt an und verhalte mich respektvoll.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich beschäftige mich mit Integration, Ausgrenzung und Chancengerechtigkeit.</td>
+                    </tr>
+                    
+                    <!-- Thema 5 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 5:</strong> Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</td>
+                        <td>1: Ich gehe selbstständig mit Geld um und plane vorausschauend.</td>
+                        <td rowspan="3">
+                            <span class="sk-button btn-6" data-sk="6" onclick="filterKompetenz('6')">3.2.6</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                            <span class="sk-button btn-11" data-sk="11" onclick="filterKompetenz('11')">3.2.11</span>
+                            <span class="sk-button btn-12" data-sk="12" onclick="filterKompetenz('12')">3.2.12</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kenne meine Rechte und Pflichten und weiss, wie ich mitgestalten kann.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich setze mich kritisch mit den Staatsaufgaben auseinander.</td>
+                    </tr>
+                    
+                    <!-- Thema 6 -->
+                    <tr>
+                        <td rowspan="4"><strong>Thema 6:</strong> Von zu Hause ausziehen</td>
+                        <td>1: Ich finde eine passende Wohnung und organisiere den Einzug selbstständig.</td>
+                        <td rowspan="4">
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
+                            <span class="sk-button btn-9" data-sk="9" onclick="filterKompetenz('9')">3.2.9</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kenne meine Rechte und Pflichten als Mieter/in.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne verschiedene Wohn- und Lebensformen.</td>
+                    </tr>
+                    <tr>
+                        <td>4: Ich organisiere meine Mobilität nachhaltig.</td>
+                    </tr>
+                    
+                    <!-- Thema 7 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 7:</strong> Arbeiten in der Zukunft</td>
+                        <td>1: Ich kenne die Chancen und Herausforderungen der Digitalisierung.</td>
+                        <td rowspan="3">
+                            <span class="sk-button btn-3" data-sk="3" onclick="filterKompetenz('3')">3.2.3</span>
+                            <span class="sk-button btn-4" data-sk="4" onclick="filterKompetenz('4')">3.2.4</span>
+                            <span class="sk-button btn-8" data-sk="8" onclick="filterKompetenz('8')">3.2.8</span>
+                            <span class="sk-button btn-10" data-sk="10" onclick="filterKompetenz('10')">3.2.10</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich plane meine berufliche Zukunft und achte auf meine Lebensqualität.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne meine Rechte und Pflichten im Arbeitsleben.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
+            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Fundamentale Kernkompetenzen</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei der Kompetenz "Werthaltungen reflektieren und weiterentwickeln" (3.2.5) mit 8 Vorkommen am besten erfüllt.</p>
+                        <p><strong>Erklärung:</strong> Diese Kompetenz bildet das absolute Fundament des Lehrplans. Ihre häufige Wiederholung über verschiedene Themen hinweg - vom Berufseinstieg über Meinungsbildung bis hin zu nachhaltigem Konsum und gesellschaftlicher Verantwortung - zeigt, dass die persönliche Werteentwicklung als roter Faden durch die gesamte Ausbildung zieht. Der Lehrplan legt hier einen klaren Schwerpunkt auf die Entwicklung einer selbstreflexiven Persönlichkeit.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Wichtige Querschnittskompetenzen</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei den Kompetenzen "Quellen unterscheiden" (3.2.1), "Perspektiven wechseln" (3.2.7) und "Vernetzt/systemisch denken" (3.2.9) mit jeweils 5 Vorkommen sowie "Standpunkte begründen" (3.2.6) und "Probleme lösen" (3.2.3) mit je 4 Vorkommen als genügend zu bewerten.</p>
+                        <p><strong>Erklärung:</strong> Diese Fähigkeiten werden regelmässig in mehreren Themenbereichen aufgegriffen. Sie fungieren als wichtige Werkzeuge für kritisches Denken (Quellenkritik), soziale Kompetenz (Perspektivwechsel), Problemlösung und nachhaltiges Handeln. Die Wiederholung ist ausreichend, um eine solide Grundlage zu schaffen, könnte aber für einen noch besseren Transfer in verschiedene Lebensbereiche verstärkt werden.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Spezifische Anwendungskompetenzen</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei mehreren Kompetenzen nur knapp erfüllt: "Ziele setzen" (3.2.2) und "Mit Mehrdeutigkeiten umgehen" (3.2.11) mit je 2 Vorkommen, "In Teams arbeiten" (3.2.4), "Lebensphasen planen" (3.2.8) und "Sich an Wandel anpassen" (3.2.10) mit je 3 Vorkommen, sowie "Gesellschaftlich partizipieren" (3.2.12) mit nur einem Vorkommen.</p>
+                        <p><strong>Erklärung:</strong> Diese Kompetenzen werden nur in wenigen, sehr spezifischen Kontexten explizit gefördert. Besonders kritisch ist die minimale Verankerung der gesellschaftlichen Partizipation (3.2.12), die nur in einem einzigen Thema vorkommt. Die geringe Wiederholungsrate birgt die Gefahr, dass diese Fähigkeiten als isolierte "Methoden" wahrgenommen werden und der Transfer in neue Situationen nicht ausreichend geübt wird. Hier besteht das grösste Potenzial für eine stärkere zirkuläre Integration über die gesamte Ausbildung.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeFilter = null;
+        
+        function filterKompetenz(kompetenzNr) {
+            // Alle Kacheln zurücksetzen
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            
+            if (activeFilter === kompetenzNr) {
+                // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
+                resetFilter();
+                return;
+            }
+            
+            // Neue Kachel aktivieren
+            document.querySelector(`.kachel-${kompetenzNr}`).classList.add('active');
+            activeFilter = kompetenzNr;
+            
+            // Alle Buttons verstecken
+            document.querySelectorAll('.sk-button').forEach(btn => {
+                btn.classList.add('hidden');
+            });
+            
+            // Nur die entsprechenden Buttons anzeigen
+            document.querySelectorAll(`.sk-button[data-sk="${kompetenzNr}"]`).forEach(btn => {
+                btn.classList.remove('hidden');
+            });
+        }
+        
+        function resetFilter() {
+            activeFilter = null;
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            document.querySelectorAll('.sk-button').forEach(btn => {
+                btn.classList.remove('hidden');
+            });
+        }
+
+        // Accordion Funktion
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+            
+            // Schließe alle anderen Accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                }
+            });
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
+            });
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

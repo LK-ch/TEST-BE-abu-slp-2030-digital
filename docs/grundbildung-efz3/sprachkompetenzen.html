@@ -1,12 +1,929 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Sprachkompetenzen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprachmodi EFZ - Zirkulärer Aufbau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-accent: #FF6B6B;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-orange: #FF9500;
+            --zh-purple: #9B59B6;
+            --zh-pink: #FF69B4;
+            --zh-teal: #20B2AA;
+            --zh-red: #DC143C;
+            --zh-yellow: #FFD700;
+            --zh-cyan: #00CED1;
+            --zh-lime: #32CD32;
+            --zh-indigo: #4B0082;
+            --zh-coral: #FF7F50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-blue) 0%, var(--zh-dark-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--zh-yellow);
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation Breadcrumb */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--zh-gray);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .back-btn:hover {
+            background: var(--zh-light-blue);
+            transform: translateX(-5px);
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .efz-link {
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .efz-link:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Status Info Box */
+        .status-info {
+            background: linear-gradient(135deg, var(--zh-light-blue), white);
+            border-left: 5px solid var(--zh-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-info h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .status-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .status-info li {
+            padding: 5px 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-complete {
+            background: var(--zh-green);
+            color: white;
+        }
+
+        .badge-draft {
+            background: var(--zh-orange);
+            color: white;
+        }
+
+        /* Title Section */
+        .sprachmodi-title {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sprachmodi-title h2 {
+            color: var(--zh-dark-blue);
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Kacheln */
+        .kacheln-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .kachel {
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kachel.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Farben für Sprachmodi-Kacheln */
+        .kachel-1 { background: linear-gradient(135deg, rgba(15,5,160,0.1), rgba(15,5,160,0.05)); border-color: var(--zh-blue); }
+        .kachel-2 { background: linear-gradient(135deg, rgba(0,206,209,0.1), rgba(0,206,209,0.05)); border-color: var(--zh-cyan); }
+        .kachel-3 { background: linear-gradient(135deg, rgba(32,178,170,0.1), rgba(32,178,170,0.05)); border-color: var(--zh-teal); }
+        .kachel-4 { background: linear-gradient(135deg, rgba(255,149,0,0.1), rgba(255,149,0,0.05)); border-color: var(--zh-orange); }
+        .kachel-5 { background: linear-gradient(135deg, rgba(255,127,80,0.1), rgba(255,127,80,0.05)); border-color: var(--zh-coral); }
+        .kachel-6 { background: linear-gradient(135deg, rgba(220,20,60,0.1), rgba(220,20,60,0.05)); border-color: var(--zh-red); }
+        .kachel-7 { background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.05)); border-color: var(--zh-purple); }
+        .kachel-8 { background: linear-gradient(135deg, rgba(255,105,180,0.1), rgba(255,105,180,0.05)); border-color: var(--zh-pink); }
+        .kachel-9 { background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,200,150,0.05)); border-color: var(--zh-green); }
+        
+        .kachel-nummer {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .kachel-text {
+            font-size: 12px;
+            margin-bottom: 8px;
+            min-height: 40px;
+        }
+        
+        .kachel-count {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* Tabelle */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: var(--zh-gray);
+            padding: 10px 20px;
+            margin: 20px 0 10px 0;
+            border-left: 5px solid var(--zh-blue);
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--zh-dark-blue);
+        }
+
+        .section-title.draft {
+            border-left-color: var(--zh-orange);
+            background: linear-gradient(90deg, rgba(255,149,0,0.1), transparent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: var(--zh-blue);
+            color: white;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background-color: var(--zh-light-blue);
+        }
+
+        .draft-row {
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .draft-indicator {
+            display: inline-block;
+            background: var(--zh-orange);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
+
+        /* Sprachmodi Tags als Buttons */
+        .sprachmodi-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sprachmodi-tag.hidden {
+            display: none;
+        }
+
+        .sprachmodi-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Farben für Sprachmodi-Buttons */
+        .btn-1 { background-color: var(--zh-blue); }
+        .btn-2 { background-color: var(--zh-cyan); }
+        .btn-3 { background-color: var(--zh-teal); }
+        .btn-4 { background-color: var(--zh-orange); }
+        .btn-5 { background-color: var(--zh-coral); }
+        .btn-6 { background-color: var(--zh-red); }
+        .btn-7 { background-color: var(--zh-purple); }
+        .btn-8 { background-color: var(--zh-pink); }
+        .btn-9 { background-color: var(--zh-green); }
+
+        .reset-button {
+            padding: 10px 20px;
+            background-color: var(--zh-gray);
+            color: var(--zh-text);
+            border: 2px solid var(--zh-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-button:hover {
+            background-color: var(--zh-light-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Qualitative Einschätzung */
+        .qualitative-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .qualitative-section h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--zh-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--zh-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+        }
+
+        .accordion-body ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .erfuellung-gut {
+            color: var(--zh-green);
+            font-weight: 600;
+        }
+
+        .erfuellung-genuegend {
+            color: var(--zh-orange);
+            font-weight: 600;
+        }
+
+        .erfuellung-knapp {
+            color: var(--zh-red);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+
+            .kacheln-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-breadcrumb {
+                padding: 1rem;
+            }
+
+            .efz-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Sprachkompetenzen</h1>
-  <p>Hier stehen die Sprachkompetenzen für EFZ 3-jährig...</p>
-  <a href="index.html">Zurück zu Zirkularität</a>
-  <a href="zirkularitaet.html">Zurück zur Übersicht</a>
+    <!-- Header -->
+    <header class="header">
+        <h1>Sprachmodi EFZ</h1>
+        <p>Zirkulärer Aufbau der Kommunikationskompetenzen über alle Themen</p>
+        <p class="subtitle">3-jährige Grundbildung - Schullehrplan Allgemeinbildung 2030</p>
+    </header>
+
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <a href="index.html">Übersicht</a>
+        <span>›</span>
+        <span>Sprachmodi</span>
+        <a href="index.html" class="efz-link">🏠 EFZ-Überblick</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <a href="zirkularitaet.html" class="back-btn">
+            ← Zurück zur Übersicht
+        </a>
+
+        <!-- Status Info -->
+        <div class="status-info">
+            <h2>📊 Bearbeitungsstand der Themen</h2>
+            <ul>
+                <li><strong>1. Schuljahr (vollständig erarbeitet):</strong>
+                    <span class="status-badge badge-complete">Fertig</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Thema 1: Ins Berufsleben einsteigen</li>
+                        <li>• Thema 2: Meinungen bilden und mitgestalten</li>
+                        <li>• Thema 3: Bewusst konsumieren und handeln</li>
+                    </ul>
+                </li>
+                <li style="margin-top: 15px;"><strong>2. & 3. Schuljahr (in Ausarbeitung):</strong>
+                    <span class="status-badge badge-draft">Entwurf</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Thema 4: Verantwortung für mich und andere übernehmen</li>
+                        <li>• Thema 5: Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</li>
+                        <li>• Thema 6: Von zu Hause ausziehen</li>
+                        <li>• Thema 7: Arbeiten in der Zukunft</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Title Section -->
+        <div class="sprachmodi-title">
+            <h2>Sprachmodi im zirkulären Aufbau</h2>
+        </div>
+
+        <!-- Interaktive Kacheln -->
+        <div class="kacheln-container">
+            <div class="kachel kachel-1" onclick="filterModus('1')">
+                <div class="kachel-nummer">4.2.1.1</div>
+                <div class="kachel-text">Rezeption mündlich</div>
+                <div class="kachel-count">Vorkommnisse: 4</div>
+            </div>
+            <div class="kachel kachel-2" onclick="filterModus('2')">
+                <div class="kachel-nummer">4.2.1.2</div>
+                <div class="kachel-text">Rezeption audiovisuell</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-3" onclick="filterModus('3')">
+                <div class="kachel-nummer">4.2.1.3</div>
+                <div class="kachel-text">Rezeption schriftlich & bildlich</div>
+                <div class="kachel-count">Vorkommnisse: 9</div>
+            </div>
+            <div class="kachel kachel-4" onclick="filterModus('4')">
+                <div class="kachel-nummer">4.2.2.1</div>
+                <div class="kachel-text">Produktion mündlich</div>
+                <div class="kachel-count">Vorkommnisse: 2</div>
+            </div>
+            <div class="kachel kachel-5" onclick="filterModus('5')">
+                <div class="kachel-nummer">4.2.2.2</div>
+                <div class="kachel-text">Produktion schriftlich & bildlich</div>
+                <div class="kachel-count">Vorkommnisse: 5</div>
+            </div>
+            <div class="kachel kachel-6" onclick="filterModus('6')">
+                <div class="kachel-nummer">4.2.2.3</div>
+                <div class="kachel-text">Produktion multimedial</div>
+                <div class="kachel-count">Vorkommnisse: 4</div>
+            </div>
+            <div class="kachel kachel-7" onclick="filterModus('7')">
+                <div class="kachel-nummer">4.2.3.1</div>
+                <div class="kachel-text">Interaktion & Kollaboration mündlich</div>
+                <div class="kachel-count">Vorkommnisse: 7</div>
+            </div>
+            <div class="kachel kachel-8" onclick="filterModus('8')">
+                <div class="kachel-nummer">4.2.3.2</div>
+                <div class="kachel-text">Interaktion & Kollaboration schriftlich</div>
+                <div class="kachel-count">Vorkommnisse: 6</div>
+            </div>
+            <div class="kachel kachel-9" onclick="filterModus('9')">
+                <div class="kachel-nummer">4.2.3.3</div>
+                <div class="kachel-text">Interaktion & Kollaboration digital</div>
+                <div class="kachel-count">Vorkommnisse: 3</div>
+            </div>
+        </div>
+
+        <button class="reset-button" onclick="resetFilter()">Filter zurücksetzen</button>
+
+        <!-- Tabelle mit allen Themen -->
+        <div class="table-container">
+            <h2>Übersicht der Themen und Sprachmodi</h2>
+            
+            <div class="section-title">
+                1. Schuljahr - Vollständig erarbeitet
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Sprachmodi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Thema 1 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 1:</strong> Ins Berufsleben einsteigen</td>
+                        <td>1: Ich finde mich im Berufsbildungssystem zurecht.</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                            <span class="sprachmodi-tag btn-8" data-modus="8" onclick="filterModus('8')">4.2.3.2</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kommuniziere auf konstruktive Art und Weise.</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                            <span class="sprachmodi-tag btn-8" data-modus="8" onclick="filterModus('8')">4.2.3.2</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich lerne effektiv und setze meine Ressourcen effizient ein.</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                            <span class="sprachmodi-tag btn-9" data-modus="9" onclick="filterModus('9')">4.2.3.3</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Thema 2 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 2:</strong> Meinungen bilden und mitgestalten</td>
+                        <td>1: Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert...</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-1" data-modus="1" onclick="filterModus('1')">4.2.1.1</span>
+                            <span class="sprachmodi-tag btn-2" data-modus="2" onclick="filterModus('2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag btn-4" data-modus="4" onclick="filterModus('4')">4.2.2.1</span>
+                            <span class="sprachmodi-tag btn-6" data-modus="6" onclick="filterModus('6')">4.2.2.3</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich erlebe Diskussionen über Ungleichbehandlung...</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-1" data-modus="1" onclick="filterModus('1')">4.2.1.1</span>
+                            <span class="sprachmodi-tag btn-2" data-modus="2" onclick="filterModus('2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag btn-5" data-modus="5" onclick="filterModus('5')">4.2.2.2</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Wir jungen Menschen wollen mitreden...</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-1" data-modus="1" onclick="filterModus('1')">4.2.1.1</span>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Thema 3 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 3:</strong> Bewusst konsumieren und handeln</td>
+                        <td>1: Ich treffe überlegte Kaufentscheidungen...</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-2" data-modus="2" onclick="filterModus('2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-5" data-modus="5" onclick="filterModus('5')">4.2.2.2</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                            <span class="sprachmodi-tag btn-9" data-modus="9" onclick="filterModus('9')">4.2.3.3</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich achte auf einen nachhaltigen Konsum.</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-2" data-modus="2" onclick="filterModus('2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-5" data-modus="5" onclick="filterModus('5')">4.2.2.2</span>
+                            <span class="sprachmodi-tag btn-6" data-modus="6" onclick="filterModus('6')">4.2.2.3</span>
+                            <span class="sprachmodi-tag btn-8" data-modus="8" onclick="filterModus('8')">4.2.3.2</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne meine Rechte und Pflichten beim Einkaufen...</td>
+                        <td>
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-5" data-modus="5" onclick="filterModus('5')">4.2.2.2</span>
+                            <span class="sprachmodi-tag btn-8" data-modus="8" onclick="filterModus('8')">4.2.3.2</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section-title draft">
+                2. & 3. Schuljahr - In Ausarbeitung
+                <span class="draft-indicator">Entwurf</span>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Sprachmodi</th>
+                    </tr>
+                </thead>
+                <tbody class="draft-row">
+                    <!-- Thema 4 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 4:</strong> Verantwortung für mich und andere übernehmen</td>
+                        <td>1: Ich sorge für mein körperliches und psychisches Wohlbefinden.</td>
+                        <td rowspan="3">
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-5" data-modus="5" onclick="filterModus('5')">4.2.2.2</span>
+                            <span class="sprachmodi-tag btn-7" data-modus="7" onclick="filterModus('7')">4.2.3.1</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich erkenne gesellschaftliche Vielfalt an und verhalte mich respektvoll.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich beschäftige mich mit Integration, Ausgrenzung und Chancengerechtigkeit.</td>
+                    </tr>
+                    
+                    <!-- Thema 5 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 5:</strong> Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</td>
+                        <td>1: Ich gehe selbstständig mit Geld um und plane vorausschauend.</td>
+                        <td rowspan="3">
+                            <span class="sprachmodi-tag btn-2" data-modus="2" onclick="filterModus('2')">4.2.1.2</span>
+                            <span class="sprachmodi-tag btn-4" data-modus="4" onclick="filterModus('4')">4.2.2.1</span>
+                            <span class="sprachmodi-tag btn-9" data-modus="9" onclick="filterModus('9')">4.2.3.3</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kenne meine Rechte und Pflichten und weiss, wie ich mitgestalten kann.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich setze mich kritisch mit den Staatsaufgaben auseinander.</td>
+                    </tr>
+                    
+                    <!-- Thema 6 -->
+                    <tr>
+                        <td rowspan="4"><strong>Thema 6:</strong> Von zu Hause ausziehen</td>
+                        <td>1: Ich finde eine passende Wohnung und organisiere den Einzug selbstständig.</td>
+                        <td rowspan="4">
+                            <span class="sprachmodi-tag btn-1" data-modus="1" onclick="filterModus('1')">4.2.1.1</span>
+                            <span class="sprachmodi-tag btn-6" data-modus="6" onclick="filterModus('6')">4.2.2.3</span>
+                            <span class="sprachmodi-tag btn-8" data-modus="8" onclick="filterModus('8')">4.2.3.2</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kenne meine Rechte und Pflichten als Mieter/in.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne verschiedene Wohn- und Lebensformen.</td>
+                    </tr>
+                    <tr>
+                        <td>4: Ich organisiere meine Mobilität nachhaltig.</td>
+                    </tr>
+                    
+                    <!-- Thema 7 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 7:</strong> Arbeiten in der Zukunft</td>
+                        <td>1: Ich kenne die Chancen und Herausforderungen der Digitalisierung.</td>
+                        <td rowspan="3">
+                            <span class="sprachmodi-tag btn-3" data-modus="3" onclick="filterModus('3')">4.2.1.3</span>
+                            <span class="sprachmodi-tag btn-6" data-modus="6" onclick="filterModus('6')">4.2.2.3</span>
+                            <span class="sprachmodi-tag btn-8" data-modus="8" onclick="filterModus('8')">4.2.3.2</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich plane meine berufliche Zukunft und achte auf meine Lebensqualität.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne meine Rechte und Pflichten im Arbeitsleben.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
+            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Rezeption und mündliche Interaktion</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei den Modi <strong>"Rezeption schriftlich & bildlich" (4.2.1.3)</strong> mit 9 Vorkommen und <strong>"Interaktion & Kollaboration mündlich" (4.2.3.1)</strong> mit 7 Vorkommen sehr gut erfüllt.</p>
+                        <p><strong>Erklärung:</strong> Diese beiden Sprachmodi bilden das kommunikative Rückgrat der EFZ-Ausbildung:</p>
+                        <ul>
+                            <li>Die schriftliche/bildliche Rezeption (9x) ist über fast alle Themen verteilt und sichert die Grundlage für informierte Entscheidungen - von Verträgen über politische Texte bis zu Steuerformularen</li>
+                            <li>Die mündliche Interaktion (7x) ist besonders in den ersten Themen stark verankert und fördert die Diskussionskultur und Teamfähigkeit</li>
+                        </ul>
+                        <p>Diese breite Verankerung stellt sicher, dass Lernende sowohl schriftliche Informationen kompetent verarbeiten als auch mündlich konstruktiv kommunizieren können.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Produktion und schriftliche Kollaboration</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei <strong>"Interaktion & Kollaboration schriftlich" (4.2.3.2)</strong> mit 6 Vorkommen, <strong>"Rezeption audiovisuell" (4.2.1.2)</strong> und <strong>"Produktion schriftlich & bildlich" (4.2.2.2)</strong> mit je 5 Vorkommen sowie <strong>"Produktion multimedial" (4.2.2.3)</strong> und <strong>"Rezeption mündlich" (4.2.1.1)</strong> mit je 4 Vorkommen als genügend zu bewerten.</p>
+                        <p><strong>Erklärung:</strong> Diese Modi werden regelmässig eingesetzt und decken wichtige Bereiche ab:</p>
+                        <ul>
+                            <li>Die schriftliche Kollaboration (6x) ist solide integriert, besonders bei formeller Korrespondenz</li>
+                            <li>Die audiovisuelle Rezeption (5x) und schriftliche Produktion (5x) sind ausgewogen verteilt</li>
+                            <li>Die multimediale Produktion (4x) und mündliche Rezeption (4x) könnten noch breiter verankert werden</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Digitale Interaktion und mündliche Produktion</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei <strong>"Interaktion & Kollaboration digital" (4.2.3.3)</strong> mit nur 3 Vorkommen und <strong>"Produktion mündlich" (4.2.2.1)</strong> mit nur 2 Vorkommen deutlich unterrepräsentiert.</p>
+                        <p><strong>Erklärung:</strong> Diese kritischen Lücken sind problematisch:</p>
+                        <ul>
+                            <li><strong>Digitale Kollaboration (3x):</strong> In der modernen Arbeitswelt essentiell, aber nur punktuell eingesetzt. Dies könnte die Vorbereitung auf digitale Teamarbeit, Online-Meetings und Remote-Arbeit beeinträchtigen</li>
+                            <li><strong>Mündliche Produktion (2x):</strong> Präsentationen, Vorträge und strukturierte mündliche Beiträge sind beruflich zentral, werden aber kaum geübt. Dies könnte zu Defiziten bei Kundenpräsentationen oder Fachvorträgen führen</li>
+                        </ul>
+                        <p><strong>Verbesserungspotenzial:</strong></p>
+                        <ul>
+                            <li>Integration digitaler Kollaborationstools in mehr Themen</li>
+                            <li>Verstärkte Übung von Präsentationen und Pitches</li>
+                            <li>Einbindung von Video-Konferenzen und digitalen Projektarbeiten</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeFilter = null;
+        
+        function filterModus(modusNr) {
+            // Alle Kacheln zurücksetzen
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            
+            if (activeFilter === modusNr) {
+                // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
+                resetFilter();
+                return;
+            }
+            
+            // Neue Kachel aktivieren
+            document.querySelector(`.kachel-${modusNr}`).classList.add('active');
+            activeFilter = modusNr;
+            
+            // Alle Tags verstecken
+            document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
+                tag.classList.add('hidden');
+            });
+            
+            // Nur die entsprechenden Tags anzeigen
+            document.querySelectorAll(`.sprachmodi-tag[data-modus="${modusNr}"]`).forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
+        
+        function resetFilter() {
+            activeFilter = null;
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
+
+        // Accordion Funktion
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+            
+            // Schließe alle anderen Accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                }
+            });
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
+            });
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

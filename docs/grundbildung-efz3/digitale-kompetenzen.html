@@ -1,1 +1,1260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale Kompetenzen EFZ - Zirkulärer Aufbau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            
+            /* Farben für die 6 digitalen Kompetenzbereiche */
+            --kompetenz-idk: #0F05A0;
+            --kompetenz-kz: #00C896;
+            --kompetenz-die: #9B59B6;
+            --kompetenz-pl: #FF9500;
+            --kompetenz-ki: #DC143C;
+            --kompetenz-er: #2E3A59;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-blue) 0%, var(--zh-dark-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #FFD700;
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--zh-gray);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .back-btn:hover {
+            background: var(--zh-light-blue);
+            transform: translateX(-5px);
+        }
+
+        .efz-link {
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .efz-link:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Concept Section */
+        .concept-section {
+            background: linear-gradient(135deg, var(--zh-light-blue) 0%, rgba(255,255,255,0.9) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-section h2 {
+            color: var(--zh-dark-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--zh-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .concept-section h3 {
+            color: var(--zh-blue);
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .framework-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .framework-card h4 {
+            color: var(--zh-dark-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .framework-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--zh-blue);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Status Info */
+        .status-info {
+            background: linear-gradient(135deg, var(--zh-light-blue), white);
+            border-left: 5px solid var(--zh-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-info h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-complete {
+            background: #00C896;
+            color: white;
+        }
+
+        .badge-draft {
+            background: #FF9500;
+            color: white;
+        }
+
+        /* Title Section */
+        .kompetenzen-title {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .kompetenzen-title h2 {
+            color: var(--zh-dark-blue);
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Kompetenzen Übersicht mit Accordions */
+        .kompetenzen-overview {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .kompetenzen-overview h3 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .kompetenzen-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .kompetenz-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .kompetenz-header {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .kompetenz-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .kompetenz-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .kompetenz-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .kompetenz-header.active .kompetenz-icon {
+            transform: rotate(180deg);
+        }
+
+        .kompetenz-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: var(--zh-gray);
+        }
+
+        .kompetenz-content.active {
+            max-height: 1000px;
+        }
+
+        .kompetenz-body {
+            padding: 15px;
+        }
+
+        .thema-gruppe {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .thema-titel {
+            font-weight: bold;
+            color: var(--zh-dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .kompetenz-liste {
+            margin-left: 15px;
+        }
+
+        .kompetenz-punkt {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Kacheln */
+        .kacheln-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .kachel {
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kachel.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Farben für Kompetenz-Kacheln */
+        .kachel-idk { 
+            background: linear-gradient(135deg, rgba(15,5,160,0.1), rgba(15,5,160,0.05)); 
+            border-color: var(--kompetenz-idk); 
+        }
+        .kachel-kz { 
+            background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,200,150,0.05)); 
+            border-color: var(--kompetenz-kz); 
+        }
+        .kachel-die { 
+            background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.05)); 
+            border-color: var(--kompetenz-die); 
+        }
+        .kachel-pl { 
+            background: linear-gradient(135deg, rgba(255,149,0,0.1), rgba(255,149,0,0.05)); 
+            border-color: var(--kompetenz-pl); 
+        }
+        .kachel-ki { 
+            background: linear-gradient(135deg, rgba(220,20,60,0.1), rgba(220,20,60,0.05)); 
+            border-color: var(--kompetenz-ki); 
+        }
+        .kachel-er { 
+            background: linear-gradient(135deg, rgba(46,58,89,0.1), rgba(46,58,89,0.05)); 
+            border-color: var(--kompetenz-er); 
+        }
+        
+        .kachel-titel {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .kachel-info {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .vorkommen-zahl {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--zh-dark-blue);
+            margin: 10px 0;
+        }
+
+        .vorkommen-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Tabelle */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: var(--zh-gray);
+            padding: 10px 20px;
+            margin: 20px 0 10px 0;
+            border-left: 5px solid var(--zh-blue);
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--zh-dark-blue);
+        }
+
+        .section-title.draft {
+            border-left-color: #FF9500;
+            background: linear-gradient(90deg, rgba(255,149,0,0.1), transparent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: var(--zh-blue);
+            color: white;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background-color: var(--zh-light-blue);
+        }
+
+        /* Kompetenz Tags als Buttons */
+        .kompetenz-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kompetenz-tag.hidden {
+            display: none;
+        }
+
+        .kompetenz-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Farben für Kompetenz-Buttons */
+        .btn-idk { background-color: var(--kompetenz-idk); }
+        .btn-kz { background-color: var(--kompetenz-kz); }
+        .btn-die { background-color: var(--kompetenz-die); }
+        .btn-pl { background-color: var(--kompetenz-pl); }
+        .btn-ki { background-color: var(--kompetenz-ki); }
+        .btn-er { background-color: var(--kompetenz-er); }
+
+        /* Qualitative Einschätzung */
+        .qualitative-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .qualitative-section h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--zh-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--zh-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+        }
+
+        .accordion-body ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .erfuellung-gut {
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .erfuellung-mittel {
+            color: #F39C12;
+            font-weight: 600;
+        }
+
+        .erfuellung-hoch {
+            color: #3498DB;
+            font-weight: 600;
+        }
+
+        .draft-indicator {
+            display: inline-block;
+            background: #FF9500;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+
+            .kacheln-container {
+                grid-template-columns: 1fr;
+            }
+
+            .kompetenzen-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Digitale Kompetenzen EFZ</h1>
+        <p>Zirkulärer Aufbau über alle Themen</p>
+        <p class="subtitle">3-jährige Grundbildung - Schullehrplan Allgemeinbildung 2030</p>
+    </header>
+
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <a href="zirkularitaet.html">Übersicht</a>
+        <span>›</span>
+        <span>Digitale Kompetenzen</span>
+        <a href="index.html" class="efz-link">🏠 EFZ-Überblick</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <a href="zirkularitaet.html" class="back-btn">
+            ← Zurück zur Übersicht
+        </a>
+
+        <!-- Status Info -->
+        <div class="status-info">
+            <h2>📊 Bearbeitungsstand der digitalen Kompetenzen</h2>
+            <ul style="list-style: none;">
+                <li><strong>Vollständig ausgearbeitet:</strong>
+                    <span class="status-badge badge-complete">Themen 1-3</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Ins Berufsleben einsteigen</li>
+                        <li>• Meinungen bilden und mitgestalten</li>
+                        <li>• Bewusst konsumieren und handeln</li>
+                    </ul>
+                </li>
+                <li style="margin-top: 15px;"><strong>In Ausarbeitung:</strong>
+                    <span class="status-badge badge-draft">Themen 4-7</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Verantwortung für mich und andere übernehmen</li>
+                        <li>• Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</li>
+                        <li>• Von zu Hause ausziehen</li>
+                        <li>• Arbeiten in der Zukunft</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Concept Section -->
+        <section class="concept-section">
+            <h2>Konzept des digitalen Kompetenzrasters für die 3-jährige EFZ-Grundbildung</h2>
+            
+            <p>Das digitale Kompetenzraster für die <strong>3-jährige EFZ-Grundbildung</strong> baut auf dem bewährten Framework auf, das <strong>DigComp 2.2</strong>, das <strong>UNESCO AI-Kompetenzrahmenwerk</strong> und das <strong>OECD AILit-Framework</strong> integriert. Diese Kombination gewährleistet eine umfassende digitale Bildung, die sowohl traditionelle digitale Kompetenzen als auch zukunftsweisende KI-Fähigkeiten vermittelt.</p>
+
+            <h3>Die drei Säulen des kombinierten Frameworks</h3>
+            
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <h4><span class="framework-icon">1</span> DigComp 2.2</h4>
+                    <p>Definiert fünf zentrale digitale Kompetenzbereiche mit praxisnahen Beispielen:</p>
+                    <ul>
+                        <li>Informations- und Datenkompetenz</li>
+                        <li>Kommunikation & Kollaboration</li>
+                        <li>Digitale Inhaltserstellung</li>
+                        <li>Sicherheit</li>
+                        <li>Problemlösung</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card">
+                    <h4><span class="framework-icon">2</span> UNESCO AI-Kompetenzrahmen</h4>
+                    <p>Umfasst vier Schlüsselbereiche mit Progressionsstufen:</p>
+                    <ul>
+                        <li>Human-Centred Mindset</li>
+                        <li>Ethics of AI</li>
+                        <li>AI Foundations & Applications</li>
+                        <li>AI System Design</li>
+                        <li>Stufen: Understand → Apply → Create</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card">
+                    <h4><span class="framework-icon">3</span> AILit-Framework (OECD)</h4>
+                    <p>Liefert konkrete KI-Domänen mit technischem Wissen und ethischen Haltungen:</p>
+                    <ul>
+                        <li><strong>Engaging:</strong> KI erkennen und bewerten</li>
+                        <li><strong>Creating:</strong> Mit KI kreativ arbeiten</li>
+                        <li><strong>Managing:</strong> KI verantwortungsvoll einsetzen</li>
+                        <li><strong>Designing:</strong> KI-Systeme gestalten</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Title Section -->
+        <div class="kompetenzen-title">
+            <h2>Digitale Kompetenzen im zirkulären Aufbau - EFZ (3 Jahre)</h2>
+        </div>
+
+        <!-- Kompetenzen Übersicht mit Accordions -->
+        <div class="kompetenzen-overview">
+            <h3>Detailansicht der digitalen Kompetenzstufen</h3>
+            <div class="kompetenzen-grid">
+                <!-- IDK - Informations- & Datenkompetenz -->
+                <div class="kompetenz-item">
+                    <div class="kompetenz-header" onclick="toggleKompetenz(this)" style="color: var(--kompetenz-idk);">
+                        <span>IDK - Informations- & Datenkompetenz</span>
+                        <span class="kompetenz-icon">▼</span>
+                    </div>
+                    <div class="kompetenz-content">
+                        <div class="kompetenz-body">
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 1: Ins Berufsleben einsteigen</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Informationen aus analogen und digitalen Quellen entnehmen</div>
+                                    <div class="kompetenz-punkt">• Zwischen relevanten und irrelevanten Quellen unterscheiden</div>
+                                    <div class="kompetenz-punkt">• Digitale Informationsquellen gezielt nutzen</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 2: Meinungen bilden und mitgestalten</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Digitale Informationen kritisch prüfen</div>
+                                    <div class="kompetenz-punkt">• Merkmale von Manipulation und Desinformation erkennen</div>
+                                    <div class="kompetenz-punkt">• Einfluss von Algorithmen und Filterblasen verstehen</div>
+                                    <div class="kompetenz-punkt">• Social-Media-Beiträge analysieren</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 3: Bewusst konsumieren und handeln</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Wirtschaftliche Zusammenhänge digital recherchieren</div>
+                                    <div class="kompetenz-punkt">• Audiovisuelle Beiträge zu Konsum analysieren</div>
+                                    <div class="kompetenz-punkt">• Digitale Informationen zu Nachhaltigkeit bewerten</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KZ - Kommunikation & Zusammenarbeit -->
+                <div class="kompetenz-item">
+                    <div class="kompetenz-header" onclick="toggleKompetenz(this)" style="color: var(--kompetenz-kz);">
+                        <span>KZ - Kommunikation & Zusammenarbeit</span>
+                        <span class="kompetenz-icon">▼</span>
+                    </div>
+                    <div class="kompetenz-content">
+                        <div class="kompetenz-body">
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 1: Ins Berufsleben einsteigen</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Digitale Kommunikationsformen sachlich einsetzen</div>
+                                    <div class="kompetenz-punkt">• In digitalen Teams zusammenarbeiten</div>
+                                    <div class="kompetenz-punkt">• Adressatengerecht digital kommunizieren</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 2: Meinungen bilden und mitgestalten</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• In digitalen Räumen sicher bewegen</div>
+                                    <div class="kompetenz-punkt">• Standpunkte in digitalen Diskussionen vertreten</div>
+                                    <div class="kompetenz-punkt">• Respektvoll in sozialen Medien kommunizieren</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 3: Bewusst konsumieren und handeln</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Digitale Austauschformate nutzen</div>
+                                    <div class="kompetenz-punkt">• Strategien für Konsumalltag digital teilen</div>
+                                    <div class="kompetenz-punkt">• In digitalen Gruppen kollaborieren</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIE - Digitale Inhaltserstellung -->
+                <div class="kompetenz-item">
+                    <div class="kompetenz-header" onclick="toggleKompetenz(this)" style="color: var(--kompetenz-die);">
+                        <span>DIE - Digitale Inhaltserstellung</span>
+                        <span class="kompetenz-icon">▼</span>
+                    </div>
+                    <div class="kompetenz-content">
+                        <div class="kompetenz-body">
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 1: Ins Berufsleben einsteigen</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Digitale Dokumente für Ausbildung erstellen</div>
+                                    <div class="kompetenz-punkt">• Lernmaterialien digital aufbereiten</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 2: Meinungen bilden und mitgestalten</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Eigene Standpunkte multimedial präsentieren</div>
+                                    <div class="kompetenz-punkt">• Digitale Inhalte adressatengerecht gestalten</div>
+                                    <div class="kompetenz-punkt">• Visualisierungen zu politischen Themen erstellen</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 3: Bewusst konsumieren und handeln</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Budget mit digitalen Tools erstellen</div>
+                                    <div class="kompetenz-punkt">• Multimediale Präsentationen zu Konsumthemen</div>
+                                    <div class="kompetenz-punkt">• Infografiken zu Nachhaltigkeit gestalten</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PL - Problemlösung -->
+                <div class="kompetenz-item">
+                    <div class="kompetenz-header" onclick="toggleKompetenz(this)" style="color: var(--kompetenz-pl);">
+                        <span>PL - Problemlösung</span>
+                        <span class="kompetenz-icon">▼</span>
+                    </div>
+                    <div class="kompetenz-content">
+                        <div class="kompetenz-body">
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 1: Ins Berufsleben einsteigen</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Digitale Ressourcen zielgerichtet einsetzen</div>
+                                    <div class="kompetenz-punkt">• Technische Probleme bei IT-Infrastruktur lösen</div>
+                                    <div class="kompetenz-punkt">• Lernprozesse digital optimieren</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 3: Bewusst konsumieren und handeln</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Digitale Tools zur Budgetplanung auswählen</div>
+                                    <div class="kompetenz-punkt">• Technische Lösungen für Konsumentscheidungen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KI - KI-spezifische Kompetenzen -->
+                <div class="kompetenz-item">
+                    <div class="kompetenz-header" onclick="toggleKompetenz(this)" style="color: var(--kompetenz-ki);">
+                        <span>KI - KI-spezifische Kompetenzen</span>
+                        <span class="kompetenz-icon">▼</span>
+                    </div>
+                    <div class="kompetenz-content">
+                        <div class="kompetenz-body">
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 2: Meinungen bilden und mitgestalten</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Einfluss von Algorithmen auf Meinungsbildung erkennen</div>
+                                    <div class="kompetenz-punkt">• KI-generierte Inhalte identifizieren</div>
+                                    <div class="kompetenz-punkt">• Filterblasen und ihre Mechanismen verstehen</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 3: Bewusst konsumieren und handeln</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Algorithmen in der Werbung verstehen</div>
+                                    <div class="kompetenz-punkt">• KI-basierte Preisbildung nachvollziehen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ER - Ethische & Reflexive Haltung -->
+                <div class="kompetenz-item">
+                    <div class="kompetenz-header" onclick="toggleKompetenz(this)" style="color: var(--kompetenz-er);">
+                        <span>ER - Ethische & Reflexive Haltung</span>
+                        <span class="kompetenz-icon">▼</span>
+                    </div>
+                    <div class="kompetenz-content">
+                        <div class="kompetenz-body">
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 1: Ins Berufsleben einsteigen</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• IT-Infrastrukturen sicher nutzen</div>
+                                    <div class="kompetenz-punkt">• Datenschutz in der Ausbildung beachten</div>
+                                    <div class="kompetenz-punkt">• Verantwortungsvoll mit digitalen Werkzeugen umgehen</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 2: Meinungen bilden und mitgestalten</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Ethische Fragen zu Hassrede reflektieren</div>
+                                    <div class="kompetenz-punkt">• Meinungsfreiheit und Verantwortung abwägen</div>
+                                    <div class="kompetenz-punkt">• Digitale Identität bewusst gestalten</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 3: Bewusst konsumieren und handeln</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Ökologische Auswirkungen digitalen Konsums</div>
+                                    <div class="kompetenz-punkt">• Soziale Folgen der Digitalisierung reflektieren</div>
+                                    <div class="kompetenz-punkt">• Nachhaltige digitale Praktiken entwickeln</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interaktive Kacheln -->
+        <div class="kacheln-container">
+            <div class="kachel kachel-idk" onclick="filterKompetenz('idk')">
+                <div class="kachel-titel">IDK<br>Informations- & Datenkompetenz</div>
+                <div class="kachel-info">
+                    <div class="vorkommen-zahl">10</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 3 Themen</div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-kz" onclick="filterKompetenz('kz')">
+                <div class="kachel-titel">KZ<br>Kommunikation & Zusammenarbeit</div>
+                <div class="kachel-info">
+                    <div class="vorkommen-zahl">9</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 3 Themen</div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-die" onclick="filterKompetenz('die')">
+                <div class="kachel-titel">DIE<br>Digitale Inhaltserstellung</div>
+                <div class="kachel-info">
+                    <div class="vorkommen-zahl">7</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 3 Themen</div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-pl" onclick="filterKompetenz('pl')">
+                <div class="kachel-titel">PL<br>Problemlösung</div>
+                <div class="kachel-info">
+                    <div class="vorkommen-zahl">5</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 2 Themen</div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-ki" onclick="filterKompetenz('ki')">
+                <div class="kachel-titel">KI<br>KI-spezifische Kompetenzen</div>
+                <div class="kachel-info">
+                    <div class="vorkommen-zahl">5</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 2 Themen</div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-er" onclick="filterKompetenz('er')">
+                <div class="kachel-titel">ER<br>Ethische & Reflexive Haltung</div>
+                <div class="kachel-info">
+                    <div class="vorkommen-zahl">8</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 3 Themen</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabelle mit allen Themen -->
+        <div class="table-container">
+            <h2>Übersicht der Themen und digitalen Kompetenzen</h2>
+            
+            <div class="section-title">
+                1. Schuljahr - Vollständig erarbeitet
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Digitale Kompetenzen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3"><strong>1. Ins Berufsleben einsteigen</strong></td>
+                        <td>1. Ich finde mich im Berufsbildungssystem zurecht</td>
+                        <td>
+                            <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
+                            <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2. Ich kommuniziere auf konstruktive Art und Weise</td>
+                        <td>
+                            <span class="kompetenz-tag btn-kz" data-kompetenz="kz" onclick="filterKompetenz('kz')">KZ</span>
+                            <span class="kompetenz-tag btn-die" data-kompetenz="die" onclick="filterKompetenz('die')">DIE</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3. Ich lerne effektiv und setze meine Ressourcen effizient ein</td>
+                        <td>
+                            <span class="kompetenz-tag btn-pl" data-kompetenz="pl" onclick="filterKompetenz('pl')">PL</span>
+                            <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td rowspan="3"><strong>2. Meinungen bilden und mitgestalten</strong></td>
+                        <td>1. Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert</td>
+                        <td>
+                            <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
+                            <span class="kompetenz-tag btn-ki" data-kompetenz="ki" onclick="filterKompetenz('ki')">KI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2. Ich erlebe Diskussionen über Ungleichbehandlung</td>
+                        <td>
+                            <span class="kompetenz-tag btn-kz" data-kompetenz="kz" onclick="filterKompetenz('kz')">KZ</span>
+                            <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3. Wir jungen Menschen wollen mitreden</td>
+                        <td>
+                            <span class="kompetenz-tag btn-die" data-kompetenz="die" onclick="filterKompetenz('die')">DIE</span>
+                            <span class="kompetenz-tag btn-kz" data-kompetenz="kz" onclick="filterKompetenz('kz')">KZ</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="3"><strong>3. Bewusst konsumieren und handeln</strong></td>
+                        <td>1. Ich treffe überlegte Kaufentscheidungen</td>
+                        <td>
+                            <span class="kompetenz-tag btn-die" data-kompetenz="die" onclick="filterKompetenz('die')">DIE</span>
+                            <span class="kompetenz-tag btn-pl" data-kompetenz="pl" onclick="filterKompetenz('pl')">PL</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2. Ich achte auf einen nachhaltigen Konsum</td>
+                        <td>
+                            <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
+                            <span class="kompetenz-tag btn-ki" data-kompetenz="ki" onclick="filterKompetenz('ki')">KI</span>
+                            <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3. Ich informiere mich über meine Rechte und Pflichten</td>
+                        <td>
+                            <span class="kompetenz-tag btn-kz" data-kompetenz="kz" onclick="filterKompetenz('kz')">KZ</span>
+                            <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section-title draft">
+                2. & 3. Schuljahr - In Ausarbeitung
+                <span class="draft-indicator">Entwurf</span>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Digitale Kompetenzen</th>
+                    </tr>
+                </thead>
+                <tbody style="opacity: 0.7;">
+                    <tr>
+                        <td><strong>4. Verantwortung für mich und andere übernehmen</strong></td>
+                        <td>Körperliches/psychisches Wohlbefinden, gesellschaftliche Vielfalt</td>
+                        <td>In Ausarbeitung</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Mich im Staat orientieren</strong></td>
+                        <td>Finanzielle Selbständigkeit, politische Teilhabe</td>
+                        <td>In Ausarbeitung</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6. Von zu Hause ausziehen</strong></td>
+                        <td>Selbstständiges Wohnen, Mobilität</td>
+                        <td>In Ausarbeitung</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7. Arbeiten in der Zukunft</strong></td>
+                        <td>Digitalisierung, berufliche Zukunft</td>
+                        <td>In Ausarbeitung</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
+            <h2>Qualitative Einschätzung der Verteilung digitaler Kompetenzen (Themen 1-3)</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Gut verankert: Informationskompetenz und ethische Reflexion</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die <strong>Informations- & Datenkompetenz (IDK)</strong> mit 10 Anwendungen und die <strong>Ethische & Reflexive Haltung (ER)</strong> mit 8 Anwendungen zeigen eine solide Verankerung in den ersten drei Themen.</p>
+                        <p><strong>Stärken:</strong></p>
+                        <ul>
+                            <li>Kritische Informationsbewertung wird von Anfang an gefördert</li>
+                            <li>Desinformation und Manipulation werden explizit thematisiert</li>
+                            <li>Ethische Fragen zu Hassrede und Meinungsfreiheit sind integriert</li>
+                            <li>Datenschutz und sichere Nutzung digitaler Werkzeuge sind verankert</li>
+                        </ul>
+                        <p>Diese Schwerpunktsetzung bereitet die Lernenden optimal auf die Herausforderungen der digitalen Informationsgesellschaft vor.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Ausgewogen: Kommunikation und Inhaltserstellung</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Kommunikation & Zusammenarbeit (KZ)</strong> mit 9 Anwendungen und <strong>Digitale Inhaltserstellung (DIE)</strong> mit 7 Anwendungen sind gleichmässig über alle drei Themen verteilt.</p>
+                        <p><strong>Positive Aspekte:</strong></p>
+                        <ul>
+                            <li>Digitale Kommunikation wird von Anfang an geübt</li>
+                            <li>Multimediale Präsentationen werden schrittweise aufgebaut</li>
+                            <li>Budget-Tools und praktische Anwendungen sind integriert</li>
+                            <li>Kollaboration in digitalen Teams wird gefördert</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-mittel">Ausbaufähig: KI-Kompetenzen und Problemlösung</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>KI-spezifische Kompetenzen</strong> und <strong>Problemlösung (PL)</strong> mit je 5 Anwendungen zeigen Entwicklungspotenzial.</p>
+                        <p><strong>Beobachtungen:</strong></p>
+                        <ul>
+                            <li>KI-Kompetenzen fokussieren stark auf Algorithmen und Filterblasen</li>
+                            <li>Praktische KI-Anwendungen (z.B. KI-Tools) fehlen noch</li>
+                            <li>Problemlösung ist nur in 2 von 3 Themen präsent</li>
+                            <li>Technisches Troubleshooting könnte verstärkt werden</li>
+                        </ul>
+                        <p><strong>Empfehlung:</strong> Die Integration von praktischen KI-Anwendungen und systematischen Problemlösungsstrategien sollte in den weiteren Themen verstärkt werden, um die Lernenden optimal auf die digitale Arbeitswelt vorzubereiten.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeFilter = null;
+        
+        function filterKompetenz(kompetenzName) {
+            // Alle Kacheln zurücksetzen
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            
+            if (activeFilter === kompetenzName) {
+                // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
+                resetFilter();
+                return;
+            }
+            
+            // Neue Kachel aktivieren
+            document.querySelector(`.kachel-${kompetenzName}`).classList.add('active');
+            activeFilter = kompetenzName;
+            
+            // Alle Kompetenz-Tags verstecken
+            document.querySelectorAll('.kompetenz-tag').forEach(tag => {
+                tag.classList.add('hidden');
+            });
+            
+            // Nur die entsprechenden Tags anzeigen
+            document.querySelectorAll(`.kompetenz-tag[data-kompetenz="${kompetenzName}"]`).forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
+        
+        function resetFilter() {
+            activeFilter = null;
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            document.querySelectorAll('.kompetenz-tag').forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
+
+        // Accordion Funktion für qualitative Einschätzung
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+            
+            // Schließe alle anderen Accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                }
+            });
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
+            });
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Accordion Funktion für Kompetenzen-Übersicht
+        function toggleKompetenz(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.kompetenz-header');
+            const allContents = document.querySelectorAll('.kompetenz-content');
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

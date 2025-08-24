@@ -1,12 +1,1416 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Handlungsfelder der Aspekte</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handlungsfelder EFZ - Zirkulärer Aufbau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-orange: #FF9500;
+            --zh-yellow: #FFD700;
+            
+            /* Farben für die 8 Aspekte */
+            --aspect-ethik: #FF6B6B;
+            --aspect-identitaet: #4ECDC4;
+            --aspect-kultur: #9B59B6;
+            --aspect-oekologie: #2ECC71;
+            --aspect-politik: #3498DB;
+            --aspect-recht: #E67E22;
+            --aspect-tech: #34495E;
+            --aspect-wirtschaft: #F39C12;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-blue) 0%, var(--zh-dark-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--zh-yellow);
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation Breadcrumb */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        .efz-link {
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .efz-link:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--zh-gray);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .back-btn:hover {
+            background: var(--zh-light-blue);
+            transform: translateX(-5px);
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        /* Status Info Box */
+        .status-info {
+            background: linear-gradient(135deg, var(--zh-light-blue), white);
+            border-left: 5px solid var(--zh-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-info h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .status-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .status-info li {
+            padding: 5px 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-complete {
+            background: var(--zh-green);
+            color: white;
+        }
+
+        .badge-draft {
+            background: var(--zh-orange);
+            color: white;
+        }
+
+        /* Title Section */
+        .handlungsfelder-title {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .handlungsfelder-title h2 {
+            color: var(--zh-dark-blue);
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Aspekte Übersicht (vor den Kacheln) */
+        .aspekte-overview {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .aspekte-overview h3 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .aspekte-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .aspekt-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .aspekt-header {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .aspekt-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .aspekt-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .aspekt-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .aspekt-header.active .aspekt-icon {
+            transform: rotate(180deg);
+        }
+
+        .aspekt-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: var(--zh-gray);
+        }
+
+        .aspekt-content.active {
+            max-height: 500px;
+        }
+
+        .aspekt-body {
+            padding: 15px;
+        }
+
+        .handlungsfeld-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .handlungsfeld-nummer {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .handlungsfeld-text {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .handlungsfeld-themen {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .handlungsfeld-item.missing {
+            background: #f0f0f0;
+            color: #999;
+            opacity: 0.7;
+        }
+
+        /* Kacheln */
+        .kacheln-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .kachel {
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kachel.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Farben für Aspekt-Kacheln */
+        .kachel-ethik { 
+            background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,107,107,0.05)); 
+            border-color: var(--aspect-ethik); 
+        }
+        .kachel-identitaet { 
+            background: linear-gradient(135deg, rgba(78,205,196,0.1), rgba(78,205,196,0.05)); 
+            border-color: var(--aspect-identitaet); 
+        }
+        .kachel-kultur { 
+            background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.05)); 
+            border-color: var(--aspect-kultur); 
+        }
+        .kachel-oekologie { 
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.05)); 
+            border-color: var(--aspect-oekologie); 
+        }
+        .kachel-politik { 
+            background: linear-gradient(135deg, rgba(52,152,219,0.1), rgba(52,152,219,0.05)); 
+            border-color: var(--aspect-politik); 
+        }
+        .kachel-recht { 
+            background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(230,126,34,0.05)); 
+            border-color: var(--aspect-recht); 
+        }
+        .kachel-tech { 
+            background: linear-gradient(135deg, rgba(52,73,94,0.1), rgba(52,73,94,0.05)); 
+            border-color: var(--aspect-tech); 
+        }
+        .kachel-wirtschaft { 
+            background: linear-gradient(135deg, rgba(243,156,18,0.1), rgba(243,156,18,0.05)); 
+            border-color: var(--aspect-wirtschaft); 
+        }
+        
+        .kachel-titel {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .kachel-felder {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .feld-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+
+        .feld-nummer {
+            font-weight: 500;
+        }
+
+        .feld-count {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .feld-missing {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        /* Tabelle */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: var(--zh-gray);
+            padding: 10px 20px;
+            margin: 20px 0 10px 0;
+            border-left: 5px solid var(--zh-blue);
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--zh-dark-blue);
+        }
+
+        .section-title.draft {
+            border-left-color: var(--zh-orange);
+            background: linear-gradient(90deg, rgba(255,149,0,0.1), transparent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: var(--zh-blue);
+            color: white;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background-color: var(--zh-light-blue);
+        }
+
+        .draft-row {
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .draft-indicator {
+            display: inline-block;
+            background: var(--zh-orange);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
+
+        /* Aspekt Tags als Buttons */
+        .aspekt-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .aspekt-tag.hidden {
+            display: none;
+        }
+
+        .aspekt-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Farben für Aspekt-Buttons */
+        .btn-ethik { background-color: var(--aspect-ethik); }
+        .btn-identitaet { background-color: var(--aspect-identitaet); }
+        .btn-kultur { background-color: var(--aspect-kultur); }
+        .btn-oekologie { background-color: var(--aspect-oekologie); }
+        .btn-politik { background-color: var(--aspect-politik); }
+        .btn-recht { background-color: var(--aspect-recht); }
+        .btn-tech { background-color: var(--aspect-tech); }
+        .btn-wirtschaft { background-color: var(--aspect-wirtschaft); }
+
+        .reset-button {
+            padding: 10px 20px;
+            background-color: var(--zh-gray);
+            color: var(--zh-text);
+            border: 2px solid var(--zh-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-button:hover {
+            background-color: var(--zh-light-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Qualitative Einschätzung */
+        .qualitative-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .qualitative-section h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--zh-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--zh-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-header.active {
+            background: var(--zh-light-blue);
+        }
+
+        .accordion-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+        }
+
+        .accordion-body ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .erfuellung-gut {
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .erfuellung-genuegend {
+            color: #F39C12;
+            font-weight: 600;
+        }
+
+        .erfuellung-knapp {
+            color: #E74C3C;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+
+            .kacheln-container {
+                grid-template-columns: 1fr;
+            }
+
+            .aspekte-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-breadcrumb {
+                padding: 1rem;
+            }
+
+            .efz-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Handlungsfelder der Aspekte</h1>
-  <p>Hier stehen die Handlungsfelder der Aspekte für EFZ 3-jährig...</p>
-  <a href="index.html">Zurück zu Zirkularität</a>
-  <a href="zirkularitaet.html">Zurück zur Übersicht</a>
+    <!-- Header -->
+    <header class="header">
+        <h1>Gesellschaftliche Handlungsfelder EFZ</h1>
+        <p>Zirkulärer Aufbau der gesellschaftlichen Aspekte über alle Themen</p>
+        <p class="subtitle">3-jährige Grundbildung - Schullehrplan Allgemeinbildung 2030</p>
+    </header>
+
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <a href="index.html">Übersicht</a>
+        <span>›</span>
+        <span>Handlungsfelder</span>
+        <a href="index.html" class="efz-link">🏠 EFZ-Überblick</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <a href="zirkularitaet.html" class="back-btn">
+            ← Zurück zur Übersicht
+        </a>
+
+        <!-- Status Info -->
+        <div class="status-info">
+            <h2>📊 Bearbeitungsstand der Themen</h2>
+            <ul>
+                <li><strong>1. Schuljahr (vollständig erarbeitet):</strong>
+                    <span class="status-badge badge-complete">Fertig</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Thema 1: Ins Berufsleben einsteigen</li>
+                        <li>• Thema 2: Meinungen bilden und mitgestalten</li>
+                        <li>• Thema 3: Bewusst konsumieren und handeln</li>
+                    </ul>
+                </li>
+                <li style="margin-top: 15px;"><strong>2. & 3. Schuljahr (in Ausarbeitung):</strong>
+                    <span class="status-badge badge-draft">Entwurf</span>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>• Thema 4: Verantwortung für mich und andere übernehmen</li>
+                        <li>• Thema 5: Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</li>
+                        <li>• Thema 6: Von zu Hause ausziehen</li>
+                        <li>• Thema 7: Arbeiten in der Zukunft</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Title Section -->
+        <div class="handlungsfelder-title">
+            <h2>Gesellschaftliche Handlungsfelder im zirkulären Aufbau</h2>
+        </div>
+
+        <!-- Aspekte Übersicht mit Accordions -->
+        <div class="aspekte-overview">
+            <h3>Detailansicht der Handlungsfelder</h3>
+            <div class="aspekte-grid">
+                <!-- Ethik -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-ethik);">
+                        <span>Ethik</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.1.1</div>
+                                <div class="handlungsfeld-text">Empathisch handeln und andere Perspektiven übernehmen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (2x), T2 (1x), T4 (1x) = 4 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.1.2</div>
+                                <div class="handlungsfeld-text">Sich durch Herausforderungen zu eigenem Handeln herausfordern lassen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T4 (1x) = 1 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.1.3</div>
+                                <div class="handlungsfeld-text">Aktiv an der Aushandlung moralischer Entscheidungen beteiligen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (1x), T2 (2x), T4 (1x) = 4 Mal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Identität und Sozialisation -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-identitaet);">
+                        <span>Identität und Sozialisation</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.1</div>
+                                <div class="handlungsfeld-text">Persönlichkeit erkunden und entwickeln</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (1x), T7 (1x) = 2 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.2</div>
+                                <div class="handlungsfeld-text">Auf psychische und physische Gesundheit achten</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (1x), T4 (1x), T6 (1x), T7 (1x) = 4 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.3</div>
+                                <div class="handlungsfeld-text">Identitätsstiftende Räume erkunden und persönliche Entscheidungen treffen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (1x), T3 (2x), T6 (1x), T7 (1x) = 5 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.2.4</div>
+                                <div class="handlungsfeld-text">Andere kulturelle Realitäten anerkennen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (1x), T4 (1x) = 2 Mal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kultur -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-kultur);">
+                        <span>Kultur</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.1</div>
+                                <div class="handlungsfeld-text">Bewusstsein für die gestaltete und ästhetische Welt entwickeln</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T4 (1x) = 1 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.2</div>
+                                <div class="handlungsfeld-text">Grundlegende Themen des Lebens in der Kultur wahrnehmen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T4 (1x) = 1 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.3.3</div>
+                                <div class="handlungsfeld-text">Eigene Wahrnehmungen im Umgang mit Kunst reflektieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T4 (1x) = 1 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item missing">
+                                <div class="handlungsfeld-nummer">5.2.3.4</div>
+                                <div class="handlungsfeld-text">Nicht im Lehrplan vorhanden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: fehlt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ökologie -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-oekologie);">
+                        <span>Ökologie</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.4.1</div>
+                                <div class="handlungsfeld-text">Eigenes Verhalten analysieren und Eingriffe in die Natur beurteilen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (1x), T6 (1x) = 2 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.4.2</div>
+                                <div class="handlungsfeld-text">Lösungsansätze für nachhaltige Ressourcennutzung formulieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (1x), T5 (1x), T6 (1x) = 3 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item missing">
+                                <div class="handlungsfeld-nummer">5.2.4.3</div>
+                                <div class="handlungsfeld-text">Nicht im Lehrplan vorhanden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: fehlt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Politik -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-politik);">
+                        <span>Politik</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.5.1</div>
+                                <div class="handlungsfeld-text">Aktuelle politische Fragen und Themen analysieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2 (2x), T5 (1x) = 3 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.5.2</div>
+                                <div class="handlungsfeld-text">Eigene politische Meinungen und Werte bewusst werden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2 (3x), T5 (1x) = 4 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.5.3</div>
+                                <div class="handlungsfeld-text">Organisation und Funktionsweise der Politik verstehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2 (1x), T5 (1x) = 2 Mal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recht -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-recht);">
+                        <span>Recht</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.1</div>
+                                <div class="handlungsfeld-text">Funktionsweise der juristischen Institutionen verstehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (1x), T2 (1x), T3 (1x), T6 (1x), T7 (1x) = 5 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.2</div>
+                                <div class="handlungsfeld-text">Gesellschaftsrelevante juristische Regeln verstehen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T2 (1x), T3 (1x), T7 (1x) = 3 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.3</div>
+                                <div class="handlungsfeld-text">Juristische Informationen in Konfliktsituationen interpretieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (1x), T6 (1x), T7 (1x) = 3 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.6.4</div>
+                                <div class="handlungsfeld-text">Zwischen Interessen der beteiligten Parteien unterscheiden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T6 (1x), T7 (1x) = 2 Mal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologische und digitale Transformation -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-tech);">
+                        <span>Technologische und digitale Transformation</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.7.1</div>
+                                <div class="handlungsfeld-text">Einfluss aktueller Technologien analysieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (1x), T7 (1x) = 2 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.7.2</div>
+                                <div class="handlungsfeld-text">IKT situativ zweckmässig nutzen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T1 (2x), T7 (1x) = 3 Mal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wirtschaft -->
+                <div class="aspekt-item">
+                    <div class="aspekt-header" onclick="toggleAspekt(this)" style="color: var(--aspect-wirtschaft);">
+                        <span>Wirtschaft</span>
+                        <span class="aspekt-icon">▼</span>
+                    </div>
+                    <div class="aspekt-content">
+                        <div class="aspekt-body">
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.8.1</div>
+                                <div class="handlungsfeld-text">Als Konsument:in mit knappen Ressourcen eine Wahl treffen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (2x) = 2 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.8.2</div>
+                                <div class="handlungsfeld-text">Zusammenwirken wirtschaftlicher Akteure untersuchen</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (1x), T5 (1x) = 2 Mal</div>
+                            </div>
+                            <div class="handlungsfeld-item missing">
+                                <div class="handlungsfeld-nummer">5.2.8.3</div>
+                                <div class="handlungsfeld-text">Nicht im Lehrplan vorhanden</div>
+                                <div class="handlungsfeld-themen">Vorkommen: fehlt</div>
+                            </div>
+                            <div class="handlungsfeld-item">
+                                <div class="handlungsfeld-nummer">5.2.8.4</div>
+                                <div class="handlungsfeld-text">Das ökonomische Grundproblem knapper Ressourcen analysieren</div>
+                                <div class="handlungsfeld-themen">Vorkommen: T3 (1x), T5 (1x) = 2 Mal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interaktive Kacheln -->
+        <div class="kacheln-container">
+            <div class="kachel kachel-ethik" onclick="filterAspekt('ethik')">
+                <div class="kachel-titel">Ethik</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.1.1:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.1.2:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.1.3:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-identitaet" onclick="filterAspekt('identitaet')">
+                <div class="kachel-titel">Identität und Sozialisation</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.1:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.2:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.3:</span>
+                        <span class="feld-count">5 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.2.4:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-kultur" onclick="filterAspekt('kultur')">
+                <div class="kachel-titel">Kultur</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.1:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.2:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.3.3:</span>
+                        <span class="feld-count">1 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer feld-missing">5.2.3.4:</span>
+                        <span class="feld-count feld-missing">fehlt</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-oekologie" onclick="filterAspekt('oekologie')">
+                <div class="kachel-titel">Ökologie</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.4.1:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.4.2:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer feld-missing">5.2.4.3:</span>
+                        <span class="feld-count feld-missing">fehlt</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-politik" onclick="filterAspekt('politik')">
+                <div class="kachel-titel">Politik</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.5.1:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.5.2:</span>
+                        <span class="feld-count">4 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.5.3:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-recht" onclick="filterAspekt('recht')">
+                <div class="kachel-titel">Recht</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.1:</span>
+                        <span class="feld-count">5 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.2:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.3:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.6.4:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-tech" onclick="filterAspekt('tech')">
+                <div class="kachel-titel">Technologische und digitale Transformation</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.7.1:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.7.2:</span>
+                        <span class="feld-count">3 Mal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel kachel-wirtschaft" onclick="filterAspekt('wirtschaft')">
+                <div class="kachel-titel">Wirtschaft</div>
+                <div class="kachel-felder">
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.8.1:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.8.2:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer feld-missing">5.2.8.3:</span>
+                        <span class="feld-count feld-missing">fehlt</span>
+                    </div>
+                    <div class="feld-item">
+                        <span class="feld-nummer">5.2.8.4:</span>
+                        <span class="feld-count">2 Mal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="reset-button" onclick="resetFilter()">Filter zurücksetzen</button>
+
+        <!-- Tabelle mit allen Themen -->
+        <div class="table-container">
+            <h2>Übersicht der Themen und gesellschaftlichen Aspekte</h2>
+            
+            <div class="section-title">
+                1. Schuljahr - Vollständig erarbeitet
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Gesellschaftliche Aspekte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Thema 1 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 1:</strong> Ins Berufsleben einsteigen</td>
+                        <td>1: Ich finde mich im Berufsbildungssystem zurecht.</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kommuniziere auf konstruktive Art und Weise.</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich lerne effektiv und setze meine Ressourcen effizient ein.</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Thema 2 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 2:</strong> Meinungen bilden und mitgestalten</td>
+                        <td>1: Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert...</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich erlebe Diskussionen über Ungleichbehandlung...</td>
+                        <td>
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Wir jungen Menschen wollen mitreden...</td>
+                        <td>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Thema 3 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 3:</strong> Bewusst konsumieren und handeln</td>
+                        <td>1: Ich treffe überlegte Kaufentscheidungen...</td>
+                        <td>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich achte auf einen nachhaltigen Konsum.</td>
+                        <td>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-oekologie" data-aspekt="oekologie" onclick="filterAspekt('oekologie')">Ökologie</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne meine Rechte und Pflichten beim Einkaufen...</td>
+                        <td>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section-title draft">
+                2. & 3. Schuljahr - In Ausarbeitung
+                <span class="draft-indicator">Entwurf</span>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Individueller Lebensbezug</th>
+                        <th>Gesellschaftliche Aspekte</th>
+                    </tr>
+                </thead>
+                <tbody class="draft-row">
+                    <!-- Thema 4 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 4:</strong> Verantwortung für mich und andere übernehmen</td>
+                        <td>1: Ich sorge für mein körperliches und psychisches Wohlbefinden.</td>
+                        <td rowspan="3">
+                            <span class="aspekt-tag btn-ethik" data-aspekt="ethik" onclick="filterAspekt('ethik')">Ethik</span>
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-kultur" data-aspekt="kultur" onclick="filterAspekt('kultur')">Kultur</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich erkenne gesellschaftliche Vielfalt an und verhalte mich respektvoll.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich beschäftige mich mit Integration, Ausgrenzung und Chancengerechtigkeit.</td>
+                    </tr>
+                    
+                    <!-- Thema 5 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 5:</strong> Mich im Staat orientieren und finanzielle Selbständigkeit entwickeln</td>
+                        <td>1: Ich gehe selbstständig mit Geld um und plane vorausschauend.</td>
+                        <td rowspan="3">
+                            <span class="aspekt-tag btn-oekologie" data-aspekt="oekologie" onclick="filterAspekt('oekologie')">Ökologie</span>
+                            <span class="aspekt-tag btn-politik" data-aspekt="politik" onclick="filterAspekt('politik')">Politik</span>
+                            <span class="aspekt-tag btn-wirtschaft" data-aspekt="wirtschaft" onclick="filterAspekt('wirtschaft')">Wirtschaft</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kenne meine Rechte und Pflichten und weiss, wie ich mitgestalten kann.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich setze mich kritisch mit den Staatsaufgaben auseinander.</td>
+                    </tr>
+                    
+                    <!-- Thema 6 -->
+                    <tr>
+                        <td rowspan="4"><strong>Thema 6:</strong> Von zu Hause ausziehen</td>
+                        <td>1: Ich finde eine passende Wohnung und organisiere den Einzug selbstständig.</td>
+                        <td rowspan="4">
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-oekologie" data-aspekt="oekologie" onclick="filterAspekt('oekologie')">Ökologie</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich kenne meine Rechte und Pflichten als Mieter/in.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne verschiedene Wohn- und Lebensformen.</td>
+                    </tr>
+                    <tr>
+                        <td>4: Ich organisiere meine Mobilität nachhaltig.</td>
+                    </tr>
+                    
+                    <!-- Thema 7 -->
+                    <tr>
+                        <td rowspan="3"><strong>Thema 7:</strong> Arbeiten in der Zukunft</td>
+                        <td>1: Ich kenne die Chancen und Herausforderungen der Digitalisierung.</td>
+                        <td rowspan="3">
+                            <span class="aspekt-tag btn-identitaet" data-aspekt="identitaet" onclick="filterAspekt('identitaet')">Identität & Sozialisation</span>
+                            <span class="aspekt-tag btn-recht" data-aspekt="recht" onclick="filterAspekt('recht')">Recht</span>
+                            <span class="aspekt-tag btn-tech" data-aspekt="tech" onclick="filterAspekt('tech')">Technologie</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2: Ich plane meine berufliche Zukunft und achte auf meine Lebensqualität.</td>
+                    </tr>
+                    <tr>
+                        <td>3: Ich kenne meine Rechte und Pflichten im Arbeitsleben.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Qualitative Einschätzung -->
+        <div class="qualitative-section">
+            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Identität und Sozialisation sowie Recht</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei den Handlungsfeldern <strong>Identität und Sozialisation</strong> (13 Vorkommen) und <strong>Recht</strong> (13 Vorkommen) sehr gut erfüllt.</p>
+                        <p><strong>Erklärung:</strong> Diese beiden Bereiche bilden das Fundament der beruflichen und persönlichen Entwicklung:</p>
+                        <ul>
+                            <li><strong>Identität und Sozialisation:</strong> Alle vier Unterfelder sind abgedeckt, mit besonderem Fokus auf identitätsstiftende Räume (5x) und Gesundheit (4x). Dies gewährleistet eine kontinuierliche Persönlichkeitsentwicklung</li>
+                            <li><strong>Recht:</strong> Mit einer gleichmässigen Verteilung über alle Unterfelder, besonders stark bei der Funktionsweise juristischer Institutionen (5x), werden Lernende durchgehend auf rechtliche Herausforderungen vorbereitet</li>
+                        </ul>
+                        <p>Diese breite Verankerung stellt sicher, dass Lernende sowohl ihre persönliche Entwicklung als auch ihre rechtliche Kompetenz kontinuierlich ausbauen.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Ethik, Politik und Wirtschaft</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei <strong>Ethik</strong> (9 Vorkommen), <strong>Politik</strong> (9 Vorkommen) und <strong>Wirtschaft</strong> (6 Vorkommen) als genügend zu bewerten.</p>
+                        <p><strong>Erklärung:</strong> Diese Handlungsfelder werden regelmässig aufgegriffen, zeigen aber Unausgewogenheiten:</p>
+                        <ul>
+                            <li><strong>Ethik:</strong> Starker Fokus auf Empathie (4x) und moralische Entscheidungen (4x), aber wenig zur persönlichen Herausforderung (1x)</li>
+                            <li><strong>Politik:</strong> Gut verteilt über alle Unterfelder, aber hauptsächlich in Thema 2 und 5 konzentriert</li>
+                            <li><strong>Wirtschaft:</strong> Fehlende Unterfelder (5.2.8.3) und geringe Gesamtpräsenz könnten die wirtschaftliche Bildung beeinträchtigen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Kultur, Ökologie und Technologie</h3>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p>Die Zirkularität ist bei <strong>Kultur</strong> (3 Vorkommen), <strong>Ökologie</strong> (5 Vorkommen) und <strong>Technologie</strong> (5 Vorkommen) kritisch niedrig.</p>
+                        <p><strong>Erklärung:</strong> Diese drei Bereiche sind deutlich unterrepräsentiert:</p>
+                        <ul>
+                            <li><strong>Kultur:</strong> Mit nur 3 Vorkommen und einem fehlenden Unterfeld (5.2.3.4) ist die kulturelle Bildung stark vernachlässigt. Dies könnte zu Defiziten in der ästhetischen und kreativen Kompetenz führen</li>
+                            <li><strong>Ökologie:</strong> Trotz der gesellschaftlichen Relevanz nur punktuell eingebunden (hauptsächlich Thema 3), fehlendes Unterfeld 5.2.4.3</li>
+                            <li><strong>Technologie:</strong> Für eine zukunftsorientierte Ausbildung kritisch untervertreten, hauptsächlich in Thema 1 und 7</li>
+                        </ul>
+                        <p><strong>Verbesserungspotenzial:</strong></p>
+                        <ul>
+                            <li>Integration kultureller Aspekte in mehr Themen</li>
+                            <li>Durchgängige Verankerung ökologischer Perspektiven</li>
+                            <li>Verstärkte Einbindung digitaler Transformation über alle Schuljahre</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeFilter = null;
+        
+        function filterAspekt(aspektName) {
+            // Alle Kacheln zurücksetzen
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            
+            if (activeFilter === aspektName) {
+                // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
+                resetFilter();
+                return;
+            }
+            
+            // Neue Kachel aktivieren
+            document.querySelector(`.kachel-${aspektName}`).classList.add('active');
+            activeFilter = aspektName;
+            
+            // Alle Aspekt-Tags verstecken
+            document.querySelectorAll('.aspekt-tag').forEach(tag => {
+                tag.classList.add('hidden');
+            });
+            
+            // Nur die entsprechenden Tags anzeigen
+            document.querySelectorAll(`.aspekt-tag[data-aspekt="${aspektName}"]`).forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
+        
+        function resetFilter() {
+            activeFilter = null;
+            document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
+            document.querySelectorAll('.aspekt-tag').forEach(tag => {
+                tag.classList.remove('hidden');
+            });
+        }
+
+        // Accordion Funktion für qualitative Einschätzung
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+            
+            // Schließe alle anderen Accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                }
+            });
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
+            });
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Accordion Funktion für Aspekte-Übersicht
+        function toggleAspekt(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.aspekt-header');
+            const allContents = document.querySelectorAll('.aspekt-content');
+            
+            // Toggle aktuelles Accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

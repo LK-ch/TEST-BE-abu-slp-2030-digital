@@ -1,1 +1,485 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handlungsfelder Gesellschaft - Vierjährige EFZ-Lehre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-teal: #20B2AA;
+            --zh-yellow: #FFD700;
+            --zh-pink: #FF69B4;
+            --zh-purple: #9B59B6;
+            --zh-orange: #FF9500;
+            --zh-coral: #FF7F50;
+            --zh-indigo: #4B0082;
+            --zh-red: #DC143C;
+            --zh-lime: #32CD32;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-green) 0%, var(--zh-teal) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '4';
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            font-size: 8rem;
+            font-weight: bold;
+            opacity: 0.1;
+            transform: translateY(-50%);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Work in Progress Box */
+        .wip-box {
+            background: linear-gradient(135deg, var(--zh-light-blue) 0%, white 100%);
+            border: 2px solid var(--zh-teal);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wip-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wip-title {
+            font-size: 2rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .wip-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--zh-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .reference-link {
+            display: inline-block;
+            background: var(--zh-teal);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .reference-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(32, 178, 170, 0.3);
+        }
+
+        /* Wisdom Quote Section */
+        .wisdom-section {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .wisdom-title {
+            font-size: 1.5rem;
+            color: var(--zh-indigo);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wisdom-question {
+            background: linear-gradient(135deg, var(--zh-indigo) 0%, var(--zh-purple) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wisdom-question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(75, 0, 130, 0.3);
+        }
+
+        .wisdom-question::before {
+            content: '🌍';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .click-hint {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .wisdom-answer {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--zh-gray);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: var(--zh-dark-blue);
+            display: none;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wisdom-answer.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Star Burst Animation */
+        .star {
+            position: fixed;
+            animation: burst linear;
+            z-index: 1000;
+            pointer-events: none;
+            font-size: 2rem;
+        }
+
+        @keyframes burst {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0.5) rotate(360deg) translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Aspects Preview */
+        .aspects-preview {
+            background: var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .aspects-title {
+            font-size: 1.5rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .aspects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .aspect-item {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .aspect-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .aspect-item:nth-child(1) { border-color: var(--zh-red); }
+        .aspect-item:nth-child(2) { border-color: var(--zh-orange); }
+        .aspect-item:nth-child(3) { border-color: var(--zh-yellow); }
+        .aspect-item:nth-child(4) { border-color: var(--zh-green); }
+        .aspect-item:nth-child(5) { border-color: var(--zh-teal); }
+        .aspect-item:nth-child(6) { border-color: var(--zh-blue); }
+        .aspect-item:nth-child(7) { border-color: var(--zh-purple); }
+        .aspect-item:nth-child(8) { border-color: var(--zh-pink); }
+
+        .aspect-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .aspect-name {
+            font-size: 0.95rem;
+            color: var(--zh-text);
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .wip-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .aspects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Handlungsfelder Gesellschaft</h1>
+        <p>8 Aspekte im spiralförmigen Aufbau</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-breadcrumb">
+        <a href="zirkularitaet-4jahre.html">← Zurück zur Zirkularität</a>
+        <span>/</span>
+        <span>Handlungsfelder Gesellschaft (4-jährige Lehre)</span>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Work in Progress Box -->
+        <div class="wip-box">
+            <div class="wip-icon">🌍</div>
+            <h2 class="wip-title">In Bearbeitung</h2>
+            <div class="wip-text">
+                <p>
+                    <strong>Die gesellschaftlichen Handlungsfelder für die vierjährige EFZ-Lehre werden derzeit ausgearbeitet.</strong>
+                </p>
+                <p>
+                    Die Zirkularität steht im Fokus: Die 8 Aspekte werden über vier Jahre spiralförmig vertieft – 
+                    vom persönlichen Umfeld bis zur globalen Verantwortung.
+                </p>
+                <p>
+                    Als momentane Orientierung dient das etablierte Konzept der dreijährigen EFZ-Lehre, 
+                    erweitert um zusätzliche Reflexionsebenen für das vierte Jahr.
+                </p>
+            </div>
+            <a href="aspekte-3jahre.html" class="reference-link">
+                🗺️ Zur Orientierung: Handlungsfelder EFZ (3 Jahre)
+            </a>
+        </div>
+
+        <!-- Wisdom Quote Section -->
+        <div class="wisdom-section">
+            <h3 class="wisdom-title">
+                <span>💫</span>
+                <span>Gesellschaftsweisheit des Tages</span>
+                <span>💫</span>
+            </h3>
+            <div class="wisdom-question" onclick="revealAnswer()">
+                <span class="question-text">
+                    Was macht einen Tropfen zum Ozean?
+                </span>
+                <div class="click-hint">
+                    (Klicke für die Erkenntnis)
+                </div>
+            </div>
+            <div class="wisdom-answer" id="wisdomAnswer">
+                <p>
+                    <strong>„Kein Tropfen glaubt, er sei für die Flut verantwortlich.</strong><br>
+                    <strong>Aber jeder Ozean besteht aus nichts als Tropfen."</strong>
+                </p>
+                <p style="margin-top: 1rem; font-size: 1rem; font-style: italic;">
+                    🌊 Jede:r Einzelne gestaltet die Gesellschaft mit. 
+                    Deine Handlungen in deinen Lebensbezügen formen das grosse Ganze.
+                </p>
+            </div>
+        </div>
+
+        <!-- Aspects Preview -->
+        <div class="aspects-preview">
+            <h3 class="aspects-title">🎯 Vorschau: Die 8 Aspekte der Gesellschaft</h3>
+            <div class="aspects-grid">
+                <div class="aspect-item">
+                    <div class="aspect-icon">⚖️</div>
+                    <div class="aspect-name">Ethik</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">🏛️</div>
+                    <div class="aspect-name">Politik</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">💼</div>
+                    <div class="aspect-name">Wirtschaft</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">🎭</div>
+                    <div class="aspect-name">Kultur</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">🌱</div>
+                    <div class="aspect-name">Ökologie</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">⚙️</div>
+                    <div class="aspect-name">Technologie</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">📜</div>
+                    <div class="aspect-name">Geschichte</div>
+                </div>
+                <div class="aspect-item">
+                    <div class="aspect-icon">⚡</div>
+                    <div class="aspect-name">Identität</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createStar() {
+            const stars = ['⭐', '✨', '💫', '🌟', '⚡', '🌠', '🌌', '🪐', '🌍', '🌎', '🌏'];
+            const colors = ['#FFD700', '#FFA500', '#FF69B4', '#00CED1', '#9370DB', '#32CD32'];
+            
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.textContent = stars[Math.floor(Math.random() * stars.length)];
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.color = colors[Math.floor(Math.random() * colors.length)];
+            star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            document.body.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+            }, 3000);
+        }
+
+        function revealAnswer() {
+            const answer = document.getElementById('wisdomAnswer');
+            
+            if (!answer.classList.contains('show')) {
+                answer.classList.add('show');
+                
+                // Create star burst
+                for (let i = 0; i < 35; i++) {
+                    setTimeout(() => {
+                        createStar();
+                    }, i * 50);
+                }
+                
+                // Add cosmic effect to the question box
+                const questionBox = document.querySelector('.wisdom-question');
+                questionBox.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)';
+                
+                setTimeout(() => {
+                    questionBox.style.background = 'linear-gradient(135deg, var(--zh-indigo) 0%, var(--zh-purple) 100%)';
+                }, 2500);
+            }
+        }
+    </script>
+</body>
+</html>

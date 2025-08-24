@@ -1,1 +1,578 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprache & Kommunikation - Vierjährige EFZ-Lehre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-teal: #20B2AA;
+            --zh-yellow: #FFD700;
+            --zh-pink: #FF69B4;
+            --zh-purple: #9B59B6;
+            --zh-orange: #FF9500;
+            --zh-coral: #FF7F50;
+            --zh-indigo: #4B0082;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-green) 0%, var(--zh-teal) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '4';
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            font-size: 8rem;
+            font-weight: bold;
+            opacity: 0.1;
+            transform: translateY(-50%);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Work in Progress Box */
+        .wip-box {
+            background: linear-gradient(135deg, var(--zh-light-blue) 0%, white 100%);
+            border: 2px solid var(--zh-teal);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wip-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .wip-title {
+            font-size: 2rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .wip-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--zh-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .reference-link {
+            display: inline-block;
+            background: var(--zh-teal);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .reference-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(32, 178, 170, 0.3);
+        }
+
+        /* Wisdom Quote Section */
+        .wisdom-section {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .wisdom-title {
+            font-size: 1.5rem;
+            color: var(--zh-coral);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wisdom-question {
+            background: linear-gradient(135deg, var(--zh-coral) 0%, var(--zh-orange) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wisdom-question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 127, 80, 0.3);
+        }
+
+        .wisdom-question::before {
+            content: '💭';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .click-hint {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .wisdom-answer {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--zh-gray);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: var(--zh-dark-blue);
+            display: none;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wisdom-answer.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Letter Rain Animation */
+        .letter {
+            position: fixed;
+            font-size: 2rem;
+            animation: fall linear;
+            z-index: 1000;
+            pointer-events: none;
+            font-weight: bold;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Language Modes Preview */
+        .modes-preview {
+            background: var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .modes-title {
+            font-size: 1.5rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .mode-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--zh-coral);
+            transition: all 0.3s ease;
+        }
+
+        .mode-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .mode-card:nth-child(1) { border-left-color: var(--zh-coral); }
+        .mode-card:nth-child(2) { border-left-color: var(--zh-orange); }
+        .mode-card:nth-child(3) { border-left-color: var(--zh-teal); }
+        .mode-card:nth-child(4) { border-left-color: var(--zh-purple); }
+
+        .mode-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mode-title {
+            font-size: 1.2rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .mode-description {
+            font-size: 0.95rem;
+            color: var(--zh-text);
+            opacity: 0.8;
+        }
+
+        .mode-skills {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--zh-light-blue);
+            color: var(--zh-blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Spiral Concept */
+        .spiral-concept {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .spiral-years {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .year-bubble {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .year-bubble:nth-child(1) { background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%); }
+        .year-bubble:nth-child(2) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .year-bubble:nth-child(3) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .year-bubble:nth-child(4) { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        .year-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .year-number {
+            font-size: 2rem;
+        }
+
+        .year-level {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .wip-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .modes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spiral-years {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Sprache & Kommunikation</h1>
+        <p>Progressiver Aufbau der Sprachkompetenzen über 4 Jahre</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-breadcrumb">
+        <a href="zirkularitaet-4jahre.html">← Zurück zur Zirkularität</a>
+        <span>/</span>
+        <span>Sprache & Kommunikation (4-jährige Lehre)</span>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Work in Progress Box -->
+        <div class="wip-box">
+            <div class="wip-icon">💬</div>
+            <h2 class="wip-title">In Bearbeitung</h2>
+            <div class="wip-text">
+                <p>
+                    <strong>Die sprachlichen Kompetenzraster für die vierjährige EFZ-Lehre werden derzeit entwickelt.</strong>
+                </p>
+                <p>
+                    Die Zirkularität steht im Fokus: Sprachkompetenzen werden spiralförmig über vier Jahre aufgebaut – 
+                    von der Alltagskommunikation bis zur professionellen Fachsprache.
+                </p>
+                <p>
+                    Als momentane Orientierung dient das bewährte Konzept der dreijährigen EFZ-Lehre, 
+                    erweitert um zusätzliche Vertiefungsstufen für das vierte Jahr.
+                </p>
+            </div>
+            <a href="sprachkompetenzen-3jahre.html" class="reference-link">
+                📖 Zur Orientierung: Sprachkompetenzen EFZ (3 Jahre)
+            </a>
+        </div>
+
+        <!-- Wisdom Quote Section -->
+        <div class="wisdom-section">
+            <h3 class="wisdom-title">
+                <span>🌟</span>
+                <span>Sprachweisheit des Tages</span>
+                <span>🌟</span>
+            </h3>
+            <div class="wisdom-question" onclick="revealAnswer()">
+                <span class="question-text">
+                    Warum haben wir zwei Ohren, aber nur einen Mund?
+                </span>
+                <div class="click-hint">
+                    (Klicke für die alte Weisheit)
+                </div>
+            </div>
+            <div class="wisdom-answer" id="wisdomAnswer">
+                <p>
+                    <strong>„Die Natur gab uns zwei Ohren und einen Mund,</strong><br>
+                    <strong>damit wir doppelt so viel zuhören wie wir sprechen."</strong><br>
+                    <em>– Epiktet</em>
+                </p>
+                <p style="margin-top: 1rem; font-size: 1rem; font-style: italic;">
+                    💡 In der Kommunikation ist aktives Zuhören der Schlüssel zum Verstehen. 
+                    Erst wer wirklich hört, kann bedeutungsvoll antworten.
+                </p>
+            </div>
+        </div>
+
+        <!-- Language Modes Preview -->
+        <div class="modes-preview">
+            <h3 class="modes-title">🎭 Vorschau: Die drei Sprachmodi im Spiralaufbau</h3>
+            <div class="modes-grid">
+                <div class="mode-card">
+                    <div class="mode-icon">👂</div>
+                    <div class="mode-title">Rezeption</div>
+                    <div class="mode-description">
+                        Verstehen und Aufnehmen von Informationen
+                    </div>
+                    <div class="mode-skills">
+                        <span class="skill-tag">Hören</span>
+                        <span class="skill-tag">Lesen</span>
+                        <span class="skill-tag">Interpretieren</span>
+                    </div>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">✍️</div>
+                    <div class="mode-title">Produktion</div>
+                    <div class="mode-description">
+                        Erstellen und Formulieren von Inhalten
+                    </div>
+                    <div class="mode-skills">
+                        <span class="skill-tag">Schreiben</span>
+                        <span class="skill-tag">Präsentieren</span>
+                        <span class="skill-tag">Gestalten</span>
+                    </div>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">🤝</div>
+                    <div class="mode-title">Interaktion</div>
+                    <div class="mode-description">
+                        Dialog und Austausch mit anderen
+                    </div>
+                    <div class="mode-skills">
+                        <span class="skill-tag">Diskutieren</span>
+                        <span class="skill-tag">Verhandeln</span>
+                        <span class="skill-tag">Moderieren</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spiral Concept -->
+        <div class="spiral-concept">
+            <h3 class="modes-title">📈 Sprachliche Progression über 4 Jahre</h3>
+            <div class="spiral-years">
+                <div class="year-bubble">
+                    <div class="year-number">1</div>
+                    <div class="year-level">Grundlagen</div>
+                </div>
+                <div class="year-bubble">
+                    <div class="year-number">2</div>
+                    <div class="year-level">Aufbau</div>
+                </div>
+                <div class="year-bubble">
+                    <div class="year-number">3</div>
+                    <div class="year-level">Vertiefung</div>
+                </div>
+                <div class="year-bubble">
+                    <div class="year-number">4</div>
+                    <div class="year-level">Expertise</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createLetter() {
+            const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+                           'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                           '📝', '✍️', '💬', '🗣️', '📚', '📖', '🎯', '💡'];
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#F7DC6F', '#BB8FCE', '#85C88A', '#F8B739'];
+            
+            const letter = document.createElement('div');
+            letter.className = 'letter';
+            letter.textContent = letters[Math.floor(Math.random() * letters.length)];
+            letter.style.left = Math.random() * 100 + '%';
+            letter.style.color = colors[Math.floor(Math.random() * colors.length)];
+            letter.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(letter);
+            
+            setTimeout(() => {
+                letter.remove();
+            }, 5000);
+        }
+
+        function revealAnswer() {
+            const answer = document.getElementById('wisdomAnswer');
+            
+            if (!answer.classList.contains('show')) {
+                answer.classList.add('show');
+                
+                // Create letter rain
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => {
+                        createLetter();
+                    }, i * 80);
+                }
+                
+                // Add rainbow effect to the question box
+                const questionBox = document.querySelector('.wisdom-question');
+                questionBox.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)';
+                
+                setTimeout(() => {
+                    questionBox.style.background = 'linear-gradient(135deg, var(--zh-coral) 0%, var(--zh-orange) 100%)';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

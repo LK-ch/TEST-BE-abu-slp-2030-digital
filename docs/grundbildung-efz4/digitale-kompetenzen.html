@@ -1,1 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale & KI-Kompetenzen - Vierjährige EFZ-Lehre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-teal: #20B2AA;
+            --zh-yellow: #FFD700;
+            --zh-pink: #FF69B4;
+            --zh-purple: #9B59B6;
+            --zh-orange: #FF9500;
+            --zh-coral: #FF7F50;
+            --zh-indigo: #4B0082;
+            --zh-red: #DC143C;
+            --zh-lime: #32CD32;
+            --zh-cyan: #00CED1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-green) 0%, var(--zh-teal) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '4';
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            font-size: 8rem;
+            font-weight: bold;
+            opacity: 0.1;
+            transform: translateY(-50%);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Work in Progress Box */
+        .wip-box {
+            background: linear-gradient(135deg, var(--zh-light-blue) 0%, white 100%);
+            border: 2px solid var(--zh-teal);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wip-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { 
+                transform: translateX(0);
+                filter: hue-rotate(0deg);
+            }
+            20% { 
+                transform: translateX(-2px);
+                filter: hue-rotate(90deg);
+            }
+            40% { 
+                transform: translateX(2px);
+                filter: hue-rotate(180deg);
+            }
+            60% { 
+                transform: translateX(-1px);
+                filter: hue-rotate(270deg);
+            }
+            80% { 
+                transform: translateX(1px);
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .wip-title {
+            font-size: 2rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .wip-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--zh-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .reference-link {
+            display: inline-block;
+            background: var(--zh-teal);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .reference-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(32, 178, 170, 0.3);
+        }
+
+        /* Wisdom Quote Section */
+        .wisdom-section {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .wisdom-title {
+            font-size: 1.5rem;
+            color: var(--zh-cyan);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wisdom-question {
+            background: linear-gradient(135deg, var(--zh-cyan) 0%, var(--zh-blue) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wisdom-question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 206, 209, 0.3);
+        }
+
+        .wisdom-question::before {
+            content: '🤖';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .click-hint {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .wisdom-answer {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--zh-gray);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: var(--zh-dark-blue);
+            display: none;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wisdom-answer.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Binary Rain Animation */
+        .binary {
+            position: fixed;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: matrixFall linear;
+            z-index: 1000;
+            pointer-events: none;
+            color: var(--zh-green);
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        @keyframes matrixFall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Digital Competencies Preview */
+        .competencies-preview {
+            background: var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .competencies-title {
+            font-size: 1.5rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .competencies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .competency-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--zh-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .competency-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .competency-card:nth-child(1) { border-left-color: var(--zh-cyan); }
+        .competency-card:nth-child(2) { border-left-color: var(--zh-blue); }
+        .competency-card:nth-child(3) { border-left-color: var(--zh-green); }
+        .competency-card:nth-child(4) { border-left-color: var(--zh-purple); }
+        .competency-card:nth-child(5) { border-left-color: var(--zh-orange); }
+
+        .competency-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .competency-title {
+            font-size: 1.1rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .competency-description {
+            font-size: 0.9rem;
+            color: var(--zh-text);
+            opacity: 0.8;
+        }
+
+        /* AI Badge */
+        .ai-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--zh-purple) 0%, var(--zh-pink) 100%);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .wip-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .competencies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Digitale & KI-Kompetenzen</h1>
+        <p>Zukunftsorientierte Digitalkompetenzen über 4 Jahre</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-breadcrumb">
+        <a href="zirkularitaet-4jahre.html">← Zurück zur Zirkularität</a>
+        <span>/</span>
+        <span>Digitale & KI-Kompetenzen (4-jährige Lehre)</span>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Work in Progress Box -->
+        <div class="wip-box">
+            <div class="wip-icon">💻</div>
+            <h2 class="wip-title">In Bearbeitung</h2>
+            <div class="wip-text">
+                <p>
+                    <strong>Das digitale Kompetenzmodell für die vierjährige EFZ-Lehre wird derzeit entwickelt.</strong>
+                </p>
+                <p>
+                    Die Zirkularität steht im Fokus: Digitale und KI-Kompetenzen werden spiralförmig aufgebaut – 
+                    von digitaler Grundbildung bis zur fortgeschrittenen KI-Anwendung im Berufsfeld.
+                </p>
+                <p>
+                    Als momentane Orientierung dient das innovative Konzept der dreijährigen EFZ-Lehre, 
+                    ergänzt um erweiterte KI-Literacy-Komponenten für das vierte Jahr.
+                </p>
+            </div>
+            <a href="../grundbildung-efz3/digitale-kompetenzen.html" class="reference-link">
+                🚀 Zur Orientierung: Digitale Kompetenzen EFZ (3 Jahre)
+            </a>
+        </div>
+
+        <!-- Wisdom Quote Section -->
+        <div class="wisdom-section">
+            <h3 class="wisdom-title">
+                <span>🔮</span>
+                <span>Digitalweisheit des Tages</span>
+                <span>🔮</span>
+            </h3>
+            <div class="wisdom-question" onclick="revealAnswer()">
+                <span class="question-text">
+                    Was ist der Unterschied zwischen künstlicher und menschlicher Intelligenz?
+                </span>
+                <div class="click-hint">
+                    (Klicke für die Perspektive)
+                </div>
+            </div>
+            <div class="wisdom-answer" id="wisdomAnswer">
+                <p>
+                    <strong>„KI kann schneller rechnen als du denken kannst.</strong><br>
+                    <strong>Aber nur du kannst fühlen, was richtig ist."</strong>
+                </p>
+                <p style="margin-top: 1rem; font-size: 1rem; font-style: italic;">
+                    🧠 Die Zukunft gehört nicht denen, die gegen KI arbeiten, 
+                    sondern denen, die mit KI zusammenarbeiten und dabei menschlich bleiben.
+                </p>
+            </div>
+        </div>
+
+        <!-- Digital Competencies Preview -->
+        <div class="competencies-preview">
+            <h3 class="competencies-title">🎯 Vorschau: Die 5 Bereiche digitaler Kompetenz (DigComp 2.2)</h3>
+            <div class="competencies-grid">
+                <div class="competency-card">
+                    <div class="competency-icon">📱</div>
+                    <div class="competency-title">Information & Daten</div>
+                    <div class="competency-description">
+                        Suchen, bewerten und verwalten digitaler Informationen
+                    </div>
+                    <span class="ai-badge">+ KI-Recherche</span>
+                </div>
+
+                <div class="competency-card">
+                    <div class="competency-icon">💬</div>
+                    <div class="competency-title">Kommunikation & Kollaboration</div>
+                    <div class="competency-description">
+                        Digital interagieren, teilen und zusammenarbeiten
+                    </div>
+                    <span class="ai-badge">+ KI-Assistenz</span>
+                </div>
+
+                <div class="competency-card">
+                    <div class="competency-icon">🎨</div>
+                    <div class="competency-title">Kreation digitaler Inhalte</div>
+                    <div class="competency-description">
+                        Entwickeln, integrieren und programmieren
+                    </div>
+                    <span class="ai-badge">+ KI-Generation</span>
+                </div>
+
+                <div class="competency-card">
+                    <div class="competency-icon">🔒</div>
+                    <div class="competency-title">Sicherheit & Verantwortung</div>
+                    <div class="competency-description">
+                        Schützen von Geräten, Daten und Gesundheit
+                    </div>
+                    <span class="ai-badge">+ KI-Ethik</span>
+                </div>
+
+                <div class="competency-card">
+                    <div class="competency-icon">🧩</div>
+                    <div class="competency-title">Problemlösung & Lernen</div>
+                    <div class="competency-description">
+                        Technische Probleme lösen und digital lernen
+                    </div>
+                    <span class="ai-badge">+ KI-Prompting</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createBinary() {
+            const chars = ['0', '1', '01', '10', '11', '00', '101', '110', '111', '000', 
+                          '🔌', '💾', '🖥️', '📡', '🔐', '⚡', '🌐', '🤖'];
+            
+            const binary = document.createElement('div');
+            binary.className = 'binary';
+            binary.textContent = chars[Math.floor(Math.random() * chars.length)];
+            binary.style.left = Math.random() * 100 + '%';
+            binary.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            // Zufällige Farben für Matrix-Effekt
+            const colors = ['#00FF00', '#00CED1', '#0F05A0', '#20B2AA', '#32CD32'];
+            binary.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.body.appendChild(binary);
+            
+            setTimeout(() => {
+                binary.remove();
+            }, 5000);
+        }
+
+        function revealAnswer() {
+            const answer = document.getElementById('wisdomAnswer');
+            
+            if (!answer.classList.contains('show')) {
+                answer.classList.add('show');
+                
+                // Create Matrix-style binary rain
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        createBinary();
+                    }, i * 60);
+                }
+                
+                // Add cyber effect to the question box
+                const questionBox = document.querySelector('.wisdom-question');
+                questionBox.style.background = 'linear-gradient(135deg, #00FF00 0%, #0F05A0 50%, #00CED1 100%)';
+                
+                setTimeout(() => {
+                    questionBox.style.background = 'linear-gradient(135deg, var(--zh-cyan) 0%, var(--zh-blue) 100%)';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

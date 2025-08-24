@@ -87,6 +87,76 @@
             margin-top: 0.5rem;
         }
 
+        /* Navigation Breadcrumb */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--zh-gray);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .back-btn:hover {
+            background: var(--zh-light-blue);
+            transform: translateX(-5px);
+            text-decoration: none;
+            color: var(--zh-text);
+        }
+
+        .efz-link {
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .efz-link:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
         /* Container */
         .container {
             max-width: 1400px;
@@ -437,6 +507,15 @@
             .kacheln-container {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .nav-breadcrumb {
+                padding: 1rem;
+            }
+
+            .efz-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -447,9 +526,20 @@
         <p>Spiralförmiger Aufbau der Kompetenzen für lebenslanges Lernen</p>
         <p class="subtitle">3-jährige Grundbildung - Schullehrplan Allgemeinbildung 2030</p>
     </header>
+
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <a href="index.html">Übersicht</a>
+        <span>›</span>
+        <span>Schlüsselkompetenzen</span>
+        <a href="index.html" class="efz-link">🏠 EFZ-Überblick</a>
+    </nav>
     
     <!-- Main Container -->
     <div class="container">
+        <a href="zirkularitaet.html" class="back-btn">
+            ← Zurück zur Übersicht
+        </a>
         <!-- Status Info -->
         <div class="status-info">
             <h2>📊 Bearbeitungsstand der Themen</h2>

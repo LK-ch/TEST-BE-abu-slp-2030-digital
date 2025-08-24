@@ -1,1 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schlüsselkompetenzen - Vierjährige EFZ-Lehre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-teal: #20B2AA;
+            --zh-yellow: #FFD700;
+            --zh-pink: #FF69B4;
+            --zh-purple: #9B59B6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-green) 0%, var(--zh-teal) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '4';
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            font-size: 8rem;
+            font-weight: bold;
+            opacity: 0.1;
+            transform: translateY(-50%);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Work in Progress Box */
+        .wip-box {
+            background: linear-gradient(135deg, var(--zh-light-blue) 0%, white 100%);
+            border: 2px solid var(--zh-teal);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wip-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wip-title {
+            font-size: 2rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .wip-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--zh-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .reference-link {
+            display: inline-block;
+            background: var(--zh-teal);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .reference-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(32, 178, 170, 0.3);
+        }
+
+        /* Wisdom Quote Section */
+        .wisdom-section {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .wisdom-title {
+            font-size: 1.5rem;
+            color: var(--zh-purple);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wisdom-question {
+            background: linear-gradient(135deg, var(--zh-purple) 0%, var(--zh-pink) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wisdom-question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+        }
+
+        .wisdom-question::before {
+            content: '🤔';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .click-hint {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .wisdom-answer {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--zh-gray);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: var(--zh-dark-blue);
+            display: none;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wisdom-answer.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Flower Rain Animation */
+        .flower {
+            position: fixed;
+            font-size: 2rem;
+            animation: fall linear;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Learning Journey Preview */
+        .journey-preview {
+            background: var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .journey-title {
+            font-size: 1.5rem;
+            color: var(--zh-dark-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .competence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .competence-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .competence-item:hover {
+            border-color: var(--zh-teal);
+            transform: translateY(-3px);
+        }
+
+        .competence-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .competence-name {
+            font-size: 0.9rem;
+            color: var(--zh-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .wip-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .competence-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Schlüsselkompetenzen</h1>
+        <p>Zirkulärer Aufbau über 4 Jahre</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-breadcrumb">
+        <a href="zirkularitaet-4jahre.html">← Zurück zur Zirkularität</a>
+        <span>/</span>
+        <span>Schlüsselkompetenzen (4-jährige Lehre)</span>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Work in Progress Box -->
+        <div class="wip-box">
+            <div class="wip-icon">⚙️</div>
+            <h2 class="wip-title">In Bearbeitung</h2>
+            <div class="wip-text">
+                <p>
+                    <strong>Die Inhalte für die vierjährige EFZ-Lehre werden derzeit erarbeitet.</strong>
+                </p>
+                <p>
+                    Die Zirkularität steht im Fokus unserer Entwicklung. Der spiralförmige Aufbau der Schlüsselkompetenzen 
+                    über vier Jahre ermöglicht eine noch tiefere und nachhaltigere Kompetenzentwicklung.
+                </p>
+                <p>
+                    Als momentane Orientierung dient der bewährte Aufbau der dreijährigen EFZ-Lehre, 
+                    der für die vierjährige Ausbildung erweitert und vertieft wird.
+                </p>
+            </div>
+            <a href="schluesselkompetenzen-3jahre.html" class="reference-link">
+                📚 Zur Orientierung: Schlüsselkompetenzen EFZ (3 Jahre)
+            </a>
+        </div>
+
+        <!-- Wisdom Quote Section -->
+        <div class="wisdom-section">
+            <h3 class="wisdom-title">
+                <span>✨</span>
+                <span>Weisheit des Tages</span>
+                <span>✨</span>
+            </h3>
+            <div class="wisdom-question" onclick="revealAnswer()">
+                <span class="question-text">
+                    Was ist der Unterschied zwischen Wissen und Kompetenz?
+                </span>
+                <div class="click-hint">
+                    (Klicke für die Antwort)
+                </div>
+            </div>
+            <div class="wisdom-answer" id="wisdomAnswer">
+                <p>
+                    <strong>„Wissen sagt dir, was zu tun ist.</strong><br>
+                    <strong>Kompetenz zeigt, dass du es kannst.</strong><br>
+                    <strong>Aber erst Erfahrung lehrt dich, wann und wie."</strong>
+                </p>
+                <p style="margin-top: 1rem; font-size: 1rem; font-style: italic;">
+                    – Die wahre Bildung entsteht im spiralförmigen Zusammenspiel aller drei.
+                </p>
+            </div>
+        </div>
+
+        <!-- Learning Journey Preview -->
+        <div class="journey-preview">
+            <h3 class="journey-title">🔮 Vorschau: Die 12 Schlüsselkompetenzen im Spiralaufbau</h3>
+            <div class="competence-grid">
+                <div class="competence-item">
+                    <div class="competence-icon">💭</div>
+                    <div class="competence-name">Reflexionsfähigkeit</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">🎯</div>
+                    <div class="competence-name">Zielorientierung</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">🤝</div>
+                    <div class="competence-name">Kooperation</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">💬</div>
+                    <div class="competence-name">Kommunikation</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">🧩</div>
+                    <div class="competence-name">Problemlösung</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">🎨</div>
+                    <div class="competence-name">Kreativität</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">📊</div>
+                    <div class="competence-name">Analysefähigkeit</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">🌍</div>
+                    <div class="competence-name">Systemdenken</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">⚖️</div>
+                    <div class="competence-name">Urteilsfähigkeit</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">🔄</div>
+                    <div class="competence-name">Flexibilität</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">📚</div>
+                    <div class="competence-name">Lernkompetenz</div>
+                </div>
+                <div class="competence-item">
+                    <div class="competence-icon">💪</div>
+                    <div class="competence-name">Selbstmanagement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createFlower() {
+            const flowers = ['🌸', '🌺', '🌼', '🌻', '🌷', '🌹', '🏵️', '💐', '🌵', '🌿'];
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + '%';
+            flower.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(flower);
+            
+            setTimeout(() => {
+                flower.remove();
+            }, 5000);
+        }
+
+        function revealAnswer() {
+            const answer = document.getElementById('wisdomAnswer');
+            
+            if (!answer.classList.contains('show')) {
+                answer.classList.add('show');
+                
+                // Create flower rain
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        createFlower();
+                    }, i * 100);
+                }
+                
+                // Add some sparkles to the question box
+                const questionBox = document.querySelector('.wisdom-question');
+                questionBox.style.background = 'linear-gradient(135deg, var(--zh-yellow) 0%, var(--zh-pink) 50%, var(--zh-purple) 100%)';
+                
+                setTimeout(() => {
+                    questionBox.style.background = 'linear-gradient(135deg, var(--zh-purple) 0%, var(--zh-pink) 100%)';
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

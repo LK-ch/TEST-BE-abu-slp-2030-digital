@@ -1,12 +1,512 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Zirkularität EFZ 4-jährig</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirkularität im SLP ABU - Vierjährige EFZ-Lehre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-light-blue: #E8F2FF;
+            --zh-dark-blue: #000051;
+            --zh-accent: #FF6B6B;
+            --zh-gray: #F5F5F5;
+            --zh-text: #333333;
+            --zh-white: #FFFFFF;
+            --zh-green: #00C896;
+            --zh-orange: #FF9500;
+            --zh-purple: #9B59B6;
+            --zh-pink: #FF69B4;
+            --zh-teal: #20B2AA;
+            --zh-red: #DC143C;
+            --zh-yellow: #FFD700;
+            --zh-cyan: #00CED1;
+            --zh-lime: #32CD32;
+            --zh-indigo: #4B0082;
+            --zh-coral: #FF7F50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--zh-text);
+            background-color: var(--zh-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--zh-green) 0%, var(--zh-teal) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '4';
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            font-size: 8rem;
+            font-weight: bold;
+            opacity: 0.1;
+            transform: translateY(-50%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .year-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav-breadcrumb {
+            background-color: var(--zh-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-breadcrumb a {
+            color: var(--zh-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-breadcrumb span {
+            color: var(--zh-text);
+            opacity: 0.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Link Buttons */
+        .link-button {
+            background: var(--zh-light-blue);
+            color: var(--zh-dark-blue);
+            border: 2px solid var(--zh-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .link-button:hover {
+            background: var(--zh-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .link-button.eba {
+            background: var(--zh-orange);
+            color: white;
+            border-color: var(--zh-orange);
+        }
+
+        .link-button.eba:hover {
+            background: #E67E00;
+        }
+
+        /* Spiral Timeline */
+        .spiral-timeline {
+            background: linear-gradient(135deg, var(--zh-gray) 0%, white 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .spiral-timeline h2 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-years {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .year-block {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-top: 4px solid var(--zh-green);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .year-block:nth-child(1) { border-top-color: var(--zh-green); }
+        .year-block:nth-child(2) { border-top-color: var(--zh-teal); }
+        .year-block:nth-child(3) { border-top-color: var(--zh-blue); }
+        .year-block:nth-child(4) { border-top-color: var(--zh-purple); }
+
+        .year-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .year-label {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--zh-dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .year-focus {
+            font-size: 0.9rem;
+            color: var(--zh-text);
+            opacity: 0.8;
+        }
+
+        /* Circular Concept */
+        .circular-concept {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .circular-concept h3 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .concept-item {
+            background: var(--zh-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--zh-teal);
+            transition: all 0.3s ease;
+        }
+
+        .concept-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .concept-item h4 {
+            color: var(--zh-teal);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Main Navigation Cards */
+        .nav-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .nav-card {
+            background: white;
+            border: 2px solid var(--zh-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--zh-light-blue) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-card:hover::before {
+            opacity: 1;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--zh-teal);
+        }
+
+        .nav-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav-card h3 {
+            color: var(--zh-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .nav-card p {
+            color: var(--zh-text);
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .nav-card .year-tags {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .year-tag {
+            background: var(--zh-light-blue);
+            color: var(--zh-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .timeline-years {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-years {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .header .subtitle {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Zirkularität – 4-jährige Grundbildung EFZ</h1>
-  <p>Hier steht die Zirkularität für EFZ 4-jährig...</p>
-  <a href="index.html">Zurück zu EFZ 4-jährig</a>
-  <a href="../index.html">Zurück zur Übersicht</a>
+    <!-- Header -->
+    <header class="header">
+        <h1>Zirkularität im Schullehrplan ABU</h1>
+        <div class="subtitle">
+            <span>Spiralförmiger Kompetenzaufbau</span>
+            <span class="year-badge">4-jährige EFZ-Lehre</span>
+        </div>
+    </header>
+
+    <!-- Navigation Breadcrumb -->
+    <nav class="nav-breadcrumb">
+        <span>Übersicht</span>
+        <a href="index.html" class="link-button">🏠 EFZ-Überblick</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Spiral Timeline -->
+        <div class="spiral-timeline">
+            <h2>🌀 Vierjähriger Spiralaufbau der Kompetenzen</h2>
+            <p>
+                In der vierjährigen EFZ-Lehre werden die Kompetenzen spiralförmig über alle Lehrjahre aufgebaut. 
+                Jedes Jahr bringt neue Vertiefungen und Erweiterungen mit steigender Komplexität und Selbstständigkeit.
+            </p>
+            
+            <div class="timeline-years">
+                <div class="year-block">
+                    <div class="year-label">1. Jahr</div>
+                    <div class="year-focus">
+                        <strong>Grundlagen</strong><br>
+                        Orientierung, Basiskompetenzen, erste berufliche Identität
+                    </div>
+                </div>
+                <div class="year-block">
+                    <div class="year-label">2. Jahr</div>
+                    <div class="year-focus">
+                        <strong>Vertiefung</strong><br>
+                        Anwendung, Festigung, erweiterte Kontexte
+                    </div>
+                </div>
+                <div class="year-block">
+                    <div class="year-label">3. Jahr</div>
+                    <div class="year-focus">
+                        <strong>Integration</strong><br>
+                        Vernetzung, Transfer, komplexe Situationen
+                    </div>
+                </div>
+                <div class="year-block">
+                    <div class="year-label">4. Jahr</div>
+                    <div class="year-focus">
+                        <strong>Professionalisierung</strong><br>
+                        Expertise, Selbstständigkeit, Vorbereitung Berufsleben
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Circular Concept -->
+        <div class="circular-concept">
+            <h3>🎯 Prinzipien der zirkulären Kompetenzentwicklung</h3>
+            
+            <div class="concept-grid">
+                <div class="concept-item">
+                    <h4>📈 Progression über 4 Jahre</h4>
+                    <p>Vom Einfachen zum Komplexen, von der Anleitung zur Selbstständigkeit</p>
+                </div>
+                <div class="concept-item">
+                    <h4>🔗 Vernetztes Lernen</h4>
+                    <p>Verknüpfung von ABU-Themen mit beruflichen Handlungssituationen</p>
+                </div>
+                <div class="concept-item">
+                    <h4>🔄 Wiederholung & Vertiefung</h4>
+                    <p>Themen kehren in neuen Kontexten und auf höherem Niveau wieder</p>
+                </div>
+                <div class="concept-item">
+                    <h4>💡 Transferfähigkeit</h4>
+                    <p>Kompetenzen werden auf neue berufliche und private Situationen übertragbar</p>
+                </div>
+                <div class="concept-item">
+                    <h4>🎓 Lebenslanges Lernen</h4>
+                    <p>Aufbau von Lernstrategien für die kontinuierliche Weiterentwicklung</p>
+                </div>
+                <div class="concept-item">
+                    <h4>✅ Qualifikationsverfahren</h4>
+                    <p>Vorbereitung auf VA und schriftliche Prüfung über alle 4 Jahre</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Cards -->
+        <div class="nav-cards">
+            <a href="aspekte-4jahre.html" class="nav-card">
+                <div class="nav-card-icon">🌍</div>
+                <h3>Handlungsfelder Gesellschaft</h3>
+                <p>Spiralförmige Entwicklung der 8 gesellschaftlichen Aspekte über alle 4 Lehrjahre mit zunehmender Komplexität</p>
+                <div class="year-tags">
+                    <span class="year-tag">Jahr 1-4</span>
+                    <span class="year-tag">8 Aspekte</span>
+                </div>
+            </a>
+
+            <a href="schluesselkompetenzen-4jahre.html" class="nav-card">
+                <div class="nav-card-icon">🔑</div>
+                <h3>Schlüsselkompetenzen</h3>
+                <p>Systematischer Aufbau der 12 Schlüsselkompetenzen mit jahresspezifischen Schwerpunkten und Vertiefungen</p>
+                <div class="year-tags">
+                    <span class="year-tag">Jahr 1-4</span>
+                    <span class="year-tag">12 Kompetenzen</span>
+                </div>
+            </a>
+
+            <a href="sprachkompetenzen-4jahre.html" class="nav-card">
+                <div class="nav-card-icon">💬</div>
+                <h3>Sprache & Kommunikation</h3>
+                <p>Progressiver Aufbau der Sprachmodi vom Grundniveau bis zur beruflichen Fachkommunikation</p>
+                <div class="year-tags">
+                    <span class="year-tag">Rezeption</span>
+                    <span class="year-tag">Produktion</span>
+                    <span class="year-tag">Interaktion</span>
+                </div>
+            </a>
+
+            <a href="digitale-kompetenzen-4jahre.html" class="nav-card">
+                <div class="nav-card-icon">💻</div>
+                <h3>Digitale & KI-Kompetenzen</h3>
+                <p>Stufenweiser Aufbau digitaler Fertigkeiten von Grundlagen bis zu fortgeschrittener KI-Nutzung</p>
+                <div class="year-tags">
+                    <span class="year-tag">DigComp 2.2</span>
+                    <span class="year-tag">KI-Literacy</span>
+                </div>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

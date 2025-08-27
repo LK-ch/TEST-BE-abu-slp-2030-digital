@@ -49,9 +49,9 @@
         
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-bottom: 50px;
+            margin-bottom: 24px;
         }
         
         .card {
@@ -113,8 +113,80 @@
             font-size: 0.95em;
         }
         
-        .section-divider {
-            height: 20px;
+        /* Spezielle Styles für die QV-Box */
+        .card-wide {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+        
+        .card-wide:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card-wide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0066cc;
+            transition: width 0.3s ease;
+        }
+        
+        .card-wide:hover::before {
+            width: 8px;
+        }
+        
+        .card-wide .card-icon {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        
+        .card-wide-content {
+            flex: 1;
+        }
+        
+        .card-wide h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .card-wide p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95em;
+            margin: 0;
+        }
+        
+        @media (max-width: 992px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-wide {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+            
+            .card-wide .card-icon {
+                margin-bottom: 15px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -124,10 +196,6 @@
             
             .subtitle {
                 font-size: 1.1em;
-            }
-            
-            .card-grid {
-                grid-template-columns: 1fr;
             }
         }
         
@@ -205,14 +273,8 @@
     </header>
     
     <main class="container">
-        <!-- Interne Navigation -->
+        <!-- Grid für die drei Grundbildungen -->
         <div class="card-grid">
-            <a href="qualifikationsverfahren/index.html" class="card">
-                <div class="card-icon icon-cert"></div>
-                <h2>Qualifikationsverfahren</h2>
-                <p>Informationen zu Semesterzeugnisnoten, Schlussarbeit und Schlussprüfung im Qualifikationsbereich Allgemeinbildung</p>
-            </a>
-            
             <a href="grundbildung-eba/index.html" class="card">
                 <div class="card-icon icon-2y"></div>
                 <h2>2-jährige Grundbildung EBA</h2>
@@ -231,6 +293,15 @@
                 <p>Schullehrplan für die vierjährige berufliche Grundbildung mit eidgenössischem Fähigkeitszeugnis</p>
             </a>
         </div>
+        
+        <!-- Breite QV-Box -->
+        <a href="qualifikationsverfahren/index.html" class="card-wide">
+            <div class="card-icon icon-cert"></div>
+            <div class="card-wide-content">
+                <h2>Qualifikationsverfahren</h2>
+                <p>Informationen zu Semesterzeugnisnoten, Schlussarbeit und Schlussprüfung im Qualifikationsbereich Allgemeinbildung</p>
+            </div>
+        </a>
         
         <!-- Externe Links zu Rechtsgrundlagen -->
         <div class="external-links">

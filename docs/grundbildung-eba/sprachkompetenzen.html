@@ -231,6 +231,23 @@
             color: #666;
         }
 
+        /* Reset Button */
+        .reset-button {
+            padding: 10px 20px;
+            background-color: var(--zh-gray);
+            color: var(--zh-text);
+            border: 2px solid var(--zh-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-button:hover {
+            background-color: var(--zh-light-blue);
+            transform: translateY(-2px);
+        }
+
         /* Tabelle */
         .table-container {
             background: white;
@@ -296,94 +313,6 @@
         .btn-7 { background-color: var(--zh-purple); }
         .btn-8 { background-color: var(--zh-pink); }
         .btn-9 { background-color: var(--zh-green); }
-
-        /* Qualitative Einschätzung */
-        .qualitative-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .qualitative-section h2 {
-            color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
-        }
-
-        /* Accordion Styles */
-        .accordion-item {
-            margin-bottom: 1rem;
-            border: 1px solid var(--zh-gray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: var(--zh-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-header.active {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-title {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .accordion-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: white;
-        }
-
-        .accordion-content.active {
-            max-height: 800px;
-        }
-
-        .accordion-body {
-            padding: 20px;
-        }
-
-        .accordion-body ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .erfuellung-gut {
-            color: var(--zh-green);
-            font-weight: 600;
-        }
-
-        .erfuellung-genuegend {
-            color: var(--zh-orange);
-            font-weight: 600;
-        }
-
-        .erfuellung-knapp {
-            color: var(--zh-red);
-            font-weight: 600;
-        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -484,6 +413,8 @@
                 <div class="kachel-count">Vorkommnisse: 17</div>
             </div>
         </div>
+
+        <button class="reset-button" onclick="resetFilter()">Filter zurücksetzen</button>
 
         <!-- Tabelle mit allen Themen -->
         <div class="table-container">
@@ -675,61 +606,6 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Qualitative Einschätzung -->
-        <div class="qualitative-section">
-            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Kernmodi der schriftlichen und digitalen Kommunikation</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei den Modi <strong>"Produktion schriftlich & bildlich" (4.2.2.2)</strong> mit 25 Vorkommen, <strong>"Interaktion & Kollaboration mündlich" (4.2.3.1)</strong> und <strong>"Interaktion & Kollaboration digital" (4.2.3.3)</strong> mit je 17 Vorkommen sowie <strong>"Rezeption schriftlich & bildlich" (4.2.1.3)</strong> mit 15 Vorkommen sehr gut erfüllt.</p>
-                        <p><strong>Erklärung:</strong> Diese Sprachmodi bilden das kommunikative Rückgrat des Lehrplans. Die extrem hohe Frequenz der schriftlichen Produktion (25x) zeigt den Fokus auf dokumentierte, reflektierte Kommunikation. Die gleichwertige Betonung von mündlicher und digitaler Interaktion (je 17x) spiegelt die moderne Arbeitswelt wider, in der beide Kommunikationskanäle essentiell sind. Die häufige schriftliche Rezeption (15x) sichert die Grundlage für informierte Entscheidungen und kritisches Denken.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Multimediale und audiovisuelle Kompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei den Modi <strong>"Rezeption audiovisuell" (4.2.1.2)</strong> und <strong>"Produktion multimedial" (4.2.2.3)</strong> mit je 13 Vorkommen sowie <strong>"Rezeption mündlich" (4.2.1.1)</strong> mit 10 Vorkommen und <strong>"Produktion mündlich" (4.2.2.1)</strong> mit 9 Vorkommen als genügend zu bewerten.</p>
-                        <p><strong>Erklärung:</strong> Diese Modi werden regelmässig eingesetzt und decken wichtige Bereiche der modernen Kommunikation ab:</p>
-                        <ul>
-                            <li>Die audiovisuelle Rezeption (13x) ist besonders in Themen wie Nachhaltigkeit, Gesundheit und Kultur verankert</li>
-                            <li>Die multimediale Produktion (13x) wird gezielt bei digitalen Werkzeugen, Nachhaltigkeit und Bewerbungen eingesetzt</li>
-                            <li>Die mündliche Rezeption (10x) und Produktion (9x) sind solide integriert, könnten aber noch breiter verankert werden</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Schriftliche Interaktion</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist beim Modus <strong>"Interaktion & Kollaboration schriftlich" (4.2.3.2)</strong> mit nur 4 Vorkommen deutlich unterrepräsentiert.</p>
-                        <p><strong>Erklärung:</strong> Dieser Sprachmodus wird nur in sehr spezifischen Kontexten eingesetzt (Versicherungskorrespondenz, behördliche Kommunikation, rechtliche Anfragen). Die geringe Wiederholungsrate ist problematisch, da schriftliche Kollaboration in der modernen Arbeitswelt (E-Mail-Verkehr, gemeinsame Dokumentbearbeitung, Projektmanagement-Tools) eine zentrale Rolle spielt. Hier besteht das grösste Verbesserungspotenzial:</p>
-                        <ul>
-                            <li>Integration in Teamarbeiten und Projektaufgaben</li>
-                            <li>Verstärkte Nutzung bei der gemeinsamen Erarbeitung von Texten</li>
-                            <li>Einbindung in digitale Kollaborationsformen</li>
-                        </ul>
-                        <p>Die Vernachlässigung dieses Modus könnte dazu führen, dass Lernende unzureichend auf die kollaborativen schriftlichen Anforderungen der Berufswelt vorbereitet sind.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -766,29 +642,6 @@
             document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
                 tag.classList.remove('hidden');
             });
-        }
-
-        // Accordion Funktion
-        function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const allHeaders = document.querySelectorAll('.accordion-header');
-            const allContents = document.querySelectorAll('.accordion-content');
-            
-            // Schließe alle anderen Accordions
-            allHeaders.forEach(h => {
-                if (h !== header) {
-                    h.classList.remove('active');
-                }
-            });
-            allContents.forEach(c => {
-                if (c !== content) {
-                    c.classList.remove('active');
-                }
-            });
-            
-            // Toggle aktuelles Accordion
-            header.classList.toggle('active');
-            content.classList.toggle('active');
         }
     </script>
 </body>

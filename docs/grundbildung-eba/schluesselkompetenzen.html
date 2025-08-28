@@ -314,34 +314,6 @@
         .btn-11 { background-color: var(--zh-coral); }
         .btn-12 { background-color: var(--zh-lime); color: var(--zh-text); }
         
-        /* Qualitative Einschätzung */
-        .qualitative-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .qualitative-section h2 {
-            color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
-        }
-
-        .qualitative-section h3 {
-            color: var(--zh-blue);
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .qualitative-section p {
-            margin-bottom: 1rem;
-        }
-
-        .qualitative-section ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
         .reset-button {
             padding: 10px 20px;
             background-color: var(--zh-gray);
@@ -356,76 +328,6 @@
         .reset-button:hover {
             background-color: var(--zh-light-blue);
             transform: translateY(-2px);
-        }
-
-        .erfuellung-gut {
-            color: var(--zh-green);
-            font-weight: 600;
-        }
-
-        .erfuellung-genuegend {
-            color: var(--zh-orange);
-            font-weight: 600;
-        }
-
-        .erfuellung-knapp {
-            color: var(--zh-red);
-            font-weight: 600;
-        }
-
-        /* Accordion Styles */
-        .accordion-item {
-            margin-bottom: 1rem;
-            border: 1px solid var(--zh-gray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: var(--zh-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-header.active {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-title {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .accordion-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: white;
-        }
-
-        .accordion-content.active {
-            max-height: 800px;
-        }
-
-        .accordion-body {
-            padding: 20px;
         }
 
         /* Responsive */
@@ -541,6 +443,8 @@
                 <div class="kachel-count">Vorkommnisse: 8</div>
             </div>
         </div>
+        
+        <button class="reset-button" onclick="resetFilter()">Filter zurücksetzen</button>
         
         <!-- Tabelle mit allen Themen -->
         <div class="table-container">
@@ -817,50 +721,6 @@
                 </tbody>
             </table>
         </div>
-        
-        <!-- Qualitative Einschätzung -->
-        <div class="qualitative-section">
-            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Fundamentale Kernkompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei den Kompetenzen "Standpunkte begründen und überzeugen" (3.2.6), "Werthaltungen reflektieren" (3.2.5), "Sich an Wandel anpassen" (3.2.10), "Mit Mehrdeutigkeiten umgehen" (3.2.11) und "Gesellschaftlich partizipieren" (3.2.12) sehr gut erfüllt.</p>
-                        <p><strong>Erklärung:</strong> Diese Kompetenzen bilden das Rückgrat des Lehrplans. Ihre extrem häufige Wiederholung über so unterschiedliche Themen wie Berufseinstieg, Politik, Medien und Kultur hinweg stellt sicher, dass die Lernenden diese Fähigkeiten in verschiedensten Kontexten anwenden und vertiefen müssen. Der Lehrplan legt hier einen klaren und konsequent umgesetzten Schwerpunkt auf die Entwicklung einer reflektierten, kommunikationsstarken und anpassungsfähigen Persönlichkeit, die aktiv am gesellschaftlichen Leben teilnimmt.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Wichtige Querschnittskompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei den Kompetenzen "Quellen unterscheiden" (3.2.1), "Ziele setzen" (3.2.2), "Perspektiven wechseln" (3.2.7) sowie "Vernetzt/systemisch denken" (3.2.9) als genügend zu bewerten.</p>
-                        <p><strong>Erklärung:</strong> Diese Fähigkeiten werden regelmässig in mehreren, aber nicht allen Themenbereichen aufgegriffen. Sie fungieren als wichtige Werkzeuge für das Bearbeiten spezifischer Aufgaben (z.B. Recherche, Planung, soziale Interaktion). Die Wiederholung ist ausreichend, um eine solide Grundlage zu schaffen. Allerdings besteht das Risiko, dass die Anwendung dieser Kompetenzen stark an die explizit genannten Themen (z.B. Quellenkritik primär bei Medien und Politik) gebunden bleibt. Eine noch breitere Verankerung, beispielsweise des vernetzten Denkens auch im Bereich der persönlichen Lebensplanung, könnte die Transferleistung weiter stärken.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Spezifische Anwendungskompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei den Kompetenzen "Innovativ Probleme lösen" (3.2.3), "In Teams arbeiten" (3.2.4) und "Lebensphasen planen" (3.2.8) nur knapp erfüllt.</p>
-                        <p><strong>Erklärung:</strong> Diese Kompetenzen werden nur in wenigen, sehr spezifischen Kontexten explizit gefördert. Die Lebensphasenplanung (3.2.8) ist logischerweise auf den Anfang (Thema 1) und das Ende (Thema 8) der Ausbildung konzentriert. Innovationsfähigkeit (3.2.3) und Teamarbeit (3.2.4) sind zwar zentral für die moderne Arbeitswelt, werden im Lehrplan aber nur punktuell verlangt. Die geringe Wiederholungsrate birgt die Gefahr, dass diese Fähigkeiten als isolierte "Methoden" für bestimmte Aufgaben wahrgenommen werden und der Transfer in neue, unvorhergesehene Situationen des Berufs- und Privatlebens nicht ausreichend geübt wird. Hier besteht das grösste Potenzial für eine stärkere zirkuläre Integration.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -897,29 +757,6 @@
             document.querySelectorAll('.sk-button').forEach(btn => {
                 btn.classList.remove('hidden');
             });
-        }
-
-        // Accordion Funktion
-        function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const allHeaders = document.querySelectorAll('.accordion-header');
-            const allContents = document.querySelectorAll('.accordion-content');
-            
-            // Schließe alle anderen Accordions
-            allHeaders.forEach(h => {
-                if (h !== header) {
-                    h.classList.remove('active');
-                }
-            });
-            allContents.forEach(c => {
-                if (c !== content) {
-                    c.classList.remove('active');
-                }
-            });
-            
-            // Toggle aktuelles Accordion
-            header.classList.toggle('active');
-            content.classList.toggle('active');
         }
     </script>
 </body>

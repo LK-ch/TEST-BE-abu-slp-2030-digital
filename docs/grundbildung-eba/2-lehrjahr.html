@@ -124,6 +124,81 @@
             }
         }
         
+        /* Neue Stile für Leitidee und Beschreibungen */
+        .leitidee-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .leitidee-title {
+            color: #003d7a;
+            font-size: 1.2em;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .kurzbeschreibung {
+            background-color: #f8f9fa;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+        
+        .erweiterung-toggle {
+            background-color: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            color: #0066cc;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        .erweiterung-toggle:hover {
+            background-color: #cce0f4;
+            transform: translateY(-1px);
+        }
+        
+        .erweiterung-toggle::after {
+            content: ' ▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .erweiterung-toggle.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .detaillierte-erweiterung {
+            display: none;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+        
+        .detaillierte-erweiterung.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .detaillierte-erweiterung p {
+            margin-bottom: 12px;
+        }
+        
+        .detaillierte-erweiterung p:last-child {
+            margin-bottom: 0;
+        }
+        
         .lebensbezug {
             margin-bottom: 30px;
             padding: 20px;
@@ -274,6 +349,12 @@
             }
         }
         
+        function toggleErweiterung(button) {
+            const erweiterung = button.nextElementSibling;
+            button.classList.toggle('active');
+            erweiterung.classList.toggle('show');
+        }
+        
         // Initialize: Add click handlers and collapse all themes
         document.addEventListener('DOMContentLoaded', function() {
             const headers = document.querySelectorAll('.theme-header');
@@ -282,6 +363,13 @@
                     toggleTheme(this);
                 });
                 header.classList.add('collapsed');
+            });
+            
+            const erweiterungButtons = document.querySelectorAll('.erweiterung-toggle');
+            erweiterungButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    toggleErweiterung(this);
+                });
             });
         });
     </script>
@@ -307,6 +395,25 @@
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Ich lebe in einer Welt voller Informationen – und stehe oft vor der Frage, was stimmt, wem ich glauben kann und wie ich mir eine fundierte Meinung bilde. Ich möchte lernen, wie ich Beiträge aus digitalen Quellen gezielt nutze, politische Absichten erkenne und Manipulation durchschauen kann.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich lerne, Informationen gezielt zu nutzen: Ich höre politische Debatten, Interviews und Social-Media-Beiträge, analysiere die Absichten hinter Aussagen und vergleiche Positionen. Ich reflektiere unterschiedliche Standpunkte und überlege, wie sich politische Meinungsbildung durch digitale Medien verändert.</p>
+                        
+                        <p>Auf dieser Basis setze ich mich mit ethischen Fragen auseinander – etwa zum Umgang mit Hassrede, Meinungsfreiheit und Verantwortung im Netz. Ich reflektiere Menschenrechte und Grundwerte und überlege, wie sie auf aktuelle Fragen angewendet werden können. Dabei bringe ich unterschiedliche Sichtweisen in Diskussionen ein und lerne, meine Meinung begründet und respektvoll zu vertreten.</p>
+                        
+                        <p>Ich kenne meine politischen Rechte – auch als Minderjährige:r oder Person mit anderer Nationalität – und weiss, wie ich mich an politischen Prozessen beteiligen kann, von der Klassenvertretung bis zur nationalen Abstimmung. Ich entwickle eigene Standpunkte, bereite sie sprachlich sorgfältig auf und präsentiere sie adressatengerecht – etwa in einem Debattenbeitrag oder als Video-Statement für Social Media. So erlebe ich: Meine Stimme zählt – und ich kann durch aktives Mitgestalten Veränderungen anstossen.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich bilde mir eine Meinung zu politischen Zusammenhängen, vertrete sie – und rege andere zum Nachdenken an.</h3>
                     
@@ -331,7 +438,7 @@
                         <div id="t5l1-gesellschaft" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">5.2.7.2 Technologische und digitale Transformation:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst.</li>
-                                <li><span class="kompetenz-nummer">5.2.5.1 Politik:</span> Die Lernenden analysieren aktuelle politische Fragen und Themen und identifizieren die Interessen und Werte der betroffenen Personen sowie die für deren Durchsetzung verwendeten Strategien. Sie analysieren dabei Chancen und Risiken der Strategien und erkennen Beeinflussung bzw. Manipulationsmöglichkeiten.</li>
+                                <li><span class="kompetenz-nummer">5.2.5.1 Politik:</span> Die Lernenden analysieren aktuelle politische Fragen und Themen und identifizieren die Interessen und Werte der betroffenen Personen sowie die für deren Durchsetzung verwendeten Strategien.</li>
                             </ul>
                         </div>
                         
@@ -433,7 +540,7 @@
                         
                         <div id="t5l3-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.7.2 Technologische und digitale Transformation:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst. Sie setzen sich mit Daten und Informationen, mit Systemen und Vernetzung auseinander. Dabei analysieren die Lernenden auch Chancen und Risiken von künstlicher Intelligenz.</li>
+                                <li><span class="kompetenz-nummer">5.2.7.2 Technologische und digitale Transformation:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst. Sie setzen sich mit Daten und Informationen, mit Systemen und Vernetzung, mit Informatikanwendungen und Medien sowie Informations- und Kommunikationstechnologien und deren Auswirkungen auf Individuum und Gesellschaft auseinander.</li>
                                 <li><span class="kompetenz-nummer">5.2.3.4 Kunst:</span> Die Lernenden erproben ihre eigenen Gestaltungs- und Ausdrucksfähigkeiten und erweitern sie.</li>
                             </ul>
                         </div>
@@ -485,8 +592,8 @@
                         
                         <div id="t5l2-1-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.5.3 Politik:</span> Die Lernenden verstehen die Organisation und die Funktionsweise der drei Ebenen der nationalen Politik (Gemeinde, Kanton und Bund) sowie die Funktion von supranationalen Organisationen in Europa und weltweit. Sie erkennen die ihnen angebotenen Möglichkeiten zur Teilnahme am politischen Leben und entwickeln Fähigkeiten, diese verantwortungsvoll zu nutzen.</li>
-                                <li><span class="kompetenz-nummer">5.2.6.1 Recht:</span> Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft. Sie erkennen deren Einfluss auf die Gesellschaft.</li>
+                                <li><span class="kompetenz-nummer">5.2.5.3 Politik:</span> Die Lernenden verstehen die Organisation und die Funktionsweise der drei Ebenen der nationalen Politik (Gemeinde, Kanton und Bund) sowie die Funktion von supranationalen Organisationen in Europa und weltweit.</li>
+                                <li><span class="kompetenz-nummer">5.2.6.1 Recht:</span> Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft.</li>
                             </ul>
                         </div>
                         
@@ -537,7 +644,7 @@
                         <div id="t5l2-2-gesellschaft" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">5.2.2.3 Identität und Sozialisation:</span> In ihrer eigenen Existenz sowie in den sozialen und beruflichen Kontexten erkunden die Lernenden identitätsstiftende Räume und treffen dort persönliche Entscheidungen.</li>
-                                <li><span class="kompetenz-nummer">5.2.5.2 Politik:</span> Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst. Sie entwickeln ihr politisches Verhalten im Kontakt mit den Meinungen und Werten anderer. Sie sind in der Lage, diese in den politischen Kontext einzuordnen.</li>
+                                <li><span class="kompetenz-nummer">5.2.5.2 Politik:</span> Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst. Sie entwickeln ihr politisches Verhalten im Kontakt mit den Meinungen und Werten anderer.</li>
                             </ul>
                         </div>
                         
@@ -587,9 +694,9 @@
                         
                         <div id="t5l2-3-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.3.1 Kultur:</span> Die Lernenden entwickeln ein Bewusstsein für die gestaltete und ästhetische Welt und verstehen verschiedene kulturelle Ausdrucksmittel, die durch die jeweilige Zeit geprägt sind.</li>
+                                <li><span class="kompetenz-nummer">5.2.3.1 Kultur:</span> Die Lernenden entwickeln ein Bewusstsein für die gestaltete und ästhetische Welt und verstehen verschiedene kulturelle Ausdrucksmittel.</li>
                                 <li><span class="kompetenz-nummer">5.2.7.2 Technologische und digitale Transformation:</span> Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst.</li>
-                                <li><span class="kompetenz-nummer">5.2.4.2 Ökologie:</span> Die Lernenden formulieren Lösungsansätze bezüglich der ökologisch nachhaltigen Nutzung von natürlichen Ressourcen und dem effizienten Einsatz von Energie im persönlichen, gesellschaftlichen und beruflichen Umfeld.</li>
+                                <li><span class="kompetenz-nummer">5.2.4.2 Ökologie:</span> Die Lernenden formulieren Lösungsansätze bezüglich der ökologisch nachhaltigen Nutzung von natürlichen Ressourcen.</li>
                             </ul>
                         </div>
                         
@@ -625,6 +732,25 @@
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Ich bewege mich in einem Alltag, der durch Regeln, Absprachen und rechtliche Grundlagen geprägt ist – sei es beim Online-Kauf, in einer WG, in einer Beziehung oder bei einer Forderung per E-Mail. Ich lerne, einfache Verträge zu verstehen, meine Rechte und Pflichten zu erkennen und mich in rechtlich relevanten Situationen sprachlich sicher zu verhalten.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich analysiere typische Vertragssituationen aus meinem Alltag: Kaufvertrag, Mietvertrag, Online-Abo, Schulbesuchsvereinbarung, Leihgabe unter Freund/innen. Ich lerne, wie ein Vertrag zustande kommt, welche Bestandteile er hat, und wie ich Rechte und Pflichten daraus ableite. Ich übe, Vertragsdokumente zu lesen, Inhalte zu markieren und bei Unklarheiten Rückfragen zu formulieren – unterstützt durch Lesestrategien, Fachbegriffe, Webseiten von Fachstellen oder KI-basierte Analyse.</p>
+                        
+                        <p>Ich reflektiere, wie ich in Beziehungen klare und faire Absprachen treffe – sei es im Zusammenleben, im Freundeskreis oder im digitalen Raum. Ich trainiere Gesprächsführung, das Formulieren von Vereinbarungen oder Rückmeldungen, sowie den konstruktiven Umgang mit Konflikten. Dabei geht es auch darum, wie ich schriftlich und digital rechtlich gültig oder nachvollziehbar kommuniziere.</p>
+                        
+                        <p>Ich lerne, wann ich auf mein Recht pochen kann, wo ich mich informieren kann und wie ich auf ungerechtfertigte Forderungen oder problematische Situationen reagiere – z. B. durch ein Beschwerdeschreiben, eine höfliche Absage oder eine Nachfrage bei einer Beratungsstelle.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich erkenne, wann rechtliche Fragen im Alltag auftreten können – und weiss, wie ich meine Rechte kläre und Unterstützung finde.</h3>
                     
@@ -671,7 +797,11 @@
                         </div>
                         
                         <div id="t6l1-schluessel" class="kompetenz-details">
-                            <p style="color: #666; font-style: italic;">Keine spezifischen Schlüsselkompetenzen für diesen Lerninhalt definiert.</p>
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Eigene Standpunkte begründen und andere überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -696,7 +826,7 @@
                         <div id="t6l2-gesellschaft" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">5.2.3.2 Ethik:</span> Die Lernenden analysieren moralische Fragen in privaten und gesellschaftlichen Kontexten, wägen unterschiedliche Sichtweisen ab und entwickeln begründete Handlungsoptionen.</li>
-                                <li><span class="kompetenz-nummer">5.2.6.3 Recht:</span> Die Lernenden identifizieren, rekonstruieren und interpretieren wichtige juristischen Informationen in Konfliktsituationen. Sie entwickeln ihre Argumentation, um die Herausforderung zu beurteilen und entscheiden, ob es notwendig ist, eine Spezialistin oder einen Spezialisten beizuziehen.</li>
+                                <li><span class="kompetenz-nummer">5.2.6.3 Recht:</span> Die Lernenden identifizieren, rekonstruieren und interpretieren wichtige juristischen Informationen in Konfliktsituationen.</li>
                                 <li><span class="kompetenz-nummer">5.2.2.3 Identität und Sozialisation:</span> Die Lernenden treffen in sozialen Kontexten persönliche Entscheidungen und reflektieren ihre Rollen.</li>
                             </ul>
                         </div>
@@ -752,7 +882,7 @@
                         <div id="t6l2-1-gesellschaft" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">5.2.1.2 Ethik:</span> Die Lernenden lassen sich durch Herausforderungen im persönlichen, gesellschaftlichen und beruflichen Umfeld, in denen die Integrität und Würde von Menschen und die Erhaltung der natürlichen Umwelt gefährdet sind, zu eigenem Entscheiden und Handeln herausfordern.</li>
-                                <li><span class="kompetenz-nummer">5.2.6.2 Recht:</span> Die Lernenden verstehen die gesellschaftsrelevanten juristischen Regeln. Sie identifizieren die diesen Regeln zugrunde liegenden Werthaltungen und Denkweisen und beurteilen deren Bedeutung für die Gesellschaft.</li>
+                                <li><span class="kompetenz-nummer">5.2.6.2 Recht:</span> Die Lernenden verstehen die gesellschaftsrelevanten juristischen Regeln.</li>
                             </ul>
                         </div>
                         
@@ -772,7 +902,13 @@
                         </div>
                         
                         <div id="t6l2-1-schluessel" class="kompetenz-details">
-                            <p style="color: #666; font-style: italic;">Keine spezifischen Schlüsselkompetenzen für diesen Lerninhalt definiert.</p>
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Eigene Werthaltungen und Überzeugungen erkennen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.9</span> Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Eigene Interessen fair und wirksam vertreten</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -796,8 +932,8 @@
                         
                         <div id="t6l2-2-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.1.1 Ethik:</span> Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven. Sie erkennen in moralischen Verunsicherungskontexten die eigene und fremde moralische Intuition sowie die daraus folgenden Handlungsweisen und überprüfen diese aufgrund ethischer Grundsätze.</li>
-                                <li><span class="kompetenz-nummer">5.2.1.3 Ethik:</span> Die Lernenden beteiligen sich aktiv an der Aushandlung von moralischen Entscheiden. Sie vertreten ihre moralischen Überzeugungen fair und entwickeln sie in Auseinandersetzung mit anderen Überzeugungen und ethischen Prinzipien weiter.</li>
+                                <li><span class="kompetenz-nummer">5.2.1.1 Ethik:</span> Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven.</li>
+                                <li><span class="kompetenz-nummer">5.2.1.3 Ethik:</span> Die Lernenden beteiligen sich aktiv an der Aushandlung von moralischen Entscheiden.</li>
                             </ul>
                         </div>
                         
@@ -829,18 +965,37 @@
             </div>
         </div>
         
-        <!-- Thema 7 -->
+        <!-- Thema 7 (vorher 8) -->
         <div class="theme-section">
             <div class="theme-header">
-                <h2>Thema 7: Kunst und Kultur</h2>
+                <h2>Thema 7: Arbeit und Steuerpflicht</h2>
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        „Ich gestalte meinen Weg – beruflich und finanziell." Ich erkenne, dass mein Leben nach der Lehre weitergeht – mit neuen Entscheidungen, Chancen und Verpflichtungen. Ich informiere mich über Weiterbildungen, plane meine nächsten Schritte bewusst und nutze digitale Werkzeuge, um mich gezielt zu bewerben.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich begreife, dass mein beruflicher Weg mit dem Lehrabschluss nicht endet. Ich informiere mich über Weiterbildungen, neue Berufsbilder und Trends in der Arbeitswelt – auch im digitalen Bereich. Ich vergleiche Anforderungen, Chancen und Risiken und überlege, wie ich mich persönlich weiterentwickeln will. Dabei nutze ich digitale Tools, Sprachhilfen und KI-Unterstützung, um Informationen zu finden, zu analysieren und aufzubereiten.</p>
+                        
+                        <p>Ich lerne auch, welche Pflichten ich im Alltag habe: Ich verstehe, wie Lohnabrechnungen aufgebaut sind, welche Abzüge gemacht werden und wofür ich Steuern zahle. Ich beschäftige mich mit Sozialversicherungen und erfahre, wie ich für spätere Lebensphasen vorsorgen kann.</p>
+                        
+                        <p>Ich trainiere den Umgang mit amtlichen Dokumenten und Formularen: Ich lerne, welche Unterlagen ich wann brauche – zum Beispiel für die Steuererklärung, ein Gesuch oder einen Kontakt mit Behörden. Ich übe, Informationen korrekt einzutragen, Anhänge bereitzustellen und digitale oder analoge Einreichwege zu nutzen. Ich finde heraus, welche Stellen mir bei Fragen helfen können – und wie ich diese gezielt nutze. So übernehme ich Schritt für Schritt Verantwortung für mein Berufsleben und meine finanzielle Situation.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
-                    <h3>1. Individueller Lebensbezug: Ich erlebe, wie Kultur Zugehörigkeit schafft – und warum Ausdrucksfreiheit wichtig ist.</h3>
+                    <h3>1. Individueller Lebensbezug: Ich finde heraus, was mir wichtig ist, wohin ich beruflich will – und wie ich meine Ziele mit passenden Bewerbungen und Weiterbildungen Schritt für Schritt verfolgen kann.</h3>
                     
                     <div class="lerninhalt">
-                        <h4>Lerninhalt 1: Ich kann kulturelle Ausdrucksformen wie Sprache, Bilder oder Werke aus meinem Umfeld beschreiben, ihre Bedeutung erklären und die Wichtigkeit der Ausdrucksfreiheit darin erkennen.</h4>
+                        <h4>Lerninhalt 1: Ich setze mich mit meinen Fähigkeiten, Interessen, Werten und Zielen auseinander. (Externer Lernort: Laufbahnzentrum, Coworking-Space oder modernes Unternehmen, Berufsmesse, RAV)</h4>
                         
                         <div class="kompetenz-container">
                             <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l1-gesellschaft')">
@@ -859,41 +1014,40 @@
                         
                         <div id="t7l1-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.3.3 Kultur:</span> Die Lernenden reflektieren im Umgang mit Werken der Kunst eigene Wahrnehmungen, finden dafür Ausdrucksmöglichkeiten und erweitern im Dialog mit anderen ihre Vorstellungen von Wirklichkeit.</li>
-                                <li><span class="kompetenz-nummer">5.2.2.4 Identität und Sozialisation:</span> Die Lernenden anerkennen andere kulturelle Realitäten in einem Umfeld, in dem jeder und jede das Recht auf Andersartigkeit und die Wahrung der Grundrechte berücksichtigen muss. Sie lassen deren Existenz gelten und bewerten sie mit Offenheit und Toleranz ihrem eigenen Lebensstil entsprechend.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.3 Identität und Sozialisation:</span> In ihrer eigenen Existenz sowie in den sozialen und beruflichen Kontexten erkunden die Lernenden identitätsstiftende Räume und treffen dort persönliche Entscheidungen.</li>
+                                <li><span class="kompetenz-nummer">5.2.8.3 Wirtschaft:</span> Die Lernenden analysieren wirtschaftliche Entwicklungen, beurteilen deren Auswirkungen auf die eigene Person, das eigene Unternehmen, die eigene Branche und die eigene Laufbahngestaltung.</li>
+                                <li><span class="kompetenz-nummer">5.2.7.1 Technologische und digitale Transformation:</span> Die Lernenden analysieren den Einfluss von aktuellen Technologien im persönlichen, gesellschaftlichen und beruflichen Umfeld.</li>
                             </ul>
                         </div>
                         
                         <div id="t7l1-sprache" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich</li>
-                                <li><span class="kompetenz-nummer">4.2.2.1</span> Produktion mündlich</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: Durchführung einer Standortbestimmung</li>
                                 <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial</li>
-                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich</li>
-                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Kollaboration und Interaktion mündlich: Interviewfragen beantworten</li>
                             </ul>
                         </div>
                         
                         <div id="t7l1-digital" class="kompetenz-details">
                             <ul>
-                                <li>Ich kann Medienarchive gezielt mit Filter und Stichworten nutzen</li>
-                                <li>Ich kann mit der KI-Quellensuche Beispiele von kulturellen Ausdrucksformen zusammenstellen</li>
-                                <li>Ich kann Gespräche über kulturelle Ausdrucksformen in meinem Umfeld mit Audioaufnahmen speichern und bearbeiten</li>
-                                <li>Ich kann mit der KI-Assistenz kulturelle Ausdrucksformen und Zugehörigkeit und Machtverhältnis aufgrund von konkreten Inputs in einen Zusammenhang setzen</li>
+                                <li>Simulation von Bewerbungsgesprächen mit Voice-Coachings-Tools oder KI-Dialogsystemen</li>
+                                <li>Erstellung eines Bewerbungsvideos mit KI-Videogeneratoren (z. B. Synthesia, Canva Video)</li>
+                                <li>Präsentation der eigenen Stärken in einem Screencast</li>
+                                <li>Digitales Porträt erstellen</li>
                             </ul>
                         </div>
                         
                         <div id="t7l1-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln.</li>
-                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
-                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="lerninhalt">
-                        <h4>Lerninhalt 2: Ich kann kulturelle Phänomene in meinem Umfeld reflektieren und ich kann begründen, wie sie Zugehörigkeit und Machtverhältnisse beeinflussen.</h4>
+                        <h4>Lerninhalt 2: Ich plane meine berufliche Laufbahn bewusst und bewerbe mich gezielt für eine neue Stelle. Ich erkenne die Bedeutung von Weiterbildungen und lebenslangem Lernen (Externer Lernort: Laufbahnzentrum, Coworking-Space oder modernes Unternehmen, Berufsmesse, RAV).</h4>
                         
                         <div class="kompetenz-container">
                             <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l2-gesellschaft')">
@@ -912,239 +1066,13 @@
                         
                         <div id="t7l2-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.1.1 Ethik:</span> Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven. Sie erkennen in moralischen Verunsicherungskontexten die eigene und fremde moralische Intuition sowie die daraus folgenden Handlungsweisen und überprüfen diese aufgrund ethischer Grundsätze.</li>
-                                <li><span class="kompetenz-nummer">5.2.5.2 Politik:</span> Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst. Sie entwickeln ihr politisches Verhalten im Kontakt mit den Meinungen und Werten anderer.</li>
-                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit. Dabei reflektieren sie mögliche Prägungen durch ihren eigenen Hintergrund.</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-sprache" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell</li>
-                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich</li>
-                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich – faktenorientiert</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-digital" class="kompetenz-details">
-                            <ul>
-                                <li>Ich kann Medienarchive gezielt mit Filter und Stichworten nutzen</li>
-                                <li>Ich kann mit der KI-Assistenz nach dem Zusammenhang von kulturellen Phänomenen, Zugehörigkeit und Machtverhältnisse suchen</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-schluessel" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern.</li>
-                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="lebensbezug">
-                    <h3>2. Individueller Lebensbezug: Ich finde kreative Wege, gesellschaftliche oder ökologische Themen gestalterisch auszudrücken – und tausche mich respektvoll mit anderen über deren Wirkung und Bedeutung aus.</h3>
-                    
-                    <div class="lerninhalt">
-                        <h4>Lerninhalt 1: Ich kann kreative Ausdrucksformen nutzen, um auf gesellschaftliche oder ökologische Entwicklungen zu reagieren und Denkanstösse zu geben. (Berufskundebezug bei gestalterischen Berufen möglich; Aussenkontakt regionale Kunstworkshops).</h4>
-                        
-                        <div class="kompetenz-container">
-                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l2-1-gesellschaft')">
-                                Gesellschaftliche Aspekte
-                            </button>
-                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l2-1-sprache')">
-                                Sprachmodi
-                            </button>
-                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't7l2-1-digital')">
-                                Digitale Kompetenzen
-                            </button>
-                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l2-1-schluessel')">
-                                Schlüsselkompetenzen
-                            </button>
-                        </div>
-                        
-                        <div id="t7l2-1-gesellschaft" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">5.2.3.4 Kultur:</span> Die Lernenden erproben ihre eigenen Gestaltungs- und Ausdrucksfähigkeiten und erweitern sie.</li>
-                                <li><span class="kompetenz-nummer">5.2.4.2 Ökologie:</span> Die Lernenden formulieren Lösungsansätze bezüglich der ökologisch nachhaltigen Nutzung von natürlichen Ressourcen und dem effizienten Einsatz von Energie im persönlichen, gesellschaftlichen und beruflichen Umfeld.</li>
-                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit. Dabei reflektieren sie mögliche Prägungen durch ihren eigenen Hintergrund.</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-1-sprache" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und mündlich</li>
-                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial</li>
-                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion & Kollaboration mündlich</li>
-                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-1-digital" class="kompetenz-details">
-                            <ul>
-                                <li>Ich nutze Tools für Audioaufnahmen, Bild- oder Videobearbeitung</li>
-                                <li>Ich gestalte Memes, Kurzfilme oder digitale Collagen</li>
-                                <li>Ich achte auf Urheberrecht und Lizenzen</li>
-                                <li>Ich nutze KI-Assistenten</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-1-schluessel" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
-                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
-                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="lerninhalt">
-                        <h4>Lerninhalt 2: Ich lerne, mit anderen respektvoll über Kunst zu sprechen und verschiedene Sichtweisen zur Bedeutung eines Kunstwerks zu diskutieren. (Externer Lernort: Besuch einer Ausstellung oder eines Museums)</h4>
-                        
-                        <div class="kompetenz-container">
-                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l2-2-gesellschaft')">
-                                Gesellschaftliche Aspekte
-                            </button>
-                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l2-2-sprache')">
-                                Sprachmodi
-                            </button>
-                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't7l2-2-digital')">
-                                Digitale Kompetenzen
-                            </button>
-                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l2-2-schluessel')">
-                                Schlüsselkompetenzen
-                            </button>
-                        </div>
-                        
-                        <div id="t7l2-2-gesellschaft" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">5.2.5.2 Politik:</span> Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst. Sie entwickeln ihr politisches Verhalten im Kontakt mit den Meinungen und Werten anderer.</li>
-                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit.</li>
-                                <li><span class="kompetenz-nummer">5.2.3.2 Kultur:</span> Die Lernenden nehmen in der Beschäftigung mit Kultur grundlegende Themen des Lebens wahr und setzen sich mit diesen auseinander.</li>
-                                <li><span class="kompetenz-nummer">5.2.2.4 Ethik:</span> Die Lernenden anerkennen andere kulturelle Realitäten in einem Umfeld, in dem jeder und jede das Recht auf Andersartigkeit und die Wahrung der Grundrechte berücksichtigen muss.</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-2-sprache" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich: Ich höre anderen zu, wenn sie ihre Sicht auf ein Kunstwerk schildern. Ich achte auf Argumente, Gefühle und Bezüge.</li>
-                                <li><span class="kompetenz-nummer">4.2.2.1</span> Produktion mündlich: Ich formuliere meine Sichtweise auf ein Kunstwerk und erkläre, warum es mir gefällt oder mich berührt.</li>
-                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: Ich verfasse eine kurze Stellungnahme zu einem Kunstwerk (z. B. in einem Blogkommentar oder Reflexionsblatt).</li>
-                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion & Kollaboration mündlich: Ich nehme an einer Gesprächsrunde oder Diskussion teil, in der wir unsere Gedanken zu einem Kunstwerk austauschen.</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-2-digital" class="kompetenz-details">
-                            <ul>
-                                <li>Nutzung digitaler Plattformen für die Diskussion über Kunst</li>
-                                <li>KI-Assistenz für konkrete Argumentationshilfen nutzen</li>
-                                <li>KI-Assistenz als Rollen- und Kunstwerkgenerator nutzen</li>
-                                <li>Videokonferenz als Austauschort nutzen</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t7l2-2-schluessel" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
-                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
-                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
-                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Thema 8 -->
-        <div class="theme-section">
-            <div class="theme-header">
-                <h2>Thema 8: Arbeit und Steuerpflicht</h2>
-                <p class="lektionen">22 Lektionen</p>
-            </div>
-            <div class="theme-content">
-                <div class="lebensbezug">
-                    <h3>1. Individueller Lebensbezug: Ich finde heraus, was mir wichtig ist, wohin ich beruflich will – und wie ich meine Ziele mit passenden Bewerbungen und Weiterbildungen Schritt für Schritt verfolgen kann.</h3>
-                    
-                    <div class="lerninhalt">
-                        <h4>Lerninhalt 1: Ich setze mich mit meinen Fähigkeiten, Interessen, Werten und Zielen auseinander. (Externer Lernort: Laufbahnzentrum, Coworking-Space oder modernes Unternehmen, Berufsmesse, RAV)</h4>
-                        
-                        <div class="kompetenz-container">
-                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't8l1-gesellschaft')">
-                                Gesellschaftliche Aspekte
-                            </button>
-                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't8l1-sprache')">
-                                Sprachmodi
-                            </button>
-                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't8l1-digital')">
-                                Digitale Kompetenzen
-                            </button>
-                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't8l1-schluessel')">
-                                Schlüsselkompetenzen
-                            </button>
-                        </div>
-                        
-                        <div id="t8l1-gesellschaft" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit. Dabei reflektieren sie mögliche Prägungen durch ihren eigenen Hintergrund.</li>
-                                <li><span class="kompetenz-nummer">5.2.2.3 Identität und Sozialisation:</span> In ihrer eigenen Existenz sowie in den sozialen und beruflichen Kontexten erkunden die Lernenden identitätsstiftende Räume und treffen dort persönliche Entscheidungen.</li>
-                                <li><span class="kompetenz-nummer">5.2.8.3 Wirtschaft:</span> Die Lernenden analysieren wirtschaftliche Entwicklungen, beurteilen deren Auswirkungen auf die eigene Person, das eigene Unternehmen, die eigene Branche und die eigene Laufbahngestaltung.</li>
-                                <li><span class="kompetenz-nummer">5.2.7.1 Technologische und digitale Transformation:</span> Die Lernenden analysieren den Einfluss von aktuellen Technologien im persönlichen, gesellschaftlichen und beruflichen Umfeld und beurteilen deren Auswirkungen auf der individuellen Ebene sowie unter dem Blickwinkel einer nachhaltigen Entwicklung.</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t8l1-sprache" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: Durchführung einer Standortbestimmung</li>
-                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial</li>
-                                <li><span class="kompetenz-nummer">4.2.3.1</span> Kollaboration und Interaktion mündlich: Interviewfragen beantworten</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t8l1-digital" class="kompetenz-details">
-                            <ul>
-                                <li>Simulation von Bewerbungsgesprächen mit Voice-Coachings-Tools oder KI-Dialogsystemen.</li>
-                                <li>Erstellung eines Bewerbungsvideos mit KI-Videogeneratoren (z. B. Synthesia, Canva Video).</li>
-                                <li>Präsentation der eigenen Stärken in einem Screencast.</li>
-                                <li>Digitales Porträt erstellen</li>
-                            </ul>
-                        </div>
-                        
-                        <div id="t8l1-schluessel" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
-                                <li><span class="kompetenz-nummer">3.2.8</span> Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="lerninhalt">
-                        <h4>Lerninhalt 2: Ich plane meine berufliche Laufbahn bewusst und bewerbe mich gezielt für eine neue Stelle. Ich erkenne die Bedeutung von Weiterbildungen und lebenslangem Lernen (Externer Lernort: Laufbahnzentrum, Coworking-Space oder modernes Unternehmen, Berufsmesse, RAV).</h4>
-                        
-                        <div class="kompetenz-container">
-                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't8l2-gesellschaft')">
-                                Gesellschaftliche Aspekte
-                            </button>
-                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't8l2-sprache')">
-                                Sprachmodi
-                            </button>
-                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't8l2-digital')">
-                                Digitale Kompetenzen
-                            </button>
-                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't8l2-schluessel')">
-                                Schlüsselkompetenzen
-                            </button>
-                        </div>
-                        
-                        <div id="t8l2-gesellschaft" class="kompetenz-details">
-                            <ul>
-                                <li><span class="kompetenz-nummer">5.2.8.2 Wirtschaft:</span> Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen (Arbeitnehmende, Mieterinnen und Mieter, Steuerpflichtige u.a.) artikulieren.</li>
-                                <li><span class="kompetenz-nummer">5.2.8.3 Wirtschaft:</span> Die Lernenden analysieren die Erwartungen verschiedener Anspruchsgruppen an ein Unternehmen und die daraus entstehenden Zielkonflikte. Sie beurteilen Auswirkungen von wirtschaftlichen Entwicklungen auf die eigene Person, das eigene Unternehmen, die eigene Branche und die eigene Laufbahngestaltung.</li>
+                                <li><span class="kompetenz-nummer">5.2.8.2 Wirtschaft:</span> Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen artikulieren.</li>
+                                <li><span class="kompetenz-nummer">5.2.8.3 Wirtschaft:</span> Die Lernenden analysieren die Erwartungen verschiedener Anspruchsgruppen an ein Unternehmen und die daraus entstehenden Zielkonflikte.</li>
                                 <li><span class="kompetenz-nummer">5.2.6.3 Recht:</span> Die Lernenden identifizieren, rekonstruieren und interpretieren wichtige juristischen Informationen in Konfliktsituationen.</li>
                             </ul>
                         </div>
                         
-                        <div id="t8l2-sprache" class="kompetenz-details">
+                        <div id="t7l2-sprache" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich</li>
                                 <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich</li>
@@ -1153,21 +1081,21 @@
                             </ul>
                         </div>
                         
-                        <div id="t8l2-digital" class="kompetenz-details">
+                        <div id="t7l2-digital" class="kompetenz-details">
                             <ul>
-                                <li>Informationen zu Stellenangeboten und Unternehmen zielgerichtet auf digitalen Plattformen recherchieren (z. B. Yousty, jobs.ch, berufsberatung.ch)</li>
-                                <li>KI-Tools nutzen, um Stellenanzeigen zu analysieren und relevante Schlüsselbegriffe zu extrahieren (z. B. für Lebenslaufoptimierung)</li>
-                                <li>Digitale Textassistenzsysteme einsetzen, um Bewerbungsschreiben zu erstellen oder zu überarbeiten (z. B. ChatGPT, DeepL Write)</li>
-                                <li>Korrektur- und Stilprüfprogramme gezielt anwenden, um sprachliche Qualität digitaler Bewerbungsunterlagen zu verbessern (z. B. LanguageTool)</li>
-                                <li>Online-Formulare und Eingabehilfen gezielt verwenden, um Bewerbungsprofile auf Plattformen zu erstellen (z. B. Promptsysteme)</li>
-                                <li>Digitale Simulationstools verwenden, um Bewerbungsgespräche zu üben (z. B. Voice-Coachings, Chat-KI)</li>
-                                <li>Bewerbungsvideos mithilfe von KI-basierten Tools produzieren (z. B. Synthesia, Canva Video)</li>
-                                <li>Den Umgang mit persönlichen Daten bei Online-Bewerbungen reflektieren und Datenschutzaspekte beachten</li>
-                                <li>Digitale Kommunikationsformen situations- und adressatengerecht einsetzen (z. B. E-Mail, Messaging)</li>
+                                <li>Informationen zu Stellenangeboten und Unternehmen zielgerichtet auf digitalen Plattformen recherchieren</li>
+                                <li>KI-Tools nutzen, um Stellenanzeigen zu analysieren und relevante Schlüsselbegriffe zu extrahieren</li>
+                                <li>Digitale Textassistenzsysteme einsetzen, um Bewerbungsschreiben zu erstellen oder zu überarbeiten</li>
+                                <li>Korrektur- und Stilprüfprogramme gezielt anwenden</li>
+                                <li>Online-Formulare und Eingabehilfen gezielt verwenden</li>
+                                <li>Digitale Simulationstools verwenden, um Bewerbungsgespräche zu üben</li>
+                                <li>Bewerbungsvideos mithilfe von KI-basierten Tools produzieren</li>
+                                <li>Den Umgang mit persönlichen Daten bei Online-Bewerbungen reflektieren</li>
+                                <li>Digitale Kommunikationsformen situations- und adressatengerecht einsetzen</li>
                             </ul>
                         </div>
                         
-                        <div id="t8l2-schluessel" class="kompetenz-details">
+                        <div id="t7l2-schluessel" class="kompetenz-details">
                             <ul>
                                 <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
                                 <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
@@ -1187,6 +1115,247 @@
                         <h4>Lerninhalt 1: Ich erstelle mir einen Übersicht, welche Aufgaben ich gegenüber dem Staat/der Gesellschaft übernehmen muss/kann und wie ich diese auf welche Weise ausüben kann. (z. B. Krankenversicherung abschliessen und bezahlen, mich einbürgern lassen, Aufenthaltsbewilligung verlängern, Prämienverbilligung beantragen, Steuerformular ausfüllen, Abstimmungsunterlagen einreichen, etc.).</h4>
                         
                         <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l2-1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l2-1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't7l2-1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l2-1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t7l2-1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.5.3 Politik:</span> Die Lernenden verstehen die Organisation und die Funktionsweise der drei Ebenen der nationalen Politik (Gemeinde, Kanton und Bund) sowie die Funktion von supranationalen Organisationen in Europa und weltweit.</li>
+                                <li><span class="kompetenz-nummer">5.2.8.2 Wirtschaft:</span> Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen artikulieren.</li>
+                                <li><span class="kompetenz-nummer">5.2.6.1 Recht:</span> Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft.</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t7l2-1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption schriftlich: (Amtliche Dokumente lesen und interpretieren)</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: (Erklärung im Tandem)</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: (Kurzbeschreibung der Dokumenteninhalte)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t7l2-1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung von Lohn- und Steuerrechnern</li>
+                                <li>Analyse digitaler Lohnabrechnungen</li>
+                                <li>Digitale Tools zur Visualisierung von Abzügen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t7l2-1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich stelle mir die Unterlagen für einen Austausch mit den Behörden oder mit einem anderen Akteur/Akteurin ((Arzt, Spital, Fahrausweis, Nothelferkurs, etc.) zusammen und reiche diese digital oder per Post ein.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't7l2-2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't7l2-2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't7l2-2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't7l2-2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t7l2-2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.6.4 Recht:</span> In juristisch bedeutsamen Herausforderungen unterscheiden die Lernenden zwischen den Interessen der beteiligten Parteien und arbeiten heraus, wer von der Anwendung des Rechts betroffen ist.</li>
+                                <li><span class="kompetenz-nummer">5.2.8.2 Wirtschaft:</span> Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen artikulieren.</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t7l2-2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich</li>
+                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich (Nachfrage per E-Mail)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t7l2-2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Nutzung von Online-Formularen</li>
+                                <li>Uploads und Scans von Belegen</li>
+                                <li>Menuleiste einer Internetseite bedienen können</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t7l2-2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thema 8 (vorher 7) -->
+        <div class="theme-section">
+            <div class="theme-header">
+                <h2>Thema 8: Kunst und Kultur</h2>
+                <p class="lektionen">22 Lektionen</p>
+            </div>
+            <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Ich gestalte Kultur mit – und mache gesellschaftliche und ökologische Themen sichtbar. Kunst und Kultur sind Teil unserer Lebenswelt – ob auf Social Media, im öffentlichen Raum oder in Bräuchen, Musik, Kleidung und digitalen Formaten. Ich erkenne, dass ich mit künstlerischen Mitteln auf aktuelle Fragen reagieren, andere zum Nachdenken anregen und zur Vielfalt im öffentlichen Diskurs beitragen kann.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich beobachte, wie kulturelle Ausdrucksformen gesellschaftliche und ökologische Themen sichtbar machen – sei es durch Musikvideos, Street Art, Protestaktionen, Memes oder Ausstellungen. Ich analysiere, wie Kunst auf Ungleichheiten, Umweltrisiken oder soziale Bewegungen reagiert – und welche Wirkung sie auf verschiedene Zielgruppen haben kann.</p>
+                        
+                        <p>Ich erkenne, dass Kultur mehr ist als Unterhaltung: Sie ist eine Möglichkeit, Verantwortung zu übernehmen, Kritik zu üben oder Visionen zu formulieren. Ich verstehe, wie kulturelle Zeichen Zugehörigkeit, Identität und Machtverhältnisse widerspiegeln – und warum Respekt, Ausdrucksfreiheit und kulturelle Vielfalt dafür wichtig sind.</p>
+                        
+                        <p>Ich lerne, gesellschaftliche Entwicklungen, Umweltereignisse oder globale Herausforderungen gestalterisch zu verarbeiten – etwa durch Collagen, Videos, Texte oder Performances. Ich entwickle eigene Werke zu Themen, die mich beschäftigen: von Konsum über Klimawandel bis Vielfalt. Dabei achte ich auf ästhetische Wirkung, Zielgruppe und gesellschaftliche Relevanz.</p>
+                        
+                        <p>Im Austausch mit anderen vergleiche ich Perspektiven und Deutungen. Ich erprobe Gesprächsformen, Feedbackmethoden und digitale Werkzeuge, um unterschiedliche Haltungen sichtbar zu machen und gemeinsame Werte zu reflektieren. Ich erfahre: Kreative Beiträge können Diskussionen auslösen, Denkräume öffnen und gesellschaftliches Lernen fördern.</p>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>1. Individueller Lebensbezug: Ich erlebe, wie Kultur Zugehörigkeit schafft – und warum Ausdrucksfreiheit wichtig ist.</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann kulturelle Ausdrucksformen wie Sprache, Bilder oder Werke aus meinem Umfeld beschreiben, ihre Bedeutung erklären und die Wichtigkeit der Ausdrucksfreiheit darin erkennen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't8l1-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't8l1-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't8l1-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't8l1-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t8l1-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.3.3 Kultur:</span> Die Lernenden reflektieren im Umgang mit Werken der Kunst eigene Wahrnehmungen, finden dafür Ausdrucksmöglichkeiten und erweitern im Dialog mit anderen ihre Vorstellungen von Wirklichkeit.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.4 Identität und Sozialisation:</span> Die Lernenden anerkennen andere kulturelle Realitäten in einem Umfeld, in dem jeder und jede das Recht auf Andersartigkeit und die Wahrung der Grundrechte berücksichtigen muss.</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t8l1-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich</li>
+                                <li><span class="kompetenz-nummer">4.2.2.1</span> Produktion mündlich</li>
+                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich</li>
+                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t8l1-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Ich kann Medienarchive gezielt mit Filter und Stichworten nutzen</li>
+                                <li>Ich kann mit der KI-Quellensuche Beispiele von kulturellen Ausdrucksformen zusammenstellen</li>
+                                <li>Ich kann Gespräche über kulturelle Ausdrucksformen in meinem Umfeld mit Audioaufnahmen speichern und bearbeiten</li>
+                                <li>Ich kann mit der KI-Assistenz kulturelle Ausdrucksformen und Zugehörigkeit und Machtverhältnis aufgrund von konkreten Inputs in einen Zusammenhang setzen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t8l1-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
+                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 2: Ich kann kulturelle Phänomene in meinem Umfeld reflektieren und ich kann begründen, wie sie Zugehörigkeit und Machtverhältnisse beeinflussen.</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't8l2-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't8l2-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't8l2-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't8l2-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t8l2-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">5.2.1.1 Ethik:</span> Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven.</li>
+                                <li><span class="kompetenz-nummer">5.2.5.2 Politik:</span> Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit.</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t8l2-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell</li>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich – faktenorientiert</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t8l2-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Ich kann Medienarchive gezielt mit Filter und Stichworten nutzen</li>
+                                <li>Ich kann mit der KI-Assistenz nach dem Zusammenhang von kulturellen Phänomenen, Zugehörigkeit und Machtverhältnisse suchen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t8l2-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lebensbezug">
+                    <h3>2. Individueller Lebensbezug: Ich finde kreative Wege, gesellschaftliche oder ökologische Themen gestalterisch auszudrücken – und tausche mich respektvoll mit anderen über deren Wirkung und Bedeutung aus.</h3>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 1: Ich kann kreative Ausdrucksformen nutzen, um auf gesellschaftliche oder ökologische Entwicklungen zu reagieren und Denkanstösse zu geben. (Berufskundebezug bei gestalterischen Berufen möglich; Aussenkontakt regionale Kunstworkshops).</h4>
+                        
+                        <div class="kompetenz-container">
                             <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't8l2-1-gesellschaft')">
                                 Gesellschaftliche Aspekte
                             </button>
@@ -1203,39 +1372,41 @@
                         
                         <div id="t8l2-1-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.5.3 Politik:</span> Die Lernenden verstehen die Organisation und die Funktionsweise der drei Ebenen der nationalen Politik (Gemeinde, Kanton und Bund) sowie die Funktion von supranationalen Organisationen in Europa und weltweit. Sie erkennen die ihnen angebotenen Möglichkeiten zur Teilnahme am politischen Leben und entwickeln Fähigkeiten, diese verantwortungsvoll zu nutzen.</li>
-                                <li><span class="kompetenz-nummer">5.2.8.2 Wirtschaft:</span> Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen (Arbeitnehmende, Mieterinnen und Mieter, Steuerpflichtige u.a.) artikulieren.</li>
-                                <li><span class="kompetenz-nummer">5.2.6.1 Recht:</span> Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft. Sie erkennen deren Einfluss auf die Gesellschaft.</li>
+                                <li><span class="kompetenz-nummer">5.2.3.4 Kultur:</span> Die Lernenden erproben ihre eigenen Gestaltungs- und Ausdrucksfähigkeiten und erweitern sie.</li>
+                                <li><span class="kompetenz-nummer">5.2.4.2 Ökologie:</span> Die Lernenden formulieren Lösungsansätze bezüglich der ökologisch nachhaltigen Nutzung von natürlichen Ressourcen.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit.</li>
                             </ul>
                         </div>
                         
                         <div id="t8l2-1-sprache" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption schriftlich: (Amtliche Dokumente lesen und interpretieren)</li>
-                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion und Kollaboration mündlich: (Erklärung im Tandem)</li>
-                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: (Kurzbeschreibung der Dokumenteninhalte)</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und mündlich</li>
+                                <li><span class="kompetenz-nummer">4.2.2.3</span> Produktion multimedial</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion & Kollaboration mündlich</li>
+                                <li><span class="kompetenz-nummer">4.2.3.3</span> Interaktion und Kollaboration digital</li>
                             </ul>
                         </div>
                         
                         <div id="t8l2-1-digital" class="kompetenz-details">
                             <ul>
-                                <li>Nutzung von Lohn- und Steuerrechnern</li>
-                                <li>Analyse digitaler Lohnabrechnungen</li>
-                                <li>Digitale Tools zur Visualisierung von Abzügen</li>
+                                <li>Ich nutze Tools für Audioaufnahmen, Bild- oder Videobearbeitung</li>
+                                <li>Ich gestalte Memes, Kurzfilme oder digitale Collagen</li>
+                                <li>Ich achte auf Urheberrecht und Lizenzen</li>
+                                <li>Ich nutze KI-Assistenten</li>
                             </ul>
                         </div>
                         
                         <div id="t8l2-1-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.10</span> Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen</li>
-                                <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
-                                <li><span class="kompetenz-nummer">3.2.12</span> An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen</li>
+                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.3</span> Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen</li>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="lerninhalt">
-                        <h4>Lerninhalt 2: Ich stelle mir die Unterlagen für einen Austausch mit den Behörden oder mit einem anderen Akteur/Akteurin ((Arzt, Spital, Fahrausweis, Nothelferkurs, etc.) zusammen und reiche diese digital oder per Post ein.</h4>
+                        <h4>Lerninhalt 2: Ich lerne, mit anderen respektvoll über Kunst zu sprechen und verschiedene Sichtweisen zur Bedeutung eines Kunstwerks zu diskutieren. (Externer Lernort: Besuch einer Ausstellung oder eines Museums)</h4>
                         
                         <div class="kompetenz-container">
                             <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't8l2-2-gesellschaft')">
@@ -1254,31 +1425,36 @@
                         
                         <div id="t8l2-2-gesellschaft" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">5.2.6.4 Recht:</span> In juristisch bedeutsamen Herausforderungen unterscheiden die Lernenden zwischen den Interessen der beteiligten Parteien und arbeiten heraus, wer von der Anwendung des Rechts betroffen ist. Sie greifen auf juristische Normen zurück, um ihre Interessen zu schützen und sozial akzeptable Lösungen für die bestehenden Konflikte zu finden.</li>
-                                <li><span class="kompetenz-nummer">5.2.8.2 Wirtschaft:</span> Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen (Arbeitnehmende, Mieterinnen und Mieter, Steuerpflichtige u.a.) artikulieren.</li>
+                                <li><span class="kompetenz-nummer">5.2.5.2 Politik:</span> Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.1 Identität und Sozialisation:</span> In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit.</li>
+                                <li><span class="kompetenz-nummer">5.2.3.2 Kultur:</span> Die Lernenden nehmen in der Beschäftigung mit Kultur grundlegende Themen des Lebens wahr und setzen sich mit diesen auseinander.</li>
+                                <li><span class="kompetenz-nummer">5.2.2.4 Ethik:</span> Die Lernenden anerkennen andere kulturelle Realitäten in einem Umfeld, in dem jeder und jede das Recht auf Andersartigkeit und die Wahrung der Grundrechte berücksichtigen muss.</li>
                             </ul>
                         </div>
                         
                         <div id="t8l2-2-sprache" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich</li>
-                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich</li>
-                                <li><span class="kompetenz-nummer">4.2.3.2</span> Interaktion und Kollaboration schriftlich (Nachfrage per E-Mail)</li>
+                                <li><span class="kompetenz-nummer">4.2.1.1</span> Rezeption mündlich: Ich höre anderen zu, wenn sie ihre Sicht auf ein Kunstwerk schildern</li>
+                                <li><span class="kompetenz-nummer">4.2.2.1</span> Produktion mündlich: Ich formuliere meine Sichtweise auf ein Kunstwerk</li>
+                                <li><span class="kompetenz-nummer">4.2.2.2</span> Produktion schriftlich und bildlich: Ich verfasse eine kurze Stellungnahme zu einem Kunstwerk</li>
+                                <li><span class="kompetenz-nummer">4.2.3.1</span> Interaktion & Kollaboration mündlich: Ich nehme an einer Gesprächsrunde oder Diskussion teil</li>
                             </ul>
                         </div>
                         
                         <div id="t8l2-2-digital" class="kompetenz-details">
                             <ul>
-                                <li>Nutzung von Online-Formularen</li>
-                                <li>Uploads und Scans von Belegen</li>
-                                <li>Menuleiste einer Internetseite bedienen können</li>
+                                <li>Nutzung digitaler Plattformen für die Diskussion über Kunst</li>
+                                <li>KI-Assistenz für konkrete Argumentationshilfen nutzen</li>
+                                <li>KI-Assistenz als Rollen- und Kunstwerkgenerator nutzen</li>
+                                <li>Videokonferenz als Austauschort nutzen</li>
                             </ul>
                         </div>
                         
                         <div id="t8l2-2-schluessel" class="kompetenz-details">
                             <ul>
-                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
-                                <li><span class="kompetenz-nummer">3.2.2</span> Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten</li>
+                                <li><span class="kompetenz-nummer">3.2.4</span> In unterschiedlichen Teams zielgerichtet und effizient arbeiten</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
                                 <li><span class="kompetenz-nummer">3.2.11</span> Mit Mehrdeutigkeiten umgehen</li>
                             </ul>
                         </div>

@@ -124,6 +124,81 @@
             }
         }
         
+        /* Neue Stile für Leitidee und Beschreibungen */
+        .leitidee-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .leitidee-title {
+            color: #003d7a;
+            font-size: 1.2em;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .kurzbeschreibung {
+            background-color: #f8f9fa;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+        
+        .erweiterung-toggle {
+            background-color: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            color: #0066cc;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        .erweiterung-toggle:hover {
+            background-color: #cce0f4;
+            transform: translateY(-1px);
+        }
+        
+        .erweiterung-toggle::after {
+            content: ' ▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .erweiterung-toggle.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .detaillierte-erweiterung {
+            display: none;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+        
+        .detaillierte-erweiterung.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .detaillierte-erweiterung p {
+            margin-bottom: 12px;
+        }
+        
+        .detaillierte-erweiterung p:last-child {
+            margin-bottom: 0;
+        }
+        
         .lebensbezug {
             margin-bottom: 30px;
             padding: 20px;
@@ -274,6 +349,12 @@
             }
         }
         
+        function toggleErweiterung(button) {
+            const erweiterung = button.nextElementSibling;
+            button.classList.toggle('active');
+            erweiterung.classList.toggle('show');
+        }
+        
         // Initialize: Add click handlers and collapse all themes
         document.addEventListener('DOMContentLoaded', function() {
             const headers = document.querySelectorAll('.theme-header');
@@ -282,6 +363,13 @@
                     toggleTheme(this);
                 });
                 header.classList.add('collapsed');
+            });
+            
+            const erweiterungButtons = document.querySelectorAll('.erweiterung-toggle');
+            erweiterungButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    toggleErweiterung(this);
+                });
             });
         });
     </script>
@@ -307,6 +395,25 @@
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Der Beginn meiner beruflichen Grundbildung bedeutet einen grossen Schritt. Ich lerne meine neue Rolle im Betrieb und in der Schule kennen. Dabei entwickle ich Orientierung und Sicherheit für meinen Berufsalltag.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich setze mich mit wichtigen Dokumenten wie dem Lehrvertrag, der Hausordnung und anderen Regelwerken auseinander. Dabei lerne ich meine Rechte und Pflichten im Berufsalltag kennen. Ich nutze verschiedene Informationsquellen und hole mir bei Bedarf Unterstützung bei den zuständigen Stellen.</p>
+                        
+                        <p>Ich mache erste Erfahrungen mit der Kommunikation im Betrieb und in der Schule. Dabei lerne ich, wie ich respektvoll mit anderen umgehe, wie Zusammenarbeit gelingt und wie ich bei Konflikten angemessen reagieren kann.</p>
+                        
+                        <p>Ich entwickle meine Lern- und Arbeitstechniken weiter und organisiere meine Arbeit gezielt. So lerne ich, mit meinen Ressourcen sorgfältig umzugehen und meine Zeit gut einzuteilen.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich finde mich im Betrieb und in der Berufsfachschule zurecht, kenne Lernstrategien, achte auf mich und arbeite ressourcenschonend.</h3>
                     
@@ -532,6 +639,25 @@
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Meine Kaufentscheidungen haben Auswirkungen auf mich, andere Menschen und die Umwelt. Ich lerne, verantwortungsvoll mit meinem Geld umzugehen, verstehe wirtschaftliche Zusammenhänge und kenne meine Rechte als Konsument.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich lerne, mit meinem Lehrlingslohn sorgfältig umzugehen. Dazu erstelle ich ein Budget und erkenne, welche Ausgaben notwendig sind und wo ich sparen kann. Ich verstehe die Risiken von Schulden und kenne verschiedene Finanzierungsmöglichkeiten.</p>
+                        
+                        <p>Ich setze mich mit meinem eigenen Konsumverhalten auseinander und verstehe, wie Werbung meine Bedürfnisse beeinflusst. Dabei lerne ich nachhaltige Konsumformen kennen und kann die Folgen meines Konsums für Umwelt und Gesellschaft einschätzen.</p>
+                        
+                        <p>Ich kenne die Grundlagen der Wirtschaft und verstehe, wie Angebot und Nachfrage funktionieren. Dabei erkenne ich meine Rolle als Konsument und kann beschreiben, wie mein Betrieb wirtschaftet.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich gehe verantwortungsbewusst mit meinem Geld um.</h3>
                     
@@ -752,6 +878,25 @@
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Im Alltag bin ich verschiedenen Risiken ausgesetzt. Ich lerne diese zu erkennen und mich dagegen abzusichern. Gleichzeitig achte ich auf meine Gesundheit und reflektiere, wie gesellschaftliche Normen mein Wohlbefinden beeinflussen.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich erkenne die Risiken in meinem privaten und beruflichen Alltag. Dazu gehören Unfälle, Krankheiten oder finanzielle Risiken. Ich verstehe, wie Versicherungen funktionieren und welche Absicherungen für mich wichtig sind.</p>
+                        
+                        <p>Ich setze mich mit gesellschaftlichen Erwartungen auseinander, die mein Selbstbild und Wohlbefinden beeinflussen. Dabei reflektiere ich kritisch Schönheitsideale, Geschlechterrollen und den Einfluss von Social Media auf meine Identität.</p>
+                        
+                        <p>Ich entwickle Strategien für einen gesunden Lebensstil. Dazu gehört der Umgang mit Stress, ausreichend Bewegung, bewusste Ernährung und eine gute Work-Life-Balance. Ich erkenne, was mir gut tut und wie ich auf mich achten kann.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich kann einschätzen, welchen Risiken ich im Alltag ausgesetzt bin, und erklären, wie ich mich dagegen absichern kann.</h3>
                     
@@ -920,7 +1065,7 @@
                     </div>
                     
                     <div class="lerninhalt">
-                        <h4>Lerninhalt 2: Ich kann Möglichkeiten für einen gesundheitsfördernden Lebensstil protokollie-ren/recherchieren/erfassen und reflektieren – z. B. im Umgang mit Stress, Bewegung, Ernährung oder Work-Life-Balance.</h4>
+                        <h4>Lerninhalt 2: Ich kann Möglichkeiten für einen gesundheitsfördernden Lebensstil protokollie-ren/recherchieren/erfassen und reflektieren – z. B. im Umgang mit Stress, Bewegung, Ernährung oder Work-Life-Balance.</h4>
                         
                         <div class="kompetenz-container">
                             <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't3l2-2-gesellschaft')">
@@ -979,6 +1124,25 @@
                 <p class="lektionen">22 Lektionen</p>
             </div>
             <div class="theme-content">
+                <div class="leitidee-section">
+                    <h3 class="leitidee-title">Leitidee</h3>
+                    
+                    <div class="kurzbeschreibung">
+                        <strong>Kurze Beschreibung:</strong><br>
+                        Digitale Medien und KI prägen meinen Alltag. Ich lerne, diese Werkzeuge gezielt und verantwortungsvoll zu nutzen, Informationen kritisch zu bewerten und mich sicher im digitalen Raum zu bewegen.
+                    </div>
+                    
+                    <button class="erweiterung-toggle">Detaillierte Erweiterung anzeigen</button>
+                    
+                    <div class="detaillierte-erweiterung">
+                        <p>Ich lerne verschiedene digitale Werkzeuge und KI-Tools kennen und kann sie für meine Zwecke einsetzen. Dabei verstehe ich grundlegend, wie KI funktioniert und kann sie sinnvoll nutzen, um meine Arbeit zu verbessern.</p>
+                        
+                        <p>Ich entwickle meine Medienkompetenz weiter und kann Informationen gezielt suchen, kritisch bewerten und von Fake News unterscheiden. Dabei erkenne ich, wie Algorithmen funktionieren und meine Mediennutzung beeinflussen.</p>
+                        
+                        <p>Ich nutze Social Media selbstbestimmt und verantwortungsvoll. Dabei achte ich auf meine digitale Identität, meinen Datenschutz und kommuniziere respektvoll mit anderen. Ich kenne die rechtlichen Grundlagen und weiss, wie ich mich vor Risiken schützen kann.</p>
+                    </div>
+                </div>
+                
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich nutze KI und digitale Werkzeuge gezielt, reflektiert und eigenständig.</h3>
                     

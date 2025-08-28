@@ -395,105 +395,6 @@
             transform: translateY(-2px);
         }
 
-        /* Qualitative Einschätzung */
-        .qualitative-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-        }
-
-        .qualitative-section h2 {
-            color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
-        }
-
-        .qualitative-section h3 {
-            color: var(--zh-blue);
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .qualitative-section p {
-            margin-bottom: 1rem;
-        }
-
-        .qualitative-section ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .erfuellung-gut {
-            color: var(--zh-green);
-            font-weight: 600;
-        }
-
-        .erfuellung-genuegend {
-            color: var(--zh-orange);
-            font-weight: 600;
-        }
-
-        .erfuellung-knapp {
-            color: var(--zh-red);
-            font-weight: 600;
-        }
-
-        /* Accordion Styles */
-        .accordion-item {
-            margin-bottom: 1rem;
-            border: 1px solid var(--zh-gray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: var(--zh-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-header.active {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-title {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .accordion-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: white;
-        }
-
-        .accordion-content.active {
-            max-height: 800px;
-        }
-
-        .accordion-body {
-            padding: 20px;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
@@ -830,50 +731,6 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Qualitative Einschätzung -->
-        <div class="qualitative-section">
-            <h2>Qualitative und kritische Einschätzung nach Erfüllungsgrad</h2>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-gut">Gut erfüllt: Fundamentale Kernkompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei der Kompetenz "Werthaltungen reflektieren und weiterentwickeln" (3.2.5) mit 8 Vorkommen am besten erfüllt.</p>
-                        <p><strong>Erklärung:</strong> Diese Kompetenz bildet das absolute Fundament des Lehrplans. Ihre häufige Wiederholung über verschiedene Themen hinweg - vom Berufseinstieg über Meinungsbildung bis hin zu nachhaltigem Konsum und gesellschaftlicher Verantwortung - zeigt, dass die persönliche Werteentwicklung als roter Faden durch die gesamte Ausbildung zieht. Der Lehrplan legt hier einen klaren Schwerpunkt auf die Entwicklung einer selbstreflexiven Persönlichkeit.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-genuegend">Genügend erfüllt: Wichtige Querschnittskompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei den Kompetenzen "Quellen unterscheiden" (3.2.1), "Perspektiven wechseln" (3.2.7) und "Vernetzt/systemisch denken" (3.2.9) mit jeweils 5 Vorkommen sowie "Standpunkte begründen" (3.2.6) und "Probleme lösen" (3.2.3) mit je 4 Vorkommen als genügend zu bewerten.</p>
-                        <p><strong>Erklärung:</strong> Diese Fähigkeiten werden regelmässig in mehreren Themenbereichen aufgegriffen. Sie fungieren als wichtige Werkzeuge für kritisches Denken (Quellenkritik), soziale Kompetenz (Perspektivwechsel), Problemlösung und nachhaltiges Handeln. Die Wiederholung ist ausreichend, um eine solide Grundlage zu schaffen, könnte aber für einen noch besseren Transfer in verschiedene Lebensbereiche verstärkt werden.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3 class="accordion-title erfuellung-knapp">Knapp erfüllt: Spezifische Anwendungskompetenzen</h3>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <p>Die Zirkularität ist bei mehreren Kompetenzen nur knapp erfüllt: "Ziele setzen" (3.2.2) und "Mit Mehrdeutigkeiten umgehen" (3.2.11) mit je 2 Vorkommen, "In Teams arbeiten" (3.2.4), "Lebensphasen planen" (3.2.8) und "Sich an Wandel anpassen" (3.2.10) mit je 3 Vorkommen, sowie "Gesellschaftlich partizipieren" (3.2.12) mit nur einem Vorkommen.</p>
-                        <p><strong>Erklärung:</strong> Diese Kompetenzen werden nur in wenigen, sehr spezifischen Kontexten explizit gefördert. Besonders kritisch ist die minimale Verankerung der gesellschaftlichen Partizipation (3.2.12), die nur in einem einzigen Thema vorkommt. Die geringe Wiederholungsrate birgt die Gefahr, dass diese Fähigkeiten als isolierte "Methoden" wahrgenommen werden und der Transfer in neue Situationen nicht ausreichend geübt wird. Hier besteht das grösste Potenzial für eine stärkere zirkuläre Integration über die gesamte Ausbildung.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -910,29 +767,6 @@
             document.querySelectorAll('.sk-button').forEach(btn => {
                 btn.classList.remove('hidden');
             });
-        }
-
-        // Accordion Funktion
-        function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const allHeaders = document.querySelectorAll('.accordion-header');
-            const allContents = document.querySelectorAll('.accordion-content');
-            
-            // Schließe alle anderen Accordions
-            allHeaders.forEach(h => {
-                if (h !== header) {
-                    h.classList.remove('active');
-                }
-            });
-            allContents.forEach(c => {
-                if (c !== content) {
-                    c.classList.remove('active');
-                }
-            });
-            
-            // Toggle aktuelles Accordion
-            header.classList.toggle('active');
-            content.classList.toggle('active');
         }
     </script>
 </body>

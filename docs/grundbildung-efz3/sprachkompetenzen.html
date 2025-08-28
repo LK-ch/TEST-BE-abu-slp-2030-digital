@@ -392,94 +392,6 @@
             transform: translateY(-2px);
         }
 
-        /* Qualitative Einschätzung */
-        .qualitative-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .qualitative-section h2 {
-            color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
-        }
-
-        /* Accordion Styles */
-        .accordion-item {
-            margin-bottom: 1rem;
-            border: 1px solid var(--zh-gray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: var(--zh-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-header.active {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-title {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .accordion-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: white;
-        }
-
-        .accordion-content.active {
-            max-height: 800px;
-        }
-
-        .accordion-body {
-            padding: 20px;
-        }
-
-        .accordion-body ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .erfuellung-gut {
-            color: var(--zh-green);
-            font-weight: 600;
-        }
-
-        .erfuellung-genuegend {
-            color: var(--zh-orange);
-            font-weight: 600;
-        }
-
-        .erfuellung-knapp {
-            color: var(--zh-red);
-            font-weight: 600;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
@@ -800,31 +712,32 @@
                 </tbody>
             </table>
         </div>
+    </div>
 
-  <script>
+    <script>
         let activeFilter = null;
         
-        function filterAspekt(aspektName) {
+        function filterModus(modusNr) {
             // Alle Kacheln zurücksetzen
             document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
             
-            if (activeFilter === aspektName) {
+            if (activeFilter === modusNr) {
                 // Wenn dieselbe Kachel nochmal geklickt wird, Filter aufheben
                 resetFilter();
                 return;
             }
             
             // Neue Kachel aktivieren
-            document.querySelector(`.kachel-${aspektName}`).classList.add('active');
-            activeFilter = aspektName;
+            document.querySelector(`.kachel-${modusNr}`).classList.add('active');
+            activeFilter = modusNr;
             
-            // Alle Aspekt-Tags verstecken
-            document.querySelectorAll('.aspekt-tag').forEach(tag => {
+            // Alle Tags verstecken
+            document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
                 tag.classList.add('hidden');
             });
             
             // Nur die entsprechenden Tags anzeigen
-            document.querySelectorAll(`.aspekt-tag[data-aspekt="${aspektName}"]`).forEach(tag => {
+            document.querySelectorAll(`.sprachmodi-tag[data-modus="${modusNr}"]`).forEach(tag => {
                 tag.classList.remove('hidden');
             });
         }
@@ -832,7 +745,7 @@
         function resetFilter() {
             activeFilter = null;
             document.querySelectorAll('.kachel').forEach(k => k.classList.remove('active'));
-            document.querySelectorAll('.aspekt-tag').forEach(tag => {
+            document.querySelectorAll('.sprachmodi-tag').forEach(tag => {
                 tag.classList.remove('hidden');
             });
         }

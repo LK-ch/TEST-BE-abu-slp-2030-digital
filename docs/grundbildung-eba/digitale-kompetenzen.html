@@ -325,6 +325,35 @@
             line-height: 1.4;
         }
 
+        /* Filter Controls mit Reset Button */
+        .filter-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-controls h3 {
+            color: var(--zh-dark-blue);
+            margin: 0;
+        }
+
+        .reset-filter-btn {
+            background: var(--zh-gray);
+            border: 2px solid var(--zh-blue);
+            color: var(--zh-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .reset-filter-btn:hover {
+            background: var(--zh-blue);
+            color: white;
+        }
+
         /* Kacheln */
         .kacheln-container {
             display: grid;
@@ -470,93 +499,6 @@
         .btn-ki { background-color: var(--kompetenz-ki); }
         .btn-er { background-color: var(--kompetenz-er); }
 
-        /* Qualitative Einschätzung */
-        .qualitative-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .qualitative-section h2 {
-            color: var(--zh-dark-blue);
-            margin-bottom: 1rem;
-        }
-
-        .accordion-item {
-            margin-bottom: 1rem;
-            border: 1px solid var(--zh-gray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: var(--zh-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-header.active {
-            background: var(--zh-light-blue);
-        }
-
-        .accordion-title {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .accordion-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: white;
-        }
-
-        .accordion-content.active {
-            max-height: 800px;
-        }
-
-        .accordion-body {
-            padding: 20px;
-        }
-
-        .accordion-body ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .erfuellung-gut {
-            color: #2ECC71;
-            font-weight: 600;
-        }
-
-        .erfuellung-mittel {
-            color: #F39C12;
-            font-weight: 600;
-        }
-
-        .erfuellung-hoch {
-            color: #3498DB;
-            font-weight: 600;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
@@ -573,6 +515,11 @@
 
             .kompetenzen-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -784,17 +731,17 @@
                                 </div>
                             </div>
                             <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 7: Kunst und Kultur</div>
-                                <div class="kompetenz-liste">
-                                    <div class="kompetenz-punkt">• Tools für Audio-, Bild- oder Videobearbeitung nutzen</div>
-                                    <div class="kompetenz-punkt">• Memes, Kurzfilme oder digitale Collagen gestalten</div>
-                                </div>
-                            </div>
-                            <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 8: Arbeit und Steuerpflicht</div>
+                                <div class="thema-titel">Thema 7: Arbeit und Steuerpflicht</div>
                                 <div class="kompetenz-liste">
                                     <div class="kompetenz-punkt">• Bewerbungsvideos mit KI-Videogeneratoren erstellen</div>
                                     <div class="kompetenz-punkt">• Digitales Porträt erstellen</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 8: Kunst und Kultur</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Tools für Audio-, Bild- oder Videobearbeitung nutzen</div>
+                                    <div class="kompetenz-punkt">• Memes, Kurzfilme oder digitale Collagen gestalten</div>
                                 </div>
                             </div>
                         </div>
@@ -829,7 +776,7 @@
                                 </div>
                             </div>
                             <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 8: Arbeit und Steuerpflicht</div>
+                                <div class="thema-titel">Thema 7: Arbeit und Steuerpflicht</div>
                                 <div class="kompetenz-liste">
                                     <div class="kompetenz-punkt">• Nutzung von Lohn- und Steuerrechnern</div>
                                     <div class="kompetenz-punkt">• Online-Formulare nutzen</div>
@@ -889,19 +836,19 @@
                                 </div>
                             </div>
                             <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 7: Kunst und Kultur</div>
-                                <div class="kompetenz-liste">
-                                    <div class="kompetenz-punkt">• KI-Quellensuche für kulturelle Beispiele</div>
-                                    <div class="kompetenz-punkt">• KI-Assistenten nutzen</div>
-                                    <div class="kompetenz-punkt">• KI als Rollen- und Kunstwerkgenerator</div>
-                                </div>
-                            </div>
-                            <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 8: Arbeit und Steuerpflicht</div>
+                                <div class="thema-titel">Thema 7: Arbeit und Steuerpflicht</div>
                                 <div class="kompetenz-liste">
                                     <div class="kompetenz-punkt">• Simulation mit Voice-Coachings-Tools oder KI-Dialogsystemen</div>
                                     <div class="kompetenz-punkt">• KI-Tools für Stellenanzeigen-Analyse nutzen</div>
                                     <div class="kompetenz-punkt">• Digitale Textassistenzsysteme für Bewerbungen</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 8: Kunst und Kultur</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• KI-Quellensuche für kulturelle Beispiele</div>
+                                    <div class="kompetenz-punkt">• KI-Assistenten nutzen</div>
+                                    <div class="kompetenz-punkt">• KI als Rollen- und Kunstwerkgenerator</div>
                                 </div>
                             </div>
                         </div>
@@ -950,16 +897,16 @@
                                 </div>
                             </div>
                             <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 7: Kunst und Kultur</div>
-                                <div class="kompetenz-liste">
-                                    <div class="kompetenz-punkt">• Auf Urheberrecht und Lizenzen achten</div>
-                                </div>
-                            </div>
-                            <div class="thema-gruppe">
-                                <div class="thema-titel">Thema 8: Arbeit und Steuerpflicht</div>
+                                <div class="thema-titel">Thema 7: Arbeit und Steuerpflicht</div>
                                 <div class="kompetenz-liste">
                                     <div class="kompetenz-punkt">• Umgang mit persönlichen Daten bei Online-Bewerbungen</div>
                                     <div class="kompetenz-punkt">• Datenschutzaspekte beachten</div>
+                                </div>
+                            </div>
+                            <div class="thema-gruppe">
+                                <div class="thema-titel">Thema 8: Kunst und Kultur</div>
+                                <div class="kompetenz-liste">
+                                    <div class="kompetenz-punkt">• Auf Urheberrecht und Lizenzen achten</div>
                                 </div>
                             </div>
                         </div>
@@ -1014,9 +961,15 @@
                 <div class="kachel-titel">ER<br>Ethische & Reflexive Haltung</div>
                 <div class="kachel-info">
                     <div class="vorkommen-zahl">10</div>
-                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 6 Themen</div>
+                    <div class="vorkommen-text">Konkrete Anwendungen<br>in 7 Themen</div>
                 </div>
             </div>
+        </div>
+
+        <!-- Filter Controls mit Reset Button -->
+        <div class="filter-controls">
+            <h3>Interaktive Kompetenz-Filter</h3>
+            <button class="reset-filter-btn" onclick="resetFilter()">Filter zurücksetzen</button>
         </div>
 
         <!-- Tabelle mit allen Themen -->
@@ -1140,15 +1093,32 @@
                     </tr>
 
                     <tr>
-                        <td rowspan="2"><strong>7. Kunst und Kultur</strong></td>
-                        <td>7.1 Kulturelle Ausdrucksformen</td>
+                        <td rowspan="2"><strong>7. Arbeit und Steuerpflicht</strong></td>
+                        <td>7.1 Berufliche Laufbahnplanung</td>
+                        <td>
+                            <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
+                            <span class="kompetenz-tag btn-die" data-kompetenz="die" onclick="filterKompetenz('die')">DIE</span>
+                            <span class="kompetenz-tag btn-ki" data-kompetenz="ki" onclick="filterKompetenz('ki')">KI</span>
+                            <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7.2 Bürgerpflichten & Steuern</td>
+                        <td>
+                            <span class="kompetenz-tag btn-pl" data-kompetenz="pl" onclick="filterKompetenz('pl')">PL</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="2"><strong>8. Kunst und Kultur</strong></td>
+                        <td>8.1 Kulturelle Ausdrucksformen</td>
                         <td>
                             <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
                             <span class="kompetenz-tag btn-ki" data-kompetenz="ki" onclick="filterKompetenz('ki')">KI</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>7.2 Kultur & kreative Gestaltung</td>
+                        <td>8.2 Kultur & kreative Gestaltung</td>
                         <td>
                             <span class="kompetenz-tag btn-die" data-kompetenz="die" onclick="filterKompetenz('die')">DIE</span>
                             <span class="kompetenz-tag btn-kz" data-kompetenz="kz" onclick="filterKompetenz('kz')">KZ</span>
@@ -1156,26 +1126,10 @@
                             <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td rowspan="2"><strong>8. Arbeit und Steuerpflicht</strong></td>
-                        <td>8.1 Berufliche Laufbahnplanung</td>
-                        <td>
-                            <span class="kompetenz-tag btn-idk" data-kompetenz="idk" onclick="filterKompetenz('idk')">IDK</span>
-                            <span class="kompetenz-tag btn-die" data-kompetenz="die" onclick="filterKompetenz('die')">DIE</span>
-                            <span class="kompetenz-tag btn-ki" data-kompetenz="ki" onclick="filterKompetenz('ki')">KI</span>
-                            <span class="kompetenz-tag btn-er" data-kompetenz="er" onclick="filterKompetenz('er')">ER</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8.2 Bürgerpflichten & Steuern</td>
-                        <td>
-                            <span class="kompetenz-tag btn-pl" data-kompetenz="pl" onclick="filterKompetenz('pl')">PL</span>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
+    </div>
 
     <script>
         let activeFilter = null;
@@ -1211,29 +1165,6 @@
             document.querySelectorAll('.kompetenz-tag').forEach(tag => {
                 tag.classList.remove('hidden');
             });
-        }
-
-        // Accordion Funktion für qualitative Einschätzung
-        function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const allHeaders = document.querySelectorAll('.accordion-header');
-            const allContents = document.querySelectorAll('.accordion-content');
-            
-            // Schließe alle anderen Accordions
-            allHeaders.forEach(h => {
-                if (h !== header) {
-                    h.classList.remove('active');
-                }
-            });
-            allContents.forEach(c => {
-                if (c !== content) {
-                    c.classList.remove('active');
-                }
-            });
-            
-            // Toggle aktuelles Accordion
-            header.classList.toggle('active');
-            content.classList.toggle('active');
         }
 
         // Accordion Funktion für Kompetenzen-Übersicht

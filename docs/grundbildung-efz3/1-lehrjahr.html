@@ -233,10 +233,34 @@
         .leitidee h3 {
             color: #003d7a;
             margin-bottom: 10px;
+            cursor: pointer;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .leitidee h3::before {
+            content: '▼';
+            position: absolute;
+            left: 0;
+            transition: transform 0.3s ease;
+            font-size: 0.8em;
+        }
+        
+        .leitidee h3.collapsed::before {
+            transform: rotate(-90deg);
         }
         
         .leitidee p {
             margin-bottom: 10px;
+        }
+        
+        .leitidee-content {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .leitidee-content.hidden {
+            display: none;
         }
         
         @media (max-width: 768px) {
@@ -291,6 +315,19 @@
             }
         }
         
+        function toggleLeitidee(header) {
+            const content = header.nextElementSibling;
+            const isOpen = !content.classList.contains('hidden');
+            
+            if (isOpen) {
+                content.classList.add('hidden');
+                header.classList.add('collapsed');
+            } else {
+                content.classList.remove('hidden');
+                header.classList.remove('collapsed');
+            }
+        }
+        
         // Initialize: Add click handlers and collapse all themes
         document.addEventListener('DOMContentLoaded', function() {
             const headers = document.querySelectorAll('.theme-header');
@@ -299,6 +336,18 @@
                     toggleTheme(this);
                 });
                 header.classList.add('collapsed');
+            });
+            
+            const leitideeHeaders = document.querySelectorAll('.leitidee h3');
+            leitideeHeaders.forEach(header => {
+                if (header.textContent === 'Detaillierte Erweiterung') {
+                    header.addEventListener('click', function() {
+                        toggleLeitidee(this);
+                    });
+                    // Initially collapsed
+                    header.classList.add('collapsed');
+                    header.nextElementSibling.classList.add('hidden');
+                }
             });
         });
     </script>
@@ -327,26 +376,27 @@
                 <div class="leitidee">
                     <h3>Leitidee</h3>
                     <p>Der Beginn meiner beruflichen Grundbildung bedeutet einen tiefgreifenden Wandel. Ich übernehme eine neue Rolle im Berufsbildungssystem als verantwortungsvolle, lernende Fachkraft im Betrieb, in der Schule und in den überbetrieblichen Kursen (ÜK). In meiner Ausbildungszeit entwickle ich Orientierung und Sicherheit und finde meinen Platz in der Berufs- und Lebenswelt.</p>
-                        </p>
-</div>
+                </div>
 
-<div class="leitidee">
-    <h3>Detaillierte Erweiterung</h3>
-    <p>Ich setze mich mit den Inhalten meines Lehrvertrags auseinander und erkenne meine Rechte und Pflichten 
-        im Berufsalltag. Dazu lese und verarbeite ich unterschiedliche Quellen, z. B. Verträge oder betriebliche 
-        Regelwerke, und nutze Informationen gezielt für meine Situation 
-        <em>(🧩 Rezeption schriftlich und bildlich)</em>.
-    </p>
-    <p>Ausserdem mache ich erste Erfahrungen damit, wie in meiner neuen Rolle kommuniziert wird, wie Zusammenarbeit 
-        im Team gelingt und wie Konflikte fair gelöst werden. Dabei tausche ich mich mit anderen Lernenden und 
-        Mitarbeitenden über Erlebnisse und Herausforderungen aus und bringe meine Sichtweise ein 
-        <em>(🧩 Interaktion und Kollaboration mündlich und schriftlich)</em>.
-    </p>
-    <p>Ich erweitere meine Lern- und Arbeitstechniken und gehe bei meinem Einstieg in die Arbeitswelt bewusst mit 
-        meinen Ressourcen um, indem ich meine eigene Arbeit gezielt organisiere 
-        <em>(🧩 Interaktion und Kollaboration digital)</em>.
-    </p>
-</div>
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <div class="leitidee-content">
+                        <p>Ich setze mich mit den Inhalten meines Lehrvertrags auseinander und erkenne meine Rechte und Pflichten 
+                            im Berufsalltag. Dazu lese und verarbeite ich unterschiedliche Quellen, z. B. Verträge oder betriebliche 
+                            Regelwerke, und nutze Informationen gezielt für meine Situation 
+                            <em>(🧩 Rezeption schriftlich und bildlich)</em>.
+                        </p>
+                        <p>Ausserdem mache ich erste Erfahrungen damit, wie in meiner neuen Rolle kommuniziert wird, wie Zusammenarbeit 
+                            im Team gelingt und wie Konflikte fair gelöst werden. Dabei tausche ich mich mit anderen Lernenden und 
+                            Mitarbeitenden über Erlebnisse und Herausforderungen aus und bringe meine Sichtweise ein 
+                            <em>(🧩 Interaktion und Kollaboration mündlich und schriftlich)</em>.
+                        </p>
+                        <p>Ich erweitere meine Lern- und Arbeitstechniken und gehe bei meinem Einstieg in die Arbeitswelt bewusst mit 
+                            meinen Ressourcen um, indem ich meine eigene Arbeit gezielt organisiere 
+                            <em>(🧩 Interaktion und Kollaboration digital)</em>.
+                        </p>
+                    </div>
+                </div>
                 
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich finde mich im Berufsbildungssystem zurecht. (9 Lektionen)</h3>
@@ -762,27 +812,28 @@
                 <div class="leitidee">
                     <h3>Leitidee</h3>
                     <p>In einer Welt, in der täglich unzählige Informationen und Meinungen auf mich einwirken, wird es für mich immer wichtiger, mir eine eigene, fundierte Haltung zu erarbeiten. Zu diesem Zweck lerne ich, meine Meinung bewusst zu bilden, sie respektvoll zu vertreten und mich aktiv in gesellschaftliche Prozesse einzubringen.</p>
-                        </p>
-</div>
+                </div>
 
-<div class="leitidee">
-    <h3>Detaillierte Erweiterung</h3>
-    <p>Ich lerne, digitale Informationen kritisch zu prüfen. Ich erkenne den Einfluss von Algorithmen, Filterblasen und Desinformationen auf meine Meinungsbildung. 
-        Ich bin sensibilisiert für den Unterschied zwischen Fake News und verlässlichen Quellen. Ich entwickle Strategien, um mich sicher und selbstbestimmt in 
-        digitalen Räumen zu bewegen. Dazu höre ich politische Debatten, Interviews und Social-Media-Beiträge, analysiere die Absichten hinter Aussagen und vergleiche Positionen 
-        <em>(🧩 Rezeption mündlich)</em>.
-    </p>
-    <p>Auf dieser Basis setze ich mich mit ethischen Fragen zum Umgang mit Hassrede, Meinungsfreiheit und Verantwortung im Netz auseinander. 
-        Ich reflektiere Menschenrechte und Grundwerte und überlege, wie sie auf aktuelle Themen angewandt werden können. Dabei bringe ich unterschiedliche Sichtweisen 
-        in Diskussionen ein und lerne, meine Meinung begründet und respektvoll zu vertreten 
-        <em>(🧩 Produktion mündlich)</em>.
-    </p>
-    <p>Ich kenne meine politischen Rechte und weiss, wie ich mich an politischen Prozessen beteiligen kann – von der Klassenvertretung bis zur nationalen Abstimmung. 
-        Ich entwickle eigene Standpunkte, bereite sie sprachlich sorgfältig auf und präsentiere sie adressatengerecht, beispielsweise in einem Debattenbeitrag 
-        <em>(🧩 Produktion schriftlich)</em> oder als Videostatement für Social Media. So erlebe ich, dass meine Stimme zählt und dass ich durch aktives Mitgestalten 
-        Veränderungen anstossen kann.
-    </p>
-</div>
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <div class="leitidee-content">
+                        <p>Ich lerne, digitale Informationen kritisch zu prüfen. Ich erkenne den Einfluss von Algorithmen, Filterblasen und Desinformationen auf meine Meinungsbildung. 
+                            Ich bin sensibilisiert für den Unterschied zwischen Fake News und verlässlichen Quellen. Ich entwickle Strategien, um mich sicher und selbstbestimmt in 
+                            digitalen Räumen zu bewegen. Dazu höre ich politische Debatten, Interviews und Social-Media-Beiträge, analysiere die Absichten hinter Aussagen und vergleiche Positionen 
+                            <em>(🧩 Rezeption mündlich)</em>.
+                        </p>
+                        <p>Auf dieser Basis setze ich mich mit ethischen Fragen zum Umgang mit Hassrede, Meinungsfreiheit und Verantwortung im Netz auseinander. 
+                            Ich reflektiere Menschenrechte und Grundwerte und überlege, wie sie auf aktuelle Themen angewandt werden können. Dabei bringe ich unterschiedliche Sichtweisen 
+                            in Diskussionen ein und lerne, meine Meinung begründet und respektvoll zu vertreten 
+                            <em>(🧩 Produktion mündlich)</em>.
+                        </p>
+                        <p>Ich kenne meine politischen Rechte und weiss, wie ich mich an politischen Prozessen beteiligen kann – von der Klassenvertretung bis zur nationalen Abstimmung. 
+                            Ich entwickle eigene Standpunkte, bereite sie sprachlich sorgfältig auf und präsentiere sie adressatengerecht, beispielsweise in einem Debattenbeitrag 
+                            <em>(🧩 Produktion schriftlich)</em> oder als Videostatement für Social Media. So erlebe ich, dass meine Stimme zählt und dass ich durch aktives Mitgestalten 
+                            Veränderungen anstossen kann.
+                        </p>
+                    </div>
+                </div>
                 
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich bin täglich mit Informationen aus verschiedenen Quellen konfrontiert und merke, dass ich oft nicht weiss, was stimmt und was nicht. (6 Lektionen)</h3>
@@ -987,6 +1038,55 @@
                             </ul>
                         </div>
                     </div>
+                    
+                    <div class="lerninhalt">
+                        <h4>Lerninhalt 3: Ich kann Meinungen und Haltungen in künstlerischen Ausdrucksformen wie Songtexten, Bildern oder Theaterszenen erkennen, beschreiben und deren Wirkung auf das Publikum einschätzen. (Möglichkeit für externe Lernorte mit regionalen Kunstworkshops, Ausstellungen und Vorführungen)</h4>
+                        
+                        <div class="kompetenz-container">
+                            <button class="kompetenz-button gesellschaft" onclick="toggleKompetenz(this, 't2l2-3-gesellschaft')">
+                                Gesellschaftliche Aspekte
+                            </button>
+                            <button class="kompetenz-button sprache" onclick="toggleKompetenz(this, 't2l2-3-sprache')">
+                                Sprachmodi
+                            </button>
+                            <button class="kompetenz-button digital" onclick="toggleKompetenz(this, 't2l2-3-digital')">
+                                Digitale Kompetenzen
+                            </button>
+                            <button class="kompetenz-button schluessel" onclick="toggleKompetenz(this, 't2l2-3-schluessel')">
+                                Schlüsselkompetenzen
+                            </button>
+                        </div>
+                        
+                        <div id="t2l2-3-gesellschaft" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">Kultur:</span> Künstlerische Ausdrucksformen und Deutung</li>
+                                <li><span class="kompetenz-nummer">Ethik:</span> Haltungen und Werte in der Kunst</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-3-sprache" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">4.2.1.3</span> Rezeption schriftlich und bildlich: Analyse von Texten, Bildern, Plakaten</li>
+                                <li><span class="kompetenz-nummer">4.2.1.2</span> Rezeption audiovisuell: Analyse von Musikvideos, Theaterszenen</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-3-digital" class="kompetenz-details">
+                            <ul>
+                                <li>Recherche in digitalen Sammlungen (z. B. Online-Ausstellungen)</li>
+                                <li>Nutzung von Annotationstools zur Bild-/Textanalyse</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="t2l2-3-schluessel" class="kompetenz-details">
+                            <ul>
+                                <li><span class="kompetenz-nummer">3.2.1</span> Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden</li>
+                                <li><span class="kompetenz-nummer">3.2.5</span> Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln</li>
+                                <li><span class="kompetenz-nummer">3.2.6</span> Ihre eigenen Standpunkte begründen und andere davon überzeugen</li>
+                                <li><span class="kompetenz-nummer">3.2.7</span> Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="lebensbezug">
@@ -1100,39 +1200,40 @@
                 <div class="leitidee">
                     <h3>Leitidee</h3>
                     <p>Meine Konsumentscheidungen – sei es beim Einkaufen, Essen oder Reisen – beeinflussen andere Personen, Unternehmen und auch die Umwelt. Beim Thema «Bewusst konsumieren und handeln» gehe ich verantwortungsvoll mit meinem Lohn um. Ich reflektiere mein eigenes Konsumverhalten, erkenne wirtschaftliche Zusammenhänge, lerne meine Rechte als Konsument/in kennen und setze mich mit den ökologischen Auswirkungen meiner alltäglichen Entscheidungen auseinander.</p>
-                   </p>
-</div>
+                </div>
 
-<div class="leitidee">
-    <h3>Detaillierte Erweiterung</h3>
-    <p>Ich lerne verantwortungsbewusst mit meinem Einkommen umzugehen und finde heraus, welche finanziellen 
-        Spielräume und Verpflichtungen damit verbunden sind. Dazu erstelle ich mithilfe digitaler Tools 
-        ein eigenes Budget und tausche mich über meine Bedürfnisse und Möglichkeiten mit anderen aus 
-        <em>(🧩 Produktion multimedial, Interaktion und Kollaboration digital)</em>.
-    </p>
-    <p>Ich setze mich mit grundlegenden wirtschaftlichen Mechanismen auseinander: Was beeinflusst meine 
-        Konsumbedürfnisse? Wie entstehen Preise? Welche Rolle spiele ich als Konsument/in in der Wirtschaft? 
-        Und welche Auswirkungen hat mein Konsumverhalten im globalen Zusammenhang? Dabei analysiere ich 
-        audiovisuelle Beiträge, wie Werbeclips, Erklärvideos oder Dokumentationen, um ökonomische Zusammenhänge 
-        zu erkennen und kritisch zu reflektieren 
-        <em>(🧩 Rezeption audiovisuell)</em>.
-    </p>
-    <p>Ich reflektiere die sozialen und ökologischen Folgen meines Konsums. Ich vergleiche konventionelle 
-        und nachhaltige Konsumformen, befasse mich mit Labels, Produktionsbedingungen und Umweltauswirkungen 
-        und formuliere meine Erkenntnisse in Texten und multimedial gestalteten Beiträgen wie Infografiken, 
-        Plakaten oder Video-Storys 
-        <em>(🧩 Produktion multimedial)</em>.
-    </p>
-    <p>Zudem lerne ich, welche Rechte und Pflichten sich aus Kaufverträgen ergeben, sei es im Laden, online 
-        oder bei digitalen Vertragsabschlüssen. Dadurch kann ich Rückgaberecht, Garantie, Reklamation oder 
-        Schutz vor Betrug in meinem Alltag anwenden. In digitalen Austauschformaten entwickle ich gemeinsam 
-        mit anderen Strategien für den Konsumalltag, beispielsweise im Forum, im Chat oder per E-Mail-Austausch 
-        <em>(🧩 Interaktion und Kollaboration digital)</em>.
-    </p>
-    <p>So stärke ich meine Fähigkeit, wirtschaftlich informiert, rechtlich orientiert und ökologisch bewusst 
-        zu handeln – als verantwortungsvolle Konsumentin bzw. verantwortungsvoller Konsument.
-    </p>
-</div>
+                <div class="leitidee">
+                    <h3>Detaillierte Erweiterung</h3>
+                    <div class="leitidee-content">
+                        <p>Ich lerne verantwortungsbewusst mit meinem Einkommen umzugehen und finde heraus, welche finanziellen 
+                            Spielräume und Verpflichtungen damit verbunden sind. Dazu erstelle ich mithilfe digitaler Tools 
+                            ein eigenes Budget und tausche mich über meine Bedürfnisse und Möglichkeiten mit anderen aus 
+                            <em>(🧩 Produktion multimedial, Interaktion und Kollaboration digital)</em>.
+                        </p>
+                        <p>Ich setze mich mit grundlegenden wirtschaftlichen Mechanismen auseinander: Was beeinflusst meine 
+                            Konsumbedürfnisse? Wie entstehen Preise? Welche Rolle spiele ich als Konsument/in in der Wirtschaft? 
+                            Und welche Auswirkungen hat mein Konsumverhalten im globalen Zusammenhang? Dabei analysiere ich 
+                            audiovisuelle Beiträge, wie Werbeclips, Erklärvideos oder Dokumentationen, um ökonomische Zusammenhänge 
+                            zu erkennen und kritisch zu reflektieren 
+                            <em>(🧩 Rezeption audiovisuell)</em>.
+                        </p>
+                        <p>Ich reflektiere die sozialen und ökologischen Folgen meines Konsums. Ich vergleiche konventionelle 
+                            und nachhaltige Konsumformen, befasse mich mit Labels, Produktionsbedingungen und Umweltauswirkungen 
+                            und formuliere meine Erkenntnisse in Texten und multimedial gestalteten Beiträgen wie Infografiken, 
+                            Plakaten oder Video-Storys 
+                            <em>(🧩 Produktion multimedial)</em>.
+                        </p>
+                        <p>Zudem lerne ich, welche Rechte und Pflichten sich aus Kaufverträgen ergeben, sei es im Laden, online 
+                            oder bei digitalen Vertragsabschlüssen. Dadurch kann ich Rückgaberecht, Garantie, Reklamation oder 
+                            Schutz vor Betrug in meinem Alltag anwenden. In digitalen Austauschformaten entwickle ich gemeinsam 
+                            mit anderen Strategien für den Konsumalltag, beispielsweise im Forum, im Chat oder per E-Mail-Austausch 
+                            <em>(🧩 Interaktion und Kollaboration digital)</em>.
+                        </p>
+                        <p>So stärke ich meine Fähigkeit, wirtschaftlich informiert, rechtlich orientiert und ökologisch bewusst 
+                            zu handeln – als verantwortungsvolle Konsumentin bzw. verantwortungsvoller Konsument.
+                        </p>
+                    </div>
+                </div>
                 
                 <div class="lebensbezug">
                     <h3>1. Individueller Lebensbezug: Ich treffe überlegte Kaufentscheidungen, die zu mir und meiner Lebenssituation passen. (12 Lektionen)</h3>

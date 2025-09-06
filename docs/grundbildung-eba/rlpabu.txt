@@ -1,0 +1,586 @@
+# Rahmenlehrplan für die Allgemeinbildung in der beruflichen Grundbildung
+
+**Bern, 9. April 2025**
+
+Das Staatssekretariat für Bildung, Forschung und Innovation SBFI, gestützt auf Artikel 19 der Verordnung vom 19. November 2003 über die Berufsbildung (BBV), erlässt den nachfolgenden Rahmenlehrplan für die Allgemeinbildung in der beruflichen Grundbildung.
+
+## Impressum
+
+### Herausgeber
+Staatssekretariat für Bildung, Forschung und Innovation (SBFI)
+
+### Projektleitung
+SBFI, Ressort berufliche Grundbildung, und Schweizerische Berufsbildungsämter-Konferenz (SBBK)
+
+### Erarbeitung
+Pädagogische Fachberatung der Eidgenössischen Hochschule für Berufsbildung EHB sowie der Pädagogischen Hochschulen Luzern, St. Gallen und Zürich in Zusammenarbeit mit Delegierten der Verbundpartner, der Berufsfachschulen und der Lehrerschaft.
+
+### Begleitgruppe
+15 Delegierte der Verbundpartner, inklusive Vertreterinnen und Vertreter von Berufsfachschulen und Lehrerschaft
+
+### Übersetzung
+Sprachdienste SBFI und GS-WBF
+
+### Layout
+Kommunikation, SBFI
+
+### Sprachen
+D/fl
+Verfügbar auf: [www.sbfi.admin.ch](http://www.sbfi.admin.ch)
+
+### Kontakt
+Staatssekretariat für Bildung, Forschung und Innovation SBFI
+Berufs- und Weiterbildung
+Einsteinstrasse 2
+3003 Bern
+T +41 584622129
+info@sbfi.admin.ch
+[www.sbfi.admin.ch](http://www.sbfi.admin.ch)
+
+Copyright © 2025 Staatssekretariat für Bildung, Forschung und Innovation
+
+## Inhaltsverzeichnis
+
+1. [Einleitung](#1-einleitung)
+2. [Grundlagen](#2-grundlagen)
+   2.1. [Rechtliche Grundlagen](#21-rechtliche-grundlagen)
+   2.2. [Ziele der Allgemeinbildung](#22-ziele-der-allgemeinbildung)
+   2.3. [Förderung von Kompetenzen in der Allgemeinbildung](#23-förderung-von-kompetenzen-in-der-allgemeinbildung)
+   2.4. [Berücksichtigung des Wandels](#24-berücksichtigung-des-wandels)
+3. [Schlüsselkompetenzen für lebenslanges Lernen](#3-schlüsselkompetenzen-für-lebenslanges-lernen)
+   3.1. [Förderung](#31-förderung)
+   3.2. [Schlüsselkompetenzen für lebenslanges Lernen](#32-schlüsselkompetenzen-für-lebenslanges-lernen)
+4. [Lernbereich Sprache und Kommunikation](#4-lernbereich-sprache-und-kommunikation)
+   4.1. [Förderung](#41-förderung)
+   4.2. [Die Modi der Kommunikation](#42-die-modi-der-kommunikation)
+   4.3. [Grundlagen zur Entwicklung der Sprach- und Kommunikationskompetenzen](#43-grundlagen-zur-entwicklung-der-sprach-und-kommunikationskompetenzen)
+5. [Lernbereich Gesellschaft](#5-lernbereich-gesellschaft)
+   5.1. [Förderung](#51-förderung)
+   5.2. [Aspekte](#52-aspekte)
+6. [Qualifikationsbereich Allgemeinbildung](#6-qualifikationsbereich-allgemeinbildung)
+   6.1. [Semesterzeugnisnote](#61-semesterzeugnisnote)
+   6.2. [Schlussarbeit](#62-schlussarbeit)
+   6.3. [Schlussprüfung](#63-schlussprüfung)
+7. [Schullehrplan](#7-schullehrplan)
+   7.1. [Konzeption](#71-konzeption)
+   7.2. [Themen](#72-themen)
+   7.3. [Differenzierung](#73-differenzierung)
+8. [Schlussbestimmungen](#8-schlussbestimmungen)
+   8.1. [Aufhebung des bisherigen Rahmenlehrplan](#81-aufhebung-des-bisherigen-rahmenlehrplan)
+   8.2. [Übergangsbestimmungen](#82-übergangsbestimmungen)
+   8.3. [Inkrafttreten](#83-inkrafttreten)
+[Anhang](#anhang)
+
+## 1. Einleitung
+
+### Die Allgemeinbildung in der beruflichen Grundbildung
+
+Das schweizerische Berufsbildungssystem zeichnet sich durch die duale Bildung und den engen Bezug zur Arbeitswelt aus. Die berufliche Grundbildung auf Sekundarstufe II ermöglicht den Einstieg in die Arbeitswelt und sorgt für qualifizierte Fachkräfte. Sie ist Basis für lebenslanges Lernen und öffnet eine Vielzahl von Berufsperspektiven. Die berufliche Grundbildung orientiert sich an tatsächlich nachgefragten beruflichen Qualifikationen sowie an den Bedürfnissen des Arbeitsmarktes und der Gesellschaft.
+
+Die berufliche Grundbildung findet im Betrieb, in der Berufsfachschule und in überbetrieblichen Kursen statt. In der Berufsfachschule erhalten die Lernenden eine ganzheitliche, anschlussfähige Bildung vermittelt. Der Unterricht schliesst an die obligatorische Schule an, orientiert sich an der Erlebniswelt der Lernenden und zielt auf die Weiterentwicklung von Kompetenzen.
+
+Die Allgemeinbildung ist Teil des ganzheitlichen Bildungsansatzes in der beruflichen Grundbildung. Sie ist Bestandteil aller beruflichen Grundbildungen. Ihr Erwerb soll die Lernenden dazu befähigen, den Zugang zur Arbeitswelt zu finden, darin zu bestehen und sich in die Gesellschaft zu integrieren. Weiter vermittelt die berufliche Grundbildung - und damit auch die Allgemeinbildung - Kenntnisse und Fähigkeiten, die zu einer nachhaltigen Entwicklung, zu lebenslangem Lernen und zu selbstständigem Urteilen und Entscheiden beitragen (Art. 15 Abs. 2 Bst. b-d, Berufsbildungsgesetz vom 13. Dezember 2002 (BBG)).
+
+### Funktion und Zielsetzung des Rahmenlehrplans
+
+Der Rahmenlehrplan für die Allgemeinbildung in der beruflichen Grundbildung ist ein Steuerungsinstrument für den allgemeinbildenden Unterricht an den Berufsfachschulen. Er richtet sich an die Kantone, die Berufsfachschulen und die Lehrpersonen, welche auf seiner Grundlage Schullehrpläne entwickeln.
+
+Er schafft einen gemeinsamen Rahmen für alle beruflichen Grundbildungen, indem er die Ziele der Allgemeinbildung gemäss Art. 15 Abs. 2 Bst. b-d BBG für die zwei-, drei- und vierjährigen beruflichen Grundbildungen konkretisiert. Dazu wurde der Rahmenlehrplan auf Kompetenzen ausgerichtet.
+
+Der Rahmenlehrplan bildet zudem die Grundlage für die Gestaltung des Unterrichts und für die Bewertung der Leistungen der Lernenden in den Lernbereichen «Sprache und Kommunikation» und «Gesellschaft» gemäss Art. 3 Abs. 2 der Verordnung vom 9. April 2025 über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung.
+
+## 2. Grundlagen
+
+### 2.1. Rechtliche Grundlagen
+
+Der vorliegende Rahmenlehrplan stützt sich auf die folgenden rechtlichen Grundlagen:
+
+- Art. 15 Abs. 2 Bst. b-d, Art. 16 Abs. 2 Bst. b, Abs. 3 und 5 sowie Art. 21 Abs. 2 BBG;
+- Art. 19 Abs. 2 BBV;
+- Verordnung des SBFI vom 9. April 2025 über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung.
+
+### 2.2. Ziele der Allgemeinbildung
+
+Gestützt auf Art. 15 Abs. 2 Bst. b-d BBG hat die Allgemeinbildung die Förderung von Kompetenzen zur Orientierung im persönlichen Lebenskontext und in der Gesellschaft sowie zur Bewältigung von privaten und beruflichen Herausforderungen zum Ziel.
+
+Sie fördert insbesondere:
+
+- die Entwicklung der Persönlichkeit;
+- das kritisch-reflexive Denken;
+- die Weiterentwicklung der Sprach- und Kommunikationskompetenzen;
+- die Weiterentwicklung von Kompetenzen zur Laufbahngestaltung und zum lebenslangen Lernen;
+- die Weiterentwicklung von digitalen Kompetenzen;
+- den Erwerb von wirtschaftlichen, ökologischen, sozialen und kulturellen Kenntnissen und Fähigkeiten, welche dazu befähigen, zu einer nachhaltigen Entwicklung beizutragen.
+
+Als Bestandteil jeder beruflichen Grundbildung trägt die Allgemeinbildung zudem zur Verwirklichung der Chancengerechtigkeit für alle Lernenden bei.
+
+### 2.3. Förderung von Kompetenzen in der Allgemeinbildung
+
+#### Kompetenzbegriff
+
+Zur Erreichung der in Kapitel 2.2 aufgeführten Ziele der Allgemeinbildung sind im vorliegenden Rahmenlehrplan Kompetenzen definiert, die im allgemeinbildenden Unterricht aufgebaut und gefördert werden. Als Kompetenzen werden jene «bei Individuen verfügbaren oder durch sie erlernbaren kognitiven Fähigkeiten und Fertigkeiten» verstanden, welche nötig sind, «um bestimmte Probleme zu lösen, sowie die damit verbundenen motivationalen, volitionalen und sozialen Bereitschaften und Fähigkeiten, um die Problemlösungen in variablen Situationen erfolgreich und verantwortungsvoll nutzen zu können» (Weinert 2001: 27f).
+
+Das pädagogische Konzept unterscheidet zwischen Schlüsselkompetenzen für lebenslanges Lernen, Kompetenzen aus dem Lernbereich «Sprache und Kommunikation» sowie Kompetenzen aus dem Lernbereich «Gesellschaft». Zur Bewältigung komplexer persönlicher, gesellschaftlicher und beruflicher Herausforderungen werden sowohl Schlüsselkompetenzen als auch Kompetenzen aus den beiden Lernbereichen der Allgemeinbildung benötigt.
+
+#### Schlüsselkompetenzen für lebenslanges Lernen
+
+Bei den Schlüsselkompetenzen für lebenslanges Lernen (nachfolgend Schlüsselkompetenzen) handelt es sich um zukunftsbedeutsame Kompetenzen. Diese erlauben es Menschen, komplexe Probleme selbstorganisiert zu lösen und sich in der Gesellschaft und in der Arbeitswelt weiterzuentwickeln.
+
+Die Schlüsselkompetenzen sind in variablen Situationen des privaten, gesellschaftlichen sowie beruflichen Alltags einsetzbar und werden ein Leben lang über die Zeit entwickelt. Sie werden im Rahmen des allgemeinbildenden Unterrichts bei der Förderung von Kompetenzen aus den beiden Lernbereichen Sprache und Kommunikation sowie Gesellschaft mitgefördert. Aufgrund ihrer Relevanz werden die Schlüsselkompetenzen im Rahmen des Qualifikationsbereichs Allgemeinbildung mitberücksichtigt (vgl. Kapitel 6). Sie sind in Kapitel 3 aufgeführt.
+
+#### Kompetenzen aus dem Lernbereich Sprache und Kommunikation
+
+Sprache und Kommunikation sind grundlegend sowohl für die Identitätsbildung und die Integration in der Gesellschaft als auch für die Entwicklung und Förderung weiterer Kompetenzen. Sprache und Kommunikation durchdringen alle gesellschaftlichen, privaten und beruflichen Lebensbereiche. Sprach- und Kommunikationskompetenzen gehören damit zu den grundlegenden Kompetenzen in einer sich rasch wandelnden Wissensund Mediengesellschaft. Sie sind auch massgeblich für den Schulerfolg und Grundvoraussetzung für das lebenslange Lernen. Deswegen sind sie gezielt weiter zu fördern und aufzubauen. Sie sind in Kapitel 4 aufgeführt.
+
+#### Kompetenzen aus dem Lernbereich Gesellschaft
+
+Um sich aktiv an einer Gesellschaft zu beteiligen und in unterschiedlichen Alltagssituationen kompetent handeln zu können, sind Fähigkeiten und Fertigkeiten sowie eine interdisziplinäre Problemlösungsbearbeitung erforderlich. Die Kompetenzen aus dem Lernbereich Gesellschaft werden aus den acht Aspekten des Lernbereichs «Gesellschaft» abgeleitet und in den Schullehrplänen definiert. Die Aspekte im Lernbereich «Gesellschaft» stellen Blickwinkel dar, unter denen die Bearbeitung einer Alltagsherausforderung erfolgen kann. Sie sind in Kapitel 5 beschrieben.
+
+#### Allgemeinbildender Unterricht
+
+Der allgemeinbildende Unterricht ist kompetenz-, themen- und handlungsorientiert. Er folgt einer gemässigten konstruktivistischen Didaktik.
+
+Kompetenzorientiert heisst, dass Kompetenzen progressiv aufbauend über die gesamte Lehrdauer erworben werden. Der Grad des kompetenten Handelns unterscheidet sich durch die Zunahme von Fakten-, Konzeptund Prozesswissen, durch die Erhöhung der Komplexität und den Grad der Selbstständigkeit, mit der gearbeitet wird.
+
+Themenorientiert heisst, dass der Aufbau der Kompetenzen entlang von im Schullehrplan zu definierenden Themen organisiert ist und nicht einer disziplinären Fachlogik folgt. Die Themen nehmen mit der Wahl von subjektiv bedeutsamen Lerninhalten Bezug auf die persönliche, gesellschaftliche und berufliche Realität der Lernenden. In den Themen werden ausgewählte Kompetenzen aus den beiden Lernbereichen miteinander gefördert und geprüft. Dabei werden Schlüsselkompetenzen bewusst mitgefördert und gefestigt. Die Auswahl der Kompetenzen wird durch das Thema und den Kontext bestimmt.
+
+Handlungsorientiert heisst, dass die Lernenden die Kompetenzen durch eigenes Handeln weiterentwickeln und in konkreten Handlungen nachweisen. Die Lernenden tragen im Unterricht Verantwortung für ihr Lernen, gestalten ihren Lernprozess selbstständig und erarbeiten konkrete Produkte. Sie werden unter Berücksichtigung ihrer jeweiligen Lern- und Leistungsvoraussetzungen unterstützt und sukzessive zu autonomem Handeln angeleitet.
+
+### 2.4. Berücksichtigung des Wandels
+
+In seiner Botschaft zur Förderung von Bildung, Forschung und Innovation (BFI) hebt der Bundesrat die zentrale Rolle der transversalen Themen Digitalisierung, nachhaltige Entwicklung und Chancengerechtigkeit hervor. Diesen Themen wird in allen BFI-Bereichen und durch alle Akteure besondere Beachtung geschenkt. Neben diesen transversalen Themen gibt es auch andere Entwicklungen, die einer gesellschaftlichen, wirtschaftlichen und politischen Dynamik unterliegen und voraussichtlich unser Leben über Jahrzehnte hinweg massgeblich beeinflussen werden. Dazu gehören zum Beispiel die Globalisierung, der demographische Wandel oder die Migration. In der wissenschaftlichen Literatur werden diese Entwicklungen oft als «Megatrends» bezeichnet. So wie die Ziele der nachhaltigen Entwicklung Teil einer globalen und verantwortungsbewussten Perspektive des Wandels sind, zielt die Allgemeinbildung in der beruflichen Grundbildung auf ihrer Ebene darauf ab, die Integration der Lernenden in eine sich ständig weiterentwickelnde Gesellschaft zu fördern.
+
+Im allgemeinbildenden Unterricht gilt es, diesen Entwicklungen Rechnung zu tragen. Die beobachtbaren und künftigen Veränderungen in Gesellschaft und Wirtschaft wurden bei der Herleitung der im Rahmenlehrplan aufgeführten Schlüsselkompetenzen für lebenslanges Lernen berücksichtigt. Ebenfalls sind sie für die Bestimmung der Sprach- und Kommunikationskompetenzen und der Kompetenzen aus dem Lernbereich Gesellschaft relevant. Zudem beeinflussen sie die Auswahl der Themen in den Schullehrplänen. Im Anhang sind einige Beispiele aufgeführt.
+
+## 3. Schlüsselkompetenzen für lebenslanges Lernen
+
+### 3.1 Förderung
+
+Die Förderung der Schlüsselkompetenzen erfolgt im allgemeinbildenden Unterricht themen- und handlungsorientiert und im Zusammenspiel mit Sprach- und Kommunikationskompetenzen sowie Kompetenzen aus dem Lernbereich Gesellschaft. Die Schlüsselkompetenzen zum lebenslangen Lernen werden in einem Spiralcurriculum progressiv über die gesamte Lernzeit aufgebaut. Dieses Spiralcurriculum soll zur Festigung und stetigen Vergrösserung der Transferreichweite der Kompetenzen beitragen.
+
+### 3.2 Schlüsselkompetenzen für lebenslanges Lernen
+
+Nachfolgend werden die zwölf Schlüsselkompetenzen sowie deren in der Allgemeinbildung beabsichtigte Reichweite aufgeführt.
+
+#### 3.2.1 Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden
+
+Um mit der Vielfalt der Quellen und Medieninhalte, inklusive Anwendungen der künstlichen Intelligenz, kritisch umgehen zu können, ist es wichtig, vermittelte Informationen zu filtern, auszuwählen, zu bewerten und zu organisieren. Dadurch werden relevante Informationen nutzbar gemacht.
+
+#### 3.2.2 Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten
+
+Um effektiv und effizient zu lernen, ist es wichtig, bei einem aufgrund eingeschränkter Ressourcen entstehenden Zielkonflikt zu priorisieren, sich Lernziele zu setzen, Fortschritte zu bewerten und Lernstrategien anzupassen.
+
+#### 3.2.3 Antizipative, unternehmerische und innovative Wege der Problemlösung erkennen, entwickeln und umsetzen
+
+Um komplexe Herausforderungen lösen zu können, ist es wichtig, über ein breites Spektrum an Ressourcen zur Ideenfindung und zur Entwicklung, Bewertung und Anwendung von innovativen Lösungsansätzen zu verfügen, um konzeptionell, flexibel, antizipativ und kreativ denken und handeln zu können. Dazu gehört auch ein reflektierter Umgang mit zeitgemässen Anwendungen der Informations- und Kommunikationstechnologien.
+
+#### 3.2.4 In unterschiedlichen Teams zielgerichtet und effizient arbeiten
+
+Um in verschiedenen Teams und in unterschiedlichen Rollen effizient und respektvoll zu arbeiten, ist es wichtig, Kooperation, Kommunikation und Koordination mit anderen Teammitgliedern zu entwickeln, gemeinsam Verantwortung für Ergebnisse zu übernehmen sowie flexibel zu sein.
+
+#### 3.2.5 Die eigenen Werthaltungen und Überzeugungen erkennen, verstehen, kritisch reflektieren und weiterentwickeln
+
+Um persönliche Entwicklungsschritte hin zu einem selbstbestimmten Leben zu machen, ist es wichtig, die persönlichen Werte und Überzeugungen zu hinterfragen, die Perspektiven zu erweitern und eine reflektierte, ethische Grundlage für das eigene Handeln zu entwickeln.
+
+#### 3.2.6 Ihre eigenen Standpunkte begründen und andere davon überzeugen
+
+Um andere von den eigenen Ideen und Standpunkten zu überzeugen, ist es wichtig, eigene Gedanken und Ideen effektiv zu artikulieren und zu vertreten sowie Argumente klar und überzeugend zu präsentieren und die Kommunikationsfähigkeiten zu verbessern.
+
+#### 3.2.7 Unterschiedliche Standpunkte nachvollziehen und das gegenseitige Verständnis fördern
+
+Um eine inklusive und respektvolle Umgebung zu schaffen und damit eine Konsensfindung zwischen unterschiedlichen Interessen zu ermöglichen, ist es wichtig, die Perspektive wechseln zu können, Empathie zu entwickeln und Toleranz zu zeigen.
+
+#### 3.2.8 Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen
+
+Um mittel- und langfristige Lebensphasen zu planen und zu gestalten, ist es wichtig, persönliche, soziale und materielle Ressourcen aufzubauen und diese gezielt und selbstwirksam einzusetzen. Dazu gehören Ressourcen zur Lebens- und Laufbahngestaltung sowie Reflexionen zur physischen und psychischen Gesundheit.
+
+#### 3.2.9 Vernetzt und systemisch denken, um sozial, ökologisch und ökonomisch nachhaltig zu handeln
+
+Um komplexe lokale und globale Zusammenhänge und Abhängigkeiten und deren Wechsel- und Auswirkungen zu verstehen sowie Handlungsmöglichkeiten für eine nachhaltige Entwicklung abzuleiten, ist es wichtig, multidisziplinär und vernetzt denken und analysieren zu können.
+
+#### 3.2.10 Sich in einem sich ständig verändernden Umfeld zurechtfinden und sich an dieses anpassen
+
+Um in sich schnell wandelnden Lebenskontexten bestehen zu können, ist es wichtig, mit Veränderungen konstruktiv umgehen zu können, flexibel zu sein, sich nachhaltig zu verhalten, mobil zu sein und die Fähigkeit zur Anpassung zu stärken.
+
+#### 3.2.11 Mit Mehrdeutigkeiten umgehen
+
+Um mit Verunsicherung und Ungewissheit umgehen zu können, ist es wichtig, komplexe Situationen zu analysieren, verschiedene Perspektiven zu berücksichtigen sowie Widersprüchlichkeiten und Mehrdeutigkeiten auszuhalten.
+
+#### 3.2.12 An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen
+
+Um in interkulturellen Umgebungen gesellschaftliche Entwicklungen aktiv mitzugestalten, ist es wichtig, politische Prozesse, Interessenskonflikte von Akteursgruppen und Machtverhältnisse zu erkennen und zu analysieren sowie individuelle und kollektive Handlungsspielräume auszuloten.
+
+## 4. Lernbereich Sprache und Kommunikation
+
+Der Lernbereich Sprache und Kommunikation orientiert sich am «Gemeinsamen europäischen Referenzrahmen für Sprachen» (GER) als Grundlage. Der GER beschreibt Sprachnutzende und -lernende als in einer sozialen Welt gesellschaftlich und sprachlich-kommunikativ Handelnde, die ihren Lernprozess aktiv mitgestalten.
+
+### 4.1 Förderung
+
+Die Förderung und der Aufbau der Kompetenzen im Lernbereich Sprache und Kommunikation erfolgt themenund handlungsorientiert im Zusammenspiel mit Kompetenzen aus dem Lernbereich Gesellschaft und Schlüsselkompetenzen für lebenslanges Lernen unter Berücksichtigung des digitalen Wandels der Gesellschaft.
+
+Im allgemeinbildenden Unterricht wird sowohl mit als auch an der Sprache gearbeitet. So werden gezielt rezeptive, produktive und interaktive Sprach- und Kommunikationskompetenzen weiterentwickelt. Texttypen und Textformate, Konventionen, Normen und Sprachbewusstheit (vgl. 4.3) bilden die Grundlagen für eine differenzierte Sprach- und Kommunikationsentwicklung.
+
+### 4.2 Die Modi der Kommunikation
+
+Die Modi der Kommunikation widerspiegeln, wie Sprache im Alltag medienabhängig genutzt wird: Der Mensch hört und liest Texte in unterschiedlichen, medienabhängigen und oft multimodalen Erscheinungsformen und unterschiedlichen Kontexten für sich selbst (Rezeption) und formuliert ebenso individuell mündlich und schriftlich (Produktion). Zudem tritt er über verschiedene Medien und Ausdruckformen in Interaktion mit anderen und tauscht sich aus (Interaktion).
+
+Nachfolgend ist eine Auswahl von Sprach- und Kommunikationskompetenzen aufgelistet, die in der persönlichen, gesellschaftlichen und beruflichen Realität nützlich sind. Diese Auswahl zeigt die in der Allgemeinbildung beabsichtigte Reichweite der Sprach- und Kommunikationskompetenzen auf.
+
+#### 4.2.1 Rezeption
+
+Aus Materialien verschiedener Formate und Typen gezielt Informationen, Daten und Aussagen finden, einordnen und interpretieren
+
+##### 4.2.1.1 mündlich
+
+Hörmaterialien aus verschiedenen Medien verstehen
+
+- Informalen und formalen Gesprächen aus verschiedenen Kontexten folgen
+
+##### 4.2.1.2 audiovisuell
+
+Audiovisuelle Materialien verstehen
+
+##### 4.2.1.3 schriftlich und bildlich
+
+- Analoge und digitale lineare Texte verstehen
+- Analoge und digitale nicht-lineare Texte verstehen
+
+#### 4.2.2 Produktion
+
+Texte verschiedener Formate und Typen planen, strukturieren, produzieren oder überarbeiten
+
+##### 4.2.2.1 mündlich
+
+- faktenorientiert kommunizieren (beschreiben, erklären, berichten, erzählen, zusammenfassen, ...)
+- meinungsorientiert kommunizieren (Feedback geben, argumentieren, kommentieren, Stellung nehmen, ...)
+
+##### 4.2.2.2 schriftlich und bildlich
+
+- Faktenorientiert kommunizieren (beschreiben, erklären, zusammenfassen, protokollieren, zitieren, ...)
+- Meinungsorientiert kommunizieren (Feedback geben, argumentieren, kommentieren, Stellung nehmen, ...)
+
+##### 4.2.2.3 multimedial
+
+- Eine fakten- oder meinungsorientierte multimedia-Präsentation erstellen
+
+#### 4.2.3 Interaktion und Kollaboration
+
+Mit einer oder mehreren Personen kommunizieren, um Informationen auszutauschen oder zu einem gemeinsamen Ziel zusammenzuwirken
+
+##### 4.2.3.1 mündlich
+
+- An formalen und informalen Gesprächen aktiv teilnehmen (Informationen austauschen, verhandeln, gemeinsam beschliessen, diskutieren, debattieren, an Konfliktgespräche teilnehmen, interviewen, moderieren, an Umfragen teilnehmen, ...)
+
+##### 4.2.3.2 schriftlich
+
+- Formal und informal korrespondieren
+- Texte kooperativ erarbeiten
+
+##### 4.2.3.3 digital
+
+- An formalen und informalen Austauschen mittels Informations- und Kommunikationstechnologien aktiv teilnehmen (an Videokonferenzen teilnehmen, chatten, ...)
+- An interaktiven Umfragen teilnehmen
+- Mit Tools der künstlichen Intelligenz interagieren
+
+### 4.3. Grundlagen zur Entwicklung der Sprach- und Kommunikationskompetenzen
+
+#### Leitgedanken
+
+Sprache ist das zentrale Medium, mit dem sich der Mensch die Wirklichkeit einerseits erschliesst und anderseits aufbaut. Mittels Sprache nimmt der Mensch die Welt wahr, baut Wissen auf, handelt Arbeitsweisen und Bedeutungen aus und denkt über seine Erfahrungen nach. Der Mensch kommuniziert mit sich selbst und mit seinen Mitmenschen. Er drückt durch Sprache seine Gedanken und Empfindungen aus und versucht mit ihr, seine Umwelt zu beeinflussen. Um mit anderen in Kommunikation zu treten, gilt es nicht nur die richtige Botschaft adressatengerecht zu vermitteln, sondern auch den Mitteilungen anderer zuzuhören und diese richtig zu interpretieren sowie darauf zu reagieren. Neben der verbalen Kommunikation spielen auch die paraverbale und die nonverbale Kommunikation eine entscheidende Rolle.
+
+| Texttypen | Beispiele |
+| :--: | :--: |
+| deskriptiv (beschreibend) | Beschreibungen einer Person, eines Gegenstandes, eines Ortes, beschreibende Teile von literarischen Werken, in Reiseführern, Handbüchern, technisch-wissenschaftlichen Beschreibungen, Bildunterschriften usw. |
+| expositorisch (erklärend) | Bericht, Meldung, Fachbericht, Lehrmittel, Lexikoneintrag usw. |
+| narrativ (erzählend) | - fiktional: Geschichte, Roman, Sage, Erzählung usw. oder nichtfiktional: Protokoll, Tagebuch, Reportage, usw. |
+| argumentativ (überzeugen wollend) | - Kommentar, politische Rede, Meinungsäusserung zu einer Debatte, Leserbrief usw. |
+| normativ (vorschreibend) | Gesetzestexte, Gebrauchsanleitungen, Spielregeln usw. |
+| expressiv (Gefühle ausdrückend) | persönliche Briefe wie Kondolenzbrief, Dankesbrief usw. |
+| Textformate | Beispiele |
+| schriftlich nicht-linear | - Formular, Notiz, Tabelle, Schaubild, Grafik, Plakat usw. |
+| schriftlich linear | - Protokoll, Bericht, Dokumentation, Zusammenfassung, literarischer Text, Zeitungsartikel, Geschäftsbrief, private Korrespondenz usw. |
+| mündlich | - Radiosendung, Vorlesung, Lied, Gespräch, Interview, Telefonat usw. |
+| audiovisuell | - Fernsehsendung, Podcast, Film usw. |
+| digital | - E-Mail, Umfrage, Hypertext, Blog, Chat, mit KI generierter Text, Videokonferenz usw. |
+
+#### Konventionen, Normen, Sprachbewusstheit
+
+Kommunikative und sprachliche Konventionen und Normen anwenden können
+Situationsadäquat und adressatengerecht kommunizieren können
+Formen, Bedeutungen, Wirkungen und Wirkungsabsichten von Äusserungen erkennen können
+Sprachliche und kulturelle Unterschiede und Vielfalt anerkennen und wertschätzen können
+Konstruktiv und einfühlsam kommunizieren
+
+## 5. Lernbereich Gesellschaft
+
+Der Lernbereich Gesellschaft umfasst acht Aspekte. Jeder Aspekt entspricht einem disziplinären Blickwinkel. Bei der Behandlung einer privaten, gesellschaftlichen und beruflichen Alltagsherausforderung ergänzen sich die verschiedenen Aspekte und erlauben eine multidisziplinäre Problemlösungsbearbeitung.
+
+### 5.1 Förderung
+
+Die Förderung und der Aufbau der Kompetenzen im Lernbereich Gesellschaft erfolgt themen- und handlungsorientiert im Zusammenspiel mit Sprach- und Kommunikationskompetenzen sowie Schlüsselkompetenzen zum lebenslangen Lernen. Die Kompetenzen werden entwickelt, indem Sachwissen und Fertigkeiten aus mehreren Aspekten aufgebaut und vernetzt werden und zur Bewältigung komplexer Probleme eingesetzt werden. Der Entwicklungspfad folgt dabei einem Spiralcurriculum, welches zu einer Festigung und zu einer stetigen Vergrösserung der Transferreichweite der Kompetenzen, die aus den Aspekten des Lernbereichs Gesellschaft abgeleitet werden beitragen soll.
+
+### 5.2 Aspekte
+
+Der Lernbereich Gesellschaft umfasst folgende acht Aspekte: 1) Ethik, 2) Identität und Sozialisation, 3) Kultur, 4) Ökologie, 5) Politik, 6) Recht, 7) Technologie und 8) Wirtschaft. Sie werden nachfolgend beschrieben. Die Handlungsfelder zeigen die in der Allgemeinbildung beabsichtigte Reichweite der Kompetenzen, die aus dem Lernbereich Gesellschaft im Schullehrplan definiert werden, auf. Diese Kompetenzen lassen sich aus den acht Aspekten ableiten.
+
+#### 5.2.1 Ethik
+
+##### Leitgedanken
+
+Ethik ist die systematische und kritische Reflexion der gelebten Moral. Unter Moral versteht man vielfältige, oft implizite persönliche und gesellschaftliche Konventionen. Diese Konventionen ermöglichen im Alltag ein verantwortungsbewusstes Urteilen und Handeln. Die Ethik hinterfragt Handlungsweisen und sucht nach verallgemeinerbaren Begründungen, ethischen Prinzipien und der Idee des Guten. Wo Moral und moralische Intuition im persönlichen, gesellschaftlichen und beruflichen Handeln fragwürdig werden, soll die ethische Reflexion zur Klärung von Entscheidungen und den darin enthaltenen Werten führen.
+
+Das gesellschaftliche Angebot an moralischen Orientierungen erleben die Lernenden als vielfältig und in sich widersprüchlich. Solche Widersprüche sind oft die Ursache von inneren Konflikten. Selbstverantwortete Entscheidungen und Handlungen sind Herausforderungen. Die Lernenden entwickeln in Auseinandersetzung mit der kulturellen Tradition eigene Vorstellungen von einem gelingenden und glücklichen Leben und setzen diese Vorstellung mit sozialer Verantwortung um.
+
+Ethische Kompetenz ist eine kritische Selbstwahrnehmung der eigenen moralischen Intuitionen und Gefühle. Sie kann auf der kritischen Reflexion von gelebter Moral aufgebaut werden. Ethische Kompetenz bezieht sich nicht nur auf die heutige Lebensführung, sondern auch auf Gestaltungsfragen gesellschaftlicher Zukunft. Die Lernenden werden befähigt, Wertkonflikte zu erkennen sowie fürsorgliche und gerechte Lösungen zu entwickeln. Die Lernenden nehmen die Unterschiedlichkeit von Perspektiven und Wertorientierungen in der pluralistischen Gesellschaft wahr und lernen, in einem Prozess des Argumentierens und Aushandelns die eigene Überzeugung weiterzuentwickeln und zu vertreten.
+
+##### Handlungsfeld
+
+5.2.1.1 Die Lernenden handeln in sozialen Herausforderungen empathisch und übernehmen andere Perspektiven. Sie erkennen in moralischen Verunsicherungskontexten die eigene und fremde moralische Intuition sowie die daraus folgenden Handlungsweisen und überprüfen diese aufgrund ethischer Grundsätze.
+5.2.1.2 Die Lernenden lassen sich durch Herausforderungen im persönlichen, gesellschaftlichen und beruflichen Umfeld, in denen die Integrität und Würde von Menschen und die Erhaltung der natürlichen Umwelt gefährdet sind, zu eigenem Entscheiden und Handeln herausfordern. Sie übernehmen Verantwortung für sich selbst, für ihre Mitmenschen und einen nachhaltigen Umgang mit natürlichen Ressourcen und Energie.
+5.2.1.3 Die Lernenden beteiligen sich aktiv an der Aushandlung von moralischen Entscheiden. Sie vertreten ihre moralischen Überzeugungen fair und entwickeln sie in Auseinandersetzung mit anderen Überzeugungen und ethischen Prinzipien weiter.
+
+#### 5.2.2 Identität und Sozialisation
+
+##### Leitgedanken
+
+Der Mensch muss sich ständig der im Wandel begriffenen Welt anpassen. Dabei gestaltet er diesen Prozess aktiv mit und wird gleichzeitig auch von seiner Lebenswelt geprägt. Er ist gefordert, eine Identität zu entwickeln, die ihm Stabilität und Offenheit gegenüber seinem Umfeld und neuen Herausforderungen garantiert. Die Identität ist gekennzeichnet durch einen kontinuierlichen Weiterentwicklungsprozess und die ständig variierende Antwort auf folgende Fragen: Wer bin ich? Wer bin ich in welchen Rollen? Welches Bild habe ich von mir selbst? Welches Bild sollen die anderen von mir haben und welches haben sie tatsächlich? Was will ich werden? Bei der Konstruktion ihrer Persönlichkeit sind die Lernenden aufgefordert, diese unterschiedlichen Fragen immer wieder zu beantworten.
+
+Die Lernenden sind permanent mit Herausforderungen im persönlichen, gesellschaftlichen und beruflichen Bereich konfrontiert, die sie dazu zwingen, sich ihres eigenen Charakters bewusst zu werden, ihre eigene Persönlichkeit zu entwickeln und sich von anderen abzugrenzen. Die Identität bildet sich also durch einen aktiven Konfrontationsprozess mit dem natürlichen und sozialen Umfeld, in der realen wie in der virtuellen Welt sowie auf lokaler, regionaler und globaler Ebene. In diesem Zusammenhang spielen die Berufswelt und die Kontakte mit anderen soziokulturellen Milieus eine entscheidende Rolle in der Sozialisation.
+
+Bei der Entwicklung ihrer körperlichen und auch psychischen Identität sind die Lernenden auf der Suche nach einem Lebensstil, der ihrer persönlichen Identität eigen ist. Sie kultivieren persönliche Ausdrucksformen und distanzieren sich vom Rest der Gesellschaft. Sie probieren verschiedene Lebensformen aus und entdecken ihren einzigartigen Charakter, ihre Zugehörigkeit zur sozialen Gruppe und ihre Gemeinsamkeiten mit anderen Gruppen oder Individuen.
+Folglich entwickelt und entfaltet sich die Identität durch eine nach und nach erfolgende Übernahme von Rollen in den verschiedensten Lebensbereichen. Diese Rollen werden im Laufe des Sozialisationsprozesses erlernt und weiterentwickelt. Dieser Prozess - der das ganze Leben dauert - hilft ihnen, sich zu verantwortungsvollen und reifen Persönlichkeiten zu entwickeln.
+
+##### Handlungsfeld
+
+5.2.2.1 In ihrer Suche nach einem erfüllten Leben, nach Anerkennung und Zugehörigkeit zu einer sozialen Gruppe erkunden und entwickeln die Lernenden ihre Persönlichkeit. Dabei reflektieren sie mögliche Prägungen durch ihren eigenen Hintergrund.
+5.2.2.2 Sie achten auf ihre psychische und physische Gesundheit, erkennen Gewaltformen und Diskriminierung, können angemessen darauf reagieren und sich Hilfe holen. Sie beachten die legitimen Bedürfnisse anderer und respektieren diese.
+5.2.2.3 In ihrer eigenen Existenz sowie in den sozialen und beruflichen Kontexten erkunden die Lernenden identitätsstiftende Räume und treffen dort persönliche Entscheidungen. Diese tragen dazu bei, ihre Rollen in der Gesellschaft und in der Arbeitswelt zu finden und zu festigen. Auch stellen sie diese Rollen durch den Vergleich mit anderen möglichen Entscheidungen zur Diskussion.
+5.2.2.4 Die Lernenden anerkennen andere kulturelle Realitäten in einem Umfeld, in dem jeder und jede das Recht auf Andersartigkeit und die Wahrung der Grundrechte berücksichtigen muss. Sie lassen deren Existenz gelten und bewerten sie mit Offenheit und Toleranz ihrem eigenen Lebensstil entsprechend.
+
+#### 5.2.3 Kultur
+
+##### Leitgedanken
+
+Kultur betrifft alles, was vom Menschen geschaffen worden ist. Sie umfasst die ganze Breite von Ausdrucksformen von der Alltagskultur bis zur Kunst, die mit Einsatz einer breiten Palette von Mitteln (inklusive digitalen Mitteln) generiert werden. Die Auseinandersetzung mit der heutigen Vielfalt von Lebenswelten und Kulturen unter Anspruch auf Gleichberechtigung stellt eine besondere Herausforderung dar. Die Auseinandersetzung mit Kunst fordert auf, sich mit eigenen und fremden Kulturen zu befassen und für diese ein Verständnis zu entwickeln.
+
+Die Lernenden werden täglich mit vielfältigen kulturellen Ausdrucksformen konfrontiert. Die Beschäftigung mit Kultur ist deshalb ein Dialog zwischen Wahrnehmungen, Interpretationen und Sichtweisen sowie eine Auseinandersetzung mit Sinn und Orientierung. Kulturelles Erbe ist etwas Dynamisches und Geschichtliches. Die Lernenden werden von ihm geprägt und sind Mitwirkende am kulturellen Prozess.
+
+Die Lernenden nehmen im Umgang mit Kultur eigene Wahrnehmungen und Reaktionsweisen wahr, finden dafür Ausdrucksmöglichkeiten und erweitern im Dialog mit anderen Menschen ihre Vorstellungen von Wirklichkeit. Sie erkennen in der Beschäftigung mit Kultur grundlegende Themen des Lebens und setzen sich mit diesen auseinander.
+
+##### Handlungsfeld
+
+5.2.3.1 Die Lernenden entwickeln ein Bewusstsein für die gestaltete und ästhetische Welt und verstehen verschiedene kulturelle Ausdrucksmittel, die durch die jeweilige Zeit geprägt sind. Sie erkennen die Ausdrucksformen der Kultur und deren Auswirkung auf ihr Lebensumfeld.
+5.2.3.2 Die Lernenden nehmen in der Beschäftigung mit Kultur grundlegende Themen des Lebens wahr und setzen sich mit diesen auseinander.
+5.2.3.3 Die Lernenden reflektieren im Umgang mit Werken der Kunst eigene Wahrnehmungen, finden dafür Ausdrucksmöglichkeiten und erweitern im Dialog mit anderen ihre Vorstellungen von Wirklichkeit.
+5.2.3.4 Die Lernenden erproben ihre eigenen Gestaltungs- und Ausdrucksfähigkeiten und erweitern sie.
+
+#### 5.2.4 Ökologie
+
+##### Leitgedanken
+
+Die Ökologie ist die Lehre von den Beziehungen und Wechselwirkungen zwischen den Organismen untereinander und zu ihrer Umwelt. Die Ökologie vernetzt Erkenntnisse mehrerer Wissenschaftszweige.
+
+Als Mitgestaltende ihrer Umwelt werden Lernende im persönlichen, gesellschaftlichen und beruflichen Umfeld mit ökologischen Herausforderungen auf lokaler, regionaler und globaler Ebene konfrontiert. Herausforderungen wie Bevölkerungswachstum, Überalterung, wachsende Ungleichheit und Armut, ein steigender Ressourcen- und Energieverbrauch, bedrohte Biodiversität und Ernährungssicherheit sowie Auswirkungen des Klimawandels verlangen nach gesamtgesellschaftlichen Lösungsansätzen. Eine nachhaltige, zukunftsbeständige Entwicklung vermag die Bedürfnisse der heutigen Generation zu decken, ohne die Möglichkeiten künftiger Generationen zu beeinträchtigen.
+
+Ökologische Kompetenz wird durch die Analyse von und der Auseinandersetzung mit ökologischen Herausforderungen aufgebaut. Die Lernenden werden befähigt, Kriterien zu entwickeln, um in ihrem persönlichen, gesellschaftlichen und beruflichen Umfeld ökologisch verantwortlich zu handeln. Auf dieser Grundlage können sie nachhaltiges Handeln, kontrovers diskutierte gesellschaftliche Fragen und globale Herausforderungen einordnen und beurteilen.
+
+##### Handlungsfeld
+
+5.2.4.1 Die Lernenden analysieren ihr eigenes Verhalten und beurteilen Eingriffe in die Natur im persönlichen, gesellschaftlichen und beruflichen Umfeld unter dem Blickwinkel ökologisch nachhaltiger Entwicklung.
+5.2.4.2 Die Lernenden formulieren Lösungsansätze bezüglich der ökologisch nachhaltigen Nutzung von natürlichen Ressourcen und dem effizienten Einsatz von Energie im persönlichen, gesellschaftlichen und beruflichen Umfeld. Sie erkennen, dass nachhaltiges Verhalten die Umweltqualität verbessert, bzw. die zunehmende Umweltbelastung reduziert.
+5.2.4.3 Die Lernenden analysieren individuelle, gesellschaftliche und berufliche Verhaltensmuster im Umgang mit Ressourcen und Energie an konkreten Beispielen wie Konsum, Mobilität und Ernährung. Sie entwickeln nachhaltige Handlungsmöglichkeiten.
+
+#### 5.2.5 Politik
+
+##### Leitgedanken
+
+Politik ist die Gesamtheit aller Aktivitäten zur Herstellung gesamtgesellschaftlich verbindlicher Regelungen und/oder am Gemeinwohl orientierter und der ganzen Gesellschaft zugutekommender Entscheidungen. In Demokratien sind diese Aktivitäten von öffentlichen Aushandlungsprozessen geprägt. Darin spielen soziale, kulturelle, ökonomische und ökologische Kräfte eine Rolle.
+
+Zum demokratischen Charakter unserer Gesellschaft gehört, dass politische Entscheidungen durch Prozesse herbeigeführt werden, die rechtsstaatlichen Prinzipien folgen. Die Bürgerinnen und Bürger sind dabei aufgerufen, ihr Stimm- und Wahlrecht auszuüben. Die Ergebnisse und Umsetzungen der politischen Entscheidungen bestimmen die Zukunft unserer Gesellschaft. Da die Lernenden von diesen Entscheidungen betroffen sein werden, sollen sie in der Lage sein, sich politisch zu beteiligen.
+
+Die persönlichen, gesellschaftlichen und beruflichen Lebensbereiche sind durch gesamtgesellschaftliche und/oder gemeinschaftliche Regelungen geprägt. Durch die Einführung in diese Regelungen und den Abgleich mit eigenen Bedürfnissen lernen die Lernenden den Nutzen gemeinschaftlicher Regelungen kennen und/oder gegebenenfalls Veränderungen zu initiieren. Sie lernen einzuschätzen, welche Vorteile sich für sie aus einer politischen Beteiligung ergeben könnten, und mit welchen Mitteln sich dies umsetzen liesse.
+
+##### Handlungsfeld
+
+5.2.5.1 Die Lernenden analysieren aktuelle politische Fragen und Themen und identifizieren die Interessen und Werte der betroffenen Personen sowie die für deren Durchsetzung verwendeten Strategien. Sie analysieren dabei Chancen und Risiken der Strategien und erkennen Beeinflussung bzw. Manipulationsmöglichkeiten. Darüber hinaus setzen sie sich mit Menschenrechten und demokratischen Werten wie Freiheit und Gleichheit, Gerechtigkeit, Nachhaltigkeit und Gemeinwohl auseinander.
+5.2.5.2 Die Lernenden werden sich ihrer Meinungen und Werte zu politischen Themen bewusst. Sie entwickeln ihr politisches Verhalten im Kontakt mit den Meinungen und Werten anderer. Sie sind in der Lage, diese in den politischen Kontext einzuordnen. Sie entwickeln ihre Einstellungen weiter, um sich einen eigenen ethischen Bezugsrahmen zu schaffen. Bei der Einschätzung von politischen Fragen sind die Lernenden in der Lage, eigene und fremde Interessen wahrzunehmen und auf dieser Grundlage ihre Position argumentativ zu begründen.
+5.2.5.3 Die Lernenden verstehen die Organisation und die Funktionsweise der drei Ebenen der nationalen Politik (Gemeinde, Kanton und Bund) sowie die Funktion von supranationalen Organisationen in Europa und weltweit. Sie erkennen die ihnen angebotenen Möglichkeiten zur Teilnahme am politischen Leben und entwickeln Fähigkeiten, diese verantwortungsvoll zu nutzen.
+
+#### 5.2.6 Recht
+
+##### Leitgedanken
+
+Das Recht ist ein komplexes, historisch gewachsenes soziales System, das die Verhaltensregeln in einer Gesellschaft festlegt. Diese sind das Ergebnis eines gesellschaftlichen und politischen Prozesses und demnach wandlungsfähig. Das Recht bezieht seine Legitimation daraus, dass es sich an den Werten und Gepflogenheiten der Gesellschaft orientiert. Das Recht regelt die Beziehungen der Individuen untereinander, der Individuen zum Staat, in dem sie leben, sowie der Staaten untereinander.
+
+Die Gesellschaft, in der die Lernenden leben, definiert juristische Regeln, die Rechte und Pflichten beinhalten. Durch das Verständnis dieser Regeln sollen die Lernenden in der Lage sein, ihr Verhalten zu steuern und ihr Leben selbstständig zu bewältigen. Die aktuelle Komplexität der Rechtstechniken bewirkt jedoch, dass die Lösung von Problemen dieser Art häufig Spezialistinnen und Spezia-listen vorbehalten bleibt. Deshalb ist es wichtig, dass die Lernenden wissen, an wen sie sich gegebenenfalls wenden können, um ein juristisches Problem zu lösen.
+
+Das Verhalten der Lernenden wird von rechtlichen Regeln bestimmt, unabhängig davon, in welchem persönlichen, gesellschaftlichen oder beruflichen Umfeld sie sich entwickeln. Die Art und Weise, den Lernenden das Recht zu vermitteln, muss von ihren persönlichen Fragestellungen ausgehen. Sie sollen dabei die Konsequenzen des Rechts auf ihr Leben einschät-
+
+zen lernen. Die Lernenden beurteilen juristische Aspekte verschiedener Herausforderungen und bestimmen mögliche Konsequenzen ihres Handelns. Dadurch können sie den Nutzen, die Auswirkungen und den Sinn einer Regel ein-schätzen. Sie verstehen damit die Funktionsweise des Rechtssystems in der Gesellschaft.
+
+##### Handlungsfeld
+
+5.2.6.1 Die Lernenden verstehen die Funktionsweise und die Mechanismen der Institutionen sowie die juristischen Instrumente der Gesellschaft. Sie erkennen deren Einfluss auf die Gesellschaft.
+5.2.6.2 Die Lernenden verstehen die gesellschaftsrelevanten juristischen Regeln. Sie identifizieren die diesen Regeln zugrunde liegenden Werthaltungen und Denkweisen und beurteilen deren Bedeutung für die Gesellschaft, in der sie leben, auch unter historischer Perspektive.
+5.2.6.3 Die Lernenden identifizieren, rekonstruieren und interpretieren wichtige juristischen Informationen in Konfliktsituationen. Sie entwickeln ihre Argumentation, um die Herausforderung zu beurteilen und entscheiden, ob es notwendig ist, eine Spezialistin oder einen Spezialisten beizuziehen.
+5.2.6.4 In juristisch bedeutsamen Herausforderungen unterscheiden die Lernenden zwischen den Interessen der beteiligten Parteien und arbeiten heraus, wer von der Anwendung des Rechts betroffen ist. Sie greifen auf juristische Normen zurück, um ihre Interessen zu schützen und sozial akzeptable Lösungen für die bestehenden Konflikte zu finden.
+
+#### 5.2.7 Technologische und digitale Transformation
+
+##### Leitgedanken
+
+Technologie umfasst Methoden und Verfahren, technische Mittel in einem bestimmten Anwendungsgebiet einzusetzen, um die Lebensgrundlagen zu sichern, Arbeit zu erleichtern oder Informations- und Kommunikationseinrichtungen bereitzustellen. Technik im engeren Sinne befasst sich mit den Werkzeugen und Einrichtungen, die dazu dienen, Entdeckungen, Erfindungen und wissenschaftliche Erkenntnisse im Dienste der Menschen produktiv zu nutzen. Technischer Fortschritt eröffnet Chancen, birgt Risiken, schafft Abhängigkeiten und wirft grundsätzliche Fragen nach dem Machbaren und Wünschbaren auf.
+
+Sowohl im persönlichen und gesellschaftlichen Bereich als auch an ihrem Arbeitsplatz setzen sich die Lernenden mit der technologischen Entwicklung in ihrer ganzen Vielfalt auseinander (Biotechnologie, Werkstofftechnologie, Informations- und Kommunikationstechnologie, usw.). Dieser Wandel bedingt, dass die Lernenden ihre Kompetenzen regelmässig überprüfen und anpassen. Technologischer Fortschritt - z.B. die rasante Entwicklung der Informations- und Kommunikationstechnologien, insbesondere der Künstlichen Intelligenz in den verschiedensten Bereichen - stellt eine besondere Herausforderung dar.
+
+##### Handlungsfeld
+
+5.2.7.1 Die Lernenden analysieren den Einfluss von aktuellen Technologien im persönlichen, gesellschaftlichen und beruflichen Umfeld und beurteilen deren Auswirkungen auf der individuellen Ebene sowie unter dem Blickwinkel einer nachhaltigen Entwicklung. Sie erkennen sowohl die Chancen und die sinnvolle und arbeitserleichternde Nutzung als auch die damit verbundenen Risiken und Abhängigkeiten. Sie wählen situativ den zweckmässigen und verantwortungsbewussten Einsatz technischer Mittel und technologischer Produkte aus persönlicher und beruflicher Sicht und berücksichtigen dabei Schutz- und Sicherheitsaspekte.
+5.2.7.2 Die Lernenden nutzen Informations- und Kommunikationstechnologien situativ zweckmässig, effizient und verantwortungsbewusst. Sie setzen sich mit Daten und Informationen, mit Systemen und Vernetzung, mit Informatikanwendungen und Medien sowie Informations- und Kommunikationstechnologien und deren Auswirkungen auf Individuum und Gesellschaft auseinander. Dabei analysieren die Lernenden auch Chancen und Risiken von künstlicher Intelligenz und nutzen die entsprechenden Mittel und Anwendungsmöglichkeiten sinnvoll und unter Berücksichtigung der Chancen wie Wissensidentifikation oder Effizienz sowie deren Risiken wie Falschinformation (Fake News).
+
+#### 5.2.8 Wirtschaft
+
+##### Leitgedanken
+
+Unter dem Aspekt Wirtschaft wird der Umgang mit knappen Ressourcen und unbegrenzten Bedürfnissen analysiert. Produktion und Konsum stehen demnach im Zentrum. Das umfassende Konzept einer nachhaltigen Entwicklung bietet hierfür wegweisende Lösungsansätze. Die Erklärung wirtschaftlicher Zusammenhänge und das Prognostizieren von Entwicklungen erfolgt einerseits aus Sicht der verschiedenen Wirtschaftssubjekte und andererseits mit Blick auf Volkswirtschaften als Ganzes. Die Veränderbarkeit von ökonomischen Modellen aufgrund sich wandelnder äusserer und innerer Einflussfaktoren eines Wirtschaftssystems wird sichtbar und nachvollziehbar gemacht.
+
+Mit dem Beginn einer beruflichen Grundbildung sind die Lernenden gefordert, sich in einer von der Wirtschaft geprägten Arbeitswelt zurechtzufinden. Sie erleben diese Arbeitswelt als Berufslernende an ihren Lernorten. Daneben werden sie in ihren unterschiedlichen Rollen als Wirtschaftssubjekte mit anspruchsvollen Aufgaben konfrontiert, die Ziel- und Rollenkonflikte sowie unterschiedliche Werthaltungen sichtbar machen. Diese Erkenntnisse beeinflussen ihre individuellen Entscheidungen sowie ihre persönliche Laufbahnplanung.
+
+Wirtschaftliche Kompetenz baut auf der Analyse von wirtschaftlichen Vorgängen auf und befähigt die Lernenden, in ihrem persönlichen, gesellschaftlichen und beruflichen Umfeld bewusst und adäquat zu handeln. In der Auseinandersetzung mit individuellen, unternehmerischen, nationalen oder internationalen Wirtschaftsfragen erweitern die Lernenden ihren Sachverstand. Dadurch vermögen sie persönliche Gestaltungsmöglichkeiten, kontroverse gesellschaftliche Fragen sowie globale Herausforderungen auf der Basis von wirtschaftlichen Argumenten einzuordnen und zu beurteilen.
+
+##### Handlungsfeld
+
+5.2.8.1 Die Lernenden treffen als Konsumentinnen und Konsumenten mit ihren knappen Ressourcen eine Wahl, welche Bedürfnisse sie befriedigen wollen und können. Sie nutzen geeignete Instrumente, um mit den eigenen Mitteln selbstverantwortlich und ökonomisch nachhaltig umzugehen.
+5.2.8.2 Die Lernenden untersuchen das Zusammenwirken unterschiedlicher Akteure im wirtschaftlichen Geschehen, schätzen die eigene wirtschaftliche Lage ein und können ihre Interessen in verschiedenen Rollen (Arbeitnehmende, Mieterinnen und Mieter, Steuerpflichtige u.a.) artikulieren.
+5.2.8.3 Die Lernenden analysieren die Erwartungen verschiedener Anspruchsgruppen an ein Unternehmen und die daraus entstehenden Zielkonflikte. Sie beurteilen Auswirkungen von wirtschaftlichen Entwicklungen auf die eigene Person, das eigene Unternehmen, die eigene Branche und die eigene Laufbahngestaltung.
+5.2.8.4 Die Lernenden analysieren an konkreten Beispielen das ökonomische Grundproblem knapper Ressourcen. Sie beurteilen Auswirkungen von Preisbildung, Marktmechanismen und Klimawandel, von staatlichem Handeln sowie internationalen Verfechtungen und Abhängigkeiten.
+
+## 6. Qualifikationsbereich Allgemeinbildung
+
+Der Qualifikationsbereich Allgemeinbildung ist ein Qualifikationsbereich des Qualifikationsverfahrens mit Abschlussprüfung in den beruflichen Grundbildungen. Er ist in Abschnitt 3 der Verordnung über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung geregelt.
+
+Im Qualifikationsbereich Allgemeinbildung weisen die Kandidatinnen und Kandidaten nach, dass sie Schlüsselkompetenzen für lebenslanges Lernen, Sprach- und Kommunikationskompetenzen sowie Kompetenzen aus dem Lernbereich Gesellschaft erworben haben. Sowohl die Leistungsnachweise während der Semester, als auch die Schlussarbeit und die Schlussprüfung sind entsprechend zu konzipieren. Die Schlussarbeit und die Schlussprüfung sind so aufeinander abzustimmen, dass sie zusammen die aus dem Rahmenlehrplan abgeleiteten Kompetenzen repräsentativ abbilden.
+
+### 6.1 Semesterzeugnisnote
+
+Die Leistungen der Lernenden im allgemeinbildenden Unterricht werden am Ende jedes Semesters mit allgemeinbildendem Unterricht von der Berufsfachschule in einem Zeugnis in Form von Noten ausgewiesen. Während eines Semesters werden Leistungsbewertungen durchgeführt, welche die Lernbereiche gleichgewichtet abbilden. Der Schullehrplan bestimmt Form und Periodizität der Leistungsbewertungen. Für jeden der beiden Lernbereiche wird aus den während eines Semesters erzielten Noten eine Semesterzeugnisnote generiert. Die Semesterzeugnisnote für den allgemeinbildenden Unterricht ergibt sich aus dem Mittel dieser beiden Noten.
+
+Die Leistungsbewertungen werden mit kompetenzorientierten, möglichst lernbereichsübergreifenden Bewertungsformen generiert, wobei auch Schlüsselkompetenzen für lebenslanges Lernen mitberücksichtigt werden. Bei einer lernbereichsübergreifenden Leistungsbewertung werden die beiden Lernbereiche jedoch separat benotet und somit grundsätzlich zwei Noten ermittelt.
+
+Die Berechnung der Semesterzeugnisnote ist in Artikel 8 der Verordnung über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung geregelt.
+
+### 6.2 Schlussarbeit
+
+Die Schlussarbeit ist in den Artikeln 9 und 10 der Verordnung über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung geregelt.
+
+Die Schlussarbeit umfasst die Erstellung eines Produkts und erfolgt unter Begleitung. Sie findet im letzten Jahr des allgemeinbildenden Unterrichts grösstenteils während des Unterrichts statt. Sie kann in verschiedenen Formen, z.B. auch multimedial, sowie einzeln oder im Team umgesetzt werden. Das Thema und die Ziele der Schlussarbeit beziehen sich auf eine private, gesellschaftliche oder berufliche Herausforderung. Sie werden so gewählt, dass eine gesellschaftsrelevante Fragestellung behandelt wird. Die Form des Produkts wird im Zusammenhang mit der Themenwahl und der Aufgabenbeschreibung der Schlussarbeit definiert.
+
+Zur Schlussarbeit gehört neben der Erarbeitung des Produkts auch eine Präsentation. Die Präsentation umfasst sowohl den Erarbeitungsprozess als auch das Produkt. Die Prüfungsexpertinnen und Prüfungsexperten stellen dazu Fragen.
+
+Nachzuweisen sind:
+
+- bei dreijährigen beruflichen Grundbildungen mindestens drei Schlüsselkompetenzen sowie Kompetenzen aus mindestens zwei Aspekten des Lernbereichs Gesellschaft und Sprach- und Kommunikationskompetenzen aus mindestens vier Modi der Kommunikation unter Berücksichtigung von Konvention, Norm und Sprachbewusstheit;
+- bei vierjährigen beruflichen Grundbildungen mindestens drei Schlüsselkompetenzen sowie Kompetenzen aus mindestens drei Aspekten des Lernbereichs Gesellschaft und Sprach- und Kommunikationskompetenzen aus mindestens vier Modi der Kommunikation unter Berücksichtigung von Konvention, Norm und Sprachbewusstheit;
+
+- bei Personen, die den Qualifikationsbereich wiederholen ohne den Berufsfachschulunterricht erneut zu besuchen oder die ausserhalb eines geregelten Bildungsgangs zum Qualifikationsverfahren mit Abschlussprüfung der zweijährigen beruflichen Grundbildung zugelassen werden, mindestens zwei Schlüsselkompetenzen sowie Kompetenzen aus mindestens zwei Aspekten des Lernbereichs Gesellschaft und Sprach- und Kommunikationskompetenzen aus mindestens drei Modi der Kommunikation unter Berücksichtigung von Konvention, Norm und Sprachbewusstheit.
+
+### 6.3 Schlussprüfung
+
+Die Schlussprüfung ist in den Artikeln 11 und 12 der Verordnung über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung geregelt.
+
+Die Schlussprüfung wird einzeln absolviert. Sie besteht aus lernbereichsübergreifenden, kompetenzorientierten Aufgaben. Sie findet gegen Ende der beruflichen Grundbildung mündlich oder schriftlich statt. Sie überprüft die Fähigkeit, Zusammenhänge zu erkennen und komplexe private, gesellschaftliche oder berufliche Herausforderungen zu analysieren und zu beurteilen.
+
+Nachzuweisen sind:
+
+- bei dreijährigen beruflichen Grundbildungen mindestens zwei Schlüsselkompetenzen sowie Kompetenzen aus mindestens zwei Aspekten des Lernbereichs Gesellschaft und Sprach- und Kommunikationskompetenzen aus mindestens zwei Modi der Kommunikation unter Berücksichtigung von Konvention, Norm und Sprachbewusstheit;
+- bei vierjährigen beruflichen Grundbildungen mindestens zwei Schlüsselkompetenzen sowie Kompetenzen aus mindestens drei Aspekten des Lernbereichs Gesellschaft und Sprach- und Kommunikationskompetenzen aus mindestens zwei Modi der Kommunikation unter Berücksichtigung von Konvention, Norm und Sprachbewusstheit.
+
+## 7. Schullehrplan
+
+### 7.1 Konzeption
+
+Der vorliegende Rahmenlehrplan für die Allgemeinbildung wird in den Kantonen durch Schullehrpläne umgesetzt. Die Schullehrpläne sind Instrumente der Steuerung und Qualitätssicherung zur Umsetzung des allgemeinbildenden Unterrichts in den Berufsfachschulen.
+
+Der Schullehrplan legt die Lerninhalte fest und enthält Ausführungsbestimmungen zum Qualifikationsverfahren im Qualifikationsbereich Allgemeinbildung:
+
+- er organisiert zeitlich, pädagogisch und didaktisch den Aufbau und die Förderung der Schlüsselkompetenzen für lebenslanges Lernen, der Sprach- und Kommunikationskompetenzen und der Kompetenzen aus dem Lernbereich Gesellschaft;
+- er legt die Themen fest, entlang welcher der Unterricht gestaltet wird;
+- er legt die Lerninhalte der beiden Lernbereiche fest, die in Bezug auf jedes Thema behandelt und geprüft werden und welche Schlüsselkompetenzen dabei gefördert und gefestigt werden;
+- er regelt die Planung, Durchführung und Bewertung des Qualifikationsbereichs Allgemeinbildung sowie die zugelassenen Hilfsmittel, insbesondere den Umgang mit künstlicher Intelligenz.
+
+Dabei berücksichtigt der Schullehrplan insbesondere:
+
+- die unterschiedlichen Voraussetzungen der Lernenden;
+- die Stundendotation in den zwei-, drei- und vierjährigen beruflichen Grundbildungen;
+- die Möglichkeiten der Kooperation und Koordination mit dem Unterricht in den Berufskenntnissen und der Ausbildung an den anderen Lernorten;
+- dass alle Schlüsselkompetenzen, Sprach- und Kommunikationskompetenzen sowie Kompetenzen aus dem Lernbereich Gesellschaft über mehrere Themen in verschiedenen Konstellationen bewusst entwickelt und gefördert werden. Ein spiralförmiges Curriculum - das sowohl formative wie summative Nachweise von kompetentem Handeln enthalten kann - macht dies sichtbar.
+
+### 7.2 Themen
+
+Der Aufbau der Kompetenzen erfolgt entlang von Themen. Ein Thema gestaltet eine Unterrichtseinheit. Diese umfasst mehrere Lektionen. Die Themen nehmen Bezug auf die persönliche, gesellschaftliche und berufliche Realität der Lernenden. Die Themenwahl orientiert sich an der Aktualität. Sie ist aufgrund der spezifischen Bedürfnisse der Regionen und Berufsfelder frei. Die Berücksichtigung des Wandels in der Wirtschaft und der Gesellschaft ist bei der Behandlung der Themen im Schullehrplan von entscheidender Bedeutung.
+
+In den Themen werden ausgewählte Lerninhalte aus den beiden Lernbereichen miteinander verknüpft aufgebaut und geprüft. Dabei werden ausgewählte Schlüsselkompetenzen bewusst mitgefördert und gefestigt. Der Schullehrplan macht die Verknüpfung der ausgewählten Schlüsselkompetenzen und den Lerninhalten aus den Lernbereichen sichtbar.
+
+Jedes Thema folgt einer Leitidee. Diese begründet das Thema, legt die Auswahl der Schlüsselkompetenzen fest und bestimmt die Kompetenzen aus dem Lernbereich Sprache und Kommunikation und die Kompetenzen aus dem Lernbereich Gesellschaft.
+
+### 7.3 Differenzierung
+
+Die Differenzierung in den Schullehrplänen erfolgt für zwei-, drei- und vierjährige berufliche Grundbildungen grundsätzlich:
+
+- formal über die Stundendotation,
+- inhaltlich durch die getroffene Auswahl der Schlüsselkompetenzen, der Sprach- und Kommunikationskompetenzen und der Kompetenzen aus dem Lernbereich Gesellschaft und deren Verknüpfung.
+
+Die Differenzierung im Lernbereich Sprache und Kommunikation erfolgt über die gezielte Auswahl der Sprachund Kommunikationskompetenzen resp. Lerninhalte. Dabei sind die zentralen Bestimmungsfaktoren für den Schwierigkeitsgrad von Sprachhandlungsaufgaben wie Lernziel, Komplexität des Sprachmaterials, Aufgabenstellungen und die Sprachhandlungsbedingungen (Zeit, Hilfsmittel für den Aufbau von Sprachhandlungsfähigkeiten [Scaffolds] und Übungsmöglichkeiten) dem Lernniveau anzupassen.
+
+Die Differenzierung im Lernbereich Gesellschaft erfolgt durch die gezielte Auswahl der aspektbezogenen Kompetenzen resp. Lerninhalte und deren Verknüpfung in den Themen. Dabei sind die zentralen Bestimmungsfaktoren für den zu erreichenden Schwierigkeitsgrad des kompetenten Handelns wie die Komplexität der Inhalte, die Art der Aufgabenstellung sowie die Lernbedingungen (Zeit, Übungsmöglichkeiten, gewährte Hilfestellungen und geforderte Selbstständigkeit) dem Lernniveau anzupassen.
+
+Bei den zweijährigen beruflichen Grundbildungen müssen bei der Festlegung von Schullehrplanthemen je Thema mindestens zwei Schlüsselkompetenzen bewusst gefördert sowie Lerninhalte aus mindestens zwei Aspekten und aus mindestens einem Sprachmodus berücksichtigt werden. Dabei sollen bis zum Ende der beruflichen Grundbildung alle Schlüsselkompetenzen und Kompetenzen aus allen acht Aspekten aufgebaut worden sein. Aus dem Lernbereich Sprach- und Kommunikationskompetenzen sind schwerpunktmässig Kompetenzen aus den Sprachmodi Rezeption mündlich und schriftlich sowie Produktion und Interaktion mündlich zu fördern. Dies geschieht jeweils unter Berücksichtigung von Konventionen und Sprachbewusstheit.
+
+Bei den dreijährigen beruflichen Grundbildungen müssen bei der Festlegung von Schullehrplanthemen je Thema mindestens drei Schlüsselkompetenzen bewusst gefördert sowie Lerninhalte aus mindestens drei Aspekten sowie aus drei Sprachmodi berücksichtigt werden. Am Ende der Lehrzeit sollen alle Schlüsselkompetenzen sowie Kompetenzen aus allen Sprachmodi unter Berücksichtigung von Konvention, Normen und Sprachbewusstheit und Kompetenzen aus allen acht Aspekten aufgebaut worden sein.
+
+Bei den vierjährigen beruflichen Grundbildungen müssen bei der Festlegung von Schullehrplanthemen je Thema mindestens vier Schlüsselkompetenzen bewusst gefördert sowie Lerninhalte aus mindestens vier Aspekten sowie aus drei Sprachmodi berücksichtigt werden. Am Ende der Lehrzeit sollen alle Schlüsselkompetenzen sowie Kompetenzen aus allen Sprachmodi unter Berücksichtigung von Konvention, Normen und Sprachbewusstheit und Kompetenzen aus allen acht Aspekten aufgebaut worden sein.
+
+## 8. Schlussbestimmungen
+
+### 8.1 Aufhebung des bisherigen Rahmenlehrplan
+
+Der Rahmenlehrplan für den allgemeinbildenden Unterricht in der beruflichen Grundbildung vom Bundesamt für Berufsbildung und Technologie (BBT) vom 27. April 2006 wird aufgehoben.
+
+### 8.2 Übergangsbestimmungen
+
+Die Übergangsbestimmungen sind in Artikel 15 der Verordnung über Mindestvorschriften für die Allgemeinbildung in der beruflichen Grundbildung geregelt.
+
+### 8.3 Inkrafttreten
+
+Der Rahmenlehrplan für die Allgemeinbildung in der beruflichen Grundbildung tritt am 1. Januar 2026 in Kraft.
+
+**9. April 2025**
+Staatssekretariat für Bildung, Forschung und Innovation:
+
+Martina Hirayama
+Staatssekretärin
+
+## Anhang
+
+### Berücksichtigung des Wandels
+
+Die Allgemeinbildung in der beruflichen Grundbildung hat auch die Aufgabe, auf die Auseinandersetzung mit globalen Entwicklungen vorzubereiten. In diesem Sinne dient sie der nachhaltigen Entwicklung, welche das Ziel verfolgt, gesellschaftliche Solidarität und wirtschaftliche Leistungsfähigkeit innerhalb der Belastbarkeitsgrenzen der Erde zu ermöglichen.
+
+Im Folgenden werden einige, nicht abschliessende Beispiele von globalen Entwicklungen erwähnt. Es ist zu berücksichtigen, dass sie miteinander verbunden sind, sich gegenseitig beeinflussen und sich laufend weiterentwickeln.
+
+#### Umweltkrisen
+
+Ressourcenverknappung, Klimawandel und Rückgang der Artenvielfalt sind aktuelle Themen, die immer mehr Individuen dazu bringen, umweltbewusstes Verhalten als eine Selbstverständlichkeit zu betrachten. Diese Entwicklung prägt eine allumfassende, neue Wertvorstellung, in der Nachhaltigkeit und Umweltbewusstsein nicht mehr nur individuelle Trends sind, sondern zu einer gesellschaftlichen Bewegung werden. Werte wie Achtsamkeit und Lebensqualität beeinflussen Kaufentscheidungen, Unternehmensstrategien und die Handlungsmoral. Unternehmen passen sich an, indem sie beispielsweise auf ökologische Landwirtschaft, erneuerbare Energien und nachhaltigen Tourismus setzen. Es entsteht die Perspektive einer Sinn-Ökonomie, in der ökologische und soziale Werte wie Gemeinwohl und Gesundheit wichtiger werden. Die Idee der Kreislaufwirtschaft, in der Ressourcen regenerativ genutzt werden, gewinnt an Bedeutung. Grüne Zukunftstechnologien spielen ebenfalls eine wichtige Rolle und versprechen nachhaltige Investitionen und Konsum.
+
+#### Demographische Transformation
+
+Migration, Alterung der Bevölkerung sowie Wachstum der Bevölkerung sind Perspektiven, die sichtbare Veränderungen der Gesellschaft mit sich bringen. Die Zuwanderung in die Schweiz und die daraus resultierende herkunftsmässige Vielfalt der Bevölkerung führt zu einer Verstärkung der kulturellen und sozialen Heterogenität und damit zu Veränderungen am Arbeitsplatz, in der Schule und im Freizeitangebot. Mit der rasanten Zunahme von Online-Angeboten, Heimarbeit und Pendelverbindungen sowie der Suche nach Lebensqualität werden ländliche Regionen «städtischer». Mit der Suche nach Lebensqualität und Nachhaltigkeit entwickeln sich auch die Verhaltensmuster hin zu mehr Gesundheitsbewusstsein. Die Auswirkungen einer wesentlich höheren Lebenserwartung stellen die Gesellschaft vor Herausforderungen. Zugleich bieten sich auch Chancen für die Entwicklung von innovativen gesellschaftlichen Modellen und das Entstehen von neuen soziokulturellen Werten.
+
+#### Vielfalt und Individualität in einer vernetzten Gesellschaft
+
+Die Geschlechterrollen verlieren an Bedeutung. Die Veränderung des Rollenmusters stärkt das Bewusstsein für individuelle Biographien und Diversität. Getrieben von persönlichen Freiheiten und Selbstbestimmung verändert sich das Verhältnis von Ich und Wir. Dabei wirkt das Internet als Beschleuniger. Informations- und Kommunikationstechnologien schaffen neue Rahmen für neue Lebensstile und Verhaltensmuster. Während die Gesellschaft pluraler wird und mehr auf Gleichstellungsfragen achtet, entstehen auch Tendenzen zur Rückkehr zu gemeinschaftlichen Werten. Moralisierende Urteile über Andersdenkende gefährden die gesellschaftliche Kohäsion. Eigenverantwortlich mit der Informationsflut umgehen zu können, gewinnt an Bedeutung.
+
+#### Strukturwandel durch Digitalisierung
+
+Die rasante Digitalisierung der Arbeitsprozesse bewirkt einen strukturellen Wandel. Durch den Einsatz von künstlicher Intelligenz werden viele Prozesse am Arbeitsplatz und im privaten Leben automatisiert. Tendenziell steigen die Anforderungen an Arbeitnehmende. Kompetenzen gewinnen an Bedeutung gegenüber Faktenwissen. Agilität, Adaptivität und Lösungsorientierung stehen im Vordergrund. Die neu entstehenden oder erkannten Gefahren und Herausforderungen sowie die systematischen Bestrebungen für mehr Sicherheit erweitern die Bedeutung von Sicherheit für Wirtschaft, Politik und Gesellschaft. Auch die Mobilität entwickelt sich im Kontext einer hohen Konnektivität und des grösseren Umweltbewusstseins. Beim Streben nach einer emissionsarmen, sicheren und für alle zugänglichen Mobilität wird Vieles unternommen und nach Kreativität gesucht.
+```

@@ -288,53 +288,73 @@
         }
 
         // === KI-KOMMUNIKATION (KORRIGIERT) ===
-        async function generateWithAI(uiStep) {
-            const button = event.target;
-            button.disabled = true;
-            button.innerHTML = 'KI arbeitet...';
+    async function generateWithAI(uiStep) {
+    const button = event.target;
+    button.disabled = true;
+    button.innerHTML = 'KI arbeitet...';
 
-            // KORREKTUR: Mappt den UI-Schritt auf den API-Schritt (z.B. UI-Schritt 8 -> API-Schritt 7)
-            const apiStep = uiStep > 5 ? uiStep - 1 : uiStep;
+    const apiStep = uiStep > 5 ? uiStep - 1 : uiStep;
 
-            const context = {
-                stepToGenerate: apiStep, // Sendet die *alte*, korrekte Schrittnummer an die KI
-                lehrjahr: appState.lehrjahr,
-                thema: appState.data.thema,
-                lebensbezug: appState.data.lebensbezug,
-                lerninhalt: appState.data.lerninhalt,
-                schluesselkompetenzen: appState.data.schluesselkompetenzen,
-                sprachmodi: appState.data.sprachmodi,
-            };
+    // --- ANPASSUNG: Wir sammeln jetzt die vollständigen Texte ---
+    // Diese Hilfsfunktion liest den Text aus einem Dropdown-Menü aus.
+    const getSelectedText = (selectId) => {
+        const select = document.getElementById(selectId);
+        // Wir prüfen, ob überhaupt etwas ausgewählt ist (ausser der Platzhalter)
+        return select.selectedIndex > 0 ? select.options[select.selectedIndex].text : '';
+    };
 
-            try {
-                const response = await fetch(CLOUDFLARE_WORKER_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(context)
-                });
-                if (!response.ok) throw new Error(`Worker-Fehler: ${response.status}`);
-                
-                const result = await response.json();
-                
-                // Nutzt den *neuen* UI-Schritt zur Aktualisierung der Felder
-                const fieldMap = { 6: 'herausforderung', 7: 'produkt', 8: 'scaffolds' };
-                if (fieldMap[uiStep] && result.generatedText) {
-                    const field = document.getElementById(fieldMap[uiStep]);
-                    field.value = result.generatedText;
-                    field.disabled = false;
-                } else if (uiStep === 9 && result.bewertung) { // uiStep 9 entspricht apiStep 8
-                    populateBewertung(result.bewertung);
-                }
+    // Diese Hilfsfunktion wandelt die Kompetenz-IDs in lesbare Texte um.
+    const getKompetenzTexte = (ids, sourceMap) => {
+        // Wir filtern leere IDs heraus und erstellen eine Textliste
+        return ids.filter(id => id).map(id => `${id} - ${sourceMap[id]}`).join('\n');
+    };
+    // --- ENDE ANPASSUNG ---
 
-            } catch (error) {
-                console.error("Fehler bei der KI-Anfrage:", error);
-                alert("Die KI-Anfrage ist fehlgeschlagen.");
-            } finally {
-                button.disabled = false;
-                button.innerHTML = '🤖 KI-Generierung';
-            }
+    // Der "Bestellzettel" für den Koch wird jetzt viel detaillierter
+    const context = {
+        stepToGenerate: apiStep,
+        lehrjahr: appState.lehrjahr,
+        thema: {
+            text: getSelectedText('thema')
+        },
+        lebensbezug: {
+            text: getSelectedText('lebensbezug')
+        },
+        lerninhalt: {
+            text: getSelectedText('lerninhalt')
+        },
+        schluesselkompetenzen: getKompetenzTexte(appState.data.schluesselkompetenzen, SCHLUESSELKOMPETENZEN),
+        sprachmodi: getKompetenzTexte(appState.data.sprachmodi, SPRACHMODI),
+    };
+
+    try {
+        // Der detaillierte Bestellzettel wird an die Küche (den Worker) gesendet
+        const response = await fetch(CLOUDFLARE_WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(context)
+        });
+        if (!response.ok) throw new Error(`Worker-Fehler: ${response.status}`);
+        
+        const result = await response.json();
+        
+        const fieldMap = { 6: 'herausforderung', 7: 'produkt', 8: 'scaffolds' };
+        if (fieldMap[uiStep] && result.generatedText) {
+            const field = document.getElementById(fieldMap[uiStep]);
+            field.value = result.generatedText;
+            field.disabled = false;
+        } else if (uiStep === 9 && result.bewertung) {
+            populateBewertung(result.bewertung);
         }
 
+    } catch (error) {
+        console.error("Fehler bei der KI-Anfrage:", error);
+        alert("Die KI-Anfrage ist fehlgeschlagen.");
+    } finally {
+        button.disabled = false;
+        button.innerHTML = '🤖 KI-Generierung';
+    }
+}
         // === UI-LOGIK UND EVENT HANDLER ===
         function selectYear(year) {
             appState.lehrjahr = year;

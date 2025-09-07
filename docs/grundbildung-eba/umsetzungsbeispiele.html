@@ -367,6 +367,108 @@
             color: #333;
         }
         
+        /* Generator Banner Styles */
+        .generator-banner {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .generator-banner::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .generator-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .generator-text {
+            flex: 1;
+            color: white;
+        }
+        
+        .generator-text h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .generator-text p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .beta-badge {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+        
+        .generator-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .generator-link {
+            display: block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .generator-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        
+        .generator-link svg {
+            display: block;
+        }
+        
+        .generator-hint {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
@@ -378,6 +480,20 @@
             
             .criteria-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .generator-banner {
+                padding: 30px 20px;
+            }
+            
+            .generator-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .generator-text {
+                text-align: center;
             }
         }
     </style>
@@ -816,6 +932,26 @@
         <div class="back-link">
             <a href="index.html">← Zurück zur Übersicht</a>
         </div>
+        
+        <!-- Generator Beta Banner -->
+        <section class="generator-banner">
+            <div class="generator-content">
+                <div class="generator-text">
+                    <h3>Umsetzungsvarianten Generator</h3>
+                    <p>Erstellen Sie eigene Herausforderungen und Produkte für Ihren ABU-Unterricht</p>
+                    <span class="beta-badge">BETA VERSION</span>
+                </div>
+                <div class="generator-action">
+                    <a href="exgen.html" class="generator-link" title="Zum Umsetzungsvarianten Generator">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                            <circle cx="30" cy="30" r="28" fill="#0066cc"/>
+                            <path d="M25 20 L35 30 L25 40" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <span class="generator-hint">Generator starten</span>
+                </div>
+            </div>
+        </section>
     </main>
     
     <script>

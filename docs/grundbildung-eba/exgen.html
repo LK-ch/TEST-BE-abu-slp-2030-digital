@@ -1,605 +1,1754 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎓 ABU Aufgabengenerator EBA</title>
-  <style>
-    /* --- Reset & Basics --- */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f5f5f5;
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLP EBA Umsetzungsvarianten-Generator</title>
+    <style>
+        /* === Globale Styles und Variablen === */
+        :root {
+            --zh-blue: #0F05A0;
+            --zh-blue-light: #3A30C2;
+            --zh-blue-lighter: #E8E6FF;
+            --zh-white: #FFFFFF;
+            --zh-gray-light: #F5F5F5;
+            --zh-gray: #E0E0E0;
+            --zh-gray-dark: #666666;
+            --zh-success: #28A745;
+            --zh-warning: #FFC107;
+            --zh-danger: #DC3545;
+            --border-radius: 8px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
-    /* --- Header (an Index-Design angelehnt) --- */
-    header {
-      background:#fff; padding:40px 20px; text-align:center; margin-bottom:40px;
-      box-shadow:0 2px 4px rgba(0,0,0,0.1);
-    }
-    h1 { color:#0066cc; font-size:2.2em; margin-bottom:10px; font-weight:600; }
-    .subtitle { color:#666; font-size:1.05em; max-width:900px; margin:0 auto; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* --- Card/Panel (weiß/blau) --- */
-    .panel {
-      background:#fff; border-radius:10px; padding:30px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:24px;
-      border-left:4px solid #0066cc;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--zh-blue-lighter) 0%, var(--zh-white) 100%);
+            min-height: 100vh;
+            color: #333;
+        }
 
-    /* --- Stepper --- */
-    .stepper-header {
-      display:flex; justify-content:space-between; align-items:center;
-      gap:12px; margin-bottom:24px; position:relative;
-    }
-    .stepper-header::before {
-      content:""; position:absolute; left:60px; right:60px; top:25px; height:2px; background:#e9ecef;
-    }
-    .step { display:flex; flex-direction:column; align-items:center; z-index:1; cursor:pointer; }
-    .step-circle {
-      width:46px; height:46px; border-radius:50%; background:#e0e0e0; color:#fff;
-      display:flex; align-items:center; justify-content:center; font-weight:700;
-      box-shadow:0 2px 10px rgba(0,0,0,0.06); transition:all .25s;
-    }
-    .step-label { margin-top:8px; font-size:.9em; color:#6c757d; transition:color .25s; }
-    .step.active .step-circle { background:#0066cc; transform:scale(1.05); }
-    .step.active .step-label { color:#0066cc; font-weight:600; }
-    .step.completed .step-circle { background:#21a366; }
-    .step.completed .step-label { color:#21a366; }
+        /* === Header === */
+        .header {
+            background: var(--zh-blue);
+            color: var(--zh-white);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
 
-    .step-content { display:block; min-height:420px; }
-    .info-box {
-      background: #f8fbff; border-left:4px solid #0066cc; padding:14px; border-radius:8px; margin:14px 0 18px;
-      color:#495057; font-size:.95em;
-    }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
 
-    /* --- Forms --- */
-    .form-group { margin-bottom:22px; }
-    label {
-      display:block; margin-bottom:8px; color:#495057; font-weight:600; font-size:.9em;
-      text-transform:uppercase; letter-spacing:.3px;
-    }
-    select, input, textarea {
-      width:100%; padding:12px 14px; border:2px solid #e9ecef; border-radius:10px; font-size:1em; background:#fff;
-      transition: all .2s ease;
-    }
-    select:focus, input:focus, textarea:focus { outline:none; border-color:#0066cc; box-shadow:0 0 0 4px rgba(0,102,204,.08); }
-    textarea { min-height:140px; resize:vertical; }
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
 
-    /* --- Checkbox Grid --- */
-    .checkbox-group { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:12px; }
-    .checkbox-item {
-      display:flex; align-items:flex-start; gap:10px; padding:12px; border-radius:10px; background:#f8f9fa; border:2px solid transparent;
-      transition: all .2s ease; cursor:pointer;
-    }
-    .checkbox-item:hover { background:#eef2f6; }
-    .checkbox-item input[type="checkbox"] { width:18px; height:18px; margin-top:2px; cursor:pointer; }
-    .checkbox-item:has(input:checked) { background:#f0f7ff; border-color:#0066cc; }
-    .checkbox-item label { flex:1; margin:0; color:#495057; cursor:pointer; }
+        /* === Jahr-Auswahl === */
+        .year-selector {
+            background: var(--zh-white);
+            padding: 1rem 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    .competence-category { margin-bottom:18px; background:#fff; border:1px solid #edf2f7; border-radius:10px; padding:16px; }
-    .competence-category h5 { color:#0066cc; margin-bottom:10px; font-size:1.05em; font-weight:600; display:flex; gap:8px; align-items:center; }
-    .competence-category h5::before {
-      content:'✓'; width:22px; height:22px; border-radius:50%; background:#0066cc; color:#fff;
-      display:inline-flex; align-items:center; justify-content:center; font-size:.8em;
-    }
+        .year-selector label {
+            font-weight: 600;
+            margin: 0;
+        }
 
-    /* --- Buttons --- */
-    .button-group { display:flex; justify-content:space-between; margin-top:24px; padding-top:20px; border-top:1px solid #e9ecef; }
-    button {
-      padding:12px 26px; border:none; border-radius:10px; font-size:1em; cursor:pointer; font-weight:600;
-      box-shadow:0 2px 10px rgba(0,0,0,0.06); transition: transform .15s, box-shadow .2s;
-      text-transform:uppercase; letter-spacing:.3px;
-    }
-    button:hover { transform: translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,0.12); }
-    .btn-primary { background:#0066cc; color:#fff; }
-    .btn-secondary { background:#f0f2f5; color:#333; }
-    .btn-generate { background:#21a366; color:#fff; }
+        .year-selector .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
 
-    /* --- Generated --- */
-    .generated-content {
-      background:#f8fbff; border:2px solid rgba(0,102,204,.18); border-radius:10px; padding:20px; margin:18px 0;
-    }
-    .generated-content h3 { color:#0066cc; margin-bottom:10px; }
+        .year-selector button {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--zh-blue);
+            background: var(--zh-white);
+            color: var(--zh-blue);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    /* --- Loading & Error --- */
-    .loading { display:none; text-align:center; padding:18px; }
-    .loading.active { display:block; }
-    .spinner {
-      border:3px solid rgba(0,102,204,.15); border-top:3px solid #0066cc; border-radius:50%; width:46px; height:46px;
-      animation: spin 1s linear infinite; margin:0 auto 10px;
-    }
-    @keyframes spin { 0% {transform:rotate(0)} 100% {transform:rotate(360deg)} }
-    .error-message { display:none; background:#ffeef0; color:#c62828; padding:14px; border-left:4px solid #c62828; border-radius:8px; margin:12px 0; }
-    .error-message.active { display:block; }
+        .year-selector button.active {
+            background: var(--zh-blue);
+            color: var(--zh-white);
+        }
 
-    /* --- Summary --- */
-    .summary-container { background:#fff; border-radius:10px; padding:28px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
-    .summary-container h2 { color:#0066cc; margin-bottom:16px; }
-    .summary-section {
-      margin-bottom:18px; padding:16px; background:#f8fbff; border-left:4px solid #0066cc; border-radius:8px;
-    }
-    .badge { display:inline-block; padding:4px 10px; background:#0066cc; color:#fff; border-radius:20px; font-size:.85em; font-weight:600; }
+        /* === Fortschrittsbalken === */
+        .progress-container {
+            background: var(--zh-white);
+            padding: 1rem 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
 
-    @media (max-width: 860px) {
-      .stepper-header { flex-wrap:wrap; gap:14px; }
-      .stepper-header::before { display:none; }
-    }
-  </style>
+        .progress-bar {
+            height: 8px;
+            background: var(--zh-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--zh-blue) 0%, var(--zh-blue-light) 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--zh-gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* === Layout Container === */
+        .container {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 250px);
+        }
+
+        /* === Linke Spalte (Wizard) === */
+        .wizard-column {
+            flex: 1;
+            background: var(--zh-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-y: auto;
+            padding: 1.5rem;
+            max-height: calc(100vh - 250px);
+        }
+
+        .step-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--zh-gray-light);
+            border-radius: var(--border-radius);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .step-section.active {
+            border-color: var(--zh-blue);
+            background: var(--zh-white);
+            box-shadow: 0 0 0 3px rgba(15,5,160,0.1);
+        }
+
+        .step-section.completed {
+            opacity: 0.8;
+            background: var(--zh-blue-lighter);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            background: var(--zh-blue);
+            color: var(--zh-white);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--zh-blue);
+        }
+
+        /* === Form Elements === */
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--zh-gray-dark);
+        }
+
+        select, textarea, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--zh-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: var(--zh-white);
+        }
+
+        select:focus, textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--zh-blue);
+            box-shadow: 0 0 0 3px rgba(15,5,160,0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        select[multiple] {
+            min-height: 150px;
+        }
+
+        /* === Buttons === */
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--zh-blue);
+            color: var(--zh-white);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--zh-blue-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15,5,160,0.3);
+        }
+
+        .btn-secondary {
+            background: var(--zh-gray);
+            color: #333;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #D0D0D0;
+        }
+
+        .btn-success {
+            background: var(--zh-success);
+            color: var(--zh-white);
+        }
+
+        .btn-danger {
+            background: var(--zh-danger);
+            color: var(--zh-white);
+        }
+
+        /* === Rechte Spalte (Vorschau) === */
+        .preview-column {
+            flex: 1;
+            background: var(--zh-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 250px);
+        }
+
+        .preview-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--zh-gray-light);
+            background: var(--zh-gray-light);
+        }
+
+        .preview-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .preview-content h3 {
+            color: var(--zh-blue);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--zh-blue-lighter);
+            padding-bottom: 0.5rem;
+        }
+
+        .preview-content h4 {
+            color: var(--zh-blue);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .preview-content ul, .preview-content ol {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .preview-content .meta-info {
+            background: var(--zh-gray-light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+
+        .preview-content .meta-info p {
+            margin: 0.25rem 0;
+        }
+
+        .preview-footer {
+            padding: 1rem 1.5rem;
+            border-top: 2px solid var(--zh-gray-light);
+            background: var(--zh-gray-light);
+        }
+
+        /* === Bewertungstabelle === */
+        .bewertung-row {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .bewertung-row input,
+        .bewertung-row select {
+            padding: 0.5rem;
+        }
+
+        .total-row {
+            font-weight: bold;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--zh-blue);
+        }
+
+        /* === Hilfe-Info === */
+        .help-info {
+            background: var(--zh-blue-lighter);
+            border-left: 4px solid var(--zh-blue);
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            color: var(--zh-gray-dark);
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: var(--zh-blue);
+            color: var(--zh-white);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        /* === Kompetenz-Kategorien === */
+        .competence-category {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: var(--zh-gray-light);
+            border-radius: var(--border-radius);
+        }
+
+        .competence-category h5 {
+            margin: 0 0 0.5rem 0;
+            color: var(--zh-blue);
+            font-size: 0.95rem;
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .wizard-column,
+            .preview-column {
+                width: 100%;
+                max-height: none;
+            }
+        }
+
+        /* === Print Styles === */
+        @media print {
+            .wizard-column,
+            .year-selector,
+            .preview-footer {
+                display: none;
+            }
+
+            .container {
+                display: block;
+            }
+
+            .preview-column {
+                box-shadow: none;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <!-- Header -->
+    <header class="header">
+        <h1>SLP EBA Umsetzungsvarianten-Generator</h1>
+        <p>Schullehrplan Allgemeinbildung • Kanton Zürich • 2-jährige Grundbildung EBA</p>
+    </header>
+
+    <!-- Jahr-Auswahl -->
+    <div class="year-selector">
+        <label>Lehrjahr wählen:</label>
+        <div class="btn-group">
+            <button id="year1Btn" onclick="selectYear(1)">1. Lehrjahr (Themen 1-4)</button>
+            <button id="year2Btn" onclick="selectYear(2)">2. Lehrjahr (Themen 5-8)</button>
+        </div>
+    </div>
+
+    <!-- Fortschrittsbalken -->
+    <div class="progress-container">
+        <div class="progress-text">
+            <span id="progressText">Bitte wählen Sie zuerst ein Lehrjahr</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <!-- Hauptcontainer -->
     <div class="container">
-      <h1>ABU Aufgabengenerator EBA</h1>
-      <p class="subtitle">Kompetenzorientierte Aufgaben mit KI erstellen – abgestützt auf deine ausgewählten Kompetenzen und Lehrplan-Texte.</p>
+        <!-- Linke Spalte: Wizard -->
+        <div class="wizard-column">
+            <!-- Schritt 1: Thema -->
+            <div class="step-section" data-step="1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Thema auswählen</h3>
+                </div>
+                <label for="thema">Wählen Sie ein Thema:</label>
+                <select id="thema" disabled onchange="autoProgressStep(1)">
+                    <option value="">-- Bitte zuerst Lehrjahr wählen --</option>
+                </select>
+                <div class="help-info" id="themaHelp" style="display:none;"></div>
+            </div>
+
+            <!-- Schritt 2: Individueller Lebensbezug -->
+            <div class="step-section" data-step="2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Individueller Lebensbezug</h3>
+                </div>
+                <label for="lebensbezug">Wählen Sie einen individuellen Lebensbezug:</label>
+                <select id="lebensbezug" disabled onchange="autoProgressStep(2)">
+                    <option value="">-- Bitte zuerst Thema wählen --</option>
+                </select>
+                <div class="help-info" id="lebensbezugHelp" style="display:none;"></div>
+            </div>
+
+            <!-- Schritt 3: Lerninhalt -->
+            <div class="step-section" data-step="3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Lerninhalt</h3>
+                </div>
+                <label for="lerninhalt">Wählen Sie einen Lerninhalt:</label>
+                <select id="lerninhalt" disabled onchange="autoProgressStep(3)">
+                    <option value="">-- Bitte zuerst Lebensbezug wählen --</option>
+                </select>
+                <div class="help-info" id="lerninhaltHelp" style="display:none;"></div>
+            </div>
+
+            <!-- Schritt 4: Alle Kompetenzen -->
+            <div class="step-section" data-step="4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Kompetenzen auswählen</h3>
+                </div>
+                
+                <!-- Schlüsselkompetenzen -->
+                <div class="competence-category">
+                    <h5>Schlüsselkompetenzen <span class="info-badge">Wählen Sie 2-4</span></h5>
+                    <select id="schluesselkompetenzen" multiple onchange="autoProgressStep(4)" disabled>
+                        <option value="">-- Werden nach Lerninhalt geladen --</option>
+                    </select>
+                </div>
+
+                <!-- Sprachmodi -->
+                <div class="competence-category">
+                    <h5>Sprachmodi <span class="info-badge">Wählen Sie relevante Modi</span></h5>
+                    <select id="sprachmodi" multiple onchange="autoProgressStep(4)" disabled>
+                        <option value="">-- Werden nach Lerninhalt geladen --</option>
+                    </select>
+                </div>
+
+                <!-- Gesellschaftliche Kompetenzen -->
+                <div class="competence-category">
+                    <h5>Handlungsfelder der gesellschaftlichen Aspekte</h5>
+                    <select id="gesellschaftliche" multiple disabled>
+                        <option value="">-- Werden nach Lerninhalt geladen --</option>
+                    </select>
+                </div>
+
+                <!-- Digitale Kompetenzen -->
+                <div class="competence-category">
+                    <h5>Digitale Kompetenzen</h5>
+                    <select id="digitale" multiple disabled>
+                        <option value="">-- Werden nach Lerninhalt geladen --</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Schritt 5: Herausforderung -->
+            <div class="step-section" data-step="5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Herausforderung</h3>
+                </div>
+                <label for="herausforderung">Beschreiben Sie die Herausforderung aus Sicht der Lernenden:</label>
+                <textarea id="herausforderung" disabled placeholder="Die Herausforderung beschreibt die konkrete Problemstellung aus der Perspektive der Lernenden..."></textarea>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateWithAI(5)" disabled>🤖 KI-Generierung</button>
+                    <button class="btn-secondary" onclick="enableManualEdit(5)" disabled>✏️ Selbst schreiben</button>
+                    <button class="btn-danger" onclick="resetField(5)" disabled>🔄 Zurücksetzen</button>
+                    <button class="btn-success" onclick="confirmStep(5)" disabled>✓ Übernehmen</button>
+                </div>
+            </div>
+
+            <!-- Schritt 6: Produkt -->
+            <div class="step-section" data-step="6">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Produkt</h3>
+                </div>
+                <label for="produkt">Beschreiben Sie das zu erstellende Lernprodukt:</label>
+                <textarea id="produkt" disabled placeholder="Das Produkt ist das konkrete Ergebnis der Lernaufgabe..."></textarea>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateWithAI(6)" disabled>🤖 KI-Generierung</button>
+                    <button class="btn-secondary" onclick="enableManualEdit(6)" disabled>✏️ Selbst schreiben</button>
+                    <button class="btn-danger" onclick="resetField(6)" disabled>🔄 Zurücksetzen</button>
+                    <button class="btn-success" onclick="confirmStep(6)" disabled>✓ Übernehmen</button>
+                </div>
+            </div>
+
+            <!-- Schritt 7: Scaffolds -->
+            <div class="step-section" data-step="7">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <h3 class="step-title">Eingesetzte Sprachmodi & Scaffolds</h3>
+                </div>
+                <label for="scaffolds">Scaffolds (Unterstützungshilfen) für die gewählten Sprachmodi:</label>
+                <textarea id="scaffolds" disabled placeholder="Beschreiben Sie die Scaffolds für jeden gewählten Sprachmodus..."></textarea>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateWithAI(7)" disabled>🤖 KI-Generierung</button>
+                    <button class="btn-secondary" onclick="enableManualEdit(7)" disabled>✏️ Selbst schreiben</button>
+                    <button class="btn-danger" onclick="resetField(7)" disabled>🔄 Zurücksetzen</button>
+                    <button class="btn-success" onclick="confirmStep(7)" disabled>✓ Übernehmen</button>
+                </div>
+            </div>
+
+            <!-- Schritt 8: Bewertung -->
+            <div class="step-section" data-step="8">
+                <div class="step-header">
+                    <div class="step-number">8</div>
+                    <h3 class="step-title">Bewertungspositionen</h3>
+                </div>
+                <div id="bewertungContainer">
+                    <div class="bewertung-row">
+                        <strong>Kriterium</strong>
+                        <strong>Kompetenz</strong>
+                        <strong>Punkte</strong>
+                        <strong>Bereich</strong>
+                        <strong>Aktion</strong>
+                    </div>
+                </div>
+                <button class="btn-secondary" onclick="addBewertungRow()">+ Kriterium hinzufügen</button>
+                <div class="total-row">
+                    Total: <span id="totalPoints">0</span> / 100 Punkte
+                </div>
+                <div class="help-info">Die Bewertung soll sich auf Sprache & Kommunikation sowie Gesellschaft beziehen (je ca. 50%).</div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateWithAI(8)" disabled>🤖 KI-Generierung</button>
+                    <button class="btn-danger" onclick="resetBewertung()" disabled>🔄 Zurücksetzen</button>
+                    <button class="btn-success" onclick="confirmStep(8)" disabled>✓ Übernehmen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rechte Spalte: Vorschau -->
+        <div class="preview-column">
+            <div class="preview-header">
+                <h2>Vorschau der Umsetzungsvariante</h2>
+            </div>
+            <div class="preview-content" id="previewContent">
+                <p style="color: #999; text-align: center; margin-top: 2rem;">
+                    Bitte wählen Sie zuerst ein Lehrjahr und beginnen Sie mit der Eingabe.
+                </p>
+            </div>
+            <div class="preview-footer">
+                <div class="button-group">
+                    <button class="btn-primary" onclick="printPreview()">🖨️ Drucken</button>
+                    <button class="btn-secondary" onclick="copyToClipboard()">📋 Kopieren</button>
+                    <button class="btn-secondary" onclick="exportAsJSON()">💾 Export JSON</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <main class="container">
-    <div class="panel">
-      <!-- Stepper Header -->
-      <div class="stepper-header">
-        <div class="step active" id="step-1-header"><div class="step-circle">1</div><span class="step-label">Schuljahr</span></div>
-        <div class="step" id="step-2-header"><div class="step-circle">2</div><span class="step-label">Thema</span></div>
-        <div class="step" id="step-3-header"><div class="step-circle">3</div><span class="step-label">Lebensbezug</span></div>
-        <div class="step" id="step-4-header"><div class="step-circle">4</div><span class="step-label">Lerninhalt</span></div>
-        <div class="step" id="step-5-header"><div class="step-circle">5</div><span class="step-label">Kompetenzen</span></div>
-        <div class="step" id="step-6-header"><div class="step-circle">6</div><span class="step-label">Herausforderung</span></div>
-        <div class="step" id="step-7-header"><div class="step-circle">7</div><span class="step-label">Lernprodukt</span></div>
-        <div class="step" id="step-8-header"><div class="step-circle">8</div><span class="step-label">Zusammenfassung</span></div>
-      </div>
+    <script>
+        // === SLP Datenstruktur (vollständig mit allen Kompetenzen) ===
+        const SLP_DATA = {
+            lehrjahr1: {
+                themen: [
+                    {
+                        nummer: 1,
+                        titel: "Ins Berufsleben einsteigen",
+                        lektionen: 22,
+                        leitidee: "Ich finde meinen Platz in der Berufswelt...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich finde mich im Betrieb und in der Berufsfachschule zurecht",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich orientiere mich in der Arbeits- und Ausbildungswelt",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.2", "4.2.1.3", "4.2.2.2", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.8", "3.2.10"],
+                                        gesellschaftliche: ["5.2.6.3", "5.2.6.4", "5.2.2.3"],
+                                        digitale: [
+                                            "Einrichten von ICT-Tools",
+                                            "Suchfunktion nutzen (Ctrl+F)",
+                                            "Vorlesen lassen im Browser",
+                                            "Screenshots erstellen",
+                                            "KI-Suche nutzen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kenne Lernstrategien und arbeite ressourcenschonend",
+                                        sprachmodi: ["4.2.1.3", "4.2.1.2", "4.2.2.2"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.8", "3.2.10"],
+                                        gesellschaftliche: ["5.2.2.3"],
+                                        digitale: [
+                                            "Digitale Anleitungen nutzen",
+                                            "Webseitenstruktur verstehen",
+                                            "Bookmarks setzen"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich kommuniziere auf konstruktive Art und Weise",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann mich verständlich und respektvoll ausdrücken",
+                                        sprachmodi: ["4.2.2.1", "4.2.2.2", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.6", "3.2.7", "3.2.3"],
+                                        gesellschaftliche: ["5.2.1.1", "5.2.2.3"],
+                                        digitale: [
+                                            "KI-Chat für Dialoge nutzen",
+                                            "Officeprogramme anwenden"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann Konflikte erkennen und adäquat reagieren",
+                                        sprachmodi: ["4.2.1.2", "4.2.1.3", "4.2.2.2", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.6", "3.2.7", "3.2.3"],
+                                        gesellschaftliche: ["5.2.1.1", "5.2.2.2", "5.2.2.3"],
+                                        digitale: [
+                                            "Recherchetool nutzen",
+                                            "Audiodatei abspielen",
+                                            "Suchfunktion nutzen"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        nummer: 2,
+                        titel: "Bewusst konsumieren und handeln",
+                        lektionen: 22,
+                        leitidee: "Ich verstehe, wie mein Konsumverhalten zusammenhängt...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich gehe verantwortungsbewusst mit meinem Geld um",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann ein Budget erstellen und Risiken identifizieren",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.2", "4.2.1.3", "4.2.2.2", "4.2.3.1"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.6"],
+                                        gesellschaftliche: ["5.2.7.2", "5.2.8.1"],
+                                        digitale: [
+                                            "Digitale Budgethilfen finden",
+                                            "Excel-Tabellen bedienen",
+                                            "Gestaltungselemente in Word"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann Strategien für nachhaltigen Konsum umsetzen",
+                                        sprachmodi: ["4.2.1.2", "4.2.1.3", "4.2.2.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.6", "3.2.9", "3.2.3"],
+                                        gesellschaftliche: ["5.2.4.1", "5.2.4.2", "5.2.8.1"],
+                                        digitale: [
+                                            "Umfragetool nutzen",
+                                            "Umfrage-Fragen mit KI entwickeln",
+                                            "Untertitel einblenden",
+                                            "Videogeschwindigkeit anpassen"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich konsumiere bewusst und verstehe wirtschaftliche Zusammenhänge",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann Produktionsprozesse beschreiben",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.3", "4.2.2.2"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.10"],
+                                        gesellschaftliche: ["5.2.7.2", "5.2.8.2"],
+                                        digitale: [
+                                            "Mediale Erfassung mit Ton/Bild",
+                                            "Verlaufsdiagramme erstellen",
+                                            "Infografiken gestalten"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann Phänomene des Massenkonsums erklären",
+                                        sprachmodi: ["4.2.1.2", "4.2.1.3", "4.2.2.2", "4.2.2.3"],
+                                        schluesselkompetenzen: ["3.2.3", "3.2.9", "3.2.12"],
+                                        gesellschaftliche: ["5.2.8.3", "5.2.7.1"],
+                                        digitale: [
+                                            "Algorithmen für Werbung identifizieren",
+                                            "Influencer als Werbeträger erkennen",
+                                            "Schutzmassnahmen gegen Werbung"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        nummer: 3,
+                        titel: "Risiko und Sicherheit",
+                        lektionen: 22,
+                        leitidee: "Sicherheit beginnt mit dem Erkennen von Risiken...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich kann Risiken einschätzen und mich absichern",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich erkenne Risiken privat und am Arbeitsplatz",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.3", "4.2.1.2", "4.2.2.1", "4.2.2.2"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.2", "3.2.8", "3.2.9"],
+                                        gesellschaftliche: ["5.2.2.2", "5.2.8.2"],
+                                        digitale: [
+                                            "Digitale Präsentationsformen nutzen",
+                                            "Digitale Inhalte erstellen",
+                                            "KI-Funktionen für Überarbeitungen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann beschreiben, wie ich mich absichern kann",
+                                        sprachmodi: ["4.2.2.2", "4.2.2.3", "4.2.2.1", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.2", "3.2.8", "3.2.9"],
+                                        gesellschaftliche: ["5.2.6.3", "5.2.8.2", "5.2.7.2"],
+                                        digitale: [
+                                            "Medienkanal bedienen",
+                                            "Mediale Inhalte bearbeiten",
+                                            "Digitale Tools für Informationen",
+                                            "KI für Bearbeitung nutzen"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich kann reflektieren, wie ich gesund leben kann",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich erkenne gesellschaftliche Normen und deren Einfluss",
+                                        sprachmodi: ["4.2.1.3", "4.2.3.1", "4.2.3.3", "4.2.2.3"],
+                                        schluesselkompetenzen: ["3.2.5", "3.2.6", "3.2.7", "3.2.12"],
+                                        gesellschaftliche: ["5.2.2.2", "5.2.3.2", "5.2.7.2"],
+                                        digitale: [
+                                            "Bildbearbeitungsprogramm bedienen",
+                                            "Social-Media-Algorithmus beeinflussen",
+                                            "Transkriptions-Tool anwenden"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann Möglichkeiten für gesunden Lebensstil protokollieren",
+                                        sprachmodi: ["4.2.1.1", "4.2.2.2", "4.2.3.1", "4.2.2.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.7"],
+                                        gesellschaftliche: ["5.2.2.2", "5.2.8.3"],
+                                        digitale: [
+                                            "Selbstbeobachtung-Tools einstellen"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        nummer: 4,
+                        titel: "Medien und digitale Welt",
+                        lektionen: 22,
+                        leitidee: "Medien und digitale Technologien prägen meinen Alltag...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich nutze KI und digitale Werkzeuge gezielt",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann digitale Werkzeuge zuordnen und nutzen",
+                                        sprachmodi: ["4.2.2.1", "4.2.2.2", "4.2.2.3", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.3", "3.2.10", "3.2.9", "3.2.6"],
+                                        gesellschaftliche: ["5.2.7.1", "5.2.8.2"],
+                                        digitale: [
+                                            "Tabellarische Darstellung erstellen",
+                                            "Präsentationsmedium gestalten",
+                                            "Ausgewählte Tool-Funktionen anwenden"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann KI verstehen und mit Prompts arbeiten",
+                                        sprachmodi: ["4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.3", "3.2.10", "3.2.9", "3.2.6"],
+                                        gesellschaftliche: ["5.2.7.1", "5.2.3.4", "5.2.6.3"],
+                                        digitale: [
+                                            "Dateien auf KI hochladen",
+                                            "Filterfunktionen bedienen",
+                                            "Datenschutz-Einstellungen vornehmen"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich recherchiere gezielt und kommuniziere selbstbestimmt",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich stärke meine Medienkompetenz für Suche und Analyse",
+                                        sprachmodi: ["4.2.1.3", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.10", "3.2.11", "3.2.12"],
+                                        gesellschaftliche: ["5.2.7.2", "5.2.7.1"],
+                                        digitale: [
+                                            "Durchsuchen und Filtern von Daten",
+                                            "Medienarchive nutzen (swissdox, SRF)",
+                                            "Auswertung digitaler Inhalte"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich nutze Social Media selbstbestimmt und respektvoll",
+                                        sprachmodi: ["4.2.2.2", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.10", "3.2.11", "3.2.12"],
+                                        gesellschaftliche: ["5.2.7.2", "5.2.1.1", "5.2.3.4", "5.2.6.3"],
+                                        digitale: [
+                                            "Inhalte teilen und löschen",
+                                            "Datenschutz-Einstellungen",
+                                            "Digitale Identitäten verwalten",
+                                            "Schutz des eigenen Rufs"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            lehrjahr2: {
+                themen: [
+                    {
+                        nummer: 5,
+                        titel: "Meinung bilden, akzeptieren und mitgestalten",
+                        lektionen: 22,
+                        leitidee: "Ich lebe in einer Welt voller Informationen...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich bilde mir eine Meinung und rege andere zum Nachdenken an",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann Beiträge verstehen und Manipulation erkennen",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.2", "4.2.2.1", "4.2.2.2", "4.2.2.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.11"],
+                                        gesellschaftliche: ["5.2.7.2", "5.2.5.1"],
+                                        digitale: [
+                                            "Quellenüberprüfte Medienarchive nutzen",
+                                            "Kriterien für Fake News aufzählen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann Standpunkte entwickeln und vertreten",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.2", "4.2.2.1", "4.2.2.2", "4.2.3.1"],
+                                        schluesselkompetenzen: ["3.2.5", "3.2.6", "3.2.7", "3.2.12", "3.2.9"],
+                                        gesellschaftliche: ["5.2.1.3", "5.2.5.1"],
+                                        digitale: [
+                                            "Gestaltung digitaler Beiträge",
+                                            "Mit KI Argumentationsstrukturen üben"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann ein mediengestütztes Produkt gestalten",
+                                        sprachmodi: ["4.2.2.3", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.11"],
+                                        gesellschaftliche: ["5.2.7.2", "5.2.3.4"],
+                                        digitale: [
+                                            "Stichwortsuche in Rechercheprogrammen",
+                                            "Zugriff auf Meinungsbildungsplattformen",
+                                            "KI-Assistenz für Medienprodukte"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich kenne meine politischen Rechte",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann politische Systeme erklären",
+                                        sprachmodi: ["4.2.1.1", "4.2.1.2", "4.2.1.3", "4.2.2.3", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.11", "3.2.12"],
+                                        gesellschaftliche: ["5.2.5.3", "5.2.6.1"],
+                                        digitale: [
+                                            "Medienarchive zu politischen Beteiligungsmöglichkeiten",
+                                            "Such- und Filterstrategien einsetzen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann meine Meinung zu politischen Fragen darlegen",
+                                        sprachmodi: ["4.2.1.2", "4.2.3.1", "4.2.3.2", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.5", "3.2.6", "3.2.7"],
+                                        gesellschaftliche: ["5.2.2.3", "5.2.5.2"],
+                                        digitale: [
+                                            "Tools zur Meinungsbildung nutzen",
+                                            "Digitale Diskussionsforen nutzen",
+                                            "Sichtbarkeitseinstellungen von Kommentaren"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann einen Beitrag zur politischen Teilhabe gestalten",
+                                        sprachmodi: ["4.2.2.3", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.4", "3.2.6"],
+                                        gesellschaftliche: ["5.2.3.1", "5.2.7.2", "5.2.4.2"],
+                                        digitale: [
+                                            "Konzeption digitaler Beiträge",
+                                            "Video- und Bildgeneratoren einsetzen"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        nummer: 6,
+                        titel: "Verträge verstehen – fair handeln",
+                        lektionen: 22,
+                        leitidee: "Ich bewege mich in einem Alltag mit Regeln und Verträgen...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich erkenne rechtliche Fragen und kläre meine Rechte",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann Alltagsverträge verstehen",
+                                        sprachmodi: ["4.2.1.3", "4.2.1.2", "4.2.2.2", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.6", "3.2.12"],
+                                        gesellschaftliche: ["5.2.6.2", "5.2.8.2"],
+                                        digitale: [
+                                            "Digitale Recherche auf Konsumentenplattformen",
+                                            "Digitale Tools zur Textanalyse",
+                                            "Beratungstipps in Medienarchiven"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich erkenne, wann rechtliche Abklärung notwendig ist",
+                                        sprachmodi: ["4.2.2.2", "4.2.3.1", "4.2.3.2", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.6", "3.2.12"],
+                                        gesellschaftliche: ["5.2.1.2", "5.2.6.3", "5.2.2.3"],
+                                        digitale: [
+                                            "Auf AGB/rechtliche Bestimmungen zugreifen",
+                                            "Kontaktaufnahme digital strukturieren",
+                                            "Kontaktadressen identifizieren"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich lerne, wie ich fair handeln kann",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann ethische von rechtlichen Bestimmungen unterscheiden",
+                                        sprachmodi: ["4.2.3.2", "4.2.3.3", "4.2.2.1", "4.2.2.2"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.4", "3.2.5", "3.2.9", "3.2.10"],
+                                        gesellschaftliche: ["5.2.1.2", "5.2.6.2"],
+                                        digitale: [
+                                            "Medienarchive nutzen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann Verhaltensweisen für Konfliktlösungen beschreiben",
+                                        sprachmodi: ["4.2.2.2", "4.2.3.1", "4.2.3.2"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.4", "3.2.5", "3.2.9", "3.2.10"],
+                                        gesellschaftliche: ["5.2.1.1", "5.2.1.3"],
+                                        digitale: [
+                                            "Datenschutzvorgaben beachten"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        nummer: 7,
+                        titel: "Arbeit und Steuerpflicht",
+                        lektionen: 22,
+                        leitidee: "Ich gestalte meinen Weg – beruflich und finanziell...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich finde heraus, wohin ich beruflich will",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich setze mich mit meinen Fähigkeiten auseinander",
+                                        sprachmodi: ["4.2.2.2", "4.2.2.3", "4.2.3.1"],
+                                        schluesselkompetenzen: ["3.2.5", "3.2.8"],
+                                        gesellschaftliche: ["5.2.2.1", "5.2.2.3", "5.2.8.3", "5.2.7.1"],
+                                        digitale: [
+                                            "Simulation von Bewerbungsgesprächen",
+                                            "Erstellung eines Bewerbungsvideos",
+                                            "Präsentation der Stärken",
+                                            "Digitales Porträt erstellen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich plane meine Laufbahn und bewerbe mich gezielt",
+                                        sprachmodi: ["4.2.1.3", "4.2.2.2", "4.2.3.2", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.4", "3.2.5", "3.2.6", "3.2.8", "3.2.10"],
+                                        gesellschaftliche: ["5.2.8.2", "5.2.8.3", "5.2.6.3"],
+                                        digitale: [
+                                            "Stellenangebote auf Plattformen recherchieren",
+                                            "KI-Tools für Stellenanalyse",
+                                            "Digitale Textassistenz",
+                                            "Korrektur- und Stilprüfprogramme",
+                                            "Online-Formulare nutzen",
+                                            "Digitale Simulationstools",
+                                            "Bewerbungsvideos produzieren",
+                                            "Datenschutz bei Online-Bewerbungen"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich kann meine Pflichten gegenüber Staat benennen",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich erstelle eine Übersicht meiner Aufgaben",
+                                        sprachmodi: ["4.2.1.2", "4.2.3.1", "4.2.2.2"],
+                                        schluesselkompetenzen: ["3.2.10", "3.2.11", "3.2.12"],
+                                        gesellschaftliche: ["5.2.5.3", "5.2.8.2", "5.2.6.1"],
+                                        digitale: [
+                                            "Lohn- und Steuerrechner nutzen",
+                                            "Digitale Lohnabrechnungen analysieren",
+                                            "Visualisierung von Abzügen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich stelle Unterlagen zusammen und reiche sie ein",
+                                        sprachmodi: ["4.2.1.3", "4.2.2.2", "4.2.3.2"],
+                                        schluesselkompetenzen: ["3.2.1", "3.2.2", "3.2.11"],
+                                        gesellschaftliche: ["5.2.6.4", "5.2.8.2"],
+                                        digitale: [
+                                            "Online-Formulare nutzen",
+                                            "Uploads und Scans von Belegen",
+                                            "Menuleiste einer Internetseite bedienen"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        nummer: 8,
+                        titel: "Kunst und Kultur",
+                        lektionen: 22,
+                        leitidee: "Ich gestalte Kultur mit – und mache Themen sichtbar...",
+                        lebensbezuege: [
+                            {
+                                titel: "Ich erlebe, wie Kultur Zugehörigkeit schafft",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann kulturelle Ausdrucksformen beschreiben",
+                                        sprachmodi: ["4.2.1.1", "4.2.2.1", "4.2.2.3", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.5", "3.2.10", "3.2.11"],
+                                        gesellschaftliche: ["5.2.3.3", "5.2.2.4"],
+                                        digitale: [
+                                            "Medienarchive mit Filter nutzen",
+                                            "KI-Quellensuche für kulturelle Beispiele",
+                                            "Gespräche mit Audioaufnahmen speichern",
+                                            "KI-Assistenz für Zusammenhänge"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich kann kulturelle Phänomene reflektieren",
+                                        sprachmodi: ["4.2.1.2", "4.2.1.3", "4.2.2.2"],
+                                        schluesselkompetenzen: ["3.2.7", "3.2.12"],
+                                        gesellschaftliche: ["5.2.1.1", "5.2.5.2", "5.2.2.1"],
+                                        digitale: [
+                                            "Medienarchive gezielt nutzen",
+                                            "KI-Assistenz für Zusammenhänge"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                titel: "Ich finde kreative Wege für gesellschaftliche Themen",
+                                lerninhalte: [
+                                    {
+                                        titel: "Ich kann kreative Ausdrucksformen nutzen",
+                                        sprachmodi: ["4.2.2.2", "4.2.2.3", "4.2.3.1", "4.2.3.3"],
+                                        schluesselkompetenzen: ["3.2.2", "3.2.3", "3.2.4"],
+                                        gesellschaftliche: ["5.2.3.4", "5.2.4.2", "5.2.2.1"],
+                                        digitale: [
+                                            "Tools für Audio/Bild/Video",
+                                            "Memes und Kurzfilme gestalten",
+                                            "Urheberrecht beachten",
+                                            "KI-Assistenten nutzen"
+                                        ]
+                                    },
+                                    {
+                                        titel: "Ich lerne, respektvoll über Kunst zu sprechen",
+                                        sprachmodi: ["4.2.1.1", "4.2.2.1", "4.2.2.2", "4.2.3.1"],
+                                        schluesselkompetenzen: ["3.2.4", "3.2.5", "3.2.7", "3.2.11"],
+                                        gesellschaftliche: ["5.2.5.2", "5.2.2.1", "5.2.3.2", "5.2.2.4"],
+                                        digitale: [
+                                            "Digitale Plattformen für Kunstdiskussion",
+                                            "KI für Argumentationshilfen",
+                                            "KI als Kunstwerkgenerator",
+                                            "Videokonferenz als Austauschort"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
 
-      <!-- Steps -->
-      <div class="step-content" id="step-1">
-        <h2>Schritt 1: Schuljahr wählen</h2>
-        <div class="info-box"><p>Wählen Sie das entsprechende Lehrjahr aus. Jedes Lehrjahr umfasst vier thematische Schwerpunkte.</p></div>
-        <div class="form-group">
-          <label for="schuljahr">Schuljahr</label>
-          <select id="schuljahr">
-            <option value="">Bitte wählen…</option>
-            <option value="1">1. Lehrjahr (Themen 1–4)</option>
-            <option value="2">2. Lehrjahr (Themen 5–8)</option>
-          </select>
-        </div>
-      </div>
+        // Definitionen aller Kompetenzen
+        const SCHLUESSELKOMPETENZEN = {
+            "3.2.1": "Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden",
+            "3.2.2": "Sich selbst Ziele setzen, die Zielsetzung überprüfen und sich adaptiv verhalten",
+            "3.2.3": "Antizipative, unternehmerische und innovative Wege der Problemlösung",
+            "3.2.4": "In unterschiedlichen Teams zielgerichtet und effizient arbeiten",
+            "3.2.5": "Die eigenen Werthaltungen und Überzeugungen erkennen und reflektieren",
+            "3.2.6": "Ihre eigenen Standpunkte begründen und andere davon überzeugen",
+            "3.2.7": "Unterschiedliche Standpunkte nachvollziehen und Verständnis fördern",
+            "3.2.8": "Ihre Lebensphasen planen und mit Unwägbarkeiten umgehen",
+            "3.2.9": "Vernetzt und systemisch denken, um nachhaltig zu handeln",
+            "3.2.10": "Sich in einem sich ständig verändernden Umfeld zurechtfinden",
+            "3.2.11": "Mit Mehrdeutigkeiten umgehen",
+            "3.2.12": "An gesellschaftlichen Prozessen partizipieren und Handlungsspielräume nutzen"
+        };
 
-      <div class="step-content" id="step-2" style="display:none;">
-        <h2>Schritt 2: Thema auswählen</h2>
-        <div class="info-box"><p>Jedes Thema behandelt einen spezifischen Lebensbereich mit konkreten Herausforderungen und Kompetenzen.</p></div>
-        <div class="form-group">
-          <label for="thema">Thema</label>
-          <select id="thema" disabled>
-            <option value="">Zuerst Schuljahr wählen…</option>
-          </select>
-        </div>
-      </div>
+        const SPRACHMODI = {
+            "4.2.1.1": "Rezeption mündlich",
+            "4.2.1.2": "Rezeption audiovisuell",
+            "4.2.1.3": "Rezeption schriftlich und bildlich",
+            "4.2.2.1": "Produktion mündlich",
+            "4.2.2.2": "Produktion schriftlich und bildlich",
+            "4.2.2.3": "Produktion multimedial",
+            "4.2.3.1": "Interaktion und Kollaboration mündlich",
+            "4.2.3.2": "Interaktion und Kollaboration schriftlich",
+            "4.2.3.3": "Interaktion und Kollaboration digital"
+        };
 
-      <div class="step-content" id="step-3" style="display:none;">
-        <h2>Schritt 3: Individuellen Lebensbezug wählen</h2>
-        <div class="info-box"><p>Der Lebensbezug verankert das Thema in der Lebenswelt der Lernenden.</p></div>
-        <div class="form-group">
-          <label for="lebensbezug">Lebensbezug</label>
-          <select id="lebensbezug">
-            <option value="">Bitte wählen…</option>
-          </select>
-        </div>
-      </div>
+        const GESELLSCHAFTLICHE = {
+            "5.2.1.1": "Ethik - Empathisch handeln und andere Perspektiven übernehmen",
+            "5.2.1.2": "Ethik - Verantwortung für Integrität und Würde übernehmen",
+            "5.2.1.3": "Ethik - Aktiv an moralischen Entscheiden beteiligen",
+            "5.2.2.1": "Identität - Persönlichkeit erkunden und entwickeln",
+            "5.2.2.2": "Identität - Auf Gesundheit achten und Diskriminierung erkennen",
+            "5.2.2.3": "Identität - Identitätsstiftende Räume erkunden",
+            "5.2.2.4": "Identität - Andere kulturelle Realitäten anerkennen",
+            "5.2.3.1": "Kultur - Bewusstsein für gestaltete Welt entwickeln",
+            "5.2.3.2": "Kultur - Mit grundlegenden Lebensthemen auseinandersetzen",
+            "5.2.3.3": "Kultur - Eigene Wahrnehmungen reflektieren",
+            "5.2.3.4": "Kultur - Gestaltungs- und Ausdrucksfähigkeiten erproben",
+            "5.2.4.1": "Ökologie - Eigenes Verhalten unter Nachhaltigkeitsaspekt analysieren",
+            "5.2.4.2": "Ökologie - Lösungsansätze für nachhaltige Ressourcennutzung",
+            "5.2.5.1": "Politik - Politische Fragen analysieren und Manipulation erkennen",
+            "5.2.5.2": "Politik - Eigene politische Meinungen und Werte entwickeln",
+            "5.2.5.3": "Politik - Politische Organisation verstehen und partizipieren",
+            "5.2.6.1": "Recht - Funktionsweise der Institutionen verstehen",
+            "5.2.6.2": "Recht - Juristische Regeln und Werthaltungen verstehen",
+            "5.2.6.3": "Recht - Juristische Informationen in Konflikten interpretieren",
+            "5.2.6.4": "Recht - Juristische Normen zum Interessenschutz nutzen",
+            "5.2.7.1": "Technologie - Einfluss von Technologien analysieren",
+            "5.2.7.2": "Technologie - IKT zweckmässig und verantwortungsbewusst nutzen",
+            "5.2.8.1": "Wirtschaft - Als Konsument mit knappen Ressourcen wählen",
+            "5.2.8.2": "Wirtschaft - Wirtschaftliche Akteure und eigene Lage verstehen",
+            "5.2.8.3": "Wirtschaft - Erwartungen an Unternehmen und Entwicklungen analysieren"
+        };
 
-      <div class="step-content" id="step-4" style="display:none;">
-        <h2>Schritt 4: Lerninhalt definieren</h2>
-        <div class="info-box"><p>Der Lerninhalt konkretisiert, was die Lernenden erarbeiten und können sollen.</p></div>
-        <div class="form-group">
-          <label for="lerninhalt">Lerninhalt</label>
-          <select id="lerninhalt">
-            <option value="">Bitte wählen…</option>
-          </select>
-        </div>
-      </div>
+        // === State Management ===
+        const appState = {
+            lehrjahr: null,
+            currentStep: 0,
+            completedSteps: [],
+            data: {
+                thema: '',
+                lebensbezug: '',
+                lerninhalt: '',
+                schluesselkompetenzen: [],
+                sprachmodi: [],
+                gesellschaftliche: [],
+                digitale: [],
+                herausforderung: '',
+                produkt: '',
+                scaffolds: '',
+                bewertung: []
+            }
+        };
 
-      <div class="step-content" id="step-5" style="display:none;">
-        <h2>Schritt 5: Kompetenzen auswählen</h2>
-        <div class="info-box"><p>Wählen Sie aus jeder Kategorie mindestens eine Kompetenz. Die Auswahl steuert die KI-Ausgaben.</p></div>
+        // === Core Functions ===
+        function selectYear(year) {
+            appState.lehrjahr = year;
+            
+            // Update buttons
+            document.getElementById('year1Btn').classList.toggle('active', year === 1);
+            document.getElementById('year2Btn').classList.toggle('active', year === 2);
+            
+            // Reset state
+            appState.data = {
+                thema: '',
+                lebensbezug: '',
+                lerninhalt: '',
+                schluesselkompetenzen: [],
+                sprachmodi: [],
+                gesellschaftliche: [],
+                digitale: [],
+                herausforderung: '',
+                produkt: '',
+                scaffolds: '',
+                bewertung: []
+            };
+            appState.completedSteps = [];
+            
+            // Load themes
+            loadThemen();
+            
+            // Enable first step
+            document.getElementById('thema').disabled = false;
+            
+            // Update progress
+            appState.currentStep = 1;
+            updateProgress();
+        }
 
-        <div class="competence-category">
-          <h5>Sprachmodi</h5>
-          <div class="checkbox-group" id="sprachmodi"></div>
-        </div>
-        <div class="competence-category">
-          <h5>Schlüsselkompetenzen</h5>
-          <div class="checkbox-group" id="schluesselkompetenzen"></div>
-        </div>
-        <div class="competence-category">
-          <h5>Digitale Kompetenzen</h5>
-          <div class="checkbox-group" id="digitale-kompetenzen"></div>
-        </div>
-        <div class="competence-category">
-          <h5>Gesellschaftliche Handlungsfelder</h5>
-          <div class="checkbox-group" id="handlungsfelder"></div>
-        </div>
-      </div>
+        function loadThemen() {
+            const themaSelect = document.getElementById('thema');
+            const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
+            
+            themaSelect.innerHTML = '<option value="">-- Bitte wählen --</option>';
+            
+            data.themen.forEach(thema => {
+                const option = document.createElement('option');
+                option.value = thema.nummer;
+                option.textContent = `Thema ${thema.nummer}: ${thema.titel}`;
+                themaSelect.appendChild(option);
+            });
+        }
 
-      <div class="step-content" id="step-6" style="display:none;">
-        <h2>Schritt 6: Herausforderung formulieren</h2>
-        <div class="info-box"><p>Die KI generiert zuerst eine Herausforderung (Ich-Form, 3–4 Sätze). Sie können sie danach überarbeiten.</p></div>
+        function autoProgressStep(step) {
+            switch(step) {
+                case 1:
+                    const thema = document.getElementById('thema').value;
+                    if (thema) {
+                        appState.data.thema = thema;
+                        loadLebensbezuege();
+                        markStepCompleted(1);
+                    }
+                    break;
+                case 2:
+                    const lebensbezug = document.getElementById('lebensbezug').value;
+                    if (lebensbezug) {
+                        appState.data.lebensbezug = lebensbezug;
+                        loadLerninhalte();
+                        markStepCompleted(2);
+                    }
+                    break;
+                case 3:
+                    const lerninhalt = document.getElementById('lerninhalt').value;
+                    if (lerninhalt) {
+                        appState.data.lerninhalt = lerninhalt;
+                        loadAllKompetenzen();
+                        markStepCompleted(3);
+                    }
+                    break;
+                case 4:
+                    // Sammle alle ausgewählten Kompetenzen
+                    const sk = Array.from(document.getElementById('schluesselkompetenzen').selectedOptions).map(o => o.value);
+                    const sm = Array.from(document.getElementById('sprachmodi').selectedOptions).map(o => o.value);
+                    
+                    if (sk.length >= 2 && sm.length > 0) {
+                        appState.data.schluesselkompetenzen = sk;
+                        appState.data.sprachmodi = sm;
+                        appState.data.gesellschaftliche = Array.from(document.getElementById('gesellschaftliche').selectedOptions).map(o => o.value);
+                        appState.data.digitale = Array.from(document.getElementById('digitale').selectedOptions).map(o => o.value);
+                        
+                        // Enable step 5
+                        enableStep(5);
+                        markStepCompleted(4);
+                    }
+                    break;
+            }
+            
+            updateProgress();
+            updatePreview();
+        }
 
-        <div class="loading" id="loading-herausforderung">
-          <div class="spinner"></div>
-          <p>KI generiert Herausforderung…</p>
-        </div>
-        <div class="error-message" id="error-herausforderung"></div>
+        function markStepCompleted(step) {
+            if (!appState.completedSteps.includes(step)) {
+                appState.completedSteps.push(step);
+            }
+            appState.currentStep = step + 1;
+            updateStepVisuals();
+        }
 
-        <div class="generated-content" id="generated-herausforderung" style="display:none;">
-          <h3>🤖 KI-generierte Herausforderung</h3>
-          <p id="herausforderung-text"></p>
-          <div style="margin-top:14px;">
-            <button type="button" class="btn-generate" onclick="generateHerausforderung()">🔄 Neu generieren</button>
-          </div>
-        </div>
+        function loadLebensbezuege() {
+            const lebensbezugSelect = document.getElementById('lebensbezug');
+            const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
+            const thema = data.themen.find(t => t.nummer == appState.data.thema);
+            
+            lebensbezugSelect.innerHTML = '<option value="">-- Bitte wählen --</option>';
+            
+            thema.lebensbezuege.forEach((lb, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = lb.titel;
+                lebensbezugSelect.appendChild(option);
+            });
+            
+            lebensbezugSelect.disabled = false;
+        }
 
-        <div class="form-group" style="margin-top:14px;">
-          <label for="custom-herausforderung">Eigene/überarbeitete Herausforderung (optional)</label>
-          <textarea id="custom-herausforderung" placeholder="Hier eigene Formulierung eintragen…"></textarea>
-        </div>
-      </div>
+        function loadLerninhalte() {
+            const lerninhaltSelect = document.getElementById('lerninhalt');
+            const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
+            const thema = data.themen.find(t => t.nummer == appState.data.thema);
+            const lebensbezug = thema.lebensbezuege[appState.data.lebensbezug];
+            
+            lerninhaltSelect.innerHTML = '<option value="">-- Bitte wählen --</option>';
+            
+            lebensbezug.lerninhalte.forEach((li, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = li.titel;
+                lerninhaltSelect.appendChild(option);
+            });
+            
+            lerninhaltSelect.disabled = false;
+        }
 
-      <div class="step-content" id="step-7" style="display:none;">
-        <h2>Schritt 7: Lernprodukt & Bewertung</h2>
-        <div class="info-box">
-          <p>Die KI erzeugt Aufgabenstellung, Arbeitsschritte, Bewertungsraster (100 Punkte), Beispiel sowie Zirkularitäts-Kommentar (vorher/danach).</p>
-        </div>
+        function loadAllKompetenzen() {
+            const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
+            const thema = data.themen.find(t => t.nummer == appState.data.thema);
+            const lebensbezug = thema.lebensbezuege[appState.data.lebensbezug];
+            const lerninhalt = lebensbezug.lerninhalte[appState.data.lerninhalt];
+            
+            // Schlüsselkompetenzen
+            const skSelect = document.getElementById('schluesselkompetenzen');
+            skSelect.innerHTML = '';
+            lerninhalt.schluesselkompetenzen.forEach(komp => {
+                const option = document.createElement('option');
+                option.value = komp;
+                option.textContent = `${komp} - ${SCHLUESSELKOMPETENZEN[komp]}`;
+                option.selected = true;
+                skSelect.appendChild(option);
+            });
+            skSelect.disabled = false;
+            
+            // Sprachmodi
+            const smSelect = document.getElementById('sprachmodi');
+            smSelect.innerHTML = '';
+            lerninhalt.sprachmodi.forEach(modus => {
+                const option = document.createElement('option');
+                option.value = modus;
+                option.textContent = `${modus} - ${SPRACHMODI[modus]}`;
+                option.selected = true;
+                smSelect.appendChild(option);
+            });
+            smSelect.disabled = false;
+            
+            // Gesellschaftliche Kompetenzen
+            const gSelect = document.getElementById('gesellschaftliche');
+            gSelect.innerHTML = '';
+            lerninhalt.gesellschaftliche.forEach(komp => {
+                const option = document.createElement('option');
+                option.value = komp;
+                option.textContent = `${komp} - ${GESELLSCHAFTLICHE[komp] || komp}`;
+                option.selected = true;
+                gSelect.appendChild(option);
+            });
+            gSelect.disabled = false;
+            
+            // Digitale Kompetenzen
+            const dSelect = document.getElementById('digitale');
+            dSelect.innerHTML = '';
+            lerninhalt.digitale.forEach(komp => {
+                const option = document.createElement('option');
+                option.value = komp;
+                option.textContent = komp;
+                option.selected = true;
+                dSelect.appendChild(option);
+            });
+            dSelect.disabled = false;
+        }
 
-        <div class="loading" id="loading-lernprodukt">
-          <div class="spinner"></div>
-          <p>KI erstellt Aufgabenstellung…</p>
-        </div>
-        <div class="error-message" id="error-lernprodukt"></div>
+        function enableStep(step) {
+            const section = document.querySelector(`[data-step="${step}"]`);
+            if (!section) return;
+            
+            section.classList.add('active');
+            const inputs = section.querySelectorAll('textarea, button');
+            inputs.forEach(input => {
+                input.disabled = false;
+            });
+        }
 
-        <div class="generated-content" id="generated-lernprodukt" style="display:none;">
-          <h3>🎯 KI-generierte Aufgabe</h3>
-          <div id="lernprodukt-content"></div>
+        function confirmStep(step) {
+            let valid = false;
+            
+            switch(step) {
+                case 5:
+                    const herausforderung = document.getElementById('herausforderung').value.trim();
+                    if (herausforderung) {
+                        appState.data.herausforderung = herausforderung;
+                        valid = true;
+                    }
+                    break;
+                case 6:
+                    const produkt = document.getElementById('produkt').value.trim();
+                    if (produkt) {
+                        appState.data.produkt = produkt;
+                        valid = true;
+                    }
+                    break;
+                case 7:
+                    const scaffolds = document.getElementById('scaffolds').value.trim();
+                    if (scaffolds) {
+                        appState.data.scaffolds = scaffolds;
+                        valid = true;
+                    }
+                    break;
+                case 8:
+                    const total = calculateTotalPoints();
+                    if (total === 100) {
+                        appState.data.bewertung = collectBewertungData();
+                        valid = true;
+                    } else {
+                        alert('Die Bewertung muss genau 100 Punkte ergeben!');
+                    }
+                    break;
+            }
+            
+            if (valid) {
+                markStepCompleted(step);
+                if (step < 8) {
+                    enableStep(step + 1);
+                }
+                updateProgress();
+                updatePreview();
+            } else {
+                alert('Bitte füllen Sie das Feld aus!');
+            }
+        }
 
-          <h4 style="margin-top:16px;">♻️ Zirkularität</h4>
-          <div id="zirkulaere-kompetenzen"><em>Wird im Abschnitt „Zirkularität (vorher / danach)“ erläutert.</em></div>
+        function generateWithAI(step) {
+            // Simulation der KI-Generierung
+            const fieldMap = {
+                5: 'herausforderung',
+                6: 'produkt',
+                7: 'scaffolds',
+                8: null
+            };
+            
+            if (step === 8) {
+                // Generiere Bewertung
+                generateBewertung();
+            } else {
+                const field = document.getElementById(fieldMap[step]);
+                field.value = "KI-generierter Inhalt wird hier eingefügt...";
+                field.disabled = false;
+            }
+        }
 
-          <div style="margin-top:14px;">
-            <button type="button" class="btn-generate" onclick="generateLernprodukt()">🔄 Neu generieren</button>
-          </div>
-        </div>
+        function enableManualEdit(step) {
+            const fieldMap = {
+                5: 'herausforderung',
+                6: 'produkt',
+                7: 'scaffolds'
+            };
+            
+            const field = document.getElementById(fieldMap[step]);
+            if (field) {
+                field.disabled = false;
+                field.focus();
+            }
+        }
 
-        <div class="form-group" style="margin-top:14px;">
-          <label for="custom-lernprodukt">Eigene Aufgabenstellung (optional)</label>
-          <textarea id="custom-lernprodukt" placeholder="Hier eigenständig anpassen/übernehmen…" style="min-height:200px;"></textarea>
-        </div>
-      </div>
+        function resetField(step) {
+            const fieldMap = {
+                5: 'herausforderung',
+                6: 'produkt',
+                7: 'scaffolds'
+            };
+            
+            const field = document.getElementById(fieldMap[step]);
+            if (field) {
+                field.value = '';
+                field.disabled = false;
+            }
+        }
 
-      <div class="step-content" id="step-8" style="display:none;">
-        <div class="summary-container">
-          <h2>📋 Aufgabenzusammenfassung</h2>
-          <div class="summary-section"><h4>Grundinformationen</h4><div id="summary-basic"></div></div>
-          <div class="summary-section"><h4>Ausgewählte Kompetenzen</h4><div id="summary-kompetenzen"></div></div>
-          <div class="summary-section"><h4>Herausforderung</h4><div id="summary-herausforderung"></div></div>
-          <div class="summary-section"><h4>Lernprodukt & Bewertung</h4><div id="summary-lernprodukt"></div></div>
-          <div class="summary-section"><h4>Scaffolds</h4><div id="summary-scaffolds"></div></div>
-          <div class="summary-section"><h4>Kompetenzaufbau (Zirkularität)</h4><div id="summary-zirkularitaet"></div></div>
+        function generateBewertung() {
+            resetBewertung();
+            
+            // Beispiel-Bewertung generieren
+            const beispiele = [
+                { kriterium: "Verständliche Darstellung", punkte: 25, bereich: "SK" },
+                { kriterium: "Fachgerechte Argumentation", punkte: 25, bereich: "SK" },
+                { kriterium: "Reflexion gesellschaftlicher Aspekte", punkte: 25, bereich: "G" },
+                { kriterium: "Kritische Auseinandersetzung", punkte: 25, bereich: "G" }
+            ];
+            
+            beispiele.forEach(item => {
+                addBewertungRow();
+                const lastRow = document.getElementById('bewertungContainer').lastElementChild;
+                const inputs = lastRow.querySelectorAll('input, select');
+                inputs[0].value = item.kriterium;
+                inputs[1].value = appState.data.schluesselkompetenzen[0] || '';
+                inputs[2].value = item.punkte;
+                inputs[3].value = item.bereich;
+            });
+            
+            updateTotalPoints();
+        }
 
-          <div style="margin-top:18px; text-align:center;">
-            <button type="button" class="btn-primary" onclick="window.print()">🖨️ Drucken</button>
-            <button type="button" class="btn-generate" onclick="saveAsJSON()">💾 Als JSON speichern</button>
-          </div>
-        </div>
-      </div>
+        function addBewertungRow() {
+            const container = document.getElementById('bewertungContainer');
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'bewertung-row';
+            rowDiv.innerHTML = `
+                <input type="text" placeholder="Bewertungskriterium">
+                <select>
+                    <option value="">-- Kompetenz --</option>
+                    ${appState.data.schluesselkompetenzen.map(k => 
+                        `<option value="${k}">${k} - ${SCHLUESSELKOMPETENZEN[k]?.substring(0,30)}...</option>`
+                    ).join('')}
+                </select>
+                <input type="number" min="0" max="100" placeholder="Punkte" onchange="updateTotalPoints()">
+                <select>
+                    <option value="SK">Sprache & Kommunikation</option>
+                    <option value="G">Gesellschaft</option>
+                </select>
+                <button class="btn-danger" onclick="this.parentElement.remove(); updateTotalPoints()">×</button>
+            `;
+            container.appendChild(rowDiv);
+        }
 
-      <!-- Navigation -->
-      <div class="button-group">
-        <button type="button" class="btn-secondary" id="btn-back" onclick="previousStep()" style="display:none;">← Zurück</button>
-        <button type="button" class="btn-primary" id="btn-next" onclick="nextStep()">Weiter →</button>
-      </div>
-    </div>
-  </main>
+        function resetBewertung() {
+            const container = document.getElementById('bewertungContainer');
+            const rows = container.querySelectorAll('.bewertung-row');
+            for (let i = 1; i < rows.length; i++) {
+                rows[i].remove();
+            }
+            updateTotalPoints();
+        }
 
-  <script>
-    /* --------------------------- CONFIG --------------------------- */
-    // 👉 Deine Cloudflare-Worker-URL einsetzen:
-    const WORKER_URL = "https://<DEIN-WORKER>.workers.dev";
+        function calculateTotalPoints() {
+            const rows = document.querySelectorAll('#bewertungContainer .bewertung-row');
+            let total = 0;
+            for (let i = 1; i < rows.length; i++) {
+                const pointsInput = rows[i].querySelector('input[type="number"]');
+                if (pointsInput) {
+                    total += parseInt(pointsInput.value) || 0;
+                }
+            }
+            return total;
+        }
 
-    /* ----------------------- Datenmodell (kurz) ------------------- */
-    // Hinweis: themenData kannst du hier (gekürzt) oder extern belassen.
-    // Für die Demo verwende deine vorhandene Struktur – hier nur Platzhalter:
-    const themenData = window.themenData || {}; // Falls du sie extern einbindest
+        function updateTotalPoints() {
+            const total = calculateTotalPoints();
+            document.getElementById('totalPoints').textContent = total;
+            document.getElementById('totalPoints').style.color = 
+                total === 100 ? 'var(--zh-success)' : 'var(--zh-danger)';
+        }
 
-    let currentStep = 1;
-    let formData = {
-      schuljahr: '',
-      thema: '',
-      lebensbezug: '',
-      lerninhalt: '',
-      kompetenzen: { sprachmodi: [], schluessel: [], digital: [], handlungsfelder: [] },
-      herausforderung: '',
-      lernprodukt: '',
-      scaffolds: [],
-      zirkularitaet: ''
-    };
+        function collectBewertungData() {
+            const rows = document.querySelectorAll('#bewertungContainer .bewertung-row');
+            const data = [];
+            for (let i = 1; i < rows.length; i++) {
+                const inputs = rows[i].querySelectorAll('input, select');
+                if (inputs[0].value && inputs[2].value) {
+                    data.push({
+                        kriterium: inputs[0].value,
+                        kompetenz: inputs[1].value,
+                        punkte: parseInt(inputs[2].value) || 0,
+                        bereich: inputs[3].value
+                    });
+                }
+            }
+            return data;
+        }
 
-    /* ----------------------- Helper-Logik ------------------------- */
-    function getThemaIndex() {
-      const sj = parseInt(formData.schuljahr, 10);
-      const t  = parseInt(formData.thema, 10);
-      if (!Number.isFinite(sj) || !Number.isFinite(t)) return null;
-      return sj === 1 ? t : 4 + t; // 1..4 oder 5..8
-    }
-    function buildContext() {
-      const th = themenData[formData.schuljahr]?.[formData.thema];
-      const lb = th?.lebensbezuege?.[formData.lebensbezug];
-      const li = lb?.lerninhalte?.[formData.lerninhalt];
-      return {
-        thema: th?.titel || "",
-        thema_index: getThemaIndex(),
-        lebensbezug: lb?.titel || "",
-        lerninhalt: li?.titel || "",
-        kompetenzen: [
-          ...(formData.kompetenzen.sprachmodi || []),
-          ...(formData.kompetenzen.schluessel || []),
-          ...(formData.kompetenzen.digital || []),
-          ...(formData.kompetenzen.handlungsfelder || [])
-        ],
-        frage: "Zirkularität beachten: vorher/nachher?"
-      };
-    }
-    async function callWorker(type, context) {
-      const res = await fetch(WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, context })
-      });
-      if (!res.ok) {
-        const t = await res.text().catch(()=> "");
-        throw new Error(`Worker-Fehler ${res.status}: ${t || res.statusText}`);
-      }
-      const data = await res.json();
-      return data[type];
-    }
+        function updateProgress() {
+            const percentage = (appState.completedSteps.length / 8) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = 
+                appState.lehrjahr ? 
+                `${appState.lehrjahr}. Lehrjahr • Schritt ${appState.currentStep} von 8` :
+                'Bitte wählen Sie zuerst ein Lehrjahr';
+        }
 
-    /* ---------------------- UI Navigation ------------------------- */
-    document.getElementById('schuljahr').addEventListener('change', (e) => {
-      formData.schuljahr = e.target.value;
-      const themaSelect = document.getElementById('thema');
-      themaSelect.innerHTML = '<option value="">Bitte wählen…</option>';
-      themaSelect.disabled = !formData.schuljahr;
-      if (formData.schuljahr && themenData[formData.schuljahr]) {
-        Object.keys(themenData[formData.schuljahr]).forEach(key => {
-          const opt = document.createElement('option');
-          opt.value = key;
-          const thema = themenData[formData.schuljahr][key];
-          opt.textContent = `Thema ${key}: ${thema.titel}`;
-          themaSelect.appendChild(opt);
+        function updateStepVisuals() {
+            document.querySelectorAll('.step-section').forEach(section => {
+                const step = parseInt(section.dataset.step);
+                section.classList.remove('active', 'completed');
+                
+                if (step === appState.currentStep) {
+                    section.classList.add('active');
+                } else if (appState.completedSteps.includes(step)) {
+                    section.classList.add('completed');
+                }
+            });
+        }
+
+        function updatePreview() {
+            const content = document.getElementById('previewContent');
+            
+            if (!appState.lehrjahr || appState.completedSteps.length === 0) {
+                content.innerHTML = '<p style="color: #999; text-align: center; margin-top: 2rem;">Bitte wählen Sie zuerst ein Lehrjahr und beginnen Sie mit der Eingabe.</p>';
+                return;
+            }
+            
+            const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
+            const thema = data.themen.find(t => t.nummer == appState.data.thema);
+            
+            let html = '';
+            
+            if (thema) {
+                html += `<h3>Umsetzungsvariante - ${appState.lehrjahr}. Lehrjahr</h3>`;
+                html += `<div class="meta-info">`;
+                html += `<p><strong>Thema ${thema.nummer}:</strong> ${thema.titel}</p>`;
+                
+                if (appState.data.lebensbezug !== '') {
+                    const lb = thema.lebensbezuege[appState.data.lebensbezug];
+                    html += `<p><strong>Individueller Lebensbezug:</strong> ${lb.titel}</p>`;
+                    
+                    if (appState.data.lerninhalt !== '') {
+                        const li = lb.lerninhalte[appState.data.lerninhalt];
+                        html += `<p><strong>Lerninhalt:</strong> ${li.titel}</p>`;
+                    }
+                }
+                html += `</div>`;
+            }
+            
+            if (appState.data.herausforderung) {
+                html += `<h4>Herausforderung</h4><p>${appState.data.herausforderung}</p>`;
+            }
+            
+            if (appState.data.produkt) {
+                html += `<h4>Produkt</h4><p>${appState.data.produkt}</p>`;
+            }
+            
+            if (appState.data.sprachmodi.length > 0 && appState.data.scaffolds) {
+                html += `<h4>Eingesetzte Sprachmodi und mögliche Scaffolds</h4>`;
+                html += `<ul>`;
+                appState.data.sprachmodi.forEach(modus => {
+                    html += `<li><strong>${modus} - ${SPRACHMODI[modus]}</strong></li>`;
+                });
+                html += `</ul>`;
+                html += `<p><strong>Scaffolds:</strong> ${appState.data.scaffolds}</p>`;
+            }
+            
+            if (appState.data.bewertung.length > 0) {
+                html += `<h4>Bewertungspositionen</h4>`;
+                
+                const sk_items = appState.data.bewertung.filter(b => b.bereich === 'SK');
+                const g_items = appState.data.bewertung.filter(b => b.bereich === 'G');
+                
+                if (sk_items.length > 0) {
+                    html += `<p><strong>Sprache & Kommunikation</strong></p><ul>`;
+                    sk_items.forEach(item => {
+                        html += `<li>${item.kriterium} (${item.punkte} Punkte)</li>`;
+                    });
+                    html += `</ul>`;
+                }
+                
+                if (g_items.length > 0) {
+                    html += `<p><strong>Gesellschaft</strong></p><ul>`;
+                    g_items.forEach(item => {
+                        html += `<li>${item.kriterium} (${item.punkte} Punkte)</li>`;
+                    });
+                    html += `</ul>`;
+                }
+            }
+            
+            content.innerHTML = html || '<p style="color: #999;">Noch keine Inhalte vorhanden.</p>';
+        }
+
+        function printPreview() {
+            window.print();
+        }
+
+        function copyToClipboard() {
+            const content = document.getElementById('previewContent').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('Text wurde in die Zwischenablage kopiert!');
+            });
+        }
+
+        function exportAsJSON() {
+            const dataStr = JSON.stringify(appState, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `umsetzungsvariante_${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add first bewertung row
+            addBewertungRow();
         });
-      }
-    });
-    document.getElementById('thema').addEventListener('change', (e) => {
-      formData.thema = e.target.value;
-    });
-
-    function nextStep() {
-      if (validateCurrentStep()) {
-        if (currentStep === 5) generateHerausforderung();
-        else if (currentStep === 6) generateLernprodukt();
-        else if (currentStep === 7) showSummary();
-
-        if (currentStep < 8) {
-          document.getElementById(`step-${currentStep}`).style.display = 'none';
-          document.getElementById(`step-${currentStep}-header`).classList.remove('active');
-          document.getElementById(`step-${currentStep}-header`).classList.add('completed');
-          currentStep++;
-          document.getElementById(`step-${currentStep}`).style.display = 'block';
-          document.getElementById(`step-${currentStep}-header`).classList.add('active');
-          updateStepContent();
-          updateButtons();
-        }
-      }
-    }
-    function previousStep() {
-      if (currentStep > 1) {
-        document.getElementById(`step-${currentStep}`).style.display = 'none';
-        document.getElementById(`step-${currentStep}-header`).classList.remove('active');
-        currentStep--;
-        document.getElementById(`step-${currentStep}`).style.display = 'block';
-        document.getElementById(`step-${currentStep}-header`).classList.remove('completed');
-        document.getElementById(`step-${currentStep}-header`).classList.add('active');
-        updateButtons();
-      }
-    }
-    function updateButtons() {
-      const backBtn = document.getElementById('btn-back');
-      const nextBtn = document.getElementById('btn-next');
-      backBtn.style.display = currentStep > 1 ? 'block' : 'none';
-      if (currentStep === 8) nextBtn.style.display = 'none';
-      else { nextBtn.style.display = 'block'; nextBtn.textContent = currentStep === 7 ? 'Zusammenfassung →' : 'Weiter →'; }
-    }
-
-    function validateCurrentStep() {
-      switch (currentStep) {
-        case 1:
-          if (!formData.schuljahr) return alert('Bitte Schuljahr wählen.'), false;
-          break;
-        case 2:
-          if (!formData.thema) return alert('Bitte Thema wählen.'), false;
-          break;
-        case 3:
-          if (!formData.lebensbezug) return alert('Bitte Lebensbezug wählen.'), false;
-          break;
-        case 4:
-          if (!formData.lerninhalt) return alert('Bitte Lerninhalt wählen.'), false;
-          break;
-        case 5: {
-          const cS = document.querySelectorAll('#sprachmodi input:checked').length;
-          const cK = document.querySelectorAll('#schluesselkompetenzen input:checked').length;
-          const cD = document.querySelectorAll('#digitale-kompetenzen input:checked').length;
-          const cH = document.querySelectorAll('#handlungsfelder input:checked').length;
-          if (!cS || !cK || !cD || !cH) return alert('Bitte mind. eine Kompetenz pro Kategorie wählen.'), false;
-
-          formData.kompetenzen.sprachmodi = [...document.querySelectorAll('#sprachmodi input:checked')].map(cb => cb.value);
-          formData.kompetenzen.schluessel  = [...document.querySelectorAll('#schluesselkompetenzen input:checked')].map(cb => cb.value);
-          formData.kompetenzen.digital     = [...document.querySelectorAll('#digitale-kompetenzen input:checked')].map(cb => cb.value);
-          formData.kompetenzen.handlungsfelder = [...document.querySelectorAll('#handlungsfelder input:checked')].map(cb => cb.value);
-          break;
-        }
-        case 6: {
-          const custom = document.getElementById('custom-herausforderung').value.trim();
-          const gen    = document.getElementById('herausforderung-text').textContent.trim();
-          formData.herausforderung = custom || gen;
-          if (!formData.herausforderung) return alert('Bitte Herausforderung generieren/erfassen.'), false;
-          break;
-        }
-        case 7: {
-          const custom = document.getElementById('custom-lernprodukt').value.trim();
-          const gen    = document.getElementById('lernprodukt-content').innerHTML.trim();
-          formData.lernprodukt = custom || gen;
-          if (!formData.lernprodukt) return alert('Bitte Aufgabe generieren/erfassen.'), false;
-          break;
-        }
-      }
-      return true;
-    }
-
-    function updateStepContent() {
-      const thema = themenData[formData.schuljahr]?.[formData.thema];
-      switch (currentStep) {
-        case 3: {
-          const sel = document.getElementById('lebensbezug');
-          sel.innerHTML = '<option value="">Bitte wählen…</option>';
-          if (thema?.lebensbezuege) {
-            Object.keys(thema.lebensbezuege).forEach(k => {
-              const o = document.createElement('option');
-              o.value = k; o.textContent = thema.lebensbezuege[k].titel;
-              sel.appendChild(o);
-            });
-          }
-          sel.onchange = (e)=> formData.lebensbezug = e.target.value;
-          break;
-        }
-        case 4: {
-          const sel = document.getElementById('lerninhalt');
-          sel.innerHTML = '<option value="">Bitte wählen…</option>';
-          const lb = thema?.lebensbezuege?.[formData.lebensbezug];
-          if (lb?.lerninhalte) {
-            Object.keys(lb.lerninhalte).forEach(k => {
-              const o = document.createElement('option');
-              o.value = k; o.textContent = lb.lerninhalte[k].titel;
-              sel.appendChild(o);
-            });
-          }
-          sel.onchange = (e)=> formData.lerninhalt = e.target.value;
-          break;
-        }
-        case 5: {
-          const li = themenData[formData.schuljahr]?.[formData.thema]?.lebensbezuege?.[formData.lebensbezug]?.lerninhalte?.[formData.lerninhalt];
-          if (!li) return;
-          const renderChecks = (containerId, arr) => {
-            const c = document.getElementById(containerId); c.innerHTML = '';
-            (arr || []).forEach(val => {
-              const id = `${containerId}-${val}`.replace(/\s+/g,'-');
-              c.innerHTML += `
-                <div class="checkbox-item">
-                  <input type="checkbox" id="${id}" value="${val}"/>
-                  <label for="${id}">${val}</label>
-                </div>`;
-            });
-          };
-          renderChecks('sprachmodi', li.sprachmodi || []);
-          renderChecks('schluesselkompetenzen', li.schluesselkompetenzen || []);
-          renderChecks('digitale-kompetenzen', li.digitaleKompetenzen || []);
-          renderChecks('handlungsfelder', li.handlungsfelder || []);
-          formData.scaffolds = li.scaffolds || [];
-          break;
-        }
-      }
-    }
-
-    /* ------------------- KI-Generierung (Worker) ------------------ */
-    async function generateHerausforderung() {
-      const loading = document.getElementById('loading-herausforderung');
-      const error   = document.getElementById('error-herausforderung');
-      const panel   = document.getElementById('generated-herausforderung');
-      loading.classList.add('active'); error.classList.remove('active'); panel.style.display='none';
-      try {
-        const text = await callWorker("herausforderung", buildContext());
-        document.getElementById('herausforderung-text').textContent = text || '';
-        panel.style.display = 'block';
-      } catch (e) {
-        console.error(e); error.textContent = 'Fehler beim Generieren: ' + e.message; error.classList.add('active');
-      } finally { loading.classList.remove('active'); }
-    }
-
-    async function generateLernprodukt() {
-      const loading = document.getElementById('loading-lernprodukt');
-      const error   = document.getElementById('error-lernprodukt');
-      const panel   = document.getElementById('generated-lernprodukt');
-      loading.classList.add('active'); error.classList.remove('active'); panel.style.display='none';
-      try {
-        const ctx = buildContext();
-        const confirmed = document.getElementById('custom-herausforderung').value.trim()
-                        || document.getElementById('herausforderung-text').textContent.trim();
-        ctx.herausforderung = confirmed || '';
-        const html = await callWorker("lernprodukt_full", ctx);
-        document.getElementById('lernprodukt-content').innerHTML = html || '';
-        document.getElementById('zirkulaere-kompetenzen').innerHTML =
-          `<em>Siehe Abschnitt „Zirkularität (vorher / danach)“ in der Aufgabe.</em>`;
-        formData.lernprodukt   = html || '';
-        formData.zirkularitaet = document.getElementById('zirkulaere-kompetenzen').innerHTML;
-        panel.style.display = 'block';
-      } catch (e) {
-        console.error(e); error.textContent = 'Fehler beim Generieren: ' + e.message; error.classList.add('active');
-      } finally { loading.classList.remove('active'); }
-    }
-
-    /* ------------------------- Summary ---------------------------- */
-    function showSummary() {
-      const th = themenData[formData.schuljahr]?.[formData.thema];
-      const lb = th?.lebensbezuege?.[formData.lebensbezug];
-      const li = lb?.lerninhalte?.[formData.lerninhalt];
-
-      document.getElementById('summary-basic').innerHTML = `
-        <p><strong>Schuljahr:</strong> <span class="badge">${formData.schuljahr}. Lehrjahr</span></p>
-        <p><strong>Thema:</strong> ${th?.titel || '-'}</p>
-        <p><strong>Lebensbezug:</strong> ${lb?.titel || '-'}</p>
-        <p><strong>Lerninhalt:</strong> ${li?.titel || '-'}</p>
-      `;
-      document.getElementById('summary-kompetenzen').innerHTML = `
-        <div style="display:grid; gap:12px;">
-          <div><strong>Sprachmodi:</strong><ul style="margin-top:6px;">${formData.kompetenzen.sprachmodi.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-          <div><strong>Schlüsselkompetenzen:</strong><ul style="margin-top:6px;">${formData.kompetenzen.schluessel.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-          <div><strong>Digitale Kompetenzen:</strong><ul style="margin-top:6px;">${formData.kompetenzen.digital.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-          <div><strong>Handlungsfelder:</strong><ul style="margin-top:6px;">${formData.kompetenzen.handlungsfelder.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-        </div>`;
-      document.getElementById('summary-herausforderung').innerHTML =
-        `<div style="background:#f8f9fa; padding:12px; border-radius:8px;">${formData.herausforderung || '-'}</div>`;
-      document.getElementById('summary-lernprodukt').innerHTML = formData.lernprodukt || '-';
-      document.getElementById('summary-scaffolds').innerHTML = `<ul>${(formData.scaffolds||[]).map(s=>`<li>${s}</li>`).join('')}</ul>`;
-      document.getElementById('summary-zirkularitaet').innerHTML = formData.zirkularitaet || '<p>Siehe Zirkularität im Lernprodukt.</p>';
-    }
-
-    function saveAsJSON() {
-      const exportData = {
-        ...formData,
-        metadata: { erstellt: new Date().toISOString(), tool:"ABU Aufgabengenerator EBA", version:"1.0" }
-      };
-      const dataStr = JSON.stringify(exportData, null, 2);
-      const uri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-      const fname = `ABU-Aufgabe-${formData.schuljahr}-${formData.thema}-${new Date().toISOString().slice(0,10)}.json`;
-      const link = document.createElement('a'); link.setAttribute('href', uri); link.setAttribute('download', fname); link.click();
-    }
-
-    /* ----------------------- Initialisieren ----------------------- */
-    document.addEventListener('DOMContentLoaded', () => {
-      updateButtons();
-      // Falls du themenData extern hältst, entferne diese Zeile; ansonsten hier laden.
-      if (!Object.keys(themenData).length) {
-        console.warn('themenData ist leer – bitte Datenstruktur einfügen/inkludieren.');
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>

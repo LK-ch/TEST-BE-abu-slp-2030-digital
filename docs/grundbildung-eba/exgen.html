@@ -30,10 +30,10 @@
         select:focus, textarea:focus, input:focus { outline: none; border-color: var(--zh-blue); box-shadow: 0 0 0 3px rgba(15,5,160,0.1); }
         textarea { min-height: 120px; resize: vertical; font-family: inherit; }
         .button-group { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
-        button { padding: 0.75rem 1.5rem; border-radius: var(--border-radius); border: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+        button, .back-button { padding: 0.75rem 1.5rem; border-radius: var(--border-radius); border: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
         button:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-primary { background: var(--zh-blue); color: var(--zh-white); }
-        .btn-primary:hover:not(:disabled) { background: var(--zh-blue-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,5,160,0.3); }
+        .btn-primary, .back-button { background: var(--zh-blue); color: var(--zh-white); text-decoration: none; }
+        .btn-primary:hover:not(:disabled), .back-button:hover { background: var(--zh-blue-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,5,160,0.3); }
         .btn-secondary { background: var(--zh-gray); color: #333; }
         .btn-secondary:hover:not(:disabled) { background: #D0D0D0; }
         .btn-success { background: var(--zh-success); color: var(--zh-white); }
@@ -63,8 +63,10 @@
         #circularity-assessment p { font-size: 0.95rem; line-height: 1.6; color: var(--zh-gray-dark); }
         #circularity-assessment h5 { color: var(--zh-blue); font-size: 1rem; margin-top: 1rem; margin-bottom: 0.5rem;}
         #circularity-results div { background: var(--zh-gray-light); padding: 1rem; border-radius: var(--border-radius); min-height: 40px; }
+        .back-button-container { padding: 1.5rem 1.5rem 0 1.5rem; background-color: var(--zh-white); max-width: 1600px; margin: 0 auto;}
+        .back-button-container.bottom { padding-top: 0; padding-bottom: 1.5rem; }
         @media (max-width: 768px) { .container { flex-direction: column; } .wizard-column, .preview-column { width: 100%; max-height: none; } }
-        @media print { .wizard-column, .preview-footer, .header, .progress-container, #circularity-assessment-button { display: none; } .container { display: block; padding: 0; } .preview-column { box-shadow: none; max-height: none; } }
+        @media print { .wizard-column, .preview-footer, .header, .progress-container, #circularity-assessment-button, .back-button-container { display: none; } .container { display: block; padding: 0; } .preview-column { box-shadow: none; max-height: none; } }
     </style>
 </head>
 <body>
@@ -72,10 +74,16 @@
         <h1>SLP EBA Umsetzungsvarianten-Generator</h1>
         <p>Schullehrplan Allgemeinbildung • Kanton Zürich • 2-jährige Grundbildung EBA</p>
     </header>
+
+    <div class="back-button-container">
+        <a href="umsetzungsbeispiele.html" class="back-button">← Zurück zu den Umsetzungsbeispielen</a>
+    </div>
+
     <div class="progress-container">
         <div class="progress-text"><span id="progressText">Bitte wählen Sie zuerst ein Lehrjahr</span></div>
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     </div>
+
     <div class="container">
         <div class="wizard-column">
             <div class="step-section" data-step="1">
@@ -181,6 +189,10 @@
         </div>
     </div>
 
+    <div class="back-button-container bottom">
+        <a href="umsetzungsbeispiele.html" class="back-button">← Zurück zu den Umsetzungsbeispielen</a>
+    </div>
+
     <script>
         const CLOUDFLARE_WORKER_URL = "https://abu-aufgaben-api.cglaus.workers.dev";
         const TOTAL_STEPS = 9;
@@ -251,8 +263,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(context)
                 });
-                if (!response.ok) throw new Error(`Worker-Fehler: ${response.status}`);
+                
                 const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.generatedText || `Worker-Fehler: ${response.status}`);
+                }
 
                 if (uiStep === 9) {
                     if (result.bewertung) {
@@ -267,12 +282,12 @@
                         field.value = result.generatedText;
                         field.disabled = false;
                     } else {
-                        alert(result.generatedText); // Fallback für z.B. Fehlermeldungen vom Worker
+                        alert(result.generatedText);
                     }
                 }
             } catch (error) {
                 console.error("Fehler bei der KI-Anfrage:", error);
-                alert("Die KI-Anfrage ist fehlgeschlagen. Prüfen Sie die Browser-Konsole für Details.");
+                alert(`Die KI-Anfrage ist fehlgeschlagen: ${error.message}`);
             } finally {
                 button.disabled = false;
                 button.innerHTML = '🤖 KI-Generierung';
@@ -501,8 +516,7 @@
                 }
             }
             
-            // Fügt die Zirkularitäts-Box hinzu, wenn der Prozess weit genug fortgeschritten ist
-            if(appState.completedSteps.length >= 7) {
+            if(appState.completedSteps.includes(7)) { // Show after product is confirmed
                  html += `
                     <div id="circularity-assessment">
                         <h4>Didaktische Zirkularität bewerten</h4>
@@ -559,8 +573,10 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(context)
                 });
-                if (!response.ok) throw new Error(`Worker-Fehler: ${response.status}`);
                 const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.generatedText || `Worker-Fehler: ${response.status}`);
+                }
 
                 if (result.circularity && result.circularity.prerequisites && result.circularity.nextSteps) {
                     prerequisitesDiv.textContent = result.circularity.prerequisites;
@@ -571,7 +587,7 @@
 
             } catch(error) {
                 console.error("Fehler bei Zirkularitäts-Analyse:", error);
-                alert("Die Analyse ist fehlgeschlagen.");
+                alert(`Die Analyse ist fehlgeschlagen: ${error.message}`);
                 prerequisitesDiv.textContent = 'Fehler bei der Analyse.';
                 nextstepsDiv.textContent = 'Fehler bei der Analyse.';
             } finally {

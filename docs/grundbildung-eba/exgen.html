@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SLP EBA Umsetzungsvarianten-Generator</title>
+    <title>SLP EBA Umsetzungsvarianten-Generator (v2)</title>
     <style>
         :root {
             --zh-blue: #0F05A0; --zh-blue-light: #3A30C2; --zh-blue-lighter: #E8E6FF;
@@ -15,442 +15,253 @@
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, var(--zh-blue-lighter) 0%, var(--zh-white) 100%); min-height: 100vh; color: #333; }
         .header { background: var(--zh-blue); color: var(--zh-white); padding: 1.5rem; box-shadow: var(--shadow); }
         .header h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .header p { opacity: 0.9; font-size: 0.95rem; }
         .year-selector-group button { width: 100%; margin-top: 0.5rem; padding: 0.75rem 1rem; border: 2px solid var(--zh-blue); background: var(--zh-white); color: var(--zh-blue); border-radius: var(--border-radius); cursor: pointer; transition: all 0.3s ease; }
         .year-selector-group button.active { background: var(--zh-blue); color: var(--zh-white); }
         .progress-container { background: var(--zh-white); padding: 1rem 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .progress-bar { height: 8px; background: var(--zh-gray); border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--zh-blue) 0%, var(--zh-blue-light) 100%); width: 0%; transition: width 0.3s ease; }
-        .progress-text { font-size: 0.9rem; color: var(--zh-gray-dark); margin-bottom: 0.5rem; }
-        .container { display: flex; gap: 1.5rem; padding: 1.5rem; max-width: 1600px; margin: 0 auto; min-height: calc(100vh - 200px); }
-        .wizard-column { flex: 1; background: var(--zh-white); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow-y: auto; padding: 1.5rem; max-height: calc(100vh - 200px); }
+        .container { display: flex; flex-wrap: wrap; gap: 1.5rem; padding: 1.5rem; max-width: 1600px; margin: 0 auto; }
+        .wizard-column, .preview-column { flex: 1; min-width: 350px; background: var(--zh-white); border-radius: var(--border-radius); box-shadow: var(--shadow); display: flex; flex-direction: column; max-height: calc(100vh - 200px); }
+        .wizard-column-content { overflow-y: auto; padding: 1.5rem; }
         .step-section { margin-bottom: 2rem; padding: 1.5rem; background: var(--zh-gray-light); border-radius: var(--border-radius); border: 2px solid transparent; transition: all 0.3s ease; }
         .step-section.active { border-color: var(--zh-blue); background: var(--zh-white); box-shadow: 0 0 0 3px rgba(15,5,160,0.1); }
         .step-section.completed { opacity: 0.8; background: var(--zh-blue-lighter); }
         .step-header { display: flex; align-items: center; margin-bottom: 1rem; }
         .step-number { background: var(--zh-blue); color: var(--zh-white); min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 1rem; }
-        .step-title { font-size: 1.1rem; font-weight: 600; color: var(--zh-blue); }
         label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--zh-gray-dark); }
-        select, textarea, input { width: 100%; padding: 0.75rem; border: 2px solid var(--zh-gray); border-radius: var(--border-radius); font-size: 1rem; transition: border-color 0.3s ease; background: var(--zh-white); }
-        select:focus, textarea:focus, input:focus { outline: none; border-color: var(--zh-blue); box-shadow: 0 0 0 3px rgba(15,5,160,0.1); }
-        textarea { min-height: 120px; resize: vertical; font-family: inherit; }
-        .button-group { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+        select, textarea { width: 100%; padding: 0.75rem; border: 2px solid var(--zh-gray); border-radius: var(--border-radius); font-size: 1rem; background: var(--zh-white); }
+        select:focus, textarea:focus { outline: none; border-color: var(--zh-blue); box-shadow: 0 0 0 3px rgba(15,5,160,0.1); }
         button { padding: 0.75rem 1.5rem; border-radius: var(--border-radius); border: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
         button:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-primary { background: var(--zh-blue); color: var(--zh-white); }
-        .btn-primary:hover:not(:disabled) { background: var(--zh-blue-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,5,160,0.3); }
-        .btn-secondary { background: var(--zh-gray); color: #333; }
-        .btn-success { background: var(--zh-success); color: var(--zh-white); }
-        .btn-danger { background: var(--zh-danger); color: var(--zh-white); }
-        .preview-column { flex: 1; background: var(--zh-white); border-radius: var(--border-radius); box-shadow: var(--shadow); display: flex; flex-direction: column; max-height: calc(100vh - 200px); }
-        .preview-header { padding: 1.5rem; border-bottom: 2px solid var(--zh-gray-light); background: var(--zh-gray-light); }
+        .preview-header { padding: 1.5rem; border-bottom: 2px solid var(--zh-gray-light); }
         .preview-content { flex: 1; padding: 1.5rem; overflow-y: auto; }
-        .preview-content h3 { color: var(--zh-blue); margin: 1.5rem 0 0.75rem; font-size: 1.3rem; border-bottom: 2px solid var(--zh-blue-lighter); padding-bottom: 0.5rem; }
-        .preview-content h4 { color: var(--zh-blue); margin: 1.5rem 0 0.75rem; font-size: 1.1rem; }
-        .preview-content ul { margin-left: 1.5rem; line-height: 1.8; }
-        .preview-content .meta-info { background: var(--zh-gray-light); padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1rem; }
-        .preview-content .meta-info p { margin: 0.25rem 0; }
-        .preview-footer { padding: 1rem 1.5rem; border-top: 2px solid var(--zh-gray-light); background: var(--zh-gray-light); }
-        .bewertung-row { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr auto; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center; }
-        .bewertung-row input, .bewertung-row select { padding: 0.5rem; }
-        .total-row { font-weight: bold; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--zh-blue); }
-        .help-info { background: var(--zh-blue-lighter); border-left: 4px solid var(--zh-blue); padding: 0.75rem; margin: 0.5rem 0; border-radius: var(--border-radius); font-size: 0.9rem; color: var(--zh-gray-dark); }
-        .info-badge { display: inline-block; background: var(--zh-blue); color: var(--zh-white); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-left: 0.5rem; }
-        .competence-category { margin: 1rem 0; padding: 0.5rem; background: var(--zh-gray-light); border-radius: var(--border-radius); }
-        .competence-category h5 { margin: 0 0 0.5rem 0; color: var(--zh-blue); font-size: 0.95rem; }
+        .preview-footer { padding: 1rem 1.5rem; border-top: 2px solid var(--zh-gray-light); }
         .checkbox-group { max-height: 150px; overflow-y: auto; background: var(--zh-white); border: 2px solid var(--zh-gray); border-radius: var(--border-radius); padding: 0.75rem; }
         .checkbox-group label { display: flex; align-items: center; margin-bottom: 0.75rem; cursor: pointer; font-weight: normal; }
         .checkbox-group input[type="checkbox"] { width: auto; margin-right: 0.75rem; }
-        @media (max-width: 768px) { .container { flex-direction: column; } .wizard-column, .preview-column { width: 100%; max-height: none; } }
-        @media print { .header, .progress-container, .wizard-column, .preview-footer { display: none; } .container { display: block; padding: 0; } .preview-column { box-shadow: none; max-height: none; } }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>SLP EBA Umsetzungsvarianten-Generator</h1>
-        <p>Schullehrplan Allgemeinbildung • Kanton Zürich • 2-jährige Grundbildung EBA</p>
-    </header>
-
-    <div class="progress-container">
-        <div class="progress-text"><span id="progressText">Bitte wählen Sie ein Lehrjahr</span></div>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    </div>
-
+    <header class="header"><h1>SLP EBA Umsetzungsvarianten-Generator</h1></header>
+    <div class="progress-container"><div id="progressText"></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
     <div class="container">
         <div class="wizard-column">
-            <div class="step-section active" data-step="1">
-                <div class="step-header"><div class="step-number">1</div><h3 class="step-title">Lehrjahr auswählen</h3></div>
-                <label>Für welches Lehrjahr möchten Sie eine Variante erstellen?</label>
-                <div class="year-selector-group button-group">
-                    <button id="year1Btn" onclick="selectYear(1)">1. Lehrjahr (Themen 1-4)</button>
-                    <button id="year2Btn" onclick="selectYear(2)">2. Lehrjahr (Themen 5-8)</button>
-                </div>
-            </div>
-
-            <div class="step-section" data-step="2">
-                <div class="step-header"><div class="step-number">2</div><h3 class="step-title">Thema auswählen</h3></div>
-                <label for="thema">Wählen Sie ein Thema:</label>
-                <select id="thema" disabled onchange="autoProgressStep(2)"><option value="">-- Bitte zuerst Lehrjahr wählen --</option></select>
-            </div>
-
-            <div class="step-section" data-step="3">
-                <div class="step-header"><div class="step-number">3</div><h3 class="step-title">Individueller Lebensbezug</h3></div>
-                <label for="lebensbezug">Wählen Sie einen individuellen Lebensbezug:</label>
-                <select id="lebensbezug" disabled onchange="autoProgressStep(3)"><option value="">-- Bitte zuerst Thema wählen --</option></select>
-            </div>
-
-            <div class="step-section" data-step="4">
-                <div class="step-header"><div class="step-number">4</div><h3 class="step-title">Lerninhalt</h3></div>
-                <label for="lerninhalt">Wählen Sie einen Lerninhalt:</label>
-                <select id="lerninhalt" disabled onchange="autoProgressStep(4)"><option value="">-- Bitte zuerst Lebensbezug wählen --</option></select>
-            </div>
-            
-            <div class="step-section" data-step="5">
-                <div class="step-header"><div class="step-number">5</div><h3 class="step-title">Kompetenzen auswählen</h3></div>
-                <div class="competence-category">
-                    <h5>Schlüsselkompetenzen <span class="info-badge">Wählen Sie 2-4</span></h5>
-                    <div id="schluesselkompetenzen-container" class="checkbox-group"></div>
-                </div>
-                <div class="competence-category">
-                    <h5>Sprachmodi <span class="info-badge">Wählen Sie relevante Modi</span></h5>
-                    <div id="sprachmodi-container" class="checkbox-group"></div>
-                </div>
-                <div class="competence-category">
-                    <h5>Handlungsfelder der gesellschaftlichen Aspekte</h5>
-                    <div id="gesellschaftliche-container" class="checkbox-group"></div>
-                </div>
-                <div class="competence-category">
-                    <h5>Digitale Kompetenzen</h5>
-                    <div id="digitale-container" class="checkbox-group"></div>
-                </div>
-            </div>
-            
-            <div class="step-section" data-step="6">
-                <div class="step-header"><div class="step-number">6</div><h3 class="step-title">Herausforderung</h3></div>
-                <label for="herausforderung">Beschreiben Sie die Herausforderung aus Sicht der Lernenden:</label>
-                <textarea id="herausforderung" disabled placeholder="..."></textarea>
-                <div class="button-group">
-                    <button class="btn-primary" onclick="generateWithAI(6)" disabled>🤖 KI-Generierung</button>
-                    <button class="btn-secondary" onclick="enableManualEdit(6)" disabled>✏️ Selbst schreiben</button>
-                    <button class="btn-danger" onclick="resetField(6)" disabled>🔄 Zurücksetzen</button>
-                    <button class="btn-success" onclick="confirmStep(6)" disabled>✓ Übernehmen</button>
-                </div>
-            </div>
-
-            <div class="step-section" data-step="7">
-                <div class="step-header"><div class="step-number">7</div><h3 class="step-title">Produkt</h3></div>
-                <label for="produkt">Beschreiben Sie das zu erstellende Lernprodukt:</label>
-                <textarea id="produkt" disabled placeholder="..."></textarea>
-                 <div class="button-group">
-                    <button class="btn-primary" onclick="generateWithAI(7)" disabled>🤖 KI-Generierung</button>
-                    <button class="btn-secondary" onclick="enableManualEdit(7)" disabled>✏️ Selbst schreiben</button>
-                    <button class="btn-danger" onclick="resetField(7)" disabled>🔄 Zurücksetzen</button>
-                    <button class="btn-success" onclick="confirmStep(7)" disabled>✓ Übernehmen</button>
-                </div>
-            </div>
-
-            <div class="step-section" data-step="8">
-                <div class="step-header"><div class="step-number">8</div><h3 class="step-title">Eingesetzte Sprachmodi & Scaffolds</h3></div>
-                <label for="scaffolds">Scaffolds (Unterstützungshilfen):</label>
-                <textarea id="scaffolds" disabled placeholder="..."></textarea>
-                 <div class="button-group">
-                    <button class="btn-primary" onclick="generateWithAI(8)" disabled>🤖 KI-Generierung</button>
-                    <button class="btn-secondary" onclick="enableManualEdit(8)" disabled>✏️ Selbst schreiben</button>
-                    <button class="btn-danger" onclick="resetField(8)" disabled>🔄 Zurücksetzen</button>
-                    <button class="btn-success" onclick="confirmStep(8)" disabled>✓ Übernehmen</button>
-                </div>
-            </div>
-
-            <div class="step-section" data-step="9">
-                <div class="step-header"><div class="step-number">9</div><h3 class="step-title">Bewertungspositionen</h3></div>
-                <div id="bewertungContainer">
-                    <div class="bewertung-row">
-                        <strong>Kriterium</strong><strong>Kompetenz</strong><strong>Punkte</strong><strong>Bereich</strong><strong>Aktion</strong>
+            <div class="wizard-column-content">
+                <div class="step-section" data-step="1">
+                    <div class="step-header"><div class="step-number">1</div><h3>Lehrjahr auswählen</h3></div>
+                    <div class="year-selector-group">
+                        <button id="year1Btn" onclick="handleYearSelect(1)">1. Lehrjahr (Themen 1-4)</button>
+                        <button id="year2Btn" onclick="handleYearSelect(2)">2. Lehrjahr (Themen 5-8)</button>
                     </div>
                 </div>
-                <button class="btn-secondary" onclick="addBewertungRow()">+ Kriterium hinzufügen</button>
-                <div class="total-row">Total: <span id="totalPoints">0</span> / 100 Punkte</div>
-                <div class="help-info">Die Bewertung soll sich auf Sprache & Kommunikation sowie Gesellschaft beziehen (je ca. 50%).</div>
-                <div class="button-group">
-                    <button class="btn-primary" onclick="generateWithAI(9)" disabled>🤖 KI-Generierung</button>
-                    <button class="btn-danger" onclick="resetBewertung()" disabled>🔄 Zurücksetzen</button>
-                    <button class="btn-success" onclick="confirmStep(9)" disabled>✓ Übernehmen</button>
+                <div class="step-section" data-step="2">
+                    <div class="step-header"><div class="step-number">2</div><h3>Thema auswählen</h3></div>
+                    <select id="thema" onchange="handleSelectChange(event, 2)"></select>
                 </div>
-            </div>
+                <div class="step-section" data-step="3">
+                    <div class="step-header"><div class="step-number">3</div><h3>Individueller Lebensbezug</h3></div>
+                    <select id="lebensbezug" onchange="handleSelectChange(event, 3)"></select>
+                </div>
+                <div class="step-section" data-step="4">
+                    <div class="step-header"><div class="step-number">4</div><h3>Lerninhalt</h3></div>
+                    <select id="lerninhalt" onchange="handleSelectChange(event, 4)"></select>
+                </div>
+                <div class="step-section" data-step="5">
+                    <div class="step-header"><div class="step-number">5</div><h3>Kompetenzen auswählen</h3></div>
+                    <div id="kompetenzen-wrapper"></div>
+                    <button class="btn-primary" style="margin-top: 1rem;" onclick="handleCompetencyConfirm()">Kompetenzen bestätigen</button>
+                </div>
+                </div>
         </div>
-        
         <div class="preview-column">
-            <div class="preview-header"><h2>Vorschau der Umsetzungsvariante</h2></div>
-            <div class="preview-content" id="previewContent">
-                <p style="color: #999; text-align: center; margin-top: 2rem;">Bitte wählen Sie ein Lehrjahr, um zu beginnen.</p>
-            </div>
-            <div class="preview-footer">
-                <div class="button-group">
-                    <button class="btn-primary" onclick="printPreview()">🖨️ Drucken</button>
-                    <button class="btn-secondary" onclick="copyToClipboard()">📋 Kopieren</button>
-                    <button class="btn-secondary" onclick="exportAsJSON()">💾 Export JSON</button>
-                </div>
-            </div>
+            <div class="preview-header"><h2>Vorschau</h2></div>
+            <div class="preview-content" id="previewContent"></div>
+            <div class="preview-footer"><button class="btn-primary" onclick="window.print()">🖨️ Drucken</button></div>
         </div>
     </div>
 
-<script>
-    // === KONFIGURATION ===
-    const CLOUDFLARE_WORKER_URL = "https://abu-aufgaben-api.cglaus.workers.dev"; // WICHTIG: Eigene Worker-URL eintragen!
+    <script>
+        // === 1. KONFIGURATION & DATEN (PLATZHALTER) ===
+        const CLOUDFLARE_WORKER_URL = "https://abu-aufgaben-api.cglaus.workers.dev";
+        let SLP_DATA = {};
+        let SCHLUESSELKOMPETENZEN = {};
+        let SPRACHMODI = {};
+        let GESELLSCHAFTLICHE = {};
 
-    // === GLOBALE VARIABLEN & STATE ===
-    let SLP_DATA = {};
-    let SCHLUESSELKOMPETENZEN = {};
-    let SPRACHMODI = {};
-    let GESELLSCHAFTLICHE = {};
+        // === 2. STATE MANAGEMENT ===
+        let state = {};
 
-    let appState = {};
-
-    // === INITIALISIERUNG ===
-    document.addEventListener('DOMContentLoaded', initializeApp);
-
-    function initializeApp() {
-        document.getElementById('progressText').textContent = 'Lade Grundlagendaten...';
-        try {
-            // Lädt die hartcodierten Daten in die globalen Variablen
-            loadStaticData();
-            // Setzt den App-Zustand auf den Startwert zurück
-            resetAppState();
-            // Aktualisiert die gesamte Benutzeroberfläche basierend auf dem Startzustand
-            updateUI();
-            console.log("Anwendung erfolgreich initialisiert.");
-        } catch (error) {
-            console.error("Fehler bei der Initialisierung:", error);
-            document.getElementById('progressText').textContent = 'Fehler: Daten konnten nicht initialisiert werden.';
+        function getInitialState() {
+            return {
+                lehrjahr: null,
+                currentStep: 1,
+                selections: {
+                    thema: null,
+                    lebensbezug: null,
+                    lerninhalt: null,
+                    kompetenzen: null
+                },
+            };
         }
-    }
-    
-    // === NEUE, ZENTRALE STEUERUNGSFUNKTIONEN ===
-    
-    function resetAppState() {
-        appState = {
-            lehrjahr: null,
-            currentStep: 1,
-            completedSteps: [],
-            data: {
-                thema: '', lebensbezug: '', lerninhalt: '', schluesselkompetenzen: [],
-                sprachmodi: [], gesellschaftliche: [], digitale: [],
-                herausforderung: '', produkt: '', scaffolds: '', bewertung: []
-            }
-        };
-        // Setzt die Button-Styles für die Lehrjahr-Auswahl zurück
-        document.getElementById('year1Btn').classList.remove('active');
-        document.getElementById('year2Btn').classList.remove('active');
-    }
 
-    // Diese Funktion aktualisiert die gesamte UI basierend auf dem aktuellen App-Zustand
-    function updateUI() {
-        updateStepVisualsAndInputs();
-        updateProgress();
-        updatePreview();
-    }
-    
-    // Diese Funktion steuert nun ZENTRAL die Sichtbarkeit UND die Interaktivität der Schritte
-    function updateStepVisualsAndInputs() {
-        document.querySelectorAll('.step-section').forEach(section => {
-            const step = parseInt(section.dataset.step);
-            const inputs = section.querySelectorAll('select, textarea, button, input[type="checkbox"]');
+        // === 3. RENDER-FUNKTIONEN (Die einzige Quelle der Wahrheit für die UI) ===
+
+        function renderUI() {
+            // -- Fortschrittsbalken --
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const totalSteps = 5; // Nur die Auswahl-Schritte
+            const completedSteps = state.currentStep - 1;
+            progressFill.style.width = `${(completedSteps / totalSteps) * 100}%`;
+            progressText.textContent = state.lehrjahr ? `${state.lehrjahr}. Lehrjahr • Schritt ${state.currentStep}` : 'Bitte Lehrjahr wählen';
             
-            section.classList.remove('active', 'completed');
-            
-            if (step < appState.currentStep) {
-                // Abgeschlossener Schritt: Sichtbar, ausgefüllt und bedienbar
-                section.classList.add('completed');
-                inputs.forEach(el => el.disabled = false);
-            } else if (step === appState.currentStep) {
-                // Aktueller Schritt: Sichtbar, aktiv und bedienbar
-                section.classList.add('active');
-                inputs.forEach(el => el.disabled = false);
-            } else {
-                // Zukünftiger Schritt: Sichtbar, aber gesperrt
-                inputs.forEach(el => el.disabled = true);
-            }
-        });
-    }
-
-    // === EVENT HANDLER (STARK VEREINFACHT) ===
-
-    function selectYear(year) {
-        resetAppState(); // Setzt alles zurück
-        appState.lehrjahr = year;
-        document.getElementById(`year${year}Btn`).classList.add('active');
-        
-        loadThemen(); // Füllt die nächste Auswahl
-        
-        // Zum nächsten Schritt wechseln
-        appState.completedSteps.push(1);
-        appState.currentStep = 2;
-        
-        updateUI(); // Aktualisiert die gesamte Oberfläche
-    }
-
-    function autoProgressStep(step) {
-        switch(step) {
-            case 2: // Thema ausgewählt
-                appState.data.thema = document.getElementById('thema').value;
-                if (!appState.data.thema) return;
-                loadLebensbezuege();
-                appState.completedSteps.push(2);
-                appState.currentStep = 3;
-                break;
-            case 3: // Lebensbezug ausgewählt
-                appState.data.lebensbezug = document.getElementById('lebensbezug').value;
-                if (!appState.data.lebensbezug) return;
-                loadLerninhalte();
-                appState.completedSteps.push(3);
-                appState.currentStep = 4;
-                break;
-            case 4: // Lerninhalt ausgewählt
-                appState.data.lerninhalt = document.getElementById('lerninhalt').value;
-                if (!appState.data.lerninhalt) return;
-                loadAllKompetenzen();
-                appState.completedSteps.push(4);
-                appState.currentStep = 5;
-                break;
-        }
-        updateUI();
-    }
-    
-    function confirmStep(step) {
-        let valid = false;
-        const fieldMap = {6: 'herausforderung', 7: 'produkt', 8: 'scaffolds'};
-        if (fieldMap[step]) {
-            const value = document.getElementById(fieldMap[step]).value.trim();
-            if (value) { appState.data[fieldMap[step]] = value; valid = true; }
-        } else if (step === 9) {
-            const total = calculateTotalPoints();
-            if (total === 100) { appState.data.bewertung = collectBewertungData(); valid = true; } 
-            else { alert('Die Bewertung muss genau 100 Punkte ergeben!'); }
-        }
-        
-        if (valid) {
-            appState.completedSteps.push(step);
-            appState.currentStep = step + 1;
-            updateUI();
-        } else if (step < 9) {
-            alert('Bitte füllen Sie das Feld aus!');
-        }
-    }
-    
-    // === DATEN LADEN & VERARBEITEN ===
-
-    function loadThemen() {
-        const themaSelect = document.getElementById('thema');
-        const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
-        themaSelect.innerHTML = '<option value="">-- Bitte wählen --</option>';
-        data.themen.forEach(thema => {
-            const option = document.createElement('option');
-            option.value = thema.nummer;
-            option.textContent = `Thema ${thema.nummer}: ${thema.titel}`;
-            themaSelect.appendChild(option);
-        });
-    }
-
-    function loadLebensbezuege() {
-        const lebensbezugSelect = document.getElementById('lebensbezug');
-        const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
-        const thema = data.themen.find(t => t.nummer == appState.data.thema);
-        lebensbezugSelect.innerHTML = '<option value="">-- Bitte wählen --</option>';
-        thema.lebensbezuege.forEach((lb, index) => {
-            lebensbezugSelect.add(new Option(lb.titel, index));
-        });
-    }
-
-    function loadLerninhalte() {
-        const lerninhaltSelect = document.getElementById('lerninhalt');
-        const data = appState.lehrjahr === 1 ? SLP_DATA.lehrjahr1 : SLP_DATA.lehrjahr2;
-        const thema = data.themen.find(t => t.nummer == appState.data.thema);
-        const lebensbezug = thema.lebensbezuege[appState.data.lebensbezug];
-        lerninhaltSelect.innerHTML = '<option value="">-- Bitte wählen --</option>';
-        lebensbezug.lerninhalte.forEach((li, index) => {
-            lerninhaltSelect.add(new Option(li.titel, index));
-        });
-    }
-
-    function loadAllKompetenzen() {
-        const lerninhalt = SLP_DATA[`lehrjahr${appState.lehrjahr}`].themen
-            .find(t => t.nummer == appState.data.thema)
-            .lebensbezuege[appState.data.lebensbezug]
-            .lerninhalte[appState.data.lerninhalt];
-
-        const createCheckboxes = (containerId, items, definitionObject) => {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            items.forEach(key => {
-                const label = document.createElement('label');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.value = key;
-                checkbox.checked = true;
-                checkbox.onchange = validateCompetencyStep;
-                label.append(checkbox, ` ${key} - ${definitionObject[key] || key}`);
-                container.appendChild(label);
+            // -- Wizard-Schritte --
+            document.querySelectorAll('.step-section').forEach(section => {
+                const step = parseInt(section.dataset.step);
+                const inputs = section.querySelectorAll('button, select, input');
+                
+                section.classList.remove('active', 'completed');
+                
+                if (step < state.currentStep) {
+                    section.classList.add('completed');
+                    inputs.forEach(el => el.disabled = false);
+                } else if (step === state.currentStep) {
+                    section.classList.add('active');
+                    inputs.forEach(el => el.disabled = false);
+                } else {
+                    inputs.forEach(el => el.disabled = true);
+                }
             });
-        };
 
-        createCheckboxes('schluesselkompetenzen-container', lerninhalt.schluesselkompetenzen, SCHLUESSELKOMPETENZEN);
-        createCheckboxes('sprachmodi-container', lerninhalt.sprachmodi, SPRACHMODI);
-        createCheckboxes('gesellschaftliche-container', lerninhalt.gesellschaftliche, GESELLSCHAFTLICHE);
-        createCheckboxes('digitale-container', lerninhalt.digitale, {});
-        
-        validateCompetencyStep();
-    }
-    
-    function validateCompetencyStep() {
-        const getChecked = id => Array.from(document.querySelectorAll(`#${id} input:checked`)).map(cb => cb.value);
-        const sk = getChecked('schluesselkompetenzen-container');
-        const sm = getChecked('sprachmodi-container');
-
-        if (sk.length >= 2 && sm.length > 0) {
-            appState.data.schluesselkompetenzen = sk;
-            appState.data.sprachmodi = sm;
-            appState.data.gesellschaftliche = getChecked('gesellschaftliche-container');
-            appState.data.digitale = getChecked('digitale-container');
-            if(!appState.completedSteps.includes(5)) {
-                appState.completedSteps.push(5);
-                appState.currentStep = 6;
+            // Button-Aktivität
+            if(state.lehrjahr) {
+                document.getElementById('year1Btn').classList.toggle('active', state.lehrjahr === 1);
+                document.getElementById('year2Btn').classList.toggle('active', state.lehrjahr === 2);
             }
-        } else {
-            appState.completedSteps = appState.completedSteps.filter(s => s < 5);
-            appState.currentStep = 5;
+
+            // -- Vorschau --
+            renderPreview();
         }
-        updateUI();
-    }
-    
-    // === RESTLICHE FUNKTIONEN (KI, VORSCHAU, BEWERTUNG, ETC.) ===
-    // Diese bleiben grösstenteils gleich, sind hier aber zur Vollständigkeit aufgeführt.
-    async function generateWithAI(step) { /* ... Code von oben ... */ }
-    function updateProgress() {
-        const totalSteps = 9;
-        const completed = appState.completedSteps.length;
-        const percentage = (completed / totalSteps) * 100;
-        document.getElementById('progressFill').style.width = percentage + '%';
-        document.getElementById('progressText').textContent = appState.lehrjahr ? `${appState.lehrjahr}. Lehrjahr • Schritt ${appState.currentStep} von ${totalSteps}` : 'Bitte wählen Sie ein Lehrjahr';
-    }
-    function updatePreview() { /* ... unveränderter Code ... */ }
-    function populateBewertung(bewertungArray) { /* ... unveränderter Code ... */ }
-    function addBewertungRow() { /* ... unveränderter Code ... */ }
-    function resetBewertung() { /* ... unveränderter Code ... */ }
-    function calculateTotalPoints() { /* ... unveränderter Code ... */ }
-    function updateTotalPoints() { /* ... unveränderter Code ... */ }
-    function collectBewertungData() { /* ... unveränderter Code ... */ }
-    function enableManualEdit(step) { /* ... unveränderter Code ... */ }
-    function resetField(step) { /* ... unveränderter Code ... */ }
-    function printPreview() { window.print(); }
-    function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('previewContent').innerText).then(() => alert('Text kopiert!')); }
-    function exportAsJSON() { /* ... unveränderter Code ... */ }
-    function loadStaticData() {
-        // HINWEIS: Hier ist der Platzhalter für Ihre Parser-Logik.
-        SCHLUESSELKOMPETENZEN = {"3.2.1": "Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden", "3.2.2": "Sich selbst Ziele setzen...", "3.2.3": "Antizipative, unternehmerische und innovative Wege der Problemlösung...", "3.2.4": "In unterschiedlichen Teams zielgerichtet und effizient arbeiten", "3.2.5": "Die eigenen Werthaltungen und Überzeugungen erkennen...", "3.2.6": "Ihre eigenen Standpunkte begründen...", "3.2.7": "Unterschiedliche Standpunkte nachvollziehen...", "3.2.8": "Ihre Lebensphasen planen...", "3.2.9": "Vernetzt und systemisch denken...", "3.2.10": "Sich in einem sich ständig verändernden Umfeld zurechtfinden", "3.2.11": "Mit Mehrdeutigkeiten umgehen", "3.2.12": "An gesellschaftlichen Prozessen partizipieren..."};
-        SPRACHMODI = {"4.2.1.1": "Rezeption mündlich", "4.2.1.2": "Rezeption audiovisuell", "4.2.1.3": "Rezeption schriftlich und bildlich", "4.2.2.1": "Produktion mündlich", "4.2.2.2": "Produktion schriftlich und bildlich", "4.2.2.3": "Produktion multimedial", "4.2.3.1": "Interaktion und Kollaboration mündlich", "4.2.3.2": "Interaktion und Kollaboration schriftlich", "4.2.3.3": "Interaktion und Kollaboration digital"};
-        GESELLSCHAFTLICHE = {"5.2.1.1": "Ethik - Empathisch handeln...", "5.2.1.2": "Ethik - Verantwortung für Integrität...", "5.2.1.3": "Ethik - Aktiv an moralischen Entscheiden beteiligen", "5.2.2.1": "Identität - Persönlichkeit erkunden...", "5.2.2.2": "Identität - Auf Gesundheit achten...", "5.2.2.3": "Identität - Identitätsstiftende Räume erkunden", "5.2.2.4": "Identität - Andere kulturelle Realitäten anerkennen", "5.2.3.1": "Kultur - Bewusstsein für gestaltete Welt entwickeln", "5.2.3.2": "Kultur - Mit grundlegenden Lebensthemen auseinandersetzen", "5.2.3.4": "Kultur - Gestaltungs- und Ausdrucksfähigkeiten erproben", "5.2.4.1": "Ökologie - Eigenes Verhalten analysieren", "5.2.4.2": "Ökologie - Lösungsansätze für nachhaltige Nutzung", "5.2.5.1": "Politik - Politische Fragen analysieren", "5.2.5.2": "Politik - Eigene politische Meinungen entwickeln", "5.2.5.3": "Politik - Politische Organisation verstehen", "5.2.6.1": "Recht - Funktionsweise der Institutionen verstehen", "5.2.6.2": "Recht - Juristische Regeln verstehen", "5.2.6.3": "Recht - Juristische Informationen interpretieren", "5.2.6.4": "Recht - Juristische Normen nutzen", "5.2.7.1": "Technologie - Einfluss von Technologien analysieren", "5.2.7.2": "Technologie - IKT verantwortungsbewusst nutzen", "5.2.8.1": "Wirtschaft - Als Konsument wählen", "5.2.8.2": "Wirtschaft - Wirtschaftliche Akteure verstehen", "5.2.8.3": "Wirtschaft - Erwartungen an Unternehmen analysieren"};
-        SLP_DATA = { /* ... Das komplette, riesige SLP_DATA Objekt von vorhin ... */ };
-    }
-</script>
+
+        function renderPreview() {
+            const preview = document.getElementById('previewContent');
+            if (!state.lehrjahr) {
+                preview.innerHTML = `<p>Bitte ein Lehrjahr wählen, um zu starten.</p>`;
+                return;
+            }
+            let html = `<h3>${state.lehrjahr}. Lehrjahr</h3>`;
+            const { thema, lebensbezug, lerninhalt, kompetenzen } = state.selections;
+
+            if (thema) {
+                 const themaData = SLP_DATA[`lehrjahr${state.lehrjahr}`].themen.find(t => t.nummer == thema);
+                 html += `<p><strong>Thema:</strong> ${themaData.titel}</p>`;
+            }
+            // ... Weitere Preview-Logik hier ...
+            preview.innerHTML = html;
+        }
+
+
+        // === 4. EVENT HANDLERS (Ändern nur den State und rufen renderUI auf) ===
+
+        function handleYearSelect(year) {
+            state = getInitialState();
+            state.lehrjahr = year;
+            state.currentStep = 2;
+            populateThemen();
+            renderUI();
+        }
+        
+        function handleSelectChange(event, step) {
+            const value = event.target.value;
+            if (!value) return;
+
+            if (step === 2) {
+                state.selections.thema = value;
+                state.currentStep = 3;
+                populateLebensbezuege();
+            } else if (step === 3) {
+                state.selections.lebensbezug = value;
+                state.currentStep = 4;
+                populateLerninhalte();
+            } else if (step === 4) {
+                state.selections.lerninhalt = value;
+                state.currentStep = 5;
+                populateKompetenzen();
+            }
+            renderUI();
+        }
+        
+        function handleCompetencyConfirm() {
+            const getChecked = id => Array.from(document.querySelectorAll(`#${id} input:checked`)).map(cb => cb.value);
+            const sk = getChecked('schluesselkompetenzen-container');
+            const sm = getChecked('sprachmodi-container');
+
+            if (sk.length < 2 || sm.length < 1) {
+                alert('Bitte mindestens 2 Schlüsselkompetenzen und 1 Sprachmodus auswählen.');
+                return;
+            }
+            
+            state.selections.kompetenzen = { sk, sm };
+            state.currentStep = 6; // Nächster Schritt (z.B. Herausforderung)
+            alert("Kompetenzen bestätigt! Nächste Schritte können nun implementiert werden.");
+            renderUI();
+        }
+
+
+        // === 5. DATENLADE-FUNKTIONEN (Füllen die UI-Elemente) ===
+
+        function populateThemen() {
+            const select = document.getElementById('thema');
+            const data = SLP_DATA[`lehrjahr${state.lehrjahr}`];
+            select.innerHTML = '<option value="">-- Bitte wählen --</option>';
+            data.themen.forEach(t => select.add(new Option(`Thema ${t.nummer}: ${t.titel}`, t.nummer)));
+        }
+
+        function populateLebensbezuege() {
+            const select = document.getElementById('lebensbezug');
+            const thema = SLP_DATA[`lehrjahr${state.lehrjahr}`].themen.find(t => t.nummer == state.selections.thema);
+            select.innerHTML = '<option value="">-- Bitte wählen --</option>';
+            thema.lebensbezuege.forEach((lb, index) => select.add(new Option(lb.titel, index)));
+        }
+        
+        function populateLerninhalte() {
+            const select = document.getElementById('lerninhalt');
+            const lebensbezug = SLP_DATA[`lehrjahr${state.lehrjahr}`].themen.find(t => t.nummer == state.selections.thema).lebensbezuege[state.selections.lebensbezug];
+            select.innerHTML = '<option value="">-- Bitte wählen --</option>';
+            lebensbezug.lerninhalte.forEach((li, index) => select.add(new Option(li.titel, index)));
+        }
+
+        function populateKompetenzen() {
+            const wrapper = document.getElementById('kompetenzen-wrapper');
+            const lerninhalt = SLP_DATA[`lehrjahr${state.lehrjahr}`].themen
+                .find(t => t.nummer == state.selections.thema)
+                .lebensbezuege[state.selections.lebensbezug]
+                .lerninhalte[state.selections.lerninhalt];
+
+            const createCheckboxes = (title, containerId, items, defs) => {
+                let html = `<div class="competence-category"><h5>${title}</h5><div id="${containerId}" class="checkbox-group">`;
+                items.forEach(key => {
+                    html += `<label><input type="checkbox" value="${key}" checked> ${key} - ${defs[key] || key}</label>`;
+                });
+                html += `</div></div>`;
+                return html;
+            };
+
+            wrapper.innerHTML = 
+                createCheckboxes('Schlüsselkompetenzen', 'schluesselkompetenzen-container', lerninhalt.schluesselkompetenzen, SCHLUESSELKOMPETENZEN) +
+                createCheckboxes('Sprachmodi', 'sprachmodi-container', lerninhalt.sprachmodi, SPRACHMODI);
+        }
+
+        // === 6. INITIALISIERUNG & DATEN-PLATZHALTER ===
+        function loadStaticData() {
+            SCHLUESSELKOMPETENZEN = {"3.2.1": "Zwischen relevanten und irrelevanten Quellen und Inhalten unterscheiden", "3.2.2": "Sich selbst Ziele setzen...", "3.2.3": "Antizipative, unternehmerische und innovative Wege der Problemlösung...", "3.2.4": "In unterschiedlichen Teams zielgerichtet und effizient arbeiten", "3.2.5": "Die eigenen Werthaltungen und Überzeugungen erkennen...", "3.2.6": "Ihre eigenen Standpunkte begründen...", "3.2.7": "Unterschiedliche Standpunkte nachvollziehen...", "3.2.8": "Ihre Lebensphasen planen...", "3.2.9": "Vernetzt und systemisch denken...", "3.2.10": "Sich in einem sich ständig verändernden Umfeld zurechtfinden", "3.2.11": "Mit Mehrdeutigkeiten umgehen", "3.2.12": "An gesellschaftlichen Prozessen partizipieren..."};
+            SPRACHMODI = {"4.2.1.1": "Rezeption mündlich", "4.2.1.2": "Rezeption audiovisuell", "4.2.1.3": "Rezeption schriftlich und bildlich", "4.2.2.1": "Produktion mündlich", "4.2.2.2": "Produktion schriftlich und bildlich", "4.2.2.3": "Produktion multimedial", "4.2.3.1": "Interaktion und Kollaboration mündlich", "4.2.3.2": "Interaktion und Kollaboration schriftlich", "4.2.3.3": "Interaktion und Kollaboration digital"};
+            GESELLSCHAFTLICHE = { /* ... */ };
+            SLP_DATA = { /* ... Das komplette, riesige SLP_DATA Objekt von vorhin ... */ };
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
 </body>
 </html>

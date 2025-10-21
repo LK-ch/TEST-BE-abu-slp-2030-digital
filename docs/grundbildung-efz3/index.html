@@ -14,8 +14,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
+            color: #000;
+            background-color: #fff8f0;
         }
         
         .container {
@@ -25,7 +25,8 @@
         }
         
         header {
-            background-color: #fff;
+            background: linear-gradient(90deg, #c8102e, #ffcc00);
+            color: white;
             padding: 30px 20px;
             margin-bottom: 30px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -33,13 +34,14 @@
         
         .breadcrumb {
             font-size: 0.9em;
-            color: #666;
+            color: #fff;
             margin-bottom: 20px;
         }
         
         .breadcrumb a {
-            color: #0066cc;
+            color: #fff;
             text-decoration: none;
+            font-weight: 500;
         }
         
         .breadcrumb a:hover {
@@ -47,31 +49,64 @@
         }
         
         h1 {
-            color: #0066cc;
+            color: #fff;
             font-size: 2.2em;
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: 700;
         }
         
         .subtitle {
-            color: #666;
+            color: #fff;
             font-size: 1.1em;
         }
         
         .info-box {
-            background-color: #e8f4fd;
-            border-left: 4px solid #0066cc;
+            background-color: #fff;
+            border-left: 4px solid #c8102e;
             border-radius: 4px;
             padding: 24px;
             margin-bottom: 40px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
         }
         
+        .info-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .info-box-header:hover {
+            opacity: 0.8;
+        }
+        
         .info-box h2 {
-            color: #003d7a;
+            color: #000;
             font-size: 1.3em;
-            margin-bottom: 16px;
-            font-weight: 600;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            color: #c8102e;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .info-box-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .info-box-content.expanded {
+            max-height: 1000px;
+            margin-top: 16px;
         }
         
         .info-box ul {
@@ -83,22 +118,22 @@
             position: relative;
             padding-left: 28px;
             margin-bottom: 12px;
-            color: #333;
+            color: #000;
         }
         
         .info-box li::before {
             content: "▸";
             position: absolute;
             left: 0;
-            color: #0066cc;
+            color: #c8102e;
             font-weight: bold;
         }
         
         .info-box .highlight {
-            background-color: #fff;
+            background-color: #fff3cd;
             padding: 2px 6px;
             border-radius: 3px;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .theme-overview {
@@ -108,7 +143,8 @@
         .theme-overview h2 {
             margin-bottom: 20px;
             font-size: 1.4em;
-            color: #003d7a;
+            color: #000;
+            font-weight: 700;
         }
         
         .theme-table {
@@ -122,38 +158,34 @@
         }
         
         .theme-table th {
-            background-color: #e8f4fd;
+            background: linear-gradient(90deg, #c8102e, #ffcc00);
             padding: 12px;
             text-align: left;
-            color: #003d7a;
+            color: #fff;
             font-weight: 600;
         }
         
         .theme-table td {
             padding: 12px;
             border-bottom: 1px solid #eee;
+            color: #000;
         }
         
         .theme-table .year-cell {
             font-weight: 600;
-            background-color: #f0f8ff;
+            background-color: #fff3cd;
             vertical-align: middle;
             text-align: center;
             font-size: 1.1em;
-        }
-        
-        .theme-table .year-1 {
-            color: #0066cc;
+            color: #c8102e;
         }
         
         .theme-table .year-2 {
-            color: #4d94ff;
-            background-color: #e6f3ff;
+            background-color: #ffe8a1;
         }
         
         .theme-table .year-3 {
-            color: #6699ff;
-            background-color: #ddeeff;
+            background-color: #ffd770;
         }
         
         .theme-table tfoot td {
@@ -180,6 +212,7 @@
             display: block;
             position: relative;
             overflow: hidden;
+            border-left: 6px solid #c8102e;
         }
         
         .card:hover {
@@ -187,26 +220,11 @@
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
         }
         
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background-color: #0066cc;
-            transition: width 0.3s ease;
-        }
-        
-        .card:hover::before {
-            width: 8px;
-        }
-        
         .card-icon {
             width: 56px;
             height: 56px;
             margin-bottom: 20px;
-            background-color: #0066cc;
+            background: linear-gradient(135deg, #c8102e, #ffcc00);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -219,12 +237,12 @@
         .card h3 {
             font-size: 1.5em;
             margin-bottom: 12px;
-            color: #0066cc;
-            font-weight: 600;
+            color: #000;
+            font-weight: 700;
         }
         
         .card p {
-            color: #666;
+            color: #333;
             line-height: 1.5;
         }
         
@@ -233,7 +251,7 @@
             padding-top: 16px;
             border-top: 1px solid #eee;
             font-size: 0.9em;
-            color: #999;
+            color: #666;
         }
         
         .back-link {
@@ -242,16 +260,16 @@
         }
         
         .back-link a {
-            color: #0066cc;
+            color: #c8102e;
             text-decoration: none;
             font-size: 1.1em;
+            font-weight: 600;
         }
         
         .back-link a:hover {
             text-decoration: underline;
         }
         
-        /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8em;
@@ -261,15 +279,20 @@
                 grid-template-columns: 1fr;
             }
             
-            .info-box {
-                padding: 20px;
-            }
-            
             .theme-table {
                 font-size: 0.9em;
             }
         }
     </style>
+    <script>
+        function toggleInfo() {
+            const content = document.getElementById('info-content');
+            const icon = document.getElementById('toggle-icon');
+            
+            content.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -283,19 +306,6 @@
     </header>
     
     <main class="container">
-        <div class="info-box">
-            <h2>📋 Vorgaben gemäss Rahmenlehrplan ABU 2025</h2>
-            <ul>
-                <li>Pro Thema werden mindestens <span class="highlight">3 Schlüsselkompetenzen</span> bewusst gefördert</li>
-                <li>Lerninhalte aus mindestens <span class="highlight">3 Aspekten</span> des Lernbereichs Gesellschaft</li>
-                <li>Berücksichtigung von <span class="highlight">3 Sprachmodi</span> pro Thema</li>
-                <li>Kompetenzen aus allen <span class="highlight">Sprachmodi</span> unter Berücksichtigung von Konvention, Normen und Sprachbewusstheit</li>
-                <li>Bis zum Abschluss: Aufbau aller <span class="highlight">12 Schlüsselkompetenzen</span> und Kompetenzen aus allen <span class="highlight">8 gesellschaftlichen Aspekten</span></li>
-                <li>Integration der <span class="highlight">Schlussarbeit</span> im letzten Lehrjahr</li>
-                <li>Spiralförmiges Curriculum mit formativen und summativen Kompetenznachweisen</li>
-            </ul>
-        </div>
-        
         <div class="theme-overview">
             <h2>📚 Themenübersicht</h2>
             <table class="theme-table">
@@ -310,44 +320,44 @@
                     <tr>
                         <td rowspan="2" class="year-cell year-1">1</td>
                         <td>
-                            <strong>1.</strong> Ins Berufsleben einsteigen <span style="color: #666;">(21 Lekt.)</span><br>
-                            <strong>2.</strong> Meinungen bilden und mitgestalten <span style="color: #666;">(30 Lekt.)</span><br>
-                            <strong>3.</strong> Bewusst konsumieren und handeln <span style="color: #666;">(33 Lekt.)</span>
+                            <strong>1.</strong> Meine Berufsausbildung<br>
+                            <strong>2.</strong> Geld verdienen und ausgeben<br>
+                            <strong>3.</strong> Gesund und sicher durchs Leben
                         </td>
-                        <td style="text-align: center;">84</td>
+                        <td style="text-align: center;">xx</td>
                     </tr>
                     <tr>
                         <td style="font-style: italic; color: #666;">Weitere Lektionen</td>
-                        <td style="text-align: center;">36</td>
+                        <td style="text-align: center;">xx</td>
                     </tr>
                     <tr>
                         <td rowspan="2" class="year-cell year-2">2</td>
                         <td>
-                            <strong>4.</strong> Verantwortung für mich und andere übernehmen* <span style="color: #666;">(ca. 27 Lekt.)</span><br>
-                            <strong>5.</strong> Sich im Staat orientieren und finanzielle Selbständigkeit entwickeln* <span style="color: #666;">(ca. 27 Lekt.)</span><br>
-                            <strong>6.</strong> Von Zuhause ausziehen* <span style="color: #666;">(ca. 26 Lekt.)</span>
+                            <strong>4.</strong> ...<br>
+                            <strong>5.</strong> ...<br>
+                            <strong>6.</strong> ...
                         </td>
-                        <td style="text-align: center;">80</td>
+                        <td style="text-align: center;">xx</td>
                     </tr>
                     <tr>
                         <td style="font-style: italic; color: #666;">Weitere Lektionen</td>
-                        <td style="text-align: center;">40</td>
+                        <td style="text-align: center;">xx</td>
                     </tr>
                     <tr>
                         <td rowspan="3" class="year-cell year-3">3</td>
                         <td>
-                            <strong>7.</strong> Arbeiten in der Zukunft* <span style="color: #666;">(ca. 28 Lekt.)</span><br>
-                            <strong>8.</strong> Vorbereitung Schlussarbeit <span style="color: #666;">(ca. 28 Lekt.)</span>
+                            <strong>7.</strong> ...<br>
+                            <strong>8.</strong> ...
                         </td>
-                        <td style="text-align: center;">56</td>
+                        <td style="text-align: center;">xx</td>
                     </tr>
                     <tr>
-                        <td style="font-style: italic; color: #666;">Schlussarbeit</td>
-                        <td style="text-align: center;">24</td>
+                        <td style="font-style: italic; color: #666;">Schlussprüfung</td>
+                        <td style="text-align: center;">xx</td>
                     </tr>
                     <tr>
                         <td style="font-style: italic; color: #666; border-bottom: none;">Weitere Lektionen</td>
-                        <td style="text-align: center; border-bottom: none;">40</td>
+                        <td style="text-align: center; border-bottom: none;">xx</td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -357,16 +367,13 @@
                     </tr>
                 </tfoot>
             </table>
-            <p style="font-size: 0.9em; color: #666; text-align: center; margin-top: -20px;">
-                * Diese Themen befinden sich in Ausarbeitung
-            </p>
         </div>
         
         <div class="card-grid">
             <a href="1-lehrjahr.html" class="card">
                 <div class="card-icon">1</div>
                 <h3>1. Lehrjahr</h3>
-                <p><strong>Themen 1-3:</strong> Der Einstieg ins Berufsleben mit Rechten und Pflichten, die kritische Meinungsbildung in der digitalen Welt sowie bewusster Konsum mit Budget, Nachhaltigkeit und Konsumentenrechten stehen im Zentrum.</p>
+                <p>...</p>
                 <div class="meta">
                     120 Lektionen Allgemeinbildung
                 </div>
@@ -375,7 +382,7 @@
             <a href="2-lehrjahr.html" class="card">
                 <div class="card-icon">2</div>
                 <h3>2. Lehrjahr</h3>
-                <p><strong>Themen 4-6:</strong> Verantwortung für Gesundheit und gesellschaftliche Vielfalt, staatsbürgerliche Orientierung mit Steuern und Vorsorge sowie die Vorbereitung auf den Auszug mit Mietrecht und Wohnformen.</p>
+                <p>...</p>
                 <div class="meta">
                     120 Lektionen Allgemeinbildung
                 </div>
@@ -384,29 +391,38 @@
             <a href="3-lehrjahr.html" class="card">
                 <div class="card-icon">3</div>
                 <h3>3. Lehrjahr</h3>
-                <p><strong>Thema 7 + Schlussarbeit:</strong> Die berufliche Zukunft mit Digitalisierung und Work-Life-Balance sowie die Schlussarbeit als individuelle Auseinandersetzung mit einem selbstgewählten Thema.</p>
+                <p>...</p>
                 <div class="meta">
                     120 Lektionen Allgemeinbildung inkl. VA
-                </div>
-            </a>
-            
-            <a href="umsetzungsbeispiele.html" class="card">
-                <div class="card-icon">🎯</div>
-                <h3>Beispiele Umsetzungsvarianten</h3>
-                <p>Im Schullehrplan werden die im ABU-Handbuch als authentische Aufgaben formulierten Konzepte als <strong>Herausforderungen</strong> bezeichnet und mit konkreten Lernprodukten verknüpft. Pro Lebenskontext werden jeweils zwei Umsetzungsvarianten vorgeschlagen.</p>
-                <div class="meta">
-                    Handlungs- und kompetenzorientiert
                 </div>
             </a>
             
             <a href="zirkularitaet.html" class="card">
                 <div class="card-icon">↻</div>
                 <h3>Zirkularität</h3>
-                <p>Die Kompetenzaneignung erfolgt spiralförmig: Schlüsselkompetenzen, Sprachmodi und gesellschaftliche Aspekte werden über alle drei Lehrjahre hinweg aufgebaut, wiederholt und vertieft.</p>
+                <p>...</p>
                 <div class="meta">
                     Themenübergreifend
                 </div>
             </a>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-box-header" onclick="toggleInfo()">
+                <h2>📋 Vorgaben gemäss Rahmenlehrplan ABU 2025</h2>
+                <span class="toggle-icon" id="toggle-icon">▼</span>
+            </div>
+            <div class="info-box-content" id="info-content">
+                <ul>
+                    <li>Pro Thema werden mindestens <span class="highlight">3 Schlüsselkompetenzen</span> bewusst gefördert</li>
+                    <li>Lerninhalte aus mindestens <span class="highlight">3 Aspekten</span> des Lernbereichs Gesellschaft</li>
+                    <li>Berücksichtigung von <span class="highlight">3 Sprachmodi</span> pro Thema</li>
+                    <li>Kompetenzen aus allen <span class="highlight">Sprachmodi</span> unter Berücksichtigung von Konvention, Normen und Sprachbewusstheit</li>
+                    <li>Bis zum Abschluss: Aufbau aller <span class="highlight">12 Schlüsselkompetenzen</span> und Kompetenzen aus allen <span class="highlight">8 gesellschaftlichen Aspekten</span></li>
+                    <li>Integration der <span class="highlight">Schlussarbeit</span> im letzten Lehrjahr</li>
+                    <li>Spiralförmiges Curriculum mit formativen und summativen Kompetenznachweisen</li>
+                </ul>
+            </div>
         </div>
         
         <div class="back-link">
